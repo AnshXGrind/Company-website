@@ -21,16 +21,16 @@
             --glass-blur: 12px;
         }
         body.theme-light, .theme-light :root {
-            /* Apple-like soft whites and subtle contrasts */
-            --bg: #ffffff;
-            --text: #0f1724; /* deeper but soft black */
-            --muted: #6b7280; /* restrained slate */
-            --panel-bg: rgba(255,255,255,0.92); /* nearly solid but soft */
-            --panel-border: rgba(15,23,42,0.06); /* very subtle */
-            --nav-bg: rgba(255,255,255,0.85);
+            /* White mode refined: treat as first-class design */
+            --bg: #fbfaf8; /* soft off-white */
+            --text: #0b1220; /* slightly stronger than before for legibility */
+            --muted: #4b5563; /* darker neutral for body text */
+            --panel-bg: rgba(255,255,255,0.96); /* near-solid panels */
+            --panel-border: rgba(15,23,42,0.06);
+            --nav-bg: rgba(255,255,255,0.92);
             --glass-blur: 6px;
-            --soft-shadow: 0 6px 24px rgba(2,6,23,0.06);
-            --panel-elevation: 0 4px 18px rgba(2,6,23,0.04);
+            --soft-shadow: 0 10px 32px rgba(2,6,23,0.04);
+            --panel-elevation: 0 8px 28px rgba(2,6,23,0.035);
         }
         /* Typography: Lucida Sans Stack */
         body {
@@ -159,9 +159,68 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap">
     <style>
-        :root { --nav-height: 64px; --ui-font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial; --display-font: 'Playfair Display', Georgia, serif; }
-        body { font-family: var(--ui-font); }
-        h1, h2, h3 { font-family: var(--display-font); }
+        :root {
+            --nav-height: 64px;
+            --ui-font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Plus Jakarta Sans", "Segoe UI", Roboto, "Helvetica Neue", Arial, system-ui;
+            --display-font: 'Playfair Display', Georgia, serif; /* optional serif for headings */
+
+            /* Typographic scale */
+            --fs-hero: 3.75rem;      /* ~60px (mobile) */
+            --fs-hero-md: 6rem;      /* ~96px (desktop) */
+            --fs-h2: 1.5rem;         /* 24px */
+            --fs-h2-md: 1.875rem;    /* 30px */
+            --fs-body: 1rem;        /* 16px */
+            --fs-small: 0.8125rem;  /* 13px */
+
+            /* Intentional weights */
+            --weight-regular: 400;
+            --weight-medium: 500;
+            --weight-semibold: 600;
+
+            /* Color tokens (soft contrast in light mode) */
+            --text: #0f1724; /* calm, soft black */
+            --muted: #6b7280; /* restrained slate */
+        }
+
+        /* Base rules */
+        body { font-family: var(--ui-font); font-size: var(--fs-body); line-height: 1.6; color: var(--text); }
+        h1, h2, h3 { font-family: var(--display-font); color: inherit; margin-top: 0; margin-bottom: .5rem; }
+
+        /* Hero headline (keeps large scale but refined weight & spacing) */
+        #main-title {
+            font-family: var(--display-font);
+            font-weight: var(--weight-semibold);
+            font-size: var(--fs-hero);
+            line-height: 1.04;
+            letter-spacing: -0.02em;
+        }
+        @media (min-width: 768px) { #main-title { font-size: var(--fs-hero-md); } }
+
+        /* Section headings */
+        h2 { font-size: var(--fs-h2); font-weight: var(--weight-medium); line-height: 1.18; }
+        @media (min-width: 768px) { h2 { font-size: var(--fs-h2-md); } }
+
+        /* Body and meta text */
+        p { font-size: var(--fs-body); line-height: 1.6; color: var(--muted); margin-bottom: 1rem; font-weight: var(--weight-regular); }
+        .text-xs, .meta, small { font-size: var(--fs-small); color: var(--muted); line-height: 1.4; }
+
+        /* Buttons aligned to UI font and refined spacing */
+        .btn { font-family: var(--ui-font); font-weight: var(--weight-semibold); font-size: 0.95rem; padding: 0.5rem 0.9rem; border-radius: 9999px; letter-spacing: 0.01em; }
+
+        /* Slightly softer text in light theme (avoid pure black) */
+        body.theme-light { --text: #0b1220; --muted: #4b5563; }
+
+        /* Light-mode specific adjustments to anchor the hero and panels */
+        body.theme-light #brand-container { top: 44%; }
+        body.theme-light #main-title { color: var(--text); font-weight: 700; text-shadow: none; }
+        body.theme-light h2, body.theme-light h3 { color: var(--text); font-weight: 600; }
+        body.theme-light p, body.theme-light .text-slate-400, body.theme-light .text-slate-300 { color: var(--muted); }
+        body.theme-light .glass-panel { background: var(--panel-bg); border-color: var(--panel-border); box-shadow: var(--panel-elevation); }
+        /* Make the white->dark content overlay feel deliberate with a subtle divider and elevation */
+        body.theme-light #content-overlay { border-top-color: rgba(15,23,42,0.06); box-shadow: 0 -12px 40px rgba(2,6,23,0.04); }
+        /* Tighter vertical rhythm for light mode */
+        body.theme-light h1, body.theme-light h2, body.theme-light h3 { margin-bottom: 0.4rem; }
+        body.theme-light p { margin-bottom: 1.125rem; }
 
         /* Slightly reduce heavy blur after splash to improve readability */
         body.post-splash .glass-panel { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
