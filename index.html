@@ -409,96 +409,56 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal-up').forEach((el) => observer.observe(el));
 
-        // First-scroll splash -> app transition
+        // BULLETPROOF SPLASH-TO-APP TRANSITION
         (function() {
+            // === SINGLE SOURCE OF TRUTH ===
+            let isSplashActive = true;
+            
+            // Cache DOM elements
             const mainTitle = document.getElementById('main-title');
             const subTitle = document.getElementById('sub-title');
             const navbar = document.getElementById('navbar');
             const scrollIndicator = document.getElementById('scroll-indicator');
             const contentOverlay = document.getElementById('content-overlay');
-            const body = document.body;
-
-            // iOS-friendly scroll lock using position:fixed and top offset
-            const _scrollLock = { locked: false, scrollY: 0 };
-            function lockScroll() {
-                if (_scrollLock.locked) return;
-                _scrollLock.scrollY = window.scrollY || window.pageYOffset || 0;
-                // apply fixed positioning to preserve current scroll pos on iOS
-                document.body.style.position = 'fixed';
-                document.body.style.top = `-${_scrollLock.scrollY}px`;
-                document.body.style.left = '0';
-                document.body.style.right = '0';
-                document.body.style.width = '100%';
-                _scrollLock.locked = true;
-            }
-            function unlockScroll(){
-                if (!_scrollLock.locked) return;
-                // restore
+            const brandContainer = document.getElementById('brand-container');
+            const keyboardHint = document.getElementById('keyboard-hint');
+            
+            // Failsafe timeout (1.5 seconds maximum)
+            const SPLASH_TIMEOUT = 1500;
+            let timeoutId = null;
+            
+            // Check for reduced motion preference
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            // === SPLASH EXIT FUNCTION (CRITICAL) ===
+            function exitSplash(reason) {
+                // Guard: prevent multiple executions
+                if (!isSplashActive) return;
+                
+                console.log('Splash exit:', reason);
+                isSplashActive = false;
+                
+                // Clear failsafe timeout
+                if (timeoutId) {
+                    clearTimeout(timeoutId);
+                    timeoutId = null;
+                }
+                
+                // 1. Remove position: fixed from body (restore normal scrolling)
                 document.body.style.position = '';
-                const y = _scrollLock.scrollY || 0;
                 document.body.style.top = '';
                 document.body.style.left = '';
                 document.body.style.right = '';
                 document.body.style.width = '';
-                _scrollLock.locked = false;
-                window.scrollTo(0, y);
-            }
-
-            // initial setup: content hidden below viewport (via transform), body locked
-            if (isSplashActive && contentOverlay) {
-                contentOverlay.style.opacity = '0';
-                contentOverlay.style.transform = 'translateY(100vh)';
-                contentOverlay.style.pointerEvents = 'none';
-            }
-
-            // Lock scrolling initially using position-fixed method (safer on iOS than overflow:hidden)
-            if (isSplashActive && !prefersReduced) lockScroll();
-
-            // ensure navbar hidden initially (classes already set but enforce)
-            if (isSplashActive) navbar.classList.add('-translate-y-full', 'opacity-0');
-
-            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            
-            // Single Source of Truth: Splash Active State
-            let isSplashActive = true;
-            let transitionInProgress = false;
-            let _fallbackTimer = null;
-            const APP_READY_TIMEOUT = 1500; // 1.5s failsafe
-
-            // Animation tuning (adjust durations and easing here)
-            const ANIM = {
-                titleDur: 700,
-                subDur: 320,
-                contentDur: 720,
-                // human-perception curve (minimum-jerk / natural motion)
-                easing: 'cubic-bezier(0.16,1,0.3,1)'
-            };
-            // Micro-haptic settings
-            const MICRO = {
-                resistance: 50, // ms before elements begin to respond (30-60ms)
-                titleLag: 40, // title initial lag
-                subLag: 80, // subtitle/indicator lag
-                overshootDur: 180,
-                settleDur: 220
-            };
-            const keyboardHint = document.getElementById('keyboard-hint');
-            let keyboardHintShown = false;
-
-            // Force app into fully interactive state (no animation)
-            function forceAppReady(reason) {
-                if (!isSplashActive) return;
-                console.log('Splash exit:', reason);
+                document.body.style.overflowY = 'auto';
                 
-                isSplashActive = false;
-                transitionInProgress = false;
+                // 2. Disable pointer events on ALL splash/hero elements
+                const splashElements = [mainTitle, subTitle, scrollIndicator, brandContainer, keyboardHint];
+                splashElements.forEach(el => {
+                    if (el) el.style.pointerEvents = 'none';
+                });
                 
-                // Clear failsafe timer
-                if (_fallbackTimer) { clearTimeout(_fallbackTimer); _fallbackTimer = null; }
-                
-                // Unlock scroll immediately
-                unlockScroll();
-                
-                // Force content visible and interactive (no transition)
+                // 3. Make main content visible and scrollable (NO ANIMATION)
                 if (contentOverlay) {
                     contentOverlay.style.transition = 'none';
                     contentOverlay.style.transform = 'translateY(0)';
@@ -506,193 +466,117 @@
                     contentOverlay.style.pointerEvents = 'auto';
                 }
                 
-                // Remove position: fixed behavior from hero (brand-container)
-                const brandContainer = document.getElementById('brand-container');
-                if (brandContainer) {
-                    brandContainer.style.position = 'static';
-                    brandContainer.style.top = '';
-                    brandContainer.style.left = '';
-                    brandContainer.style.transform = '';
-                }
-                
-                // Disable pointer events on all splash/hero elements
-                const splashEls = [
-                    brandContainer,
-                    document.getElementById('scroll-indicator'),
-                    mainTitle,
-                    subTitle,
-                    keyboardHint
-                ];
-                splashEls.forEach(el => { if (el) el.style.pointerEvents = 'none'; });
-                
-                // Remove all blur/transforms from hero elements
-                if (mainTitle) {
-                    mainTitle.style.transition = 'none';
-                    mainTitle.style.transform = '';
-                    mainTitle.style.filter = '';
-                    mainTitle.style.opacity = '0.2';
-                }
-                if (subTitle) {
-                    subTitle.style.transition = 'none';
-                    subTitle.style.opacity = '0';
-                }
-                if (scrollIndicator) {
-                    scrollIndicator.style.transition = 'none';
-                    scrollIndicator.style.opacity = '0';
-                }
-                if (keyboardHint) {
-                    keyboardHint.style.opacity = '0';
-                }
-                
-                // Force navbar visible and interactive
+                // 4. Show navbar and make it interactive
                 if (navbar) {
                     navbar.classList.remove('-translate-y-full', 'opacity-0');
                     navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
                     navbar.style.pointerEvents = 'auto';
                 }
                 
-                // Restore body scrolling (overflow-y: auto)
-                document.body.style.overflowY = 'auto';
+                // 5. Clean up splash visuals (fade hero elements)
+                if (mainTitle) {
+                    mainTitle.style.transition = 'opacity 300ms ease';
+                    mainTitle.style.opacity = '0.2';
+                }
+                if (subTitle) {
+                    subTitle.style.transition = 'opacity 200ms ease';
+                    subTitle.style.opacity = '0';
+                }
+                if (scrollIndicator) {
+                    scrollIndicator.style.transition = 'opacity 200ms ease';
+                    scrollIndicator.style.opacity = '0';
+                }
+                if (keyboardHint) {
+                    keyboardHint.style.opacity = '0';
+                }
                 
-                // Remove all event listeners
-                removeListeners();
+                // 6. Remove all event listeners
+                window.removeEventListener('wheel', onUserInteraction);
+                window.removeEventListener('touchstart', onUserInteraction);
+                window.removeEventListener('touchmove', onUserInteraction);
+                window.removeEventListener('pointerdown', onUserInteraction);
+                window.removeEventListener('keydown', onKeyboardInteraction);
+                document.removeEventListener('scroll', onUserInteraction);
                 
-                // Remove global error handlers
-                try {
-                    window.removeEventListener('error', _errorHandler);
-                    window.removeEventListener('unhandledrejection', _promiseRejectionHandler);
-                } catch(e){}
+                // 7. Remove global error handlers
+                window.removeEventListener('error', onJSError);
+                window.removeEventListener('unhandledrejection', onPromiseError);
             }
             
-            function revealImmediately() {
-                // for reduced-motion: skip animations and show final state
-                forceAppReady('reduced-motion');
+            // === EVENT HANDLERS ===
+            function onUserInteraction(e) {
+                if (!isSplashActive) return;
+                exitSplash('user-interaction');
             }
-
-            function startTransition() {
-                if (!isSplashActive || transitionInProgress) return;
-                transitionInProgress = true;
-
-                // set initial transitions (will be overridden for micro-stages)
-                mainTitle.style.transition = `transform ${ANIM.titleDur}ms ${ANIM.easing}, filter ${ANIM.titleDur}ms ${ANIM.easing}, opacity ${ANIM.titleDur}ms ${ANIM.easing}`;
-                subTitle.style.transition = `opacity ${ANIM.subDur}ms ease`;
-                scrollIndicator.style.transition = `opacity ${ANIM.subDur}ms ease`;
-                if (contentOverlay) contentOverlay.style.transition = `transform ${ANIM.contentDur}ms ${ANIM.easing}, opacity ${ANIM.contentDur}ms ease`;
-
-                // Micro-haptic staged sequence
-                // 1) Resistance delay (visual resistance)
-                setTimeout(() => {
-                    // start a subtle initial response: title moves slowly (simulating weight)
-                    mainTitle.style.transition = `transform ${Math.round(ANIM.titleDur * 0.55)}ms ${ANIM.easing}, filter ${Math.round(ANIM.titleDur * 0.55)}ms ${ANIM.easing}, opacity ${Math.round(ANIM.titleDur * 0.55)}ms ${ANIM.easing}`;
-                    mainTitle.style.transform = 'scale(0.94)';
-                    mainTitle.style.filter = 'blur(2px)';
-                    mainTitle.style.opacity = '0.85';
-
-                    // unlock scrolling as soon as the animation begins
-                    unlockScroll();
-
-                    // keyboard hint hide
-                    if (keyboardHint && keyboardHintShown) keyboardHint.style.opacity = '0';
-
-                    // reveal content a little after title starts (so title feels heavier)
-                    if (contentOverlay) {
-                        setTimeout(() => {
-                            contentOverlay.style.transition = `transform ${ANIM.contentDur}ms ${ANIM.easing}, opacity ${ANIM.contentDur}ms ease`;
-                            contentOverlay.style.transform = 'translateY(0)';
-                            contentOverlay.style.opacity = '1';
-                            contentOverlay.style.pointerEvents = 'auto';
-                        }, MICRO.titleLag);
-                    }
-
-                    // subtitle and indicator lag and fade faster
-                    setTimeout(() => {
-                        subTitle.style.transition = `opacity ${ANIM.subDur}ms ease`;
-                        scrollIndicator.style.transition = `opacity ${ANIM.subDur}ms ease`;
-                        subTitle.style.opacity = '0';
-                        scrollIndicator.style.opacity = '0';
-                    }, MICRO.subLag);
-
-                    // 2) Overshoot then settle for title to simulate physical weight
-                    setTimeout(() => {
-                        // quick overshoot past final target
-                        mainTitle.style.transition = `transform ${MICRO.overshootDur}ms ${ANIM.easing}`;
-                        mainTitle.style.transform = 'scale(0.76)';
-                        mainTitle.style.filter = 'blur(8px)';
-
-                        // settle to final target
-                        setTimeout(() => {
-                            mainTitle.style.transition = `transform ${MICRO.settleDur}ms ${ANIM.easing}, filter ${MICRO.settleDur}ms ${ANIM.easing}, opacity ${MICRO.settleDur}ms ${ANIM.easing}`;
-                            mainTitle.style.transform = 'scale(0.82)';
-                            mainTitle.style.filter = 'blur(6px)';
-                            mainTitle.style.opacity = '0.2';
-                        }, MICRO.overshootDur);
-                    }, 120);
-                }, MICRO.resistance);
-
-                // after content transition completes, reveal navbar and mark ready
-                setTimeout(() => {
-                    if (isSplashActive) {
-                        navbar.classList.remove('-translate-y-full', 'opacity-0');
-                        navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
-                        forceAppReady('animation-complete');
-                    }
-                }, ANIM.contentDur + 40);
-            }
-
-
-
-            // Global error handlers to force app ready on errors
-            function _errorHandler(evOrMsg, source, lineno, colno, err){
-                if (isSplashActive) forceAppReady('error-handler');
-            }
-            function _promiseRejectionHandler(evt){
-                if (isSplashActive) forceAppReady('promise-rejection');
-            }
-            window.addEventListener('error', _errorHandler);
-            window.addEventListener('unhandledrejection', _promiseRejectionHandler);
-
-            // Timeout-based failsafe: force app ready after 1.5s if not already
-            _fallbackTimer = setTimeout(() => {
-                if (isSplashActive) forceAppReady('timeout-failsafe');
-            }, APP_READY_TIMEOUT);
-
-            function onFirstIntent(e) {
-                // Guard: prevent multiple triggers
-                if (!isSplashActive || transitionInProgress) return;
-                transitionInProgress = true;
-                
-                // Immediately force app into interactive state on first scroll intent
-                // This ensures the app never gets stuck waiting for animations
-                forceAppReady('first-scroll-intent');
-            }
-
-            function onKeyboardNavigation(e) {
-                // show hint on first Tab press (keyboard navigation)
-                if (e.key === 'Tab' && keyboardHint && !keyboardHintShown) {
-                    keyboardHintShown = true;
-                    keyboardHint.style.opacity = '1';
+            
+            function onKeyboardInteraction(e) {
+                if (!isSplashActive) return;
+                // Only exit on navigation keys
+                if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Space', 'End'].includes(e.code) || e.key === ' ') {
+                    exitSplash('keyboard-navigation');
                 }
             }
-
-            function removeListeners() {
-                window.removeEventListener('wheel', onFirstIntent, {passive:true});
-                window.removeEventListener('touchstart', onFirstIntent, {passive:true});
-                window.removeEventListener('keydown', onFirstIntent, {passive:true});
-                window.removeEventListener('pointerdown', onFirstIntent, {passive:true});
+            
+            function onJSError() {
+                if (!isSplashActive) return;
+                exitSplash('javascript-error');
             }
-
-            // Listen for first scroll/touch/intent. Use passive listeners for performance.
-            window.addEventListener('wheel', onFirstIntent, {passive:true});
-            window.addEventListener('touchstart', onFirstIntent, {passive:true});
-            window.addEventListener('pointerdown', onFirstIntent, {passive:true});
-            window.addEventListener('keydown', (e) => {
-                // allow keyboard down/space/PageDown to trigger
-                if (['ArrowDown','PageDown','Space'].includes(e.code) || e.key === ' ') onFirstIntent(e);
-            }, {passive:true});
-            window.addEventListener('keydown', onKeyboardNavigation, {passive:true});
-
-            // if reduced motion is preferred, reveal immediately
-            if (prefersReduced) revealImmediately();
+            
+            function onPromiseError() {
+                if (!isSplashActive) return;
+                exitSplash('promise-rejection');
+            }
+            
+            // === INITIALIZATION ===
+            function initializeSplash() {
+                // If reduced motion is preferred, exit splash immediately
+                if (prefersReduced) {
+                    exitSplash('reduced-motion');
+                    return;
+                }
+                
+                // Set up initial splash state
+                // 1. Lock body scrolling using position: fixed
+                document.body.style.position = 'fixed';
+                document.body.style.top = '0';
+                document.body.style.left = '0';
+                document.body.style.right = '0';
+                document.body.style.width = '100%';
+                document.body.style.overflowY = 'hidden';
+                
+                // 2. Hide main content
+                if (contentOverlay) {
+                    contentOverlay.style.opacity = '0';
+                    contentOverlay.style.transform = 'translateY(100vh)';
+                    contentOverlay.style.pointerEvents = 'none';
+                }
+                
+                // 3. Hide navbar
+                if (navbar) {
+                    navbar.classList.add('-translate-y-full', 'opacity-0');
+                    navbar.style.pointerEvents = 'none';
+                }
+                
+                // 4. Set up event listeners for splash exit
+                window.addEventListener('wheel', onUserInteraction, { passive: true });
+                window.addEventListener('touchstart', onUserInteraction, { passive: true });
+                window.addEventListener('touchmove', onUserInteraction, { passive: true });
+                window.addEventListener('pointerdown', onUserInteraction, { passive: true });
+                window.addEventListener('keydown', onKeyboardInteraction, { passive: true });
+                document.addEventListener('scroll', onUserInteraction, { passive: true });
+                
+                // 5. Set up error handlers
+                window.addEventListener('error', onJSError);
+                window.addEventListener('unhandledrejection', onPromiseError);
+                
+                // 6. Set failsafe timeout (MANDATORY - prevents permanent lock)
+                timeoutId = setTimeout(() => {
+                    if (isSplashActive) exitSplash('timeout-failsafe');
+                }, SPLASH_TIMEOUT);
+            }
+            
+            // Start initialization
+            initializeSplash();
         })();
     </script>
 
