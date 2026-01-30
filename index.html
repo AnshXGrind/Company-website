@@ -445,25 +445,25 @@
             }
 
             // initial setup: content hidden below viewport (via transform), body locked
-            if (contentOverlay) {
+            if (isSplashActive && contentOverlay) {
                 contentOverlay.style.opacity = '0';
                 contentOverlay.style.transform = 'translateY(100vh)';
                 contentOverlay.style.pointerEvents = 'none';
             }
 
             // Lock scrolling initially using position-fixed method (safer on iOS than overflow:hidden)
-            if (!prefersReduced) lockScroll();
+            if (isSplashActive && !prefersReduced) lockScroll();
 
             // ensure navbar hidden initially (classes already set but enforce)
-            navbar.classList.add('-translate-y-full', 'opacity-0');
+            if (isSplashActive) navbar.classList.add('-translate-y-full', 'opacity-0');
 
             const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             
-            // Explicit app-ready state management
-            let appReady = false;
+            // Single Source of Truth: Splash Active State
+            let isSplashActive = true;
             let transitionInProgress = false;
             let _fallbackTimer = null;
-            const APP_READY_TIMEOUT = 2000; // 2s failsafe
+            const APP_READY_TIMEOUT = 1500; // 1.5s failsafe
 
             // Animation tuning (adjust durations and easing here)
             const ANIM = {
@@ -486,10 +486,10 @@
 
             // Force app into fully interactive state (no animation)
             function forceAppReady(reason) {
-                if (appReady) return;
-                console.log('App ready:', reason);
+                if (!isSplashActive) return;
+                console.log('Splash exit:', reason);
                 
-                appReady = true;
+                isSplashActive = false;
                 transitionInProgress = false;
                 
                 // Clear failsafe timer
@@ -506,9 +506,18 @@
                     contentOverlay.style.pointerEvents = 'auto';
                 }
                 
+                // Remove position: fixed behavior from hero (brand-container)
+                const brandContainer = document.getElementById('brand-container');
+                if (brandContainer) {
+                    brandContainer.style.position = 'static';
+                    brandContainer.style.top = '';
+                    brandContainer.style.left = '';
+                    brandContainer.style.transform = '';
+                }
+                
                 // Disable pointer events on all splash/hero elements
                 const splashEls = [
-                    document.getElementById('brand-container'),
+                    brandContainer,
                     document.getElementById('scroll-indicator'),
                     mainTitle,
                     subTitle,
@@ -542,6 +551,9 @@
                     navbar.style.pointerEvents = 'auto';
                 }
                 
+                // Restore body scrolling (overflow-y: auto)
+                document.body.style.overflowY = 'auto';
+                
                 // Remove all event listeners
                 removeListeners();
                 
@@ -558,7 +570,7 @@
             }
 
             function startTransition() {
-                if (appReady || transitionInProgress) return;
+                if (!isSplashActive || transitionInProgress) return;
                 transitionInProgress = true;
 
                 // set initial transitions (will be overridden for micro-stages)
@@ -619,7 +631,7 @@
 
                 // after content transition completes, reveal navbar and mark ready
                 setTimeout(() => {
-                    if (!appReady) {
+                    if (isSplashActive) {
                         navbar.classList.remove('-translate-y-full', 'opacity-0');
                         navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
                         forceAppReady('animation-complete');
@@ -631,22 +643,22 @@
 
             // Global error handlers to force app ready on errors
             function _errorHandler(evOrMsg, source, lineno, colno, err){
-                if (!appReady) forceAppReady('error-handler');
+                if (isSplashActive) forceAppReady('error-handler');
             }
             function _promiseRejectionHandler(evt){
-                if (!appReady) forceAppReady('promise-rejection');
+                if (isSplashActive) forceAppReady('promise-rejection');
             }
             window.addEventListener('error', _errorHandler);
             window.addEventListener('unhandledrejection', _promiseRejectionHandler);
 
-            // Timeout-based failsafe: force app ready after 2s if not already
+            // Timeout-based failsafe: force app ready after 1.5s if not already
             _fallbackTimer = setTimeout(() => {
-                if (!appReady) forceAppReady('timeout-failsafe');
+                if (isSplashActive) forceAppReady('timeout-failsafe');
             }, APP_READY_TIMEOUT);
 
             function onFirstIntent(e) {
                 // Guard: prevent multiple triggers
-                if (appReady || transitionInProgress) return;
+                if (!isSplashActive || transitionInProgress) return;
                 transitionInProgress = true;
                 
                 // Immediately force app into interactive state on first scroll intent
