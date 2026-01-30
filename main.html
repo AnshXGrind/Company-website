@@ -123,10 +123,10 @@
             
             <!-- Dynamic Brand Name Container -->
             <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" id="brand-container">
-                <h1 id="main-title" class="text-6xl md:text-9xl tracking-tighter text-white font-medium text-center transition-all duration-100 mix-blend-overlay" style="transform: scale(0.8); opacity: 0; filter: blur(10px);">
+                <h1 id="main-title" class="text-6xl md:text-9xl tracking-tighter text-white font-medium text-center transition-all duration-300 mix-blend-overlay" style="transform: scale(1); opacity: 1; filter: none;">
                     Launcify
                 </h1>
-                <p id="sub-title" class="text-slate-300 text-sm md:text-base text-center mt-6 tracking-wide opacity-0 transition-opacity duration-700 delay-300 font-medium" style="opacity: 0;">
+                <p id="sub-title" class="text-slate-300 text-sm md:text-base text-center mt-6 tracking-wide transition-opacity duration-700 delay-200 font-medium" style="opacity: 1;">
                     Architecting the autonomous web.
                 </p>
             </div>
@@ -138,8 +138,8 @@
             </div>
         </section>
 
-        <!-- Content Overlay -->
-        <div class="w-full bg-[#02040a] relative z-10 mt-[40vh] border-t border-slate-900/60 shadow-[0_-50px_100px_rgba(0,0,0,1)] rounded-t-[3rem] pb-24">
+        <!-- Content Overlay (hidden initially; revealed on scroll) -->
+        <div id="content-overlay" class="w-full bg-[#02040a] relative z-10 mt-[40vh] border-t border-slate-900/60 shadow-[0_-50px_100px_rgba(0,0,0,1)] rounded-t-[3rem] pb-24" style="opacity:0; transform: translateY(40vh); pointer-events: none; transition: all 600ms ease;">
             
             <div class="max-w-6xl mx-auto px-6 pt-24">
                 
@@ -375,34 +375,52 @@
 
         document.querySelectorAll('.reveal-up').forEach((el) => observer.observe(el));
 
-        // Scroll Logic for Hero & Navbar
+        // Scroll Logic for Hero & Navbar — reverse/reveal behavior
         const brandContainer = document.getElementById('brand-container');
         const mainTitle = document.getElementById('main-title');
         const subTitle = document.getElementById('sub-title');
         const navbar = document.getElementById('navbar');
         const scrollIndicator = document.getElementById('scroll-indicator');
+        const contentOverlay = document.getElementById('content-overlay');
+
+        let lastScrollY = window.scrollY || 0;
+
+        // Ensure initial state (title visible, content hidden)
+        if (contentOverlay) {
+            contentOverlay.style.opacity = '0';
+            contentOverlay.style.transform = 'translateY(40vh)';
+            contentOverlay.style.pointerEvents = 'none';
+        }
 
         window.addEventListener('scroll', () => {
             const scrollY = window.scrollY;
-            const threshold = 400; // Pixel value where transition completes
-            
-            // Calculate progress 0 to 1
-            let progress = Math.min(scrollY / threshold, 1);
-            
-            // 1. Scale and Blur the Main Title
-            const scale = 1 - (progress * 0.2); 
-            const opacity = 1 - (progress * 1.5);
-            const blur = progress * 10;
-            
-            mainTitle.style.transform = `scale(${scale})`;
-            mainTitle.style.opacity = Math.max(0, opacity);
-            mainTitle.style.filter = `blur(${blur}px)`;
-            
-            subTitle.style.opacity = Math.max(0, 1 - (progress * 3));
-            scrollIndicator.style.opacity = Math.max(0, 0.5 - (progress * 2));
+            const delta = scrollY - lastScrollY;
+            lastScrollY = scrollY;
 
-            // 2. Navbar Reveal
-            if (scrollY > 300) {
+            const threshold = 400; // pixel range for transition
+            let progress = Math.min(Math.max(scrollY / threshold, 0), 1);
+
+            // Title: shrink and fade as user scrolls down (so brand shows first)
+            const scale = 1 - (progress * 0.2);
+            const titleOpacity = 1 - (progress * 1.2);
+            const blur = progress * 10;
+            mainTitle.style.transform = `scale(${scale})`;
+            mainTitle.style.opacity = String(Math.max(0, titleOpacity));
+            mainTitle.style.filter = `blur(${blur}px)`;
+
+            subTitle.style.opacity = String(Math.max(0, 1 - (progress * 2)));
+            scrollIndicator.style.opacity = String(Math.max(0, 0.5 - (progress * 2)));
+
+            // Content overlay: slide up and fade in as progress increases
+            if (contentOverlay) {
+                const translateVH = 40 - (progress * 40); // from 40vh -> 0vh
+                contentOverlay.style.transform = `translateY(${translateVH}vh)`;
+                contentOverlay.style.opacity = String(progress);
+                contentOverlay.style.pointerEvents = progress > 0.05 ? 'auto' : 'none';
+            }
+
+            // Navbar: reveal once user has moved a bit
+            if (scrollY > 50 || progress > 0.1) {
                 navbar.classList.remove('-translate-y-full', 'opacity-0');
                 navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
             } else {
