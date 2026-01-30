@@ -97,13 +97,8 @@
         a, button, [role="button"] { touch-action: manipulation; cursor: pointer; -webkit-tap-highlight-color: rgba(255,255,255,0.06); }
 
     </style>
-    <!-- Keep only two fonts for performance -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&display=swap">
     <style>
-        :root { --nav-height: 64px; --ui-font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial; --display-font: 'Playfair Display', Georgia, serif; }
-        body { font-family: var(--ui-font); }
-        h1, h2, h3 { font-family: var(--display-font); }
+        :root { --nav-height: 64px; }
 
         /* Slightly reduce heavy blur after splash to improve readability */
         body.post-splash .glass-panel { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
