@@ -53,6 +53,11 @@
         :root { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
         a, button { touch-action: manipulation; -webkit-tap-highlight-color: rgba(255,255,255,0.06); }
 
+        /* Performance hints for hero animations */
+        #main-title, #sub-title, #scroll-indicator, #content-overlay {
+            will-change: transform, opacity, filter;
+        }
+
         /* Larger tap targets for touch devices */
         @media (pointer: coarse) {
             button, a { min-height: 44px; min-width: 44px; padding: 10px 12px; }
@@ -85,9 +90,15 @@
         
         .custom-checkbox input:checked + div { background-color: #fff; border-color: #fff; } /* White checked */
         .custom-checkbox input:checked + div svg { display: block; }
+        /* iOS momentum scrolling for scrollable containers */
+        html, body, #content-overlay { -webkit-overflow-scrolling: touch; }
+
+        /* Make all tappable elements respond immediately and hint clickable */
+        a, button, [role="button"] { touch-action: manipulation; cursor: pointer; -webkit-tap-highlight-color: rgba(255,255,255,0.06); }
+
     </style>
 <link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style><link id="all-fonts-link-font-newsreader" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"><style id="all-fonts-style-font-newsreader">.font-newsreader { font-family: 'Newsreader', serif !important; }</style><link id="all-fonts-link-font-google-sans-flex" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-google-sans-flex">.font-google-sans-flex { font-family: 'Google Sans Flex', sans-serif !important; }</style><link id="all-fonts-link-font-oswald" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-oswald">.font-oswald { font-family: 'Oswald', sans-serif !important; }</style><link id="all-fonts-link-font-dm-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-dm-sans">.font-dm-sans { font-family: 'DM Sans', sans-serif !important; }</style><link id="all-fonts-link-font-cormorant" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-cormorant">.font-cormorant { font-family: 'Cormorant Garamond', serif !important; }</style></head>
-<body class="antialiased overflow-hidden relative selection:bg-blue-600 selection:text-white">
+<body class="antialiased relative selection:bg-blue-600 selection:text-white">
 
     <!-- Fixed Gradient Background (Dual Tone: Black & Blue) -->
     <!-- No colored background glows for pure black/white mode -->
@@ -104,12 +115,12 @@
                     <a href="#services" class="text-xs text-slate-400 hover:text-white transition-colors">Services</a>
                     <a href="#workflow" class="text-xs text-slate-400 hover:text-white transition-colors">Workflow</a>
                 </div>
-                <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2">
                     <!-- New Square Call Button -->
                     <a href="tel:+123456789" class="w-8 h-8 flex items-center justify-center border border-slate-800 rounded bg-slate-900/50 text-slate-400 hover:bg-white hover:text-black hover:border-white transition-all duration-300 group" aria-label="Call Us">
                         <iconify-icon icon="solar:phone-calling-linear" width="16" height="16"></iconify-icon>
                     </a>
-                    <button class="bg-white text-black text-xs px-4 py-2 rounded-full font-medium hover:bg-neutral-100 transition-colors">Start Project</button>
+                    <button data-contact="open" class="bg-white text-black text-xs px-4 py-2 rounded-full font-medium hover:bg-neutral-100 transition-colors">Start Project</button>
                 </div>
             </div>
         </div>
@@ -322,7 +333,7 @@
                             <!-- Right: Contact Actions -->
                             <div class="grid grid-cols-2 gap-3">
                                 <!-- Large Email Card -->
-                                <a href="mailto:grgsaksham25@gmail.com" class="col-span-2 bg-slate-900/50 border border-slate-800 hover:border-white/50 hover:bg-white/10 rounded-xl p-6 flex flex-col justify-between group/card transition-all h-32">
+                                <a href="#" data-contact="open" class="col-span-2 bg-slate-900/50 border border-slate-800 hover:border-white/50 hover:bg-white/10 rounded-xl p-6 flex flex-col justify-between group/card transition-all h-32">
                                     <div class="flex justify-between items-start">
                                         <iconify-icon icon="solar:letter-linear" class="text-slate-500 group-hover/card:text-white transition-colors" width="24" height="24"></iconify-icon>
                                         <iconify-icon icon="solar:arrow-right-up-linear" class="text-white opacity-0 group-hover/card:opacity-100 transform translate-y-2 group-hover/card:translate-y-0 duration-300" width="20" height="20"></iconify-icon>
@@ -360,6 +371,29 @@
         </div>
     </main>
 
+    <!-- Contact Modal (hidden) -->
+    <div id="contact-modal" class="fixed inset-0 z-60 hidden items-center justify-center px-4">
+        <div id="contact-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <form id="contact-form" class="relative z-70 w-full max-w-xl bg-[#0b0b0d] border border-slate-800 rounded-2xl p-6 shadow-lg" aria-hidden="true">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h3 class="text-lg text-white font-medium">Contact Us</h3>
+                    <p class="text-xs text-slate-400">Send a short note — we’ll reply within one business day.</p>
+                </div>
+                <button type="button" id="contact-close" class="text-slate-400 hover:text-white">✕</button>
+            </div>
+            <div class="grid grid-cols-1 gap-3">
+                <input name="name" id="cf-name" required placeholder="Your name" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
+                <input name="email" id="cf-email" type="email" required placeholder="Email" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
+                <textarea name="message" id="cf-message" rows="4" required placeholder="How can we help?" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white"></textarea>
+                <div class="flex items-center justify-between">
+                    <button id="cf-submit" type="submit" class="bg-white text-black px-4 py-2 rounded font-medium">Contact me now</button>
+                    <span id="cf-status" class="text-xs text-slate-400"></span>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <script>
         // Init Subtitle Animation
         document.addEventListener('DOMContentLoaded', () => {
@@ -384,6 +418,32 @@
             const contentOverlay = document.getElementById('content-overlay');
             const body = document.body;
 
+            // iOS-friendly scroll lock using position:fixed and top offset
+            const _scrollLock = { locked: false, scrollY: 0 };
+            function lockScroll() {
+                if (_scrollLock.locked) return;
+                _scrollLock.scrollY = window.scrollY || window.pageYOffset || 0;
+                // apply fixed positioning to preserve current scroll pos on iOS
+                document.body.style.position = 'fixed';
+                document.body.style.top = `-${_scrollLock.scrollY}px`;
+                document.body.style.left = '0';
+                document.body.style.right = '0';
+                document.body.style.width = '100%';
+                _scrollLock.locked = true;
+            }
+            function unlockScroll(){
+                if (!_scrollLock.locked) return;
+                // restore
+                document.body.style.position = '';
+                const y = _scrollLock.scrollY || 0;
+                document.body.style.top = '';
+                document.body.style.left = '';
+                document.body.style.right = '';
+                document.body.style.width = '';
+                _scrollLock.locked = false;
+                window.scrollTo(0, y);
+            }
+
             // initial setup: content hidden below viewport (via transform), body locked
             if (contentOverlay) {
                 contentOverlay.style.opacity = '0';
@@ -391,83 +451,207 @@
                 contentOverlay.style.pointerEvents = 'none';
             }
 
+            // Lock scrolling initially using position-fixed method (safer on iOS than overflow:hidden)
+            if (!prefersReduced) lockScroll();
+
             // ensure navbar hidden initially (classes already set but enforce)
             navbar.classList.add('-translate-y-full', 'opacity-0');
 
             const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            let triggered = false;
+            
+            // Explicit app-ready state management
+            let appReady = false;
+            let transitionInProgress = false;
+            let _fallbackTimer = null;
+            const APP_READY_TIMEOUT = 2000; // 2s failsafe
 
             // Animation tuning (adjust durations and easing here)
             const ANIM = {
                 titleDur: 700,
                 subDur: 320,
                 contentDur: 720,
-                easing: 'cubic-bezier(0.22,1,0.36,1)'
+                // human-perception curve (minimum-jerk / natural motion)
+                easing: 'cubic-bezier(0.16,1,0.3,1)'
+            };
+            // Micro-haptic settings
+            const MICRO = {
+                resistance: 50, // ms before elements begin to respond (30-60ms)
+                titleLag: 40, // title initial lag
+                subLag: 80, // subtitle/indicator lag
+                overshootDur: 180,
+                settleDur: 220
             };
             const keyboardHint = document.getElementById('keyboard-hint');
             let keyboardHintShown = false;
 
-            function revealImmediately() {
-                // for reduced-motion: skip animations and show final state
+            // Force app into fully interactive state (no animation)
+            function forceAppReady(reason) {
+                if (appReady) return;
+                console.log('App ready:', reason);
+                
+                appReady = true;
+                transitionInProgress = false;
+                
+                // Clear failsafe timer
+                if (_fallbackTimer) { clearTimeout(_fallbackTimer); _fallbackTimer = null; }
+                
+                // Unlock scroll immediately
+                unlockScroll();
+                
+                // Force content visible and interactive (no transition)
                 if (contentOverlay) {
                     contentOverlay.style.transition = 'none';
                     contentOverlay.style.transform = 'translateY(0)';
                     contentOverlay.style.opacity = '1';
                     contentOverlay.style.pointerEvents = 'auto';
                 }
-                body.style.overflow = '';
-                navbar.classList.remove('-translate-y-full', 'opacity-0');
-                navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
+                
+                // Disable pointer events on all splash/hero elements
+                const splashEls = [
+                    document.getElementById('brand-container'),
+                    document.getElementById('scroll-indicator'),
+                    mainTitle,
+                    subTitle,
+                    keyboardHint
+                ];
+                splashEls.forEach(el => { if (el) el.style.pointerEvents = 'none'; });
+                
+                // Remove all blur/transforms from hero elements
+                if (mainTitle) {
+                    mainTitle.style.transition = 'none';
+                    mainTitle.style.transform = '';
+                    mainTitle.style.filter = '';
+                    mainTitle.style.opacity = '0.2';
+                }
+                if (subTitle) {
+                    subTitle.style.transition = 'none';
+                    subTitle.style.opacity = '0';
+                }
+                if (scrollIndicator) {
+                    scrollIndicator.style.transition = 'none';
+                    scrollIndicator.style.opacity = '0';
+                }
+                if (keyboardHint) {
+                    keyboardHint.style.opacity = '0';
+                }
+                
+                // Force navbar visible and interactive
+                if (navbar) {
+                    navbar.classList.remove('-translate-y-full', 'opacity-0');
+                    navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
+                    navbar.style.pointerEvents = 'auto';
+                }
+                
+                // Remove all event listeners
+                removeListeners();
+                
+                // Remove global error handlers
+                try {
+                    window.removeEventListener('error', _errorHandler);
+                    window.removeEventListener('unhandledrejection', _promiseRejectionHandler);
+                } catch(e){}
+            }
+            
+            function revealImmediately() {
+                // for reduced-motion: skip animations and show final state
+                forceAppReady('reduced-motion');
             }
 
             function startTransition() {
-                if (triggered) return; triggered = true;
+                if (appReady || transitionInProgress) return;
+                transitionInProgress = true;
 
-                // set transitions using tuned values
+                // set initial transitions (will be overridden for micro-stages)
                 mainTitle.style.transition = `transform ${ANIM.titleDur}ms ${ANIM.easing}, filter ${ANIM.titleDur}ms ${ANIM.easing}, opacity ${ANIM.titleDur}ms ${ANIM.easing}`;
                 subTitle.style.transition = `opacity ${ANIM.subDur}ms ease`;
                 scrollIndicator.style.transition = `opacity ${ANIM.subDur}ms ease`;
                 if (contentOverlay) contentOverlay.style.transition = `transform ${ANIM.contentDur}ms ${ANIM.easing}, opacity ${ANIM.contentDur}ms ease`;
 
-                // trigger visual changes (use rAF to ensure transition)
-                requestAnimationFrame(() => {
-                    mainTitle.style.transform = 'scale(0.82)';
-                    mainTitle.style.filter = 'blur(6px)';
-                    mainTitle.style.opacity = '0.2';
-
-                    subTitle.style.opacity = '0';
-                    scrollIndicator.style.opacity = '0';
-
-                    // hide keyboard hint when transition begins
-                    if (keyboardHint && keyboardHintShown) {
-                        keyboardHint.style.opacity = '0';
-                    }
-
-                    // unlock scrolling immediately after animation starts
-                    body.style.overflow = '';
-
-                    // reveal content (slide up)
-                    if (contentOverlay) {
-                        contentOverlay.style.transform = 'translateY(0)';
-                        contentOverlay.style.opacity = '1';
-                        contentOverlay.style.pointerEvents = 'auto';
-                    }
-                });
-
-                // after content transition completes, reveal navbar
+                // Micro-haptic staged sequence
+                // 1) Resistance delay (visual resistance)
                 setTimeout(() => {
-                    navbar.classList.remove('-translate-y-full', 'opacity-0');
-                    navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
+                    // start a subtle initial response: title moves slowly (simulating weight)
+                    mainTitle.style.transition = `transform ${Math.round(ANIM.titleDur * 0.55)}ms ${ANIM.easing}, filter ${Math.round(ANIM.titleDur * 0.55)}ms ${ANIM.easing}, opacity ${Math.round(ANIM.titleDur * 0.55)}ms ${ANIM.easing}`;
+                    mainTitle.style.transform = 'scale(0.94)';
+                    mainTitle.style.filter = 'blur(2px)';
+                    mainTitle.style.opacity = '0.85';
+
+                    // unlock scrolling as soon as the animation begins
+                    unlockScroll();
+
+                    // keyboard hint hide
+                    if (keyboardHint && keyboardHintShown) keyboardHint.style.opacity = '0';
+
+                    // reveal content a little after title starts (so title feels heavier)
+                    if (contentOverlay) {
+                        setTimeout(() => {
+                            contentOverlay.style.transition = `transform ${ANIM.contentDur}ms ${ANIM.easing}, opacity ${ANIM.contentDur}ms ease`;
+                            contentOverlay.style.transform = 'translateY(0)';
+                            contentOverlay.style.opacity = '1';
+                            contentOverlay.style.pointerEvents = 'auto';
+                        }, MICRO.titleLag);
+                    }
+
+                    // subtitle and indicator lag and fade faster
+                    setTimeout(() => {
+                        subTitle.style.transition = `opacity ${ANIM.subDur}ms ease`;
+                        scrollIndicator.style.transition = `opacity ${ANIM.subDur}ms ease`;
+                        subTitle.style.opacity = '0';
+                        scrollIndicator.style.opacity = '0';
+                    }, MICRO.subLag);
+
+                    // 2) Overshoot then settle for title to simulate physical weight
+                    setTimeout(() => {
+                        // quick overshoot past final target
+                        mainTitle.style.transition = `transform ${MICRO.overshootDur}ms ${ANIM.easing}`;
+                        mainTitle.style.transform = 'scale(0.76)';
+                        mainTitle.style.filter = 'blur(8px)';
+
+                        // settle to final target
+                        setTimeout(() => {
+                            mainTitle.style.transition = `transform ${MICRO.settleDur}ms ${ANIM.easing}, filter ${MICRO.settleDur}ms ${ANIM.easing}, opacity ${MICRO.settleDur}ms ${ANIM.easing}`;
+                            mainTitle.style.transform = 'scale(0.82)';
+                            mainTitle.style.filter = 'blur(6px)';
+                            mainTitle.style.opacity = '0.2';
+                        }, MICRO.overshootDur);
+                    }, 120);
+                }, MICRO.resistance);
+
+                // after content transition completes, reveal navbar and mark ready
+                setTimeout(() => {
+                    if (!appReady) {
+                        navbar.classList.remove('-translate-y-full', 'opacity-0');
+                        navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
+                        forceAppReady('animation-complete');
+                    }
                 }, ANIM.contentDur + 40);
             }
 
+
+
+            // Global error handlers to force app ready on errors
+            function _errorHandler(evOrMsg, source, lineno, colno, err){
+                if (!appReady) forceAppReady('error-handler');
+            }
+            function _promiseRejectionHandler(evt){
+                if (!appReady) forceAppReady('promise-rejection');
+            }
+            window.addEventListener('error', _errorHandler);
+            window.addEventListener('unhandledrejection', _promiseRejectionHandler);
+
+            // Timeout-based failsafe: force app ready after 2s if not already
+            _fallbackTimer = setTimeout(() => {
+                if (!appReady) forceAppReady('timeout-failsafe');
+            }, APP_READY_TIMEOUT);
+
             function onFirstIntent(e) {
-                if (prefersReduced) {
-                    revealImmediately();
-                } else {
-                    startTransition();
-                }
-                removeListeners();
+                // Guard: prevent multiple triggers
+                if (appReady || transitionInProgress) return;
+                transitionInProgress = true;
+                
+                // Immediately force app into interactive state on first scroll intent
+                // This ensures the app never gets stuck waiting for animations
+                forceAppReady('first-scroll-intent');
             }
 
             function onKeyboardNavigation(e) {
@@ -500,6 +684,88 @@
         })();
     </script>
 
+    <script>
+        // Contact modal + Formspree integration
+        (function(){
+            const FORM_ENDPOINT = 'https://formspree.io/f/mjgwlokv';
+            const modal = document.getElementById('contact-modal');
+            const backdrop = document.getElementById('contact-backdrop');
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('cf-submit');
+            const status = document.getElementById('cf-status');
+            const closeBtn = document.getElementById('contact-close');
+
+            function openModal(e){
+                if (!modal) return;
+                // guard: already open
+                if (modal.classList.contains('flex')) return;
+                if (e) {
+                    try { e.preventDefault(); } catch(err){}
+                }
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                form.setAttribute('aria-hidden','false');
+                // focus first input
+                const name = document.getElementById('cf-name');
+                if (name) name.focus();
+            }
+            function closeModal(){
+                modal.classList.add('hidden');
+                modal.classList.remove('flex');
+                form.setAttribute('aria-hidden','true');
+            }
+
+            // attach to elements with data-contact
+            document.querySelectorAll('[data-contact="open"]').forEach(el => {
+                // Prefer pointerup for faster, unified tap handling (avoids 300ms/ghost click issues)
+                el.addEventListener('pointerup', (ev) => {
+                    // only primary pointers
+                    if (ev.isPrimary === false) return;
+                    // stop anchors from navigating (href="#") and suppress synthetic clicks
+                    try { ev.preventDefault(); } catch(err){}
+                    openModal(ev);
+                });
+                // Fallback: ensure clicks still open on older platforms
+                el.addEventListener('click', (ev) => {
+                    try { ev.preventDefault(); } catch(err){}
+                    openModal(ev);
+                });
+            });
+
+            backdrop && backdrop.addEventListener('click', closeModal);
+            closeBtn && closeBtn.addEventListener('click', closeModal);
+
+            form.addEventListener('submit', async (ev) =>{
+                ev.preventDefault();
+                status.textContent = '';
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Sending...';
+
+                const fd = new FormData(form);
+
+                try{
+                    const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: fd });
+                    if (res.ok) {
+                        status.textContent = 'Message sent — thank you.';
+                        submitBtn.textContent = 'Sent';
+                        setTimeout(() => { closeModal(); submitBtn.disabled = false; submitBtn.textContent = 'Contact me now'; form.reset(); status.textContent = ''; }, 1200);
+                    } else {
+                        const text = await res.text();
+                        status.textContent = 'Error sending message.';
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = 'Contact me now';
+                        console.warn('Formspree failed', res.status, text);
+                    }
+                }catch(err){
+                    status.textContent = 'Network error.';
+                    submitBtn.disabled = false;
+                    submitBtn.textContent = 'Contact me now';
+                    console.error(err);
+                }
+            });
+        })();
+    </script>
+
     <!-- Optional: register a service worker if provided to enable offline/fast loads on supported platforms -->
     <script>
         if ('serviceWorker' in navigator) {
@@ -507,6 +773,110 @@
                 navigator.serviceWorker.register('/sw.js').catch(() => {/* sw optional */});
             });
         }
+    </script>
+
+    <!-- Dev debug overlay (disabled by default). Toggle with Ctrl+Shift+D -->
+    <div id="dev-debug-overlay" aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;display:none;z-index:99999;font-family:system-ui,Segoe UI,Roboto,Arial;">
+    </div>
+    <script>
+        (function(){
+            const overlay = document.getElementById('dev-debug-overlay');
+            let enabled = false;
+            const targets = [
+                {sel:'#navbar', name:'Navbar'},
+                {sel:'section', name:'Hero'},
+                {sel:'#brand-container', name:'Brand'},
+                {sel:'#content-overlay', name:'Content'},
+                {sel:'#contact-modal', name:'Modal'},
+                {sel:'main', name:'Main'}
+            ];
+
+            function formatPointer(el){
+                if (!el) return 'none';
+                const pe = window.getComputedStyle(el).pointerEvents || 'auto';
+                return pe;
+            }
+
+            function createBox(id, rect, name, z, pe){
+                const box = document.createElement('div');
+                box.className = 'dev-box';
+                box.style.position = 'fixed';
+                box.style.left = rect.left + 'px';
+                box.style.top = rect.top + 'px';
+                box.style.width = rect.width + 'px';
+                box.style.height = rect.height + 'px';
+                box.style.border = '2px dashed rgba(96,165,250,0.95)';
+                box.style.background = 'transparent';
+                box.style.pointerEvents = 'none';
+                box.style.zIndex = 999999;
+
+                const label = document.createElement('div');
+                label.className = 'dev-label';
+                label.style.position = 'absolute';
+                label.style.right = '0';
+                label.style.top = '-18px';
+                label.style.padding = '2px 6px';
+                label.style.fontSize = '11px';
+                label.style.background = 'rgba(2,6,23,0.85)';
+                label.style.color = 'white';
+                label.style.borderRadius = '4px';
+                label.style.pointerEvents = 'none';
+                label.textContent = `${name} · z:${z} · pe:${pe}`;
+
+                box.appendChild(label);
+                box.dataset.devId = id;
+                return box;
+            }
+
+            let boxes = [];
+            function render(){
+                // remove old
+                boxes.forEach(b=>b.remove()); boxes = [];
+                targets.forEach((t,i)=>{
+                    const el = document.querySelector(t.sel);
+                    if (!el) return;
+                    const rect = el.getBoundingClientRect();
+                    const z = window.getComputedStyle(el).zIndex || 'auto';
+                    const pe = formatPointer(el);
+                    // ignore zero-size
+                    if (rect.width <=1 && rect.height <=1) return;
+                    const box = createBox(i, rect, t.name, z, pe);
+                    overlay.appendChild(box);
+                    boxes.push(box);
+                });
+            }
+
+            let raf = null;
+            function scheduleRender(){
+                if (raf) cancelAnimationFrame(raf);
+                raf = requestAnimationFrame(()=>{ render(); raf = null; });
+            }
+
+            function enable(){
+                if (enabled) return; enabled = true;
+                overlay.style.display = 'block';
+                scheduleRender();
+                window.addEventListener('resize', scheduleRender);
+                window.addEventListener('scroll', scheduleRender, {passive:true});
+            }
+            function disable(){
+                if (!enabled) return; enabled = false;
+                overlay.style.display = 'none';
+                boxes.forEach(b=>b.remove()); boxes = [];
+                window.removeEventListener('resize', scheduleRender);
+                window.removeEventListener('scroll', scheduleRender);
+            }
+
+            // Toggle on Ctrl+Shift+D
+            window.addEventListener('keydown', (e)=>{
+                if (e.ctrlKey && e.shiftKey && (e.key === 'D' || e.key === 'd')){
+                    if (enabled) disable(); else enable();
+                }
+            });
+
+            // expose for console: devDebug.enable()/disable()/render()
+            window.devDebug = { enable, disable, render: scheduleRender };
+        })();
     </script>
 
 </body></html>
