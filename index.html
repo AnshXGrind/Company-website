@@ -7,31 +7,63 @@
     <link rel="manifest" href="/manifest.json">
     <link rel="apple-touch-icon" href="/assets/icon-192.png">
     <title>Launcify | Agentic AI &amp; Workflows</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <script src="https://cdn.tailwindcss.com" defer></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js" defer></script>
     <style>
+        /* Design tokens (light/dark) */
+        :root{
+            --bg: #000000;
+            --text: #ffffff;
+            --muted: #94a3b8; /* slate-400 */
+            --panel-bg: rgba(30,30,30,0.4);
+            --panel-border: rgba(255,255,255,0.08);
+            --nav-bg: rgba(2,6,23,0.6);
+            --glass-blur: 12px;
+        }
+        body.theme-light, .theme-light :root {
+            /* Apple-like soft whites and subtle contrasts */
+            --bg: #ffffff;
+            --text: #0f1724; /* deeper but soft black */
+            --muted: #6b7280; /* restrained slate */
+            --panel-bg: rgba(255,255,255,0.92); /* nearly solid but soft */
+            --panel-border: rgba(15,23,42,0.06); /* very subtle */
+            --nav-bg: rgba(255,255,255,0.85);
+            --glass-blur: 6px;
+            --soft-shadow: 0 6px 24px rgba(2,6,23,0.06);
+            --panel-elevation: 0 4px 18px rgba(2,6,23,0.04);
+        }
         /* Typography: Lucida Sans Stack */
         body {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            background-color: #000000; /* Pure black */
-            color: #ffffff;
+            font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            transition: background-color 260ms ease, color 260ms ease;
         }
 
         /* Custom Utilities - Dual Tone Tinting */
         .glass-panel {
-            background: rgba(30, 30, 30, 0.4); /* Neutral glass */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.08); /* Subtle white border */
+            background: var(--panel-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--panel-border);
+            box-shadow: var(--panel-elevation, none);
         }
         .glass-panel:hover {
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.03);
-            box-shadow: 0 0 30px rgba(255,255,255,0.08);
+            border-color: rgba(2,6,23,0.06);
+            background: rgba(255,255,255,0.95);
+            box-shadow: var(--soft-shadow);
         }
 
         .text-glow {
-            text-shadow: 0 0 40px rgba(255,255,255,0.2);
+            /* Reduce glow to avoid visual noise; keep subtle depth */
+            text-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+
+        /* Typography rhythm and spacing */
+        body { line-height: 1.45; }
+        h1 { line-height: 1.02; letter-spacing: -0.02em; margin-bottom: 0.25rem; }
+        h2, h3 { line-height: 1.15; margin-top: 0; margin-bottom: .5rem; }
+        p { color: var(--muted); }
         }
 
         /* Hide scrollbar */
@@ -42,7 +74,7 @@
         .reveal-up {
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .reveal-up.active {
             opacity: 1;
@@ -94,10 +126,50 @@
         html, body, #content-overlay { -webkit-overflow-scrolling: touch; }
 
         /* Make all tappable elements respond immediately and hint clickable */
-        a, button, [role="button"] { touch-action: manipulation; cursor: pointer; -webkit-tap-highlight-color: rgba(255,255,255,0.06); }
+        a, button, [role="button"] { touch-action: manipulation; cursor: pointer; -webkit-tap-highlight-color: rgba(0,0,0,0.04); }
+
+        /* Button primitives for state-driven interactions */
+        .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; transition: transform 180ms cubic-bezier(.2,.9,.3,1), opacity 160ms ease, box-shadow 200ms ease; will-change: transform, opacity; }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(2,6,23,0.06); }
+        .btn:active { transform: translateY(0); opacity:0.92; box-shadow: 0 2px 8px rgba(2,6,23,0.06); }
+        .btn:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(59,130,246,0.12); }
+        .btn[data-loading="true"]{ pointer-events:none; opacity:0.7; transform: none; }
+
+        /* Links: subtle underline on hover, focused ring for keyboard users */
+        a { transition: color 160ms ease, opacity 160ms ease, transform 160ms ease; -webkit-tap-highlight-color: transparent; }
+        a:hover { opacity: 0.95; transform: translateY(-1px); }
+        a:active { transform: translateY(0); opacity: 0.9; }
+        a:focus-visible { outline: none; box-shadow: 0 0 0 4px rgba(59,130,246,0.08); border-radius: 6px; }
+
+        /* Navbar links slightly elevate on hover for clarity */
+        #navbar a { transition: transform 160ms cubic-bezier(.2,.9,.3,1), color 160ms ease; }
+        #navbar a:hover { transform: translateY(-2px); }
+
+        /* Respect reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            .btn, a, #navbar a { transition: none !important; transform: none !important; }
+        }
+        /* Improve touch responsiveness for interactive elements */
+        .btn, a, button { touch-action: manipulation; }
 
     </style>
-<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style><link id="all-fonts-link-font-newsreader" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"><style id="all-fonts-style-font-newsreader">.font-newsreader { font-family: 'Newsreader', serif !important; }</style><link id="all-fonts-link-font-google-sans-flex" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-google-sans-flex">.font-google-sans-flex { font-family: 'Google Sans Flex', sans-serif !important; }</style><link id="all-fonts-link-font-oswald" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-oswald">.font-oswald { font-family: 'Oswald', sans-serif !important; }</style><link id="all-fonts-link-font-dm-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-dm-sans">.font-dm-sans { font-family: 'DM Sans', sans-serif !important; }</style><link id="all-fonts-link-font-cormorant" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-cormorant">.font-cormorant { font-family: 'Cormorant Garamond', serif !important; }</style></head>
+    <!-- Keep only two fonts for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap">
+    <style>
+        :root { --nav-height: 64px; --ui-font: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, Arial; --display-font: 'Playfair Display', Georgia, serif; }
+        body { font-family: var(--ui-font); }
+        h1, h2, h3 { font-family: var(--display-font); }
+
+        /* Slightly reduce heavy blur after splash to improve readability */
+        body.post-splash .glass-panel { backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); }
+
+        /* Prevent in-page anchors from being hidden under navbar */
+        [id] { scroll-margin-top: calc(var(--nav-height) + 12px); }
+    </style>
+</head>
 <body class="antialiased relative selection:bg-blue-600 selection:text-white">
 
     <!-- Fixed Gradient Background (Dual Tone: Black & Blue) -->
@@ -106,7 +178,7 @@
     <!-- Sticky Navigation (Appears on Scroll) -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 transform border-b border-transparent -translate-y-full opacity-0">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-sm tracking-widest uppercase text-white font-semibold flex items-center gap-2">
+                    <a href="#" class="text-sm tracking-widest uppercase text-white font-semibold flex items-center gap-2">
                 <div class="w-2 h-2 bg-white rounded-full"></div>
                 Launcify
             </a>
@@ -120,7 +192,10 @@
                     <a href="tel:+123456789" class="w-8 h-8 flex items-center justify-center border border-slate-800 rounded bg-slate-900/50 text-slate-400 hover:bg-white hover:text-black hover:border-white transition-all duration-300 group" aria-label="Call Us">
                         <iconify-icon icon="solar:phone-calling-linear" width="16" height="16"></iconify-icon>
                     </a>
-                    <button data-contact="open" class="bg-white text-black text-xs px-4 py-2 rounded-full font-medium hover:bg-neutral-100 transition-colors">Start Project</button>
+                    <button data-contact="open" class="bg-white text-black text-xs px-4 py-2 rounded-full font-medium hover:bg-neutral-100 transition-colors btn" data-action="open-contact">Join Early Access</button>
+                    <button id="theme-toggle" aria-label="Toggle theme" class="ml-2 w-9 h-9 rounded-full border border-transparent flex items-center justify-center bg-transparent text-slate-300 btn" title="Toggle theme" data-action="toggle-theme">
+                        <iconify-icon icon="ph:sun-duotone" width="18" height="18"></iconify-icon>
+                    </button>
                 </div>
             </div>
         </div>
@@ -138,13 +213,13 @@
                     Launcify
                 </h1>
                 <p id="sub-title" class="text-slate-300 text-sm md:text-base text-center mt-6 tracking-wide transition-opacity duration-700 delay-200 font-medium" style="opacity: 1;">
-                    Architecting the autonomous web.
+                    Autonomous growth for small teams — convert more, manage less.
                 </p>
             </div>
 
             <!-- Scroll Indicator -->
-            <div id="scroll-indicator" class="absolute bottom-12 flex flex-col items-center gap-2 opacity-50 animate-pulse">
-                <span class="text-[10px] tracking-widest uppercase text-slate-300">Scroll</span>
+            <div id="scroll-indicator" class="absolute bottom-12 flex flex-col items-center gap-2 opacity-75 animate-pulse">
+                <span class="text-[10px] tracking-widest uppercase text-slate-300">Scroll / Swipe</span>
                 <div class="w-[1px] h-8 bg-gradient-to-b from-transparent via-white to-transparent"></div>
             </div>
             <!-- Keyboard hint for users navigating without a pointer -->
@@ -154,19 +229,20 @@
         </section>
 
         <!-- Content Overlay (hidden initially; revealed on scroll) -->
-        <div id="content-overlay" class="w-full bg-[#02040a] relative z-10 border-t border-slate-900/60 shadow-[0_-50px_100px_rgba(0,0,0,1)] rounded-t-[3rem] pb-24" style="opacity:0; transform: translateY(100vh); pointer-events: none; transition: all 600ms ease;">
+        <div id="content-overlay" class="w-full bg-[#02040a] relative z-10 border-t border-slate-900/60 shadow-[0_-50px_100px_rgba(0,0,0,1)] rounded-t-[3rem] pb-24" style="opacity:0; transform: translateY(100vh); pointer-events: none; transition: transform 600ms ease, opacity 600ms ease;">
             
             <div class="max-w-6xl mx-auto px-6 pt-24">
                 
                 <!-- Introduction -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32 reveal-up">
                     <h2 class="text-2xl md:text-3xl font-light leading-tight tracking-tight text-slate-200">
-                        We build intelligent digital ecosystems. Combining minimalist design with <span class="text-white font-medium">Agentic AI</span> to automate your business growth.
+                        A simple product: automate repetitive growth tasks so your team focuses on strategy.
                     </h2>
                     <div class="flex flex-col justify-end">
                         <p class="text-slate-400 text-sm leading-relaxed max-w-md">
-                            From high-conversion websites to bespoke AI workflows. Launcify bridges the gap between aesthetic excellence and autonomous functionality.
+                            Join early access to pilot autonomous workflows that increase conversions and reduce manual work.
                         </p>
+                        <div class="mt-4 text-xs text-slate-500">Our principles: <span class="text-slate-300">Privacy‑first · Minimal surface area · Stability‑first</span></div>
                     </div>
                 </div>
 
@@ -311,10 +387,11 @@
                             <!-- Left: Vision & Founders -->
                             <div class="flex flex-col justify-between h-full gap-8">
                                 <div>
-                                    <h2 class="text-3xl md:text-5xl tracking-tighter text-white font-medium mb-4">Let's build the future.</h2>
+                                    <h2 class="text-3xl md:text-5xl tracking-tighter text-white font-medium mb-4">Coming soon.</h2>
                                     <p class="text-sm text-slate-400 max-w-sm leading-relaxed">
-                                        Ready to scale? Connect with us to architect your autonomous workflow today.
+                                        Launcify launches soon. Request early access to try the product before public release.
                                     </p>
+                                    <div class="text-xs text-slate-500 mt-4">Privacy-first. We use your email only to manage the waitlist and share launch details.</div>
                                 </div>
                                 
                                 <!-- Founders Section -->
@@ -338,7 +415,7 @@
                                         <iconify-icon icon="solar:letter-linear" class="text-slate-500 group-hover/card:text-white transition-colors" width="24" height="24"></iconify-icon>
                                         <iconify-icon icon="solar:arrow-right-up-linear" class="text-white opacity-0 group-hover/card:opacity-100 transform translate-y-2 group-hover/card:translate-y-0 duration-300" width="20" height="20"></iconify-icon>
                                     </div>
-                                    <span class="text-lg text-white font-medium tracking-tight group-hover/card:text-neutral-100 transition-colors">grgsaksham25@gmail.com</span>
+                                    <span class="text-lg text-white font-medium tracking-tight group-hover/card:text-neutral-100 transition-colors">Request Early Access</span>
                                 </a>
 
                                 <!-- Call Card -->
@@ -377,20 +454,20 @@
         <form id="contact-form" class="relative z-70 w-full max-w-xl bg-[#0b0b0d] border border-slate-800 rounded-2xl p-6 shadow-lg" aria-hidden="true">
             <div class="flex justify-between items-start mb-4">
                 <div>
-                    <h3 class="text-lg text-white font-medium">Contact Us</h3>
-                    <p class="text-xs text-slate-400">Send a short note — we’ll reply within one business day.</p>
+                                <h3 class="text-lg text-white font-medium">Request Early Access</h3>
+                    <p class="text-xs text-slate-400">Sign up for early access — limited seats. We'll follow up with launch details.</p>
                 </div>
                 <button type="button" id="contact-close" class="text-slate-400 hover:text-white">✕</button>
             </div>
-            <div class="grid grid-cols-1 gap-3">
-                <input name="name" id="cf-name" required placeholder="Your name" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
-                <input name="email" id="cf-email" type="email" required placeholder="Email" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
-                <textarea name="message" id="cf-message" rows="4" required placeholder="How can we help?" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white"></textarea>
-                <div class="flex items-center justify-between">
-                    <button id="cf-submit" type="submit" class="bg-white text-black px-4 py-2 rounded font-medium">Contact me now</button>
-                    <span id="cf-status" class="text-xs text-slate-400"></span>
+                <div class="grid grid-cols-1 gap-3">
+                    <input name="email" id="cf-email" type="email" required placeholder="Email address" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
+                    <input name="name" id="cf-name" placeholder="Name (optional)" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
+                    <div class="flex items-center justify-between">
+                        <button id="cf-submit" type="submit" class="bg-white text-black px-4 py-2 rounded font-medium">Request access</button>
+                        <span id="cf-status" class="text-xs text-slate-400"></span>
+                    </div>
+                    <div class="text-[11px] text-slate-500 mt-1">We respect your privacy — your email is used only to invite you to early access. No third‑party sharing.</div>
                 </div>
-            </div>
         </form>
     </div>
 
@@ -400,6 +477,45 @@
             const st = document.getElementById('sub-title');
             if (st) st.style.opacity = '1';
         });
+
+        // Lightweight AppState manager for theme and UI actions
+        (function(){
+            const storageKey = 'launcify:theme';
+            const app = {
+                theme: 'dark',
+                init(){
+                    try{ const saved = localStorage.getItem(storageKey); if (saved) this.theme = saved; }catch(e){}
+                    this.applyTheme();
+                    document.addEventListener('click', this.handleClick.bind(this));
+                    window.addEventListener('keydown', (e)=>{ if (e.key === 't' && (e.ctrlKey||e.metaKey)) this.toggleTheme(); });
+                },
+                applyTheme(){
+                    if (this.theme === 'light') document.body.classList.add('theme-light'); else document.body.classList.remove('theme-light');
+                    // update icon
+                    const ico = document.querySelector('#theme-toggle iconify-icon');
+                    if (ico) ico.setAttribute('icon', this.theme === 'light' ? 'ph:moon-duotone' : 'ph:sun-duotone');
+                },
+                toggleTheme(){
+                    this.theme = this.theme === 'light' ? 'dark' : 'light';
+                    try{ localStorage.setItem(storageKey, this.theme); }catch(e){}
+                    this.applyTheme();
+                },
+                handleClick(e){
+                    const btn = e.target.closest && e.target.closest('[data-action]');
+                    if (!btn) return;
+                    const action = btn.getAttribute('data-action');
+                    if (action === 'toggle-theme') { this.toggleTheme(); return; }
+                    if (action === 'open-contact') {
+                        // show a tiny loading microinteraction then open modal
+                        btn.setAttribute('data-loading','true');
+                        setTimeout(()=>{ btn.removeAttribute('data-loading'); const evt = new Event('click',{bubbles:true}); /* forward to contact modal logic */ document.querySelector('[data-contact="open"]').dispatchEvent(evt); }, 220);
+                        return;
+                    }
+                }
+            };
+            window.LauncifyApp = app;
+            document.addEventListener('DOMContentLoaded', ()=>app.init());
+        })();
 
         // Intersection Observer for Scroll Reveals
         const observer = new IntersectionObserver((entries) => {
@@ -444,13 +560,19 @@
                     timeoutId = null;
                 }
                 
-                // 1. Remove position: fixed from body (restore normal scrolling)
-                document.body.style.position = '';
-                document.body.style.top = '';
-                document.body.style.left = '';
-                document.body.style.right = '';
-                document.body.style.width = '';
-                document.body.style.overflowY = 'auto';
+                    // 1. Remove position: fixed from body (restore normal scrolling)
+                    document.body.style.position = '';
+                    document.body.style.top = '';
+                    document.body.style.left = '';
+                    document.body.style.right = '';
+                    document.body.style.width = '';
+                    document.body.style.overflowY = 'auto';
+
+                    // mark splash as seen for repeat visits
+                    try { localStorage.setItem('launcify:splashSeen','1'); } catch(e){}
+
+                    // add a post-splash marker class to allow subtle visual tweaks
+                    try { document.body.classList.add('post-splash'); } catch(e){}
                 
                 // 2. Disable pointer events on ALL splash/hero elements
                 const splashElements = [mainTitle, subTitle, scrollIndicator, brandContainer, keyboardHint];
@@ -490,7 +612,8 @@
                     keyboardHint.style.opacity = '0';
                 }
                 
-                // 6. Remove all event listeners
+                // 6. Make main content interactive and remove all event listeners
+                try { const mainEl = document.querySelector('main'); if (mainEl) mainEl.style.pointerEvents = 'auto'; } catch(e){}
                 window.removeEventListener('wheel', onUserInteraction);
                 window.removeEventListener('touchstart', onUserInteraction);
                 window.removeEventListener('touchmove', onUserInteraction);
@@ -501,6 +624,8 @@
                 // 7. Remove global error handlers
                 window.removeEventListener('error', onJSError);
                 window.removeEventListener('unhandledrejection', onPromiseError);
+                // update nav height CSS variable for anchor offset calculations
+                try { const navH = navbar ? navbar.getBoundingClientRect().height : 64; document.documentElement.style.setProperty('--nav-height', navH + 'px'); } catch(e){}
             }
             
             // === EVENT HANDLERS ===
@@ -529,11 +654,11 @@
             
             // === INITIALIZATION ===
             function initializeSplash() {
-                // If reduced motion is preferred, exit splash immediately
-                if (prefersReduced) {
-                    exitSplash('reduced-motion');
-                    return;
-                }
+                // If reduced motion is preferred, or splash was seen before, exit splash immediately
+                try {
+                    if (prefersReduced) { exitSplash('reduced-motion'); return; }
+                    if (localStorage && localStorage.getItem && localStorage.getItem('launcify:splashSeen')) { exitSplash('repeat-visit'); return; }
+                } catch(e){}
                 
                 // Set up initial splash state
                 // 1. Lock body scrolling using position: fixed
@@ -577,6 +702,66 @@
             
             // Start initialization
             initializeSplash();
+            
+            // --- Runtime sanity check: ensure page becomes interactive ---
+            function sanityCheckAndRecover() {
+                try {
+                    // Conditions to consider "not interactive"
+                    const bodyFixed = window.getComputedStyle(document.body).position === 'fixed' || document.body.style.position === 'fixed';
+                    const bodyOverflowHidden = window.getComputedStyle(document.body).overflowY === 'hidden' || document.body.style.overflowY === 'hidden';
+                    const contentHidden = contentOverlay && (parseFloat(window.getComputedStyle(contentOverlay).opacity) === 0 || window.getComputedStyle(contentOverlay).transform.includes('translateY'));
+                    const navbarBlocked = navbar && window.getComputedStyle(navbar).pointerEvents === 'none';
+
+                    if (isSplashActive && (bodyFixed || bodyOverflowHidden || contentHidden || navbarBlocked)) {
+                        console.warn('Sanity recovery: forcing interactive state due to failed splash unlock');
+                        exitSplash('sanity-recovery');
+                        return true;
+                    }
+                } catch (err) {
+                    console.warn('Sanity check error, forcing recovery', err);
+                    exitSplash('sanity-exception');
+                    return true;
+                }
+                return false;
+            }
+
+            // Run immediately and after 3 seconds
+            try { sanityCheckAndRecover(); } catch(e){}
+            setTimeout(() => { sanityCheckAndRecover(); }, 3000);
+        })();
+    </script>
+
+    <script>
+        // Anchor link handler: account for navbar height and ensure smooth scroll
+        (function(){
+            function getNavOffset(){
+                const nav = document.getElementById('navbar');
+                if (!nav) return 64;
+                return Math.round(nav.getBoundingClientRect().height) || 64;
+            }
+
+            // set css var for nav height on load/resize
+            function updateNavVar(){
+                try { document.documentElement.style.setProperty('--nav-height', getNavOffset() + 'px'); } catch(e){}
+            }
+            window.addEventListener('load', updateNavVar);
+            window.addEventListener('resize', updateNavVar);
+            updateNavVar();
+
+            // intercept hash anchor clicks
+            document.addEventListener('click', (e)=>{
+                const a = e.target.closest && e.target.closest('a[href^="#"]');
+                if (!a) return;
+                const href = a.getAttribute('href');
+                if (!href || href === '#') return;
+                const id = href.slice(1);
+                const target = document.getElementById(id);
+                if (!target) return;
+                e.preventDefault();
+                const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || getNavOffset();
+                const top = target.getBoundingClientRect().top + window.scrollY - navH - 8;
+                window.scrollTo({ top, behavior: 'smooth' });
+            }, {passive: false});
         })();
     </script>
 
@@ -631,33 +816,52 @@
             backdrop && backdrop.addEventListener('click', closeModal);
             closeBtn && closeBtn.addEventListener('click', closeModal);
 
-            form.addEventListener('submit', async (ev) =>{
+            form.addEventListener('submit', (ev) =>{
                 ev.preventDefault();
                 status.textContent = '';
                 submitBtn.disabled = true;
-                submitBtn.textContent = 'Sending...';
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Joining...';
 
-                const fd = new FormData(form);
+                const email = (document.getElementById('cf-email') || {}).value || '';
+                const name = (document.getElementById('cf-name') || {}).value || '';
 
-                try{
-                    const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: fd });
-                    if (res.ok) {
-                        status.textContent = 'Message sent — thank you.';
-                        submitBtn.textContent = 'Sent';
-                        setTimeout(() => { closeModal(); submitBtn.disabled = false; submitBtn.textContent = 'Contact me now'; form.reset(); status.textContent = ''; }, 1200);
-                    } else {
-                        const text = await res.text();
-                        status.textContent = 'Error sending message.';
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = 'Contact me now';
-                        console.warn('Formspree failed', res.status, text);
-                    }
-                }catch(err){
-                    status.textContent = 'Network error.';
+                // Basic email validation
+                const validEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+                if (!validEmail) {
+                    status.textContent = 'Please enter a valid email.';
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'Contact me now';
-                    console.error(err);
+                    submitBtn.textContent = originalText || 'Request access';
+                    return;
                 }
+
+                // Simulate async save (no backend). Store to localStorage waitlist and show confirmation.
+                try {
+                    const key = 'launcify:waitlist';
+                    const existing = JSON.parse(localStorage.getItem(key) || '[]');
+                    existing.push({ email: email.trim(), name: name.trim(), ts: Date.now() });
+                    localStorage.setItem(key, JSON.stringify(existing));
+                } catch (err) {
+                    console.warn('Failed to save waitlist locally', err);
+                }
+
+                // Show a minimal confirmation state inside the modal
+                (function showConfirmation(){
+                    form.innerHTML = '';
+                    const wrap = document.createElement('div');
+                    wrap.className = 'text-center p-6';
+                    wrap.innerHTML = '<div style="font-size:36px;line-height:1;margin-bottom:12px;">✓</div>' +
+                        '<div class="text-lg text-white font-medium mb-2">You’re on the list.</div>' +
+                        '<div class="text-xs text-slate-400 mb-4">We’ll email you when early access opens.</div>' +
+                        '<div><button id="cf-close-after" class="bg-white text-black px-4 py-2 rounded font-medium">Close</button></div>';
+                    form.appendChild(wrap);
+
+                    const closeAfter = document.getElementById('cf-close-after');
+                    if (closeAfter) closeAfter.addEventListener('click', () => { closeModal(); });
+
+                    // Auto-close after short delay to keep flow minimal
+                    setTimeout(()=>{ try{ closeModal(); }catch(e){} }, 1800);
+                })();
             });
         })();
     </script>
@@ -675,103 +879,105 @@
     <div id="dev-debug-overlay" aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;display:none;z-index:99999;font-family:system-ui,Segoe UI,Roboto,Arial;">
     </div>
     <script>
-        (function(){
-            const overlay = document.getElementById('dev-debug-overlay');
-            let enabled = false;
-            const targets = [
-                {sel:'#navbar', name:'Navbar'},
-                {sel:'section', name:'Hero'},
-                {sel:'#brand-container', name:'Brand'},
-                {sel:'#content-overlay', name:'Content'},
-                {sel:'#contact-modal', name:'Modal'},
-                {sel:'main', name:'Main'}
-            ];
+        // Initialize dev debug overlay when the browser is idle to avoid main-thread work during critical load
+        (function scheduleDevDebugInit(){
+            function init(){
+                (function(){
+                    const overlay = document.getElementById('dev-debug-overlay');
+                    let enabled = false;
+                    const targets = [
+                        {sel:'#navbar', name:'Navbar'},
+                        {sel:'section', name:'Hero'},
+                        {sel:'#brand-container', name:'Brand'},
+                        {sel:'#content-overlay', name:'Content'},
+                        {sel:'#contact-modal', name:'Modal'},
+                        {sel:'main', name:'Main'}
+                    ];
 
-            function formatPointer(el){
-                if (!el) return 'none';
-                const pe = window.getComputedStyle(el).pointerEvents || 'auto';
-                return pe;
+                    function formatPointer(el){
+                        if (!el) return 'none';
+                        const pe = window.getComputedStyle(el).pointerEvents || 'auto';
+                        return pe;
+                    }
+
+                    function createBox(id, rect, name, z, pe){
+                        const box = document.createElement('div');
+                        box.className = 'dev-box';
+                        box.style.position = 'fixed';
+                        box.style.left = rect.left + 'px';
+                        box.style.top = rect.top + 'px';
+                        box.style.width = rect.width + 'px';
+                        box.style.height = rect.height + 'px';
+                        box.style.border = '2px dashed rgba(96,165,250,0.95)';
+                        box.style.background = 'transparent';
+                        box.style.pointerEvents = 'none';
+                        box.style.zIndex = 999999;
+
+                        const label = document.createElement('div');
+                        label.className = 'dev-label';
+                        label.style.position = 'absolute';
+                        label.style.right = '0';
+                        label.style.top = '-18px';
+                        label.style.padding = '2px 6px';
+                        label.style.fontSize = '11px';
+                        label.style.background = 'rgba(2,6,23,0.85)';
+                        label.style.color = 'white';
+                        label.style.borderRadius = '4px';
+                        label.style.pointerEvents = 'none';
+                        label.textContent = `${name} · z:${z} · pe:${pe}`;
+
+                        box.appendChild(label);
+                        box.dataset.devId = id;
+                        return box;
+                    }
+
+                    let boxes = [];
+                    function render(){
+                        boxes.forEach(b=>b.remove()); boxes = [];
+                        targets.forEach((t,i)=>{
+                            const el = document.querySelector(t.sel);
+                            if (!el) return;
+                            const rect = el.getBoundingClientRect();
+                            const z = window.getComputedStyle(el).zIndex || 'auto';
+                            const pe = formatPointer(el);
+                            if (rect.width <=1 && rect.height <=1) return;
+                            const box = createBox(i, rect, t.name, z, pe);
+                            overlay.appendChild(box);
+                            boxes.push(box);
+                        });
+                    }
+
+                    let raf = null;
+                    function scheduleRender(){
+                        if (raf) cancelAnimationFrame(raf);
+                        raf = requestAnimationFrame(()=>{ render(); raf = null; });
+                    }
+
+                    function enable(){
+                        if (enabled) return; enabled = true;
+                        overlay.style.display = 'block';
+                        scheduleRender();
+                        window.addEventListener('resize', scheduleRender);
+                        window.addEventListener('scroll', scheduleRender, {passive:true});
+                    }
+                    function disable(){
+                        if (!enabled) return; enabled = false;
+                        overlay.style.display = 'none';
+                        boxes.forEach(b=>b.remove()); boxes = [];
+                        window.removeEventListener('resize', scheduleRender);
+                        window.removeEventListener('scroll', scheduleRender);
+                    }
+
+                    window.addEventListener('keydown', (e)=>{
+                        if (e.ctrlKey && e.shiftKey && (e.key === 'D' || e.key === 'd')){
+                            if (enabled) disable(); else enable();
+                        }
+                    });
+
+                    window.devDebug = { enable, disable, render: scheduleRender };
+                })();
             }
-
-            function createBox(id, rect, name, z, pe){
-                const box = document.createElement('div');
-                box.className = 'dev-box';
-                box.style.position = 'fixed';
-                box.style.left = rect.left + 'px';
-                box.style.top = rect.top + 'px';
-                box.style.width = rect.width + 'px';
-                box.style.height = rect.height + 'px';
-                box.style.border = '2px dashed rgba(96,165,250,0.95)';
-                box.style.background = 'transparent';
-                box.style.pointerEvents = 'none';
-                box.style.zIndex = 999999;
-
-                const label = document.createElement('div');
-                label.className = 'dev-label';
-                label.style.position = 'absolute';
-                label.style.right = '0';
-                label.style.top = '-18px';
-                label.style.padding = '2px 6px';
-                label.style.fontSize = '11px';
-                label.style.background = 'rgba(2,6,23,0.85)';
-                label.style.color = 'white';
-                label.style.borderRadius = '4px';
-                label.style.pointerEvents = 'none';
-                label.textContent = `${name} · z:${z} · pe:${pe}`;
-
-                box.appendChild(label);
-                box.dataset.devId = id;
-                return box;
-            }
-
-            let boxes = [];
-            function render(){
-                // remove old
-                boxes.forEach(b=>b.remove()); boxes = [];
-                targets.forEach((t,i)=>{
-                    const el = document.querySelector(t.sel);
-                    if (!el) return;
-                    const rect = el.getBoundingClientRect();
-                    const z = window.getComputedStyle(el).zIndex || 'auto';
-                    const pe = formatPointer(el);
-                    // ignore zero-size
-                    if (rect.width <=1 && rect.height <=1) return;
-                    const box = createBox(i, rect, t.name, z, pe);
-                    overlay.appendChild(box);
-                    boxes.push(box);
-                });
-            }
-
-            let raf = null;
-            function scheduleRender(){
-                if (raf) cancelAnimationFrame(raf);
-                raf = requestAnimationFrame(()=>{ render(); raf = null; });
-            }
-
-            function enable(){
-                if (enabled) return; enabled = true;
-                overlay.style.display = 'block';
-                scheduleRender();
-                window.addEventListener('resize', scheduleRender);
-                window.addEventListener('scroll', scheduleRender, {passive:true});
-            }
-            function disable(){
-                if (!enabled) return; enabled = false;
-                overlay.style.display = 'none';
-                boxes.forEach(b=>b.remove()); boxes = [];
-                window.removeEventListener('resize', scheduleRender);
-                window.removeEventListener('scroll', scheduleRender);
-            }
-
-            // Toggle on Ctrl+Shift+D
-            window.addEventListener('keydown', (e)=>{
-                if (e.ctrlKey && e.shiftKey && (e.key === 'D' || e.key === 'd')){
-                    if (enabled) disable(); else enable();
-                }
-            });
-
-            // expose for console: devDebug.enable()/disable()/render()
-            window.devDebug = { enable, disable, render: scheduleRender };
+            if ('requestIdleCallback' in window) requestIdleCallback(init, {timeout:2000}); else setTimeout(init, 1500);
         })();
     </script>
 
