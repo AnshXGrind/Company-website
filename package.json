@@ -1,0 +1,11 @@
+{
+  "name": "company-website-smoke",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test:smoke": "node smoke-test.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.40.0"
+  }
+}

@@ -1,13 +1,512 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0; url=/main.html" />
-    <link rel="canonical" href="/main.html" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Redirecting…</title>
-  </head>
-  <body>
-    Redirecting to <a href="/main.html">main.html</a>.
-  </body>
-</html>
+<html lang="en" class="scroll-smooth"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#000000">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/icon-192.png">
+    <title>Launcify | Agentic AI &amp; Workflows</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <style>
+        /* Typography: Lucida Sans Stack */
+        body {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            background-color: #000000; /* Pure black */
+            color: #ffffff;
+        }
+
+        /* Custom Utilities - Dual Tone Tinting */
+        .glass-panel {
+            background: rgba(30, 30, 30, 0.4); /* Neutral glass */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.08); /* Subtle white border */
+        }
+        .glass-panel:hover {
+            border-color: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.03);
+            box-shadow: 0 0 30px rgba(255,255,255,0.08);
+        }
+
+        .text-glow {
+            text-shadow: 0 0 40px rgba(255,255,255,0.2);
+        }
+
+        /* Hide scrollbar */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Animation Classes */
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal-up.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile / Touch Optimizations */
+        :root { -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+        a, button { touch-action: manipulation; -webkit-tap-highlight-color: rgba(255,255,255,0.06); }
+
+        /* Larger tap targets for touch devices */
+        @media (pointer: coarse) {
+            button, a { min-height: 44px; min-width: 44px; padding: 10px 12px; }
+            .w-8.h-8 { width: 44px; height: 44px; }
+        }
+
+        /* Respect users who prefer reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+        }
+
+        /* Respect OS color scheme; allow black/white-only modes */
+        @media (prefers-color-scheme: light) {
+            body { background-color: #ffffff; color: #000000; }
+            .glass-panel { background: rgba(255,255,255,0.6); border-color: rgba(0,0,0,0.06); }
+            .text-glow { text-shadow: none; }
+        }
+
+        /* Custom UI Elements - Dual Tone Specifics */
+        input[type=range] { -webkit-appearance: none; background: transparent; }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
+            background: #fff; /* White thumb */
+            margin-top: -6px; cursor: pointer;
+            box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%; height: 4px; background: #222; border-radius: 2px;
+        }
+        
+        .custom-checkbox input:checked + div { background-color: #fff; border-color: #fff; } /* White checked */
+        .custom-checkbox input:checked + div svg { display: block; }
+    </style>
+<link id="all-fonts-link-font-geist" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist">.font-geist { font-family: 'Geist', sans-serif !important; }</style><link id="all-fonts-link-font-roboto" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-roboto">.font-roboto { font-family: 'Roboto', sans-serif !important; }</style><link id="all-fonts-link-font-montserrat" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-montserrat">.font-montserrat { font-family: 'Montserrat', sans-serif !important; }</style><link id="all-fonts-link-font-poppins" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-poppins">.font-poppins { font-family: 'Poppins', sans-serif !important; }</style><link id="all-fonts-link-font-playfair" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;900&amp;display=swap"><style id="all-fonts-style-font-playfair">.font-playfair { font-family: 'Playfair Display', serif !important; }</style><link id="all-fonts-link-font-instrument-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-instrument-serif">.font-instrument-serif { font-family: 'Instrument Serif', serif !important; }</style><link id="all-fonts-link-font-merriweather" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&amp;display=swap"><style id="all-fonts-style-font-merriweather">.font-merriweather { font-family: 'Merriweather', serif !important; }</style><link id="all-fonts-link-font-bricolage" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-bricolage">.font-bricolage { font-family: 'Bricolage Grotesque', sans-serif !important; }</style><link id="all-fonts-link-font-jakarta" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-jakarta">.font-jakarta { font-family: 'Plus Jakarta Sans', sans-serif !important; }</style><link id="all-fonts-link-font-manrope" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-manrope">.font-manrope { font-family: 'Manrope', sans-serif !important; }</style><link id="all-fonts-link-font-space-grotesk" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-space-grotesk">.font-space-grotesk { font-family: 'Space Grotesk', sans-serif !important; }</style><link id="all-fonts-link-font-work-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-work-sans">.font-work-sans { font-family: 'Work Sans', sans-serif !important; }</style><link id="all-fonts-link-font-pt-serif" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=PT+Serif:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-pt-serif">.font-pt-serif { font-family: 'PT Serif', serif !important; }</style><link id="all-fonts-link-font-geist-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-geist-mono">.font-geist-mono { font-family: 'Geist Mono', monospace !important; }</style><link id="all-fonts-link-font-space-mono" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap"><style id="all-fonts-style-font-space-mono">.font-space-mono { font-family: 'Space Mono', monospace !important; }</style><link id="all-fonts-link-font-quicksand" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-quicksand">.font-quicksand { font-family: 'Quicksand', sans-serif !important; }</style><link id="all-fonts-link-font-nunito" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800&amp;display=swap"><style id="all-fonts-style-font-nunito">.font-nunito { font-family: 'Nunito', sans-serif !important; }</style><link id="all-fonts-link-font-newsreader" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400..800&amp;display=swap"><style id="all-fonts-style-font-newsreader">.font-newsreader { font-family: 'Newsreader', serif !important; }</style><link id="all-fonts-link-font-google-sans-flex" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:wght@400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-google-sans-flex">.font-google-sans-flex { font-family: 'Google Sans Flex', sans-serif !important; }</style><link id="all-fonts-link-font-oswald" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-oswald">.font-oswald { font-family: 'Oswald', sans-serif !important; }</style><link id="all-fonts-link-font-dm-sans" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-dm-sans">.font-dm-sans { font-family: 'DM Sans', sans-serif !important; }</style><link id="all-fonts-link-font-cormorant" rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&amp;display=swap"><style id="all-fonts-style-font-cormorant">.font-cormorant { font-family: 'Cormorant Garamond', serif !important; }</style></head>
+<body class="antialiased overflow-hidden relative selection:bg-blue-600 selection:text-white">
+
+    <!-- Fixed Gradient Background (Dual Tone: Black & Blue) -->
+    <!-- No colored background glows for pure black/white mode -->
+
+    <!-- Sticky Navigation (Appears on Scroll) -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 transform border-b border-transparent -translate-y-full opacity-0">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <a href="#" class="text-sm tracking-widest uppercase text-white font-semibold flex items-center gap-2">
+                <div class="w-2 h-2 bg-white rounded-full"></div>
+                Launcify
+            </a>
+            <div class="flex items-center gap-6">
+                <div class="hidden md:flex gap-6 items-center">
+                    <a href="#services" class="text-xs text-slate-400 hover:text-white transition-colors">Services</a>
+                    <a href="#workflow" class="text-xs text-slate-400 hover:text-white transition-colors">Workflow</a>
+                </div>
+                <div class="flex items-center gap-2">
+                    <!-- New Square Call Button -->
+                    <a href="tel:+123456789" class="w-8 h-8 flex items-center justify-center border border-slate-800 rounded bg-slate-900/50 text-slate-400 hover:bg-white hover:text-black hover:border-white transition-all duration-300 group" aria-label="Call Us">
+                        <iconify-icon icon="solar:phone-calling-linear" width="16" height="16"></iconify-icon>
+                    </a>
+                    <button class="bg-white text-black text-xs px-4 py-2 rounded-full font-medium hover:bg-neutral-100 transition-colors">Start Project</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Wrapper -->
+    <main class="relative z-10 flex flex-col items-center">
+
+        <!-- Hero Section with Center Animation -->
+        <section class="h-screen w-full flex flex-col relative items-center justify-center">
+            
+            <!-- Dynamic Brand Name Container -->
+            <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" id="brand-container">
+                <h1 id="main-title" class="text-6xl md:text-9xl tracking-tighter text-white font-medium text-center transition-all duration-300 mix-blend-overlay" style="transform: scale(1); opacity: 1; filter: none;">
+                    Launcify
+                </h1>
+                <p id="sub-title" class="text-slate-300 text-sm md:text-base text-center mt-6 tracking-wide transition-opacity duration-700 delay-200 font-medium" style="opacity: 1;">
+                    Architecting the autonomous web.
+                </p>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div id="scroll-indicator" class="absolute bottom-12 flex flex-col items-center gap-2 opacity-50 animate-pulse">
+                <span class="text-[10px] tracking-widest uppercase text-slate-300">Scroll</span>
+                <div class="w-[1px] h-8 bg-gradient-to-b from-transparent via-white to-transparent"></div>
+            </div>
+            <!-- Keyboard hint for users navigating without a pointer -->
+            <div id="keyboard-hint" class="absolute bottom-20 flex items-center gap-2 opacity-0 transition-opacity duration-300 pointer-events-none">
+                <span class="text-[11px] text-slate-400">Press ↓ or Space to continue</span>
+            </div>
+        </section>
+
+        <!-- Content Overlay (hidden initially; revealed on scroll) -->
+        <div id="content-overlay" class="w-full bg-[#02040a] relative z-10 border-t border-slate-900/60 shadow-[0_-50px_100px_rgba(0,0,0,1)] rounded-t-[3rem] pb-24" style="opacity:0; transform: translateY(100vh); pointer-events: none; transition: all 600ms ease;">
+            
+            <div class="max-w-6xl mx-auto px-6 pt-24">
+                
+                <!-- Introduction -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32 reveal-up">
+                    <h2 class="text-2xl md:text-3xl font-light leading-tight tracking-tight text-slate-200">
+                        We build intelligent digital ecosystems. Combining minimalist design with <span class="text-white font-medium">Agentic AI</span> to automate your business growth.
+                    </h2>
+                    <div class="flex flex-col justify-end">
+                        <p class="text-slate-400 text-sm leading-relaxed max-w-md">
+                            From high-conversion websites to bespoke AI workflows. Launcify bridges the gap between aesthetic excellence and autonomous functionality.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Bento Grid Services -->
+                <div id="services" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-32">
+                    
+                    <!-- Card 1 -->
+                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 group reveal-up hover:scale-[1.01] transition-transform duration-500">
+                        <div class="flex justify-between items-start">
+                            <iconify-icon icon="solar:monitor-smartphone-linear" width="24" height="24" class="text-slate-500 group-hover:text-white transition-colors" stroke-width="1.5"></iconify-icon>
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 border border-slate-800 px-2 py-1 rounded-full group-hover:border-white/30 group-hover:text-white transition-colors">Web</span>
+                        </div>
+                        <div class="">
+                            <h3 class="text-lg font-medium tracking-tight text-white mb-2 group-hover:text-neutral-100 transition-colors">Modern Websites</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Pixel-perfect, high-performance web interfaces designed for conversion and speed.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 md:col-span-2 group reveal-up hover:scale-[1.01] transition-transform duration-500 relative overflow-hidden">
+                        <!-- No blue gradient background in black/white mode -->
+                        <div class="flex justify-between items-start relative z-10">
+                            <iconify-icon icon="solar:infinity-linear" width="24" height="24" class="text-slate-500 group-hover:text-white transition-colors" stroke-width="1.5"></iconify-icon>
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 border border-slate-800 px-2 py-1 rounded-full group-hover:border-white/30 group-hover:text-white transition-colors">Auto</span>
+                        </div>
+                        <div class="relative z-10 flex gap-12 items-end">
+                            <div class="max-w-xs">
+                                <h3 class="text-lg font-medium tracking-tight text-white mb-2 group-hover:text-neutral-100 transition-colors">Workflow Automation</h3>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    End-to-end business logic automation. We connect your tools to work while you sleep.
+                                </p>
+                            </div>
+                            <!-- Mock UI for visual interest -->
+                            <div class="hidden md:flex gap-2">
+                                <div class="w-2 h-2 rounded-full bg-white animate-pulse"></div>
+                                <div class="w-16 h-2 bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full w-1/2 bg-white/30"></div>
+                                </div>
+                                <div class="w-2 h-2 rounded-full bg-slate-800"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 md:col-span-2 group reveal-up hover:scale-[1.01] transition-transform duration-500">
+                        <div class="flex justify-between items-start">
+                            <iconify-icon icon="solar:users-group-two-rounded-linear" width="24" height="24" class="text-slate-500 group-hover:text-white transition-colors" stroke-width="1.5"></iconify-icon>
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 border border-slate-800 px-2 py-1 rounded-full group-hover:border-white/30 group-hover:text-white transition-colors">AI Agents</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-8 items-end">
+                            <div>
+                                <h3 class="text-lg font-medium tracking-tight text-white mb-2 group-hover:text-neutral-100 transition-colors">Agentic AI</h3>
+                                <p class="text-xs text-slate-400 leading-relaxed">
+                                    Deploy autonomous agents to handle customer support, outreach, and data analysis.
+                                </p>
+                            </div>
+                            <!-- Interactive Element -->
+                            <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800/50 backdrop-blur-sm group-hover:border-white/20 transition-colors">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_#fff]"></div>
+                                    <span class="text-[10px] text-slate-400 group-hover:text-white">Agent Status: Active</span>
+                                </div>
+                                <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+                                    <div class="h-full bg-white w-2/3 shadow-[0_0_10px_#fff]"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 4 -->
+                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 group reveal-up hover:scale-[1.01] transition-transform duration-500">
+                        <div class="flex justify-between items-start">
+                            <iconify-icon icon="solar:magic-stick-3-linear" width="24" height="24" class="text-slate-500 group-hover:text-white transition-colors" stroke-width="1.5"></iconify-icon>
+                            <span class="text-[10px] uppercase tracking-widest text-slate-500 border border-slate-800 px-2 py-1 rounded-full group-hover:border-white/30 group-hover:text-white transition-colors">Tools</span>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-medium tracking-tight text-white mb-2 group-hover:text-neutral-100 transition-colors">Custom AI Tools</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">
+                                Bespoke AI wrappers and internal tools tailored to your specific operational needs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Configurator Section -->
+                <div class="mb-32 reveal-up">
+                    <div class="border border-slate-800 bg-slate-900/20 rounded-xl overflow-hidden backdrop-blur-sm">
+                        <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-800">
+                            <!-- Toggle -->
+                            <div class="p-8 flex flex-col gap-4">
+                                <span class="text-xs text-slate-500 uppercase tracking-widest">Efficiency Mode</span>
+                                <label class="flex items-center cursor-pointer group">
+                                    <div class="relative">
+                                        <input type="checkbox" class="sr-only peer" checked="">
+                                        <div class="w-10 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 peer-checked:after:bg-white peer-checked:shadow-[0_0_15px_rgba(59,130,246,0.5)]"></div>
+                                    </div>
+                                    <span class="ml-3 text-sm text-slate-300 group-hover:text-white transition-colors">AI Optimization</span>
+                                </label>
+                            </div>
+                            <!-- Slider -->
+                            <div class="p-8 flex flex-col gap-4">
+                                <span class="text-xs text-slate-500 uppercase tracking-widest">Throughput</span>
+                                <input type="range" min="1" max="100" value="75" class="w-full">
+                                <div class="flex justify-between text-[10px] text-slate-500">
+                                    <span>Low</span>
+                                    <span>High</span>
+                                </div>
+                            </div>
+                            <!-- Custom Checkbox List -->
+                            <div class="p-8 flex flex-col gap-4">
+                                <span class="text-xs text-slate-500 uppercase tracking-widest">Integrations</span>
+                                <div class="space-y-2">
+                                    <label class="custom-checkbox flex items-center gap-3 cursor-pointer group">
+                                        <input type="checkbox" class="hidden" checked="">
+                                        <div class="w-4 h-4 border border-slate-600 rounded flex items-center justify-center transition-colors group-hover:border-white">
+                                            <svg class="w-2.5 h-2.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        </div>
+                                        <span class="text-xs text-slate-400 group-hover:text-white">OpenAI API</span>
+                                    </label>
+                                    <label class="custom-checkbox flex items-center gap-3 cursor-pointer group">
+                                        <input type="checkbox" class="hidden">
+                                        <div class="w-4 h-4 border border-slate-600 rounded flex items-center justify-center transition-colors group-hover:border-white">
+                                            <svg class="w-2.5 h-2.5 text-white hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                                        </div>
+                                        <span class="text-xs text-slate-400 group-hover:text-white">Stripe Payments</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer / Cool Contact Hub -->
+                <footer class="border-t border-slate-900 pt-24 reveal-up">
+                    
+                    <!-- Contact Glass Grid -->
+                    <div class="glass-panel rounded-3xl p-8 md:p-12 mb-12 relative overflow-hidden group border-slate-800">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
+                            <!-- Left: Vision & Founders -->
+                            <div class="flex flex-col justify-between h-full gap-8">
+                                <div>
+                                    <h2 class="text-3xl md:text-5xl tracking-tighter text-white font-medium mb-4">Let's build the future.</h2>
+                                    <p class="text-sm text-slate-400 max-w-sm leading-relaxed">
+                                        Ready to scale? Connect with us to architect your autonomous workflow today.
+                                    </p>
+                                </div>
+                                
+                                <!-- Founders Section -->
+                                <div class="flex items-center gap-4 mt-4">
+                                    <div class="flex -space-x-3">
+                                        <div class="w-10 h-10 rounded-full bg-slate-800 border-2 border-[#02040a] flex items-center justify-center text-xs text-white font-medium hover:bg-blue-600 transition-colors cursor-default">S</div>
+                                        <div class="w-10 h-10 rounded-full bg-slate-700 border-2 border-[#02040a] flex items-center justify-center text-xs text-white font-medium hover:bg-blue-600 transition-colors cursor-default">Y</div>
+                                    </div>
+                                    <div class="flex flex-col">
+                                        <span class="text-sm text-white font-medium tracking-tight">Saksham &amp; Yadyansh</span>
+                                        <span class="text-[10px] text-slate-500 uppercase tracking-widest">Founders</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Contact Actions -->
+                            <div class="grid grid-cols-2 gap-3">
+                                <!-- Large Email Card -->
+                                <a href="mailto:grgsaksham25@gmail.com" class="col-span-2 bg-slate-900/50 border border-slate-800 hover:border-white/50 hover:bg-white/10 rounded-xl p-6 flex flex-col justify-between group/card transition-all h-32">
+                                    <div class="flex justify-between items-start">
+                                        <iconify-icon icon="solar:letter-linear" class="text-slate-500 group-hover/card:text-white transition-colors" width="24" height="24"></iconify-icon>
+                                        <iconify-icon icon="solar:arrow-right-up-linear" class="text-white opacity-0 group-hover/card:opacity-100 transform translate-y-2 group-hover/card:translate-y-0 duration-300" width="20" height="20"></iconify-icon>
+                                    </div>
+                                    <span class="text-lg text-white font-medium tracking-tight group-hover/card:text-neutral-100 transition-colors">grgsaksham25@gmail.com</span>
+                                </a>
+
+                                <!-- Call Card -->
+                                <a href="#" class="bg-slate-900/50 border border-slate-800 hover:bg-white hover:text-black hover:border-white rounded-xl p-6 flex flex-col justify-center items-center gap-2 group/call transition-all h-32">
+                                    <iconify-icon icon="solar:phone-calling-linear" width="28" height="28"></iconify-icon>
+                                    <span class="text-xs font-medium">Book a Call</span>
+                                </a>
+
+                                <!-- Socials Card -->
+                                <a href="#" class="bg-slate-900/50 border border-slate-800 hover:border-white/50 hover:bg-white/5 rounded-xl p-6 flex flex-col justify-center items-center gap-2 group/social transition-all h-32">
+                                    <iconify-icon icon="solar:brands-linear" width="28" height="28"></iconify-icon>
+                                    <span class="text-xs font-medium text-slate-400 group-hover/social:text-blue-400">Socials</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bottom Copyright -->
+                    <div class="flex flex-col md:flex-row justify-between w-full text-[10px] text-slate-600 uppercase tracking-widest pb-12">
+                        <span class="">© from 2026</span>
+                        <div class="flex gap-6 mt-4 md:mt-0">
+                            <a href="#" class="hover:text-white transition-colors">Twitter</a>
+                            <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                            <a href="#" class="hover:text-white transition-colors">Legal</a>
+                        </div>
+                    </div>
+                </footer>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Init Subtitle Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            const st = document.getElementById('sub-title');
+            if (st) st.style.opacity = '1';
+        });
+
+        // Intersection Observer for Scroll Reveals
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal-up').forEach((el) => observer.observe(el));
+
+        // First-scroll splash -> app transition
+        (function() {
+            const mainTitle = document.getElementById('main-title');
+            const subTitle = document.getElementById('sub-title');
+            const navbar = document.getElementById('navbar');
+            const scrollIndicator = document.getElementById('scroll-indicator');
+            const contentOverlay = document.getElementById('content-overlay');
+            const body = document.body;
+
+            // initial setup: content hidden below viewport (via transform), body locked
+            if (contentOverlay) {
+                contentOverlay.style.opacity = '0';
+                contentOverlay.style.transform = 'translateY(100vh)';
+                contentOverlay.style.pointerEvents = 'none';
+            }
+
+            // ensure navbar hidden initially (classes already set but enforce)
+            navbar.classList.add('-translate-y-full', 'opacity-0');
+
+            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            let triggered = false;
+
+            // Animation tuning (adjust durations and easing here)
+            const ANIM = {
+                titleDur: 700,
+                subDur: 320,
+                contentDur: 720,
+                easing: 'cubic-bezier(0.22,1,0.36,1)'
+            };
+            const keyboardHint = document.getElementById('keyboard-hint');
+            let keyboardHintShown = false;
+
+            function revealImmediately() {
+                // for reduced-motion: skip animations and show final state
+                if (contentOverlay) {
+                    contentOverlay.style.transition = 'none';
+                    contentOverlay.style.transform = 'translateY(0)';
+                    contentOverlay.style.opacity = '1';
+                    contentOverlay.style.pointerEvents = 'auto';
+                }
+                body.style.overflow = '';
+                navbar.classList.remove('-translate-y-full', 'opacity-0');
+                navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
+            }
+
+            function startTransition() {
+                if (triggered) return; triggered = true;
+
+                // set transitions using tuned values
+                mainTitle.style.transition = `transform ${ANIM.titleDur}ms ${ANIM.easing}, filter ${ANIM.titleDur}ms ${ANIM.easing}, opacity ${ANIM.titleDur}ms ${ANIM.easing}`;
+                subTitle.style.transition = `opacity ${ANIM.subDur}ms ease`;
+                scrollIndicator.style.transition = `opacity ${ANIM.subDur}ms ease`;
+                if (contentOverlay) contentOverlay.style.transition = `transform ${ANIM.contentDur}ms ${ANIM.easing}, opacity ${ANIM.contentDur}ms ease`;
+
+                // trigger visual changes (use rAF to ensure transition)
+                requestAnimationFrame(() => {
+                    mainTitle.style.transform = 'scale(0.82)';
+                    mainTitle.style.filter = 'blur(6px)';
+                    mainTitle.style.opacity = '0.2';
+
+                    subTitle.style.opacity = '0';
+                    scrollIndicator.style.opacity = '0';
+
+                    // hide keyboard hint when transition begins
+                    if (keyboardHint && keyboardHintShown) {
+                        keyboardHint.style.opacity = '0';
+                    }
+
+                    // unlock scrolling immediately after animation starts
+                    body.style.overflow = '';
+
+                    // reveal content (slide up)
+                    if (contentOverlay) {
+                        contentOverlay.style.transform = 'translateY(0)';
+                        contentOverlay.style.opacity = '1';
+                        contentOverlay.style.pointerEvents = 'auto';
+                    }
+                });
+
+                // after content transition completes, reveal navbar
+                setTimeout(() => {
+                    navbar.classList.remove('-translate-y-full', 'opacity-0');
+                    navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
+                }, ANIM.contentDur + 40);
+            }
+
+            function onFirstIntent(e) {
+                if (prefersReduced) {
+                    revealImmediately();
+                } else {
+                    startTransition();
+                }
+                removeListeners();
+            }
+
+            function onKeyboardNavigation(e) {
+                // show hint on first Tab press (keyboard navigation)
+                if (e.key === 'Tab' && keyboardHint && !keyboardHintShown) {
+                    keyboardHintShown = true;
+                    keyboardHint.style.opacity = '1';
+                }
+            }
+
+            function removeListeners() {
+                window.removeEventListener('wheel', onFirstIntent, {passive:true});
+                window.removeEventListener('touchstart', onFirstIntent, {passive:true});
+                window.removeEventListener('keydown', onFirstIntent, {passive:true});
+                window.removeEventListener('pointerdown', onFirstIntent, {passive:true});
+            }
+
+            // Listen for first scroll/touch/intent. Use passive listeners for performance.
+            window.addEventListener('wheel', onFirstIntent, {passive:true});
+            window.addEventListener('touchstart', onFirstIntent, {passive:true});
+            window.addEventListener('pointerdown', onFirstIntent, {passive:true});
+            window.addEventListener('keydown', (e) => {
+                // allow keyboard down/space/PageDown to trigger
+                if (['ArrowDown','PageDown','Space'].includes(e.code) || e.key === ' ') onFirstIntent(e);
+            }, {passive:true});
+            window.addEventListener('keydown', onKeyboardNavigation, {passive:true});
+
+            // if reduced motion is preferred, reveal immediately
+            if (prefersReduced) revealImmediately();
+        })();
+    </script>
+
+    <!-- Optional: register a service worker if provided to enable offline/fast loads on supported platforms -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js').catch(() => {/* sw optional */});
+            });
+        }
+    </script>
+
+</body></html>
