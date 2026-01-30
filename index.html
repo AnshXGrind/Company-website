@@ -389,12 +389,12 @@
                     <h3 class="text-lg text-white font-medium">Contact Us</h3>
                     <p class="text-xs text-slate-400">Send a short note — we’ll reply within one business day.</p>
                 </div>
-                <button type="button" id="contact-close" class="text-slate-400 hover:text-white">✕</button>
+                    <button type="button" id="contact-close" aria-label="Close contact form" class="text-slate-400 hover:text-white">✕</button>
             </div>
             <div class="grid grid-cols-1 gap-3">
-                <input name="name" id="cf-name" required placeholder="Your name" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
-                <input name="email" id="cf-email" type="email" required placeholder="Email" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
-                <textarea name="message" id="cf-message" rows="4" required placeholder="How can we help?" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white"></textarea>
+                <input name="name" id="cf-name" required placeholder="Your name" aria-label="Your name" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
+                <input name="email" id="cf-email" type="email" required placeholder="Email" aria-label="Email address" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
+                <textarea name="message" id="cf-message" rows="4" required placeholder="How can we help?" aria-label="Message" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white"></textarea>
                 <div class="flex items-center justify-between">
                     <button id="cf-submit" type="submit" class="bg-white text-black px-4 py-2 rounded font-medium">Contact me now</button>
                     <span id="cf-status" class="text-xs text-slate-400"></span>
@@ -404,6 +404,8 @@
     </div>
 
     <script>
+        // === Splash / App-Unlock Logic ===
+        // Responsible for: splash state, unlocking app, safety failsafes
         // Init Subtitle Animation
         document.addEventListener('DOMContentLoaded', () => {
             const st = document.getElementById('sub-title');
@@ -625,6 +627,7 @@
     </script>
 
     <script>
+        // === Scroll & Navigation Behavior ===
         // Anchor link handler: account for navbar height and ensure smooth scroll
         (function(){
             function getNavOffset(){
@@ -659,6 +662,7 @@
     </script>
 
     <script>
+        // === Modal & Form Logic ===
         // Contact modal + Formspree integration
         (function(){
             const FORM_ENDPOINT = 'https://formspree.io/f/mjgwlokv';
@@ -708,6 +712,8 @@
 
             backdrop && backdrop.addEventListener('click', closeModal);
             closeBtn && closeBtn.addEventListener('click', closeModal);
+            // Allow closing the modal with Escape key
+            window.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (modal && modal.classList.contains('flex')) closeModal(); } }, {passive:true});
 
             form.addEventListener('submit', async (ev) =>{
                 ev.preventDefault();
@@ -749,108 +755,6 @@
         }
     </script>
 
-    <!-- Dev debug overlay (disabled by default). Toggle with Ctrl+Shift+D -->
-    <div id="dev-debug-overlay" aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;display:none;z-index:99999;font-family:system-ui,Segoe UI,Roboto,Arial;">
-    </div>
-    <script>
-        (function(){
-            const overlay = document.getElementById('dev-debug-overlay');
-            let enabled = false;
-            const targets = [
-                {sel:'#navbar', name:'Navbar'},
-                {sel:'section', name:'Hero'},
-                {sel:'#brand-container', name:'Brand'},
-                {sel:'#content-overlay', name:'Content'},
-                {sel:'#contact-modal', name:'Modal'},
-                {sel:'main', name:'Main'}
-            ];
-
-            function formatPointer(el){
-                if (!el) return 'none';
-                const pe = window.getComputedStyle(el).pointerEvents || 'auto';
-                return pe;
-            }
-
-            function createBox(id, rect, name, z, pe){
-                const box = document.createElement('div');
-                box.className = 'dev-box';
-                box.style.position = 'fixed';
-                box.style.left = rect.left + 'px';
-                box.style.top = rect.top + 'px';
-                box.style.width = rect.width + 'px';
-                box.style.height = rect.height + 'px';
-                box.style.border = '2px dashed rgba(96,165,250,0.95)';
-                box.style.background = 'transparent';
-                box.style.pointerEvents = 'none';
-                box.style.zIndex = 999999;
-
-                const label = document.createElement('div');
-                label.className = 'dev-label';
-                label.style.position = 'absolute';
-                label.style.right = '0';
-                label.style.top = '-18px';
-                label.style.padding = '2px 6px';
-                label.style.fontSize = '11px';
-                label.style.background = 'rgba(2,6,23,0.85)';
-                label.style.color = 'white';
-                label.style.borderRadius = '4px';
-                label.style.pointerEvents = 'none';
-                label.textContent = `${name} · z:${z} · pe:${pe}`;
-
-                box.appendChild(label);
-                box.dataset.devId = id;
-                return box;
-            }
-
-            let boxes = [];
-            function render(){
-                // remove old
-                boxes.forEach(b=>b.remove()); boxes = [];
-                targets.forEach((t,i)=>{
-                    const el = document.querySelector(t.sel);
-                    if (!el) return;
-                    const rect = el.getBoundingClientRect();
-                    const z = window.getComputedStyle(el).zIndex || 'auto';
-                    const pe = formatPointer(el);
-                    // ignore zero-size
-                    if (rect.width <=1 && rect.height <=1) return;
-                    const box = createBox(i, rect, t.name, z, pe);
-                    overlay.appendChild(box);
-                    boxes.push(box);
-                });
-            }
-
-            let raf = null;
-            function scheduleRender(){
-                if (raf) cancelAnimationFrame(raf);
-                raf = requestAnimationFrame(()=>{ render(); raf = null; });
-            }
-
-            function enable(){
-                if (enabled) return; enabled = true;
-                overlay.style.display = 'block';
-                scheduleRender();
-                window.addEventListener('resize', scheduleRender);
-                window.addEventListener('scroll', scheduleRender, {passive:true});
-            }
-            function disable(){
-                if (!enabled) return; enabled = false;
-                overlay.style.display = 'none';
-                boxes.forEach(b=>b.remove()); boxes = [];
-                window.removeEventListener('resize', scheduleRender);
-                window.removeEventListener('scroll', scheduleRender);
-            }
-
-            // Toggle on Ctrl+Shift+D
-            window.addEventListener('keydown', (e)=>{
-                if (e.ctrlKey && e.shiftKey && (e.key === 'D' || e.key === 'd')){
-                    if (enabled) disable(); else enable();
-                }
-            });
-
-            // expose for console: devDebug.enable()/disable()/render()
-            window.devDebug = { enable, disable, render: scheduleRender };
-        })();
-    </script>
+    <!-- dev overlay removed for production -->
 
 </body></html>
