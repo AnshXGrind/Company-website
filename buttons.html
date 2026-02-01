@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Button Library — Launcify</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/interactive-button.css">
+  <link rel="stylesheet" href="/auth-modal.css">
+  <style>
+    body{padding-top:70px;background:var(--bg);font-family:'Times New Roman', Times, serif}
+    nav{font-family:Orbitron,system-ui;position:fixed;top:0;left:0;width:100%;background:transparent;border:none;z-index:100;padding:16px 24px}
+    .nav-brand{font-weight:700;letter-spacing:0.02em}
+    .nav-container{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+    .nav-brand{color:var(--text-main);text-decoration:none;font-weight:700;font-family:Orbitron,system-ui}
+    .nav-links{display:flex;gap:20px;align-items:center}
+    .nav-links a{color:var(--text-main);text-decoration:none;text-transform:uppercase;font-size:13px;letter-spacing:0.05em}
+    .nav-toggle{display:none;background:transparent;border:0;color:var(--text-main);font-size:24px;cursor:pointer}
+    .button-demo{display:flex;flex-direction:column;gap:16px;padding:32px;background:var(--panel-bg);border:1px solid var(--panel-border);border-radius:16px}
+    .button-demo h3{margin:0 0 8px 0;font-size:18px;font-weight:600;color:var(--text-main)}
+    .button-demo p{margin:0 0 20px 0;font-size:14px;color:var(--muted)}
+    .button-row{display:flex;gap:12px;flex-wrap:wrap}
+    
+    @media (max-width:768px){.nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg);flex-direction:column;padding:20px;border-top:1px solid var(--panel-border)}.nav-links.active{display:flex}.nav-toggle{display:block}}
+  </style>
+</head><body>
+  <nav>
+    <div class="nav-container">
+      <a href="/" class="nav-brand">Launcify</a>
+      <div class="nav-links" id="nav-links">
+        <a href="/services.html">Services</a>
+        <a href="/workflow.html">Workflow</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/skills.html">Capabilities</a>
+        <a href="/about.html">About</a>
+      </div>
+      <button data-interactive-button data-contact="open"><span>Contact</span></button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <div class="glass-panel reveal-up" style="text-align:center;padding:48px 20px;margin-bottom:48px">
+      <h1 style="font-size:42px;margin:0;font-weight:700">Interactive Button Library</h1>
+      <p style="margin:16px 0 0 0;color:var(--muted);font-size:18px">Beautiful hover effects and animations for modern CTAs</p>
+    </div>
+
+    <!-- Interactive Hover Button -->
+    <div class="button-demo reveal-up">
+      <h3>✨ Interactive Hover Buttons</h3>
+      <p>Ripple effect with gradient shift on hover. Perfect for all CTAs.</p>
+      <div class="button-row">
+        <button data-interactive-button><span>Get Started →</span></button>
+        <button data-interactive-button data-variant="glass"><span>Learn More</span></button>
+        <button data-interactive-button data-variant="outline"><span>View Demo</span></button>
+        <button data-interactive-button data-size="large"><span>Book a Call →</span></button>
+        <button data-interactive-button data-size="small"><span>Try Now</span></button>
+      </div>
+    </div>
+
+    <!-- Note about deprecated noise button -->
+    <div class="button-demo reveal-up" style="opacity: 0.6; border: 1px dashed var(--panel-border)">
+      <h3>⚠️ Deprecated: Noise Effect Button</h3>
+      <p>The noise button effect has been removed in favor of consistent interactive buttons across all pages.</p>
+    </div>
+    </div>
+
+    <!-- Size Variations -->
+    <div class="button-demo reveal-up">
+      <h3>Size Variations</h3>
+      <p>Different sizes for various contexts using data-size attribute.</p>
+      <div class="button-row" style="align-items:center">
+        <button data-interactive-button data-size="small"><span>Small</span></button>
+        <button data-interactive-button><span>Default</span></button>
+        <button data-interactive-button data-size="large"><span>Large</span></button>
+      </div>
+    </div>
+
+    <!-- Icon Buttons -->
+    <div class="button-demo reveal-up">
+      <h3>Buttons with Icons/Arrows</h3>
+      <p>Add arrows or icons directly in the text.</p>
+      <div class="button-row">
+        <button data-interactive-button><span>→ Next Step</span></button>
+        <button data-interactive-button data-variant="glass"><span>← Go Back</span></button>
+        <button data-interactive-button><span>✓ Confirm</span></button>
+        <button data-interactive-button data-variant="outline"><span>✕ Cancel</span></button>
+      </div>
+    </div>
+
+    <!-- State Variations -->
+    <div class="button-demo reveal-up">
+      <h3>Button States</h3>
+      <p>Disabled states using standard HTML disabled attribute.</p>
+      <div class="button-row">
+        <button data-interactive-button disabled style="opacity:0.5;cursor:not-allowed"><span>Disabled</span></button>
+        <button data-interactive-button data-variant="glass" disabled style="opacity:0.5;cursor:not-allowed"><span>Disabled Glass</span></button>
+        <button data-interactive-button><span>Loading...</span></button>
+      </div>
+    </div>
+
+    <!-- Full Width -->
+    <div class="button-demo reveal-up">
+      <h3>Full Width Buttons</h3>
+      <p>Buttons that span the full width of their container.</p>
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <button data-interactive-button style="width:100%"><span>Full Width Primary</span></button>
+        <button data-interactive-button data-variant="outline" style="width:100%"><span>Full Width Outline</span></button>
+      </div>
+    </div>
+
+    <!-- Code Example -->
+    <div class="glass-panel reveal-up" style="margin-top:48px">
+      <h2 style="margin:0 0 16px 0;font-size:24px">Usage Example</h2>
+      <p style="color:var(--muted);margin:0 0 16px;font-size:14px">Clean, monochrome interactive buttons (no funky colors). Similar to InteractiveHoverButton from MagicUI.</p>
+      <pre style="background:rgba(0,0,0,0.3);padding:20px;border-radius:8px;overflow-x:auto;color:var(--muted);font-size:14px;line-height:1.6"><code>&lt;!-- Interactive Button (Default - Primary Style) --&gt;
+&lt;button data-interactive-button&gt;
+  &lt;span&gt;Hover Me&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- Glass Variant (Transparent with backdrop blur) --&gt;
+&lt;button data-interactive-button data-variant="glass"&gt;
+  &lt;span&gt;Learn More&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- Outline Variant (Border only) --&gt;
+&lt;button data-interactive-button data-variant="outline"&gt;
+  &lt;span&gt;View Demo&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- Large Size --&gt;
+&lt;button data-interactive-button data-size="large"&gt;
+  &lt;span&gt;Book a Call →&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- Small Size --&gt;
+&lt;button data-interactive-button data-size="small"&gt;
+  &lt;span&gt;Quick Action&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;!-- With Icon/Arrow --&gt;
+&lt;button data-interactive-button&gt;
+  &lt;span&gt;Get Started →&lt;/span&gt;
+&lt;/button&gt;
+&lt;button class="btn btn-gradient"&gt;Gradient&lt;/button&gt;</code></pre>
+    </div>
+
+    <div class="glass-panel reveal-up" style="margin-top:48px;text-align:center;padding:48px 20px">
+      <h2 style="font-size:32px;margin:0 0 16px 0;font-weight:600">Ready to implement?</h2>
+      <p style="color:var(--muted);margin:0 0 24px 0;font-size:16px">Copy the code and start building beautiful interfaces.</p>
+      <button data-interactive-button data-contact="open"><span>Get the Component Library →</span></button>
+    </div>
+  </main>
+
+  <script src="/border-beam.js"></script>
+  <script src="/theme-toggler.js"></script>
+  <script src="/scripts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const obs = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('active');})},{threshold:0.08});
+      document.querySelectorAll('.reveal-up').forEach(el=>obs.observe(el));
+    });
+  </script>
+</body></html>

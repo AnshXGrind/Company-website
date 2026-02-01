@@ -9,31 +9,78 @@
     <title>Launcify | Agentic AI &amp; Workflows</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+        <style>
+            :root{
+                --bg: #000000;
+            <style id="palette-override">
+                :root{
+                    --bg: #000000;
+                    --text-main: #FFFFFF;
+                    --tangerine: #FF7A2D;
+                    --bubblegum: #FF6FA3;
+                    --lavender: #A78BFA;
+                    --buttercream: #FFF5C3;
+                    --muted: #9CA3AF;
+                    --panel-bg: rgba(255,255,255,0.02);
+                    --panel-border: rgba(255,255,255,0.06);
+                }
+                body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: var(--bg) !important; color: var(--text-main) !important; }
+            </style>
+                --tangerine: #FF7F11;
+                --bubblegum: #FF77B5;
+                --lavender: #B497FF;
+                --buttercream: #FFF1B8;
+                --muted: #9CA3AF;
+                --panel-bg: rgba(255,255,255,0.02);
+                --panel-border: rgba(255,255,255,0.06);
+                --accent: var(--tangerine);
+            }
+            body{background:var(--bg);}
+            .glass-panel{background:var(--panel-bg)!important;border:1px solid var(--panel-border)!important}
+            .text-slate-400{color:var(--muted)!important}
+            .text-slate-500{color:var(--muted)!important}
+            .border-slate-800{border-color:rgba(255,255,255,0.04)!important}
+            .bg-white{background:var(--buttercream)!important;color:#000!important}
+        </style>
     <style>
         /* Typography: Lucida Sans Stack */
+        :root{
+            --color-tangerine:#FF7A2D;
+            --color-bubblegum:#FF6FA3;
+            --color-lavender:#A78BFA;
+            --color-buttercream:#FFF5C3;
+            --text-dark:#0f172a;
+            --panel-bg: rgba(255,255,255,0.76);
+            --panel-border: rgba(15,23,42,0.06);
+            --overlay-bg: rgba(167,139,250,0.06);
+            --control-bg: rgba(255,255,255,0.06);
+        }
+
         body {
             font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            background-color: #000000; /* Pure black */
-            color: #ffffff;
+            background-color: var(--bg);
+            color: var(--text-main, #ffffff);
         }
+            body { font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background-color: var(--bg); color: var(--text-main); }
 
         
 
         /* Custom Utilities - Dual Tone Tinting */
         .glass-panel {
-            background: rgba(30, 30, 30, 0.4); /* Neutral glass */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.08); /* Subtle white border */
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--panel-border);
         }
         .glass-panel:hover {
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.03);
-            box-shadow: 0 0 30px rgba(255,255,255,0.08);
+            border-color: rgba(15,23,42,0.12);
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
 
         .text-glow {
-            text-shadow: 0 0 40px rgba(255,255,255,0.2);
+            text-shadow: 0 0 28px var(--color-tangerine);
         }
 
         /* Hide scrollbar */
@@ -68,10 +115,13 @@
 
         /* Respect OS color scheme; allow black/white-only modes */
         @media (prefers-color-scheme: light) {
-            body { background-color: #ffffff; color: #000000; }
-            .glass-panel { background: rgba(255,255,255,0.6); border-color: rgba(0,0,0,0.06); }
+            body { background-color: var(--color-buttercream); color: var(--text-dark); }
+            .glass-panel { background: var(--panel-bg); border-color: var(--panel-border); }
             .text-glow { text-shadow: none; }
         }
+
+        /* content overlay override to match palette */
+        #content-overlay { background: linear-gradient(180deg, rgba(167,139,250,0.08), rgba(255,255,255,0.02)); }
 
         /* Custom UI Elements - Dual Tone Specifics */
         input[type=range] { -webkit-appearance: none; background: transparent; }
@@ -95,24 +145,21 @@
     <!-- No colored background glows for pure black/white mode -->
 
     <!-- Sticky Navigation (Appears on Scroll) -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 transform border-b border-transparent">
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50" style="background:transparent;font-family:Orbitron, system-ui, sans-serif;">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-sm tracking-widest uppercase text-white font-semibold flex items-center gap-2">
-                <div class="w-2 h-2 bg-white rounded-full"></div>
-                Launcify
+            <a href="/" class="flex items-center gap-3" style="text-decoration:none;color:var(--text-main);">
+                <div style="width:36px;height:36;border-radius:8px;background:var(--panel-bg);display:grid;place-items:center;color:var(--text-main);font-weight:700">L</div>
+                <span style="font-family:Orbitron,system-ui;font-weight:700;letter-spacing:0.02em">Launcify</span>
             </a>
-            <div class="flex items-center gap-6">
-                <div class="hidden md:flex gap-6 items-center">
-                    <a href="#services" class="text-xs text-slate-400 hover:text-white transition-colors">Services</a>
-                    <a href="#workflow" class="text-xs text-slate-400 hover:text-white transition-colors">Workflow</a>
-                </div>
-                <div class="flex items-center gap-2">
-                    <!-- New Square Call Button -->
-                    <a href="tel:+123456789" class="w-8 h-8 flex items-center justify-center border border-slate-800 rounded bg-slate-900/50 text-slate-400 hover:bg-white hover:text-black hover:border-white transition-all duration-300 group" aria-label="Call Us">
-                        <iconify-icon icon="solar:phone-calling-linear" width="16" height="16"></iconify-icon>
-                    </a>
-                    <button class="bg-white text-black text-xs px-4 py-2 rounded-full font-medium hover:bg-neutral-100 transition-colors">Start Project</button>
-                </div>
+            <div class="hidden md:flex gap-8 items-center" style="gap:24px">
+                <a href="/services.html" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity" style="color:var(--text-main);text-decoration:none">Services</a>
+                <a href="/workflow.html" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity" style="color:var(--text-main);text-decoration:none">Workflow</a>
+                <a href="/skills.html" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity" style="color:var(--text-main);text-decoration:none">Skills</a>
+                <a href="/about.html" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity" style="color:var(--text-main);text-decoration:none">About</a>
+            </div>
+            <div class="flex items-center gap-3">
+                <a href="/contact.html" class="px-3 py-1 rounded-md" style="background:var(--buttercream);color:#000;font-weight:700;text-decoration:none">Contact</a>
+                <button id="nav-toggle" class="md:hidden" aria-label="Open menu" style="background:transparent;border:0;color:var(--text-main);font-size:20px;line-height:1">☰</button>
             </div>
         </div>
     </nav>
@@ -394,42 +441,26 @@
             contentOverlay.style.pointerEvents = 'none';
         }
 
-        window.addEventListener('scroll', () => {
-            const scrollY = window.scrollY;
-            const delta = scrollY - lastScrollY;
-            lastScrollY = scrollY;
-
-            const threshold = 400; // pixel range for transition
-            let progress = Math.min(Math.max(scrollY / threshold, 0), 1);
-
-            // Title: shrink and fade as user scrolls down (so brand shows first)
-            const scale = 1 - (progress * 0.2);
-            const titleOpacity = 1 - (progress * 1.2);
-            const blur = progress * 10;
-            mainTitle.style.transform = `scale(${scale})`;
-            mainTitle.style.opacity = String(Math.max(0, titleOpacity));
-            mainTitle.style.filter = `blur(${blur}px)`;
-
-            subTitle.style.opacity = String(Math.max(0, 1 - (progress * 2)));
-            scrollIndicator.style.opacity = String(Math.max(0, 0.5 - (progress * 2)));
-
-            // Content overlay: slide up and fade in as progress increases
-            if (contentOverlay) {
-                const translateVH = 40 - (progress * 40); // from 40vh -> 0vh
-                contentOverlay.style.transform = `translateY(${translateVH}vh)`;
-                contentOverlay.style.opacity = String(progress);
-                contentOverlay.style.pointerEvents = progress > 0.05 ? 'auto' : 'none';
-            }
-
-            // Navbar: reveal once user has moved a bit
-            if (scrollY > 50 || progress > 0.1) {
-                navbar.classList.remove('-translate-y-full', 'opacity-0');
-                navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
-            } else {
-                navbar.classList.add('-translate-y-full', 'opacity-0');
-                navbar.classList.remove('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
-            }
-        });
+        // Hero animation disabled — reveal content and show navbar immediately
+        (function(){
+            try {
+                if (contentOverlay) {
+                    contentOverlay.style.transition = 'none';
+                    contentOverlay.style.transform = 'translateY(0)';
+                    contentOverlay.style.opacity = '1';
+                    contentOverlay.style.pointerEvents = 'auto';
+                }
+                if (navbar) {
+                    navbar.classList.remove('-translate-y-full','opacity-0');
+                    navbar.classList.add('translate-y-0','opacity-100');
+                    navbar.style.background = 'transparent';
+                    navbar.style.pointerEvents = 'auto';
+                }
+                if (mainTitle) { mainTitle.style.transform = 'scale(1)'; mainTitle.style.opacity = '0.2'; mainTitle.style.filter = 'none'; }
+                if (subTitle) { subTitle.style.opacity = '0'; }
+                if (scrollIndicator) { scrollIndicator.style.opacity = '0'; }
+            } catch(e){ console.warn('disable-hero script', e); }
+        })();
     </script>
 
     <!-- Optional: register a service worker if provided to enable offline/fast loads on supported platforms -->

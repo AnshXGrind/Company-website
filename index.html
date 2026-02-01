@@ -9,29 +9,65 @@
     <title>Launcify | Agentic AI &amp; Workflows</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/interactive-button.css">
+    <link rel="stylesheet" href="/auth-modal.css">
+        <style>
+            :root{
+                --bg: #000000;
+                --tangerine: #FF7F11;
+                --bubblegum: #FF77B5;
+                --lavender: #B497FF;
+                --buttercream: #FFF1B8;
+                --muted: #9CA3AF;
+                --panel-bg: rgba(255,255,255,0.02);
+                --panel-border: rgba(255,255,255,0.06);
+                --accent: var(--tangerine);
+            }
+            body{background:var(--bg);color:var(--text-main,#fff)}
+            .glass-panel{background:var(--panel-bg)!important;border:1px solid var(--panel-border)!important}
+            .text-slate-400{color:var(--muted)!important}
+            .text-slate-500{color:var(--muted)!important}
+            .border-slate-800{border-color:rgba(255,255,255,0.04)!important}
+            .bg-white{background:var(--buttercream)!important;color:#000!important}
+            a:hover{opacity:0.9}
+            .btn-accent{background:linear-gradient(90deg,var(--tangerine),var(--bubblegum));color:#000}
+        </style>
     <style>
         /* Typography: Lucida Sans Stack */
+        :root{
+            --color-tangerine:#FF7A2D;
+            --color-bubblegum:#FF6FA3;
+            --color-lavender:#A78BFA;
+            --color-buttercream:#FFF5C3;
+            --text-dark:#0f172a;
+            --panel-bg: rgba(255,255,255,0.76);
+            --panel-border: rgba(15,23,42,0.06);
+            --overlay-bg: rgba(167,139,250,0.06);
+            --control-bg: rgba(255,255,255,0.06);
+        }
+
         body {
-            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-            background-color: #000000; /* Pure black */
-            color: #ffffff;
+            font-family: 'Times New Roman', Times, serif;
+            background-color: var(--bg);
+            color: var(--text-main, #ffffff);
         }
 
         /* Custom Utilities - Dual Tone Tinting */
         .glass-panel {
-            background: rgba(30, 30, 30, 0.4); /* Neutral glass */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255,255,255,0.08); /* Subtle white border */
+            background: var(--panel-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--panel-border);
         }
         .glass-panel:hover {
-            border-color: rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.03);
-            box-shadow: 0 0 30px rgba(255,255,255,0.08);
+            border-color: rgba(15,23,42,0.12);
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
 
         .text-glow {
-            text-shadow: 0 0 40px rgba(255,255,255,0.2);
+            text-shadow: 0 0 28px var(--color-tangerine);
         }
 
         /* Hide scrollbar */
@@ -57,6 +93,9 @@
         #main-title, #sub-title, #scroll-indicator, #content-overlay {
             will-change: transform, opacity, filter;
         }
+
+        /* content overlay override to match palette */
+        #content-overlay { background: linear-gradient(180deg, rgba(167,139,250,0.08), rgba(255,255,255,0.02)); }
 
         /* Larger tap targets for touch devices */
         @media (pointer: coarse) {
@@ -106,6 +145,30 @@
         /* Prevent in-page anchors from being hidden under navbar */
         [id] { scroll-margin-top: calc(var(--nav-height) + 12px); }
     </style>
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+        <style id="palette-override">
+            :root{
+                --bg: #000000;
+                --text-main: #FFFFFF;
+                --tangerine: #FF7A2D;
+                --bubblegum: #FF6FA3;
+                --lavender: #A78BFA;
+                --buttercream: #FFF5C3;
+                --muted: #9CA3AF;
+                --panel-bg: rgba(255,255,255,0.02);
+                --panel-border: rgba(255,255,255,0.06);
+            }
+            body { font-family: 'Orbitron', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: var(--bg) !important; color: var(--text-main) !important; }
+        </style>
+    <style>
+        /* Hide detailed homepage sections but show brand + webcam grid */
+        #scroll-indicator, #keyboard-hint, #content-overlay, #services, section.h-screen, footer { display: none !important; }
+        /* Ensure webcam grid and brand text are visible and stacked correctly */
+        #webcam-grid-root { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+        #brand-container { position: absolute; top:50%; left:50%; transform: translate(-50%, -50%); z-index: 2; pointer-events: none; text-align:center }
+        #brand-container h1{ font-family: Orbitron, system-ui; font-size: clamp(36px, 8vw, 120px); margin:0; color:var(--text-main); letter-spacing:0.02em }
+        #brand-container p{ margin:8px 0 0 0; color:var(--muted); font-weight:600 }
+    </style>
 </head>
 <body class="antialiased relative selection:bg-blue-600 selection:text-white">
 
@@ -113,43 +176,49 @@
     <!-- No colored background glows for pure black/white mode -->
 
     <!-- Sticky Navigation (Appears on Scroll) -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 transform border-b border-transparent -translate-y-full opacity-0">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="text-sm tracking-widest uppercase text-white font-semibold flex items-center gap-2">
-                <div class="w-2 h-2 bg-white rounded-full"></div>
-                Launcify
-            </a>
-            <div class="flex items-center gap-6">
-                <div class="hidden md:flex gap-6 items-center">
-                    <a href="#services" class="text-xs text-slate-400 hover:text-white transition-colors">Services</a>
-                    <a href="#workflow" class="text-xs text-slate-400 hover:text-white transition-colors">Workflow</a>
-                </div>
-                    <div class="flex items-center gap-2">
-                    <!-- New Square Call Button -->
-                    <a href="tel:+123456789" class="w-8 h-8 flex items-center justify-center border border-slate-800 rounded bg-slate-900/50 text-slate-400 hover:bg-white hover:text-black hover:border-white transition-all duration-300 group" aria-label="Call Us">
-                        <iconify-icon icon="solar:phone-calling-linear" width="16" height="16"></iconify-icon>
-                    </a>
-                    <button data-contact="open" class="bg-white text-black text-xs px-4 py-2 rounded-full font-medium hover:bg-neutral-100 transition-colors">Start Project</button>
-                </div>
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50" style="background:transparent;border:none;font-family:Orbitron,system-ui;">
+                <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" style="align-items:center">
+            <a href="/" style="text-decoration:none;color:var(--text-main);font-weight:700;letter-spacing:0.02em;">Launcify</a>
+
+            <div class="hidden md:flex gap-8 items-center" style="gap:24px;">
+                <a href="/services.html" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity" style="color:var(--text-main);text-decoration:none">Services</a>
+                <a href="/workflow.html" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity" style="color:var(--text-main);text-decoration:none">Workflow</a>
+                <a href="/projects.html" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity" style="color:var(--text-main);text-decoration:none">Projects</a>
+                <a href="/skills.html" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity" style="color:var(--text-main);text-decoration:none">Capabilities</a>
+                <a href="/about.html" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity" style="color:var(--text-main);text-decoration:none">About</a>
+            </div>
+
+            <div class="flex items-center gap-3">
+                <button data-interactive-button data-contact="open"><span>Contact</span></button>
+                <button id="nav-toggle" class="md:hidden" aria-label="Open menu" style="background:transparent;border:0;color:var(--text-main);font-size:20px;line-height:1">☰</button>
             </div>
         </div>
     </nav>
 
     <!-- Main Wrapper -->
-    <main class="relative z-10 flex flex-col items-center">
+    <main class="relative z-10">
 
         <!-- Hero Section with Center Animation -->
         <section class="h-screen w-full flex flex-col relative items-center justify-center">
+            <!-- World Map Background -->
+            <div id="world-map-container" style="position:absolute;inset:0;z-index:0;opacity:0.25;pointer-events:none"></div>
             
             <!-- Dynamic Brand Name Container -->
-            <div class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none" id="brand-container">
-                <h1 id="main-title" class="text-6xl md:text-9xl tracking-tighter text-white font-medium text-center transition-all duration-300 mix-blend-overlay" style="transform: scale(1); opacity: 1; filter: none;">
-                    Launcify
+                <div class="relative z-50 pointer-events-auto" id="brand-container" style="max-width:900px;width:90%;text-align:center">
+                <h1 id="main-title" class="text-4xl md:text-7xl tracking-tight font-bold text-center transition-all duration-300" style="transform: scale(1); opacity: 1; filter: none; margin:0 0 20px 0; line-height:1.1; color: var(--text-main); font-family: 'Times New Roman', Times, serif;">
+                    <span style="display:block;font-size:0.5em;font-weight:400;color:var(--muted);margin-bottom:16px;letter-spacing:0.1em;text-transform:uppercase">From idea to production systems, not endless sprints.</span>
+                    Build <span data-flip-words="modern,intelligent,scalable,powerful"></span><br/>automation systems
                 </h1>
-                <p id="sub-title" class="text-slate-300 text-sm md:text-base text-center mt-6 tracking-wide transition-opacity duration-700 delay-200 font-medium" style="opacity: 1;">
-                    Architecting the autonomous web.
+                <p id="sub-title" class="text-base md:text-xl text-center tracking-normal transition-opacity duration-700 delay-200" style="opacity: 1; margin:0 0 32px 0; line-height:1.6; color: var(--muted)">
+                    We build AI agents, automated workflows, and high-performance websites that remove manual work and scale with your business.
                 </p>
+                <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px">
+                    <button data-interactive-button data-contact="open"><span>Book an Automation Audit →</span></button>
+                    <button data-interactive-button data-variant="glass" onclick="window.location.href='/workflow.html'"><span>See How It Works</span></button>
+                </div>
             </div>
+
+
 
             <!-- Scroll Indicator -->
             <div id="scroll-indicator" class="absolute bottom-12 flex flex-col items-center gap-2 opacity-75 animate-pulse">
@@ -167,95 +236,95 @@
             
             <div class="max-w-6xl mx-auto px-6 pt-24">
                 
-                <!-- Introduction -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 mb-32 reveal-up">
-                    <h2 class="text-2xl md:text-3xl font-light leading-tight tracking-tight text-slate-200">
-                        We build intelligent digital ecosystems. Combining minimalist design with <span class="text-white font-medium">Agentic AI</span> to automate your business growth.
+                <!-- What You Do -->
+                <div class="mb-32 reveal-up" style="text-align:center;max-width:800px;margin:0 auto 80px">
+                    <h2 class="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-white" style="margin:0 0 20px 0">
+                        We turn fragmented processes into systems that run themselves.
                     </h2>
-                    <div class="flex flex-col justify-end">
-                        <p class="text-slate-400 text-sm leading-relaxed max-w-md">
-                            From high-conversion websites to bespoke AI workflows. Launcify bridges the gap between aesthetic excellence and autonomous functionality.
-                        </p>
-                    </div>
+                    <p class="text-slate-300 text-lg leading-relaxed" style="margin:20px 0 0 0">
+                        Most teams waste time moving data between tools, fixing human errors, and managing workflows that don't scale.
+                    </p>
+                    <p class="text-slate-300 text-lg leading-relaxed" style="margin:16px 0 0 0">
+                        We replace that with automated, observable systems that run quietly in the background.
+                    </p>
                 </div>
 
                 <!-- Bento Grid Services -->
                 <div id="services" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-32">
                     
-                    <!-- Card 1 -->
-                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 group reveal-up hover:scale-[1.01] transition-transform duration-500">
+                    <!-- Card 1 - Web -->
+                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 group reveal-up hover:scale-[1.01] transition-transform duration-500" style="border-left: 2px solid rgba(20, 184, 166, 0.3);">
                         <div class="flex justify-between items-start">
-                            <iconify-icon icon="solar:monitor-smartphone-linear" width="24" height="24" class="text-slate-500 group-hover:text-white transition-colors" stroke-width="1.5"></iconify-icon>
-                            <span class="text-[10px] uppercase tracking-widest text-slate-500 border border-slate-800 px-2 py-1 rounded-full group-hover:border-white/30 group-hover:text-white transition-colors">Web</span>
+                            <iconify-icon icon="solar:monitor-smartphone-linear" width="24" height="24" style="color: #14b8a6;" stroke-width="1.5"></iconify-icon>
+                            <span class="text-[10px] uppercase tracking-widest px-2 py-1 rounded-full transition-colors" style="color: #14b8a6; border: 1px solid rgba(20, 184, 166, 0.3);">Web</span>
                         </div>
                         <div class="">
-                            <h3 class="text-lg font-medium tracking-tight text-white mb-2 group-hover:text-neutral-100 transition-colors">Modern Websites</h3>
-                            <p class="text-xs text-slate-400 leading-relaxed">
+                            <h3 class="text-lg font-medium tracking-tight mb-2 group-hover:text-neutral-100 transition-colors" style="color: var(--text-main);">Modern Websites</h3>
+                            <p class="text-xs leading-relaxed" style="color: var(--muted);">
                                 Pixel-perfect, high-performance web interfaces designed for conversion and speed.
                             </p>
                         </div>
                     </div>
 
-                    <!-- Card 2 -->
-                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 md:col-span-2 group reveal-up hover:scale-[1.01] transition-transform duration-500 relative overflow-hidden">
-                        <!-- No blue gradient background in black/white mode -->
+                    <!-- Card 2 - Automation -->
+                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 md:col-span-2 group reveal-up hover:scale-[1.01] transition-transform duration-500 relative overflow-hidden" style="border-left: 2px solid rgba(59, 130, 246, 0.3);">
                         <div class="flex justify-between items-start relative z-10">
-                            <iconify-icon icon="solar:infinity-linear" width="24" height="24" class="text-slate-500 group-hover:text-white transition-colors" stroke-width="1.5"></iconify-icon>
-                            <span class="text-[10px] uppercase tracking-widest text-slate-500 border border-slate-800 px-2 py-1 rounded-full group-hover:border-white/30 group-hover:text-white transition-colors">Auto</span>
+                            <iconify-icon icon="solar:infinity-linear" width="24" height="24" style="color: #3b82f6;" stroke-width="1.5"></iconify-icon>
+                            <span class="text-[10px] uppercase tracking-widest px-2 py-1 rounded-full transition-colors" style="color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">Auto</span>
                         </div>
                         <div class="relative z-10 flex gap-12 items-end">
                             <div class="max-w-xs">
-                                <h3 class="text-lg font-medium tracking-tight text-white mb-2 group-hover:text-neutral-100 transition-colors">Workflow Automation</h3>
-                                <p class="text-xs text-slate-400 leading-relaxed">
+                                <h3 class="text-lg font-medium tracking-tight mb-2 group-hover:text-neutral-100 transition-colors" style="color: var(--text-main);">Workflow Automation</h3>
+                                <p class="text-xs leading-relaxed" style="color: var(--muted);">
                                     End-to-end business logic automation. We connect your tools to work while you sleep.
                                 </p>
                             </div>
                             <!-- Mock UI for visual interest -->
                             <div class="hidden md:flex gap-2">
-                                <div class="w-2 h-2 rounded-full bg-white animate-pulse"></div>
+                                <div class="w-2 h-2 rounded-full animate-pulse" style="background: #3b82f6;"></div>
                                 <div class="w-16 h-2 bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full w-1/2 bg-white/30"></div>
+                                    <div class="h-full w-1/2" style="background: rgba(59, 130, 246, 0.5);"></div>
                                 </div>
                                 <div class="w-2 h-2 rounded-full bg-slate-800"></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Card 3 -->
-                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 md:col-span-2 group reveal-up hover:scale-[1.01] transition-transform duration-500">
+                    <!-- Card 3 - AI Agents -->
+                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 md:col-span-2 group reveal-up hover:scale-[1.01] transition-transform duration-500" style="border-left: 2px solid rgba(167, 139, 250, 0.3);">
                         <div class="flex justify-between items-start">
-                            <iconify-icon icon="solar:users-group-two-rounded-linear" width="24" height="24" class="text-slate-500 group-hover:text-white transition-colors" stroke-width="1.5"></iconify-icon>
-                            <span class="text-[10px] uppercase tracking-widest text-slate-500 border border-slate-800 px-2 py-1 rounded-full group-hover:border-white/30 group-hover:text-white transition-colors">AI Agents</span>
+                            <iconify-icon icon="solar:users-group-two-rounded-linear" width="24" height="24" style="color: #a78bfa;" stroke-width="1.5"></iconify-icon>
+                            <span class="text-[10px] uppercase tracking-widest px-2 py-1 rounded-full transition-colors" style="color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.3);">AI Agents</span>
                         </div>
                         <div class="grid grid-cols-2 gap-8 items-end">
                             <div>
-                                <h3 class="text-lg font-medium tracking-tight text-white mb-2 group-hover:text-neutral-100 transition-colors">Agentic AI</h3>
-                                <p class="text-xs text-slate-400 leading-relaxed">
+                                <h3 class="text-lg font-medium tracking-tight mb-2 group-hover:text-neutral-100 transition-colors" style="color: var(--text-main);">Agentic AI</h3>
+                                <p class="text-xs leading-relaxed" style="color: var(--muted);">
                                     Deploy autonomous agents to handle customer support, outreach, and data analysis.
                                 </p>
                             </div>
                             <!-- Interactive Element -->
-                            <div class="bg-slate-900/50 p-3 rounded-lg border border-slate-800/50 backdrop-blur-sm group-hover:border-white/20 transition-colors">
+                            <div class="p-3 rounded-lg backdrop-blur-sm transition-colors" style="background: rgba(167, 139, 250, 0.05); border: 1px solid rgba(167, 139, 250, 0.2);">
                                 <div class="flex items-center gap-2 mb-2">
-                                    <div class="w-2 h-2 rounded-full bg-white shadow-[0_0_10px_#fff]"></div>
-                                    <span class="text-[10px] text-slate-400 group-hover:text-white">Agent Status: Active</span>
+                                    <div class="w-2 h-2 rounded-full" style="background: #a78bfa; box-shadow: 0 0 10px #a78bfa;"></div>
+                                    <span class="text-[10px]" style="color: #a78bfa;">Agent Status: Active</span>
                                 </div>
                                 <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full bg-white w-2/3 shadow-[0_0_10px_#fff]"></div>
+                                    <div class="h-full w-2/3" style="background: #a78bfa; box-shadow: 0 0 10px #a78bfa;"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Card 4 -->
-                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 group reveal-up hover:scale-[1.01] transition-transform duration-500">
+                    <!-- Card 4 - Tools -->
+                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 group reveal-up hover:scale-[1.01] transition-transform duration-500" style="border-left: 2px solid rgba(251, 191, 36, 0.3);">
                         <div class="flex justify-between items-start">
-                            <iconify-icon icon="solar:magic-stick-3-linear" width="24" height="24" class="text-slate-500 group-hover:text-white transition-colors" stroke-width="1.5"></iconify-icon>
-                            <span class="text-[10px] uppercase tracking-widest text-slate-500 border border-slate-800 px-2 py-1 rounded-full group-hover:border-white/30 group-hover:text-white transition-colors">Tools</span>
+                            <iconify-icon icon="solar:magic-stick-3-linear" width="24" height="24" style="color: #fbbf24;" stroke-width="1.5"></iconify-icon>
+                            <span class="text-[10px] uppercase tracking-widest px-2 py-1 rounded-full transition-colors" style="color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3);">Tools</span>
                         </div>
                         <div>
-                            <h3 class="text-lg font-medium tracking-tight text-white mb-2 group-hover:text-neutral-100 transition-colors">Custom AI Tools</h3>
-                            <p class="text-xs text-slate-400 leading-relaxed">
+                            <h3 class="text-lg font-medium tracking-tight mb-2 group-hover:text-neutral-100 transition-colors" style="color: var(--text-main);">Custom AI Tools</h3>
+                            <p class="text-xs leading-relaxed" style="color: var(--muted);">
                                 Bespoke AI wrappers and internal tools tailored to your specific operational needs.
                             </p>
                         </div>
@@ -329,11 +398,11 @@
                                 <!-- Founders Section -->
                                 <div class="flex items-center gap-4 mt-4">
                                     <div class="flex -space-x-3">
-                                        <div class="w-10 h-10 rounded-full bg-slate-800 border-2 border-[#02040a] flex items-center justify-center text-xs text-white font-medium hover:bg-blue-600 transition-colors cursor-default">S</div>
-                                        <div class="w-10 h-10 rounded-full bg-slate-700 border-2 border-[#02040a] flex items-center justify-center text-xs text-white font-medium hover:bg-blue-600 transition-colors cursor-default">Y</div>
+                                        <div id="logo-S" data-image="https://assets.aceternity.com/manu-red.png" role="button" tabindex="0" class="w-10 h-10 rounded-full bg-slate-800 border-2 border-[#02040a] flex items-center justify-center text-xs text-white font-medium hover:bg-blue-600 transition-colors cursor-pointer">S</div>
+                                        <div id="logo-Y" data-image="https://pbs.twimg.com/media/Gyla7NnXMAAXSo_?format=jpg&name=large" role="button" tabindex="0" class="w-10 h-10 rounded-full bg-slate-700 border-2 border-[#02040a] flex items-center justify-center text-xs text-white font-medium hover:bg-blue-600 transition-colors cursor-pointer">Y</div>
                                     </div>
                                     <div class="flex flex-col">
-                                        <span class="text-sm text-white font-medium tracking-tight">Saksham &amp; Yadyansh</span>
+                                        <span class="text-sm font-medium tracking-tight" style="color: var(--text-main)">Saksham &amp; Yadyansh</span>
                                         <span class="text-[10px] text-slate-500 uppercase tracking-widest">Founders</span>
                                     </div>
                                 </div>
@@ -347,7 +416,7 @@
                                         <iconify-icon icon="solar:letter-linear" class="text-slate-500 group-hover/card:text-white transition-colors" width="24" height="24"></iconify-icon>
                                         <iconify-icon icon="solar:arrow-right-up-linear" class="text-white opacity-0 group-hover/card:opacity-100 transform translate-y-2 group-hover/card:translate-y-0 duration-300" width="20" height="20"></iconify-icon>
                                     </div>
-                                    <span class="text-lg text-white font-medium tracking-tight group-hover/card:text-neutral-100 transition-colors">grgsaksham25@gmail.com</span>
+                                    <span class="text-lg font-medium tracking-tight group-hover/card:text-neutral-100 transition-colors" style="color: var(--text-main)">grgsaksham25@gmail.com</span>
                                 </a>
 
                                 <!-- Call Card -->
@@ -378,6 +447,7 @@
 
             </div>
         </div>
+    
     </main>
 
     <!-- Contact Modal (hidden) -->
@@ -396,11 +466,109 @@
                 <input name="email" id="cf-email" type="email" required placeholder="Email" aria-label="Email address" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
                 <textarea name="message" id="cf-message" rows="4" required placeholder="How can we help?" aria-label="Message" class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white"></textarea>
                 <div class="flex items-center justify-between">
-                    <button id="cf-submit" type="submit" class="bg-white text-black px-4 py-2 rounded font-medium">Contact me now</button>
+                    <button id="cf-submit" type="submit" data-interactive-button><span>Contact me now</span></button>
                     <span id="cf-status" class="text-xs text-slate-400"></span>
                 </div>
             </div>
         </form>
+    </div>
+
+    <!-- Auth Modal (Signup/Login) -->
+    <div id="auth-modal" class="auth-modal">
+        <div class="auth-modal-content">
+            <button class="auth-modal-close" id="auth-close" aria-label="Close">×</button>
+            
+            <h2>Welcome to Launcify</h2>
+            <p class="auth-modal-description">Create an account to get started with automated workflows and AI-powered tools.</p>
+
+            <!-- Tabs -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="signup">Sign Up</button>
+                <button class="auth-tab" data-tab="login">Login</button>
+            </div>
+
+            <!-- Signup Form -->
+            <form class="auth-form" id="signup-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="firstname">First name</label>
+                        <input class="form-input" id="firstname" type="text" placeholder="Tyler" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="lastname">Last name</label>
+                        <input class="form-input" id="lastname" type="text" placeholder="Durden" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="signup-email">Email Address</label>
+                    <input class="form-input" id="signup-email" type="email" placeholder="you@company.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="signup-password">Password</label>
+                    <input class="form-input" id="signup-password" type="password" placeholder="••••••••" required>
+                </div>
+
+                <button class="auth-submit-btn" type="submit">
+                    Sign up →
+                </button>
+
+                <div class="auth-divider"></div>
+
+                <div class="social-buttons">
+                    <button class="social-btn" type="button" data-provider="github">
+                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </button>
+                    <button class="social-btn" type="button" data-provider="google">
+                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        <span>Google</span>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Login Form (hidden by default) -->
+            <form class="auth-form" id="login-form" style="display:none">
+                <div class="form-group">
+                    <label class="form-label" for="login-email">Email Address</label>
+                    <input class="form-input" id="login-email" type="email" placeholder="you@company.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="login-password">Password</label>
+                    <input class="form-input" id="login-password" type="password" placeholder="••••••••" required>
+                </div>
+
+                <button class="auth-submit-btn" type="submit">
+                    Login →
+                </button>
+
+                <div class="auth-divider"></div>
+
+                <div class="social-buttons">
+                    <button class="social-btn" type="button" data-provider="github">
+                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                        </svg>
+                        <span>GitHub</span>
+                    </button>
+                    <button class="social-btn" type="button" data-provider="google">
+                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+                        </svg>
+                        <span>Google</span>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <script>
@@ -420,210 +588,36 @@
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal-up').forEach((el) => observer.observe(el));
 
-        // BULLETPROOF SPLASH-TO-APP TRANSITION
-        (function() {
-            // === SINGLE SOURCE OF TRUTH ===
-            let isSplashActive = true;
-            
-            // Cache DOM elements
-            const mainTitle = document.getElementById('main-title');
-            const subTitle = document.getElementById('sub-title');
-            const navbar = document.getElementById('navbar');
-            const scrollIndicator = document.getElementById('scroll-indicator');
-            const contentOverlay = document.getElementById('content-overlay');
-            const brandContainer = document.getElementById('brand-container');
-            const keyboardHint = document.getElementById('keyboard-hint');
-            
-            // Failsafe timeout (1.5 seconds maximum)
-            const SPLASH_TIMEOUT = 1500;
-            let timeoutId = null;
-            
-            // Check for reduced motion preference
-            const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            
-            // === SPLASH EXIT FUNCTION (CRITICAL) ===
-            function exitSplash(reason) {
-                // Guard: prevent multiple executions
-                if (!isSplashActive) return;
-                
-                console.log('Splash exit:', reason);
-                isSplashActive = false;
-                
-                // Clear failsafe timeout
-                if (timeoutId) {
-                    clearTimeout(timeoutId);
-                    timeoutId = null;
-                }
-                
-                    // 1. Remove position: fixed from body (restore normal scrolling)
-                    document.body.style.position = '';
-                    document.body.style.top = '';
-                    document.body.style.left = '';
-                    document.body.style.right = '';
-                    document.body.style.width = '';
-                    document.body.style.overflowY = 'auto';
+        // Splash/hero animations disabled by user request — reveal content immediately
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                // Ensure body is scrollable
+                document.body.style.position = '';
+                document.body.style.overflowY = 'auto';
 
-                    // mark splash as seen for repeat visits
-                    try { localStorage.setItem('launcify:splashSeen','1'); } catch(e){}
+                const contentOverlay = document.getElementById('content-overlay');
+                const navbar = document.getElementById('navbar');
+                const mainTitle = document.getElementById('main-title');
+                const subTitle = document.getElementById('sub-title');
+                const scrollIndicator = document.getElementById('scroll-indicator');
 
-                    // add a post-splash marker class to allow subtle visual tweaks
-                    try { document.body.classList.add('post-splash'); } catch(e){}
-                
-                // 2. Disable pointer events on ALL splash/hero elements
-                const splashElements = [mainTitle, subTitle, scrollIndicator, brandContainer, keyboardHint];
-                splashElements.forEach(el => {
-                    if (el) el.style.pointerEvents = 'none';
-                });
-                
-                // 3. Make main content visible and scrollable (NO ANIMATION)
                 if (contentOverlay) {
                     contentOverlay.style.transition = 'none';
                     contentOverlay.style.transform = 'translateY(0)';
                     contentOverlay.style.opacity = '1';
                     contentOverlay.style.pointerEvents = 'auto';
                 }
-                
-                // 4. Show navbar and make it interactive
                 if (navbar) {
                     navbar.classList.remove('-translate-y-full', 'opacity-0');
-                    navbar.classList.add('translate-y-0', 'opacity-100', 'bg-slate-950/80', 'backdrop-blur-md', 'border-slate-800');
+                    navbar.classList.add('translate-y-0', 'opacity-100');
+                    navbar.style.background = 'transparent';
                     navbar.style.pointerEvents = 'auto';
                 }
-                
-                // 5. Clean up splash visuals (fade hero elements)
-                if (mainTitle) {
-                    mainTitle.style.transition = 'opacity 300ms ease';
-                    mainTitle.style.opacity = '0.2';
-                }
-                if (subTitle) {
-                    subTitle.style.transition = 'opacity 200ms ease';
-                    subTitle.style.opacity = '0';
-                }
-                if (scrollIndicator) {
-                    scrollIndicator.style.transition = 'opacity 200ms ease';
-                    scrollIndicator.style.opacity = '0';
-                }
-                if (keyboardHint) {
-                    keyboardHint.style.opacity = '0';
-                }
-                
-                // 6. Make main content interactive and remove all event listeners
-                try { const mainEl = document.querySelector('main'); if (mainEl) mainEl.style.pointerEvents = 'auto'; } catch(e){}
-                window.removeEventListener('wheel', onUserInteraction);
-                window.removeEventListener('touchstart', onUserInteraction);
-                window.removeEventListener('touchmove', onUserInteraction);
-                window.removeEventListener('pointerdown', onUserInteraction);
-                window.removeEventListener('keydown', onKeyboardInteraction);
-                document.removeEventListener('scroll', onUserInteraction);
-                
-                // 7. Remove global error handlers
-                window.removeEventListener('error', onJSError);
-                window.removeEventListener('unhandledrejection', onPromiseError);
-                // update nav height CSS variable for anchor offset calculations
-                try { const navH = navbar ? navbar.getBoundingClientRect().height : 64; document.documentElement.style.setProperty('--nav-height', navH + 'px'); } catch(e){}
-            }
-            
-            // === EVENT HANDLERS ===
-            function onUserInteraction(e) {
-                if (!isSplashActive) return;
-                exitSplash('user-interaction');
-            }
-            
-            function onKeyboardInteraction(e) {
-                if (!isSplashActive) return;
-                // Only exit on navigation keys
-                if (['ArrowDown', 'ArrowUp', 'PageDown', 'PageUp', 'Space', 'End'].includes(e.code) || e.key === ' ') {
-                    exitSplash('keyboard-navigation');
-                }
-            }
-            
-            function onJSError() {
-                if (!isSplashActive) return;
-                exitSplash('javascript-error');
-            }
-            
-            function onPromiseError() {
-                if (!isSplashActive) return;
-                exitSplash('promise-rejection');
-            }
-            
-            // === INITIALIZATION ===
-            function initializeSplash() {
-                // If reduced motion is preferred, or splash was seen before, exit splash immediately
-                try {
-                    if (prefersReduced) { exitSplash('reduced-motion'); return; }
-                    if (localStorage && localStorage.getItem && localStorage.getItem('launcify:splashSeen')) { exitSplash('repeat-visit'); return; }
-                } catch(e){}
-                
-                // Set up initial splash state
-                // 1. Lock body scrolling using position: fixed
-                document.body.style.position = 'fixed';
-                document.body.style.top = '0';
-                document.body.style.left = '0';
-                document.body.style.right = '0';
-                document.body.style.width = '100%';
-                document.body.style.overflowY = 'hidden';
-                
-                // 2. Hide main content
-                if (contentOverlay) {
-                    contentOverlay.style.opacity = '0';
-                    contentOverlay.style.transform = 'translateY(100vh)';
-                    contentOverlay.style.pointerEvents = 'none';
-                }
-                
-                // 3. Hide navbar
-                if (navbar) {
-                    navbar.classList.add('-translate-y-full', 'opacity-0');
-                    navbar.style.pointerEvents = 'none';
-                }
-                
-                // 4. Set up event listeners for splash exit
-                window.addEventListener('wheel', onUserInteraction, { passive: true });
-                window.addEventListener('touchstart', onUserInteraction, { passive: true });
-                window.addEventListener('touchmove', onUserInteraction, { passive: true });
-                window.addEventListener('pointerdown', onUserInteraction, { passive: true });
-                window.addEventListener('keydown', onKeyboardInteraction, { passive: true });
-                document.addEventListener('scroll', onUserInteraction, { passive: true });
-                
-                // 5. Set up error handlers
-                window.addEventListener('error', onJSError);
-                window.addEventListener('unhandledrejection', onPromiseError);
-                
-                // 6. Set failsafe timeout (MANDATORY - prevents permanent lock)
-                timeoutId = setTimeout(() => {
-                    if (isSplashActive) exitSplash('timeout-failsafe');
-                }, SPLASH_TIMEOUT);
-            }
-            
-            // Start initialization
-            initializeSplash();
-            
-            // --- Runtime sanity check: ensure page becomes interactive ---
-            function sanityCheckAndRecover() {
-                try {
-                    // Conditions to consider "not interactive"
-                    const bodyFixed = window.getComputedStyle(document.body).position === 'fixed' || document.body.style.position === 'fixed';
-                    const bodyOverflowHidden = window.getComputedStyle(document.body).overflowY === 'hidden' || document.body.style.overflowY === 'hidden';
-                    const contentHidden = contentOverlay && (parseFloat(window.getComputedStyle(contentOverlay).opacity) === 0 || window.getComputedStyle(contentOverlay).transform.includes('translateY'));
-                    const navbarBlocked = navbar && window.getComputedStyle(navbar).pointerEvents === 'none';
-
-                    if (isSplashActive && (bodyFixed || bodyOverflowHidden || contentHidden || navbarBlocked)) {
-                        console.warn('Sanity recovery: forcing interactive state due to failed splash unlock');
-                        exitSplash('sanity-recovery');
-                        return true;
-                    }
-                } catch (err) {
-                    console.warn('Sanity check error, forcing recovery', err);
-                    exitSplash('sanity-exception');
-                    return true;
-                }
-                return false;
-            }
-
-            // Run immediately and after 3 seconds
-            try { sanityCheckAndRecover(); } catch(e){}
-            setTimeout(() => { sanityCheckAndRecover(); }, 3000);
-        })();
+                if (mainTitle) { mainTitle.style.opacity = '0.2'; }
+                if (subTitle) { subTitle.style.opacity = '0'; }
+                if (scrollIndicator) { scrollIndicator.style.opacity = '0'; }
+            } catch (e) { console.warn('Disable-splash script error', e); }
+        });
     </script>
 
     <script>
@@ -754,6 +748,14 @@
             });
         }
     </script>
+
+    <!-- removed webcam + pixel modal scripts per user request -->
+
+    <script src="/world-map.js" defer></script>
+    <script src="/flip-words.js" defer></script>
+    <script src="/border-beam.js"></script>
+    <script src="/theme-toggler.js"></script>
+    <script src="/auth-modal.js"></script>
 
     <!-- dev overlay removed for production -->
 
