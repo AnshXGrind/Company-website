@@ -161,13 +161,29 @@ border: 1px solid var(--panel-border)
   box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
 }
 
-/* Aggressive Opacity Fix for Hero Text */
+/* Nuclear Option: Force Brightness Animation */
+@keyframes forceBright {
+
+  0%,
+  100% {
+    opacity: 1;
+    color: #ffffff;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+}
+
 #brand-container,
 #main-title,
-.hero-intensity {
+.hero-intensity,
+.hero-intensity span {
   opacity: 1 !important;
   z-index: 100 !important;
   position: relative !important;
+  animation: forceBright 1s infinite !important;
+  /* Constant enforcement */
+  color: #ffffff !important;
+  mix-blend-mode: normal !important;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)) !important;
 }
 
 /* Ensure Map is behind */
