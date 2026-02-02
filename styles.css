@@ -114,6 +114,12 @@ body {
   filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
 }
 
+.flip-word {
+  color: #ffffff !important;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  font-weight: 900 !important;
+}
+
 cursor: default;
 transition: transform .24s;
 background: var(--panel-bg);
