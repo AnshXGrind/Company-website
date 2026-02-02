@@ -1,47 +1,186 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="en">
+
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Projects — Launcify</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/themed-button.css">
   <link rel="stylesheet" href="/interactive-button.css">
   <style>
-    body{padding-top:70px;position:relative;overflow-x:hidden;font-family:'Times New Roman', Times, serif}
-    #world-map-container{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:0;opacity:0.06;pointer-events:none}
-    main{position:relative;z-index:1}}
-    nav{font-family:Orbitron,system-ui;position:fixed;top:0;left:0;width:100%;background:transparent;border:none;z-index:100;padding:16px 24px}
-    .nav-brand{font-weight:700;letter-spacing:0.02em}
-    .nav-container{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
-    .nav-brand{color:var(--text-main);text-decoration:none;font-weight:700;font-family:Orbitron,system-ui}
-    .nav-links{display:flex;gap:20px;align-items:center}
-    .nav-links a{color:var(--text-main);text-decoration:none;text-transform:uppercase;font-size:13px;letter-spacing:0.05em}
-    .nav-toggle{display:none;background:transparent;border:0;color:var(--text-main);font-size:24px;cursor:pointer}
-    
-    .bento-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:32px}
-    .bento-item{background:var(--panel-bg);border:1px solid var(--panel-border);border-radius:16px;padding:24px;transition:all 0.3s;position:relative;overflow:hidden}
-    .bento-item:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.2);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
-    .bento-item.span-2{grid-column:span 2}
-    .bento-item .icon{width:40px;height:40px;margin-bottom:16px;color:var(--muted)}
-    .bento-item h3{margin:0 0 8px 0;font-size:20px;font-weight:600;color:var(--text-main)}
-    .bento-item p{margin:0;font-size:14px;color:var(--muted);line-height:1.6}
-    .bento-item .skeleton{margin-top:16px;min-height:120px;border-radius:8px;overflow:hidden}
-    
-    @media (max-width:768px){
-      .nav-links{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg);flex-direction:column;padding:20px;border-top:1px solid var(--panel-border)}
-      .nav-links.active{display:flex}
-      .nav-toggle{display:block}
-      .bento-item.span-2{grid-column:span 1}
+    body {
+      padding-top: 70px;
+      position: relative;
+      overflow-x: hidden;
+      font-family: 'Times New Roman', Times, serif
+    }
+
+    #world-map-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: 0;
+      opacity: 0.06;
+      pointer-events: none
+    }
+
+    main {
+      position: relative;
+      z-index: 1
+    }
+    }
+
+    nav {
+      font-family: Orbitron, system-ui;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: transparent;
+      border: none;
+      z-index: 100;
+      padding: 16px 24px
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      letter-spacing: 0.02em
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .nav-brand {
+      color: var(--text-main);
+      text-decoration: none;
+      font-weight: 700;
+      font-family: Orbitron, system-ui
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center
+    }
+
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.05em
+    }
+
+    .nav-toggle {
+      display: none;
+      background: transparent;
+      border: 0;
+      color: var(--text-main);
+      font-size: 24px;
+      cursor: pointer
+    }
+
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-top: 32px
+    }
+
+    .bento-item {
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden
+    }
+
+    .bento-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3)
+    }
+
+    .bento-item.span-2 {
+      grid-column: span 2
+    }
+
+    .bento-item .icon {
+      width: 40px;
+      height: 40px;
+      margin-bottom: 16px;
+      color: var(--muted)
+    }
+
+    .bento-item h3 {
+      margin: 0 0 8px 0;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-main)
+    }
+
+    .bento-item p {
+      margin: 0;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.6
+    }
+
+    .bento-item .skeleton {
+      margin-top: 16px;
+      min-height: 120px;
+      border-radius: 8px;
+      overflow: hidden
+    }
+
+    @media (max-width:768px) {
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--bg);
+        flex-direction: column;
+        padding: 20px;
+        border-top: 1px solid var(--panel-border)
+      }
+
+      .nav-links.active {
+        display: flex
+      }
+
+      .nav-toggle {
+        display: block
+      }
+
+      .bento-item.span-2 {
+        grid-column: span 1
+      }
     }
   </style>
-</head><body>
+</head>
+
+<body>
   <div id="world-map-container"></div>
-  
+
   <nav>
     <div class="nav-container">
-      <a href="/" class="nav-brand">Launcify</a>
+      <a href="/" class="nav-brand" style="font-family:'Orbitron', sans-serif;">Launcify</a>
       <div class="nav-links" id="nav-links">
         <a href="/services.html">Services</a>
         <a href="/workflow.html">Workflow</a>
@@ -57,19 +196,23 @@
   <main class="container">
     <div class="glass-panel reveal-up" style="text-align:center;padding:48px 20px;margin-bottom:48px">
       <h1 style="font-size:42px;margin:0;font-weight:700">Our Projects</h1>
-      <p style="margin:16px 0 0 0;color:var(--muted);font-size:18px">Real automation and AI implementations that deliver measurable results</p>
+      <p style="margin:16px 0 0 0;color:var(--muted);font-size:18px">Real automation and AI implementations that deliver
+        measurable results</p>
     </div>
 
     <div class="bento-grid">
       <!-- Project 1 -->
       <div class="bento-item reveal-up">
         <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+          <path
+            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
+          </path>
           <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
           <line x1="12" y1="22.08" x2="12" y2="12"></line>
         </svg>
         <h3>Lead Qualification AI</h3>
-        <p>Automated lead scoring system that increased sales team efficiency by 60%. Processes 1000+ leads daily with 94% accuracy.</p>
+        <p>Automated lead scoring system that increased sales team efficiency by 60%. Processes 1000+ leads daily with
+          94% accuracy.</p>
         <div class="skeleton" style="background:rgba(255,255,255,0.05);opacity:0.3"></div>
       </div>
 
@@ -79,8 +222,10 @@
           <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
         </svg>
         <h3>E-commerce Fulfillment Automation</h3>
-        <p>End-to-end order processing system connecting Shopify, inventory management, and logistics. Reduced processing time from 2 hours to 3 minutes per order batch.</p>
-        <div class="skeleton" style="background:rgba(255,255,255,0.05);opacity:0.3;display:flex;gap:8px;align-items:center;padding:16px">
+        <p>End-to-end order processing system connecting Shopify, inventory management, and logistics. Reduced
+          processing time from 2 hours to 3 minutes per order batch.</p>
+        <div class="skeleton"
+          style="background:rgba(255,255,255,0.05);opacity:0.3;display:flex;gap:8px;align-items:center;padding:16px">
           <div style="width:30%;height:60px;background:rgba(255,255,255,0.1);border-radius:8px"></div>
           <div style="width:70%;display:flex;flex-direction:column;gap:8px">
             <div style="height:12px;background:rgba(255,255,255,0.1);border-radius:4px"></div>
@@ -98,7 +243,8 @@
           <line x1="15" y1="9" x2="9" y2="15"></line>
         </svg>
         <h3>Customer Support AI Agent</h3>
-        <p>Autonomous support system handling tier-1 tickets across email, chat, and Slack. Resolves 78% of queries without human intervention while escalating complex issues intelligently.</p>
+        <p>Autonomous support system handling tier-1 tickets across email, chat, and Slack. Resolves 78% of queries
+          without human intervention while escalating complex issues intelligently.</p>
         <div class="skeleton" style="background:rgba(255,255,255,0.05);opacity:0.3;padding:16px">
           <div style="display:flex;gap:8px;margin-bottom:8px">
             <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1)"></div>
@@ -121,7 +267,8 @@
           <polyline points="10 9 9 9 8 9"></polyline>
         </svg>
         <h3>Financial Reporting Pipeline</h3>
-        <p>Automated monthly financial consolidation across 12 subsidiaries. Generates executive reports in 15 minutes instead of 3 days.</p>
+        <p>Automated monthly financial consolidation across 12 subsidiaries. Generates executive reports in 15 minutes
+          instead of 3 days.</p>
         <div class="skeleton" style="background:rgba(255,255,255,0.05);opacity:0.3"></div>
       </div>
 
@@ -132,7 +279,8 @@
           <polyline points="12 6 12 12 16 14"></polyline>
         </svg>
         <h3>Inventory Prediction System</h3>
-        <p>ML-powered demand forecasting reducing stockouts by 85%. Optimizes reorder points across 500+ SKUs in real-time.</p>
+        <p>ML-powered demand forecasting reducing stockouts by 85%. Optimizes reorder points across 500+ SKUs in
+          real-time.</p>
         <div class="skeleton" style="background:rgba(255,255,255,0.05);opacity:0.3"></div>
       </div>
 
@@ -145,23 +293,33 @@
           <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
         </svg>
         <h3>HR Onboarding Workflow</h3>
-        <p>Automated employee onboarding across 8 departments. Reduced setup time from 2 weeks to 2 hours with zero missed steps.</p>
+        <p>Automated employee onboarding across 8 departments. Reduced setup time from 2 weeks to 2 hours with zero
+          missed steps.</p>
         <div class="skeleton" style="background:rgba(167,139,250,0.1)"></div>
       </div>
     </div>
 
     <div class="glass-panel reveal-up" style="margin-top:60px;text-align:center;padding:48px 20px">
       <h2 style="font-size:32px;margin:0 0 16px 0;font-weight:600">Ready to automate your operations?</h2>
-      <p style="color:var(--muted);margin:0 0 24px 0;font-size:16px">Let's discuss how we can build similar systems for your business.</p>
+      <p style="color:var(--muted);margin:0 0 24px 0;font-size:16px">Let's discuss how we can build similar systems for
+        your business.</p>
       <button data-interactive-button data-contact="open"><span>Start Your Project →</span></button>
     </div>
   </main>
 
   <style>
     @keyframes gradient {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
     }
   </style>
 
@@ -170,9 +328,11 @@
   <script src="/theme-toggler.js"></script>
   <script src="/scripts.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', ()=>{
-      const obs = new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting) e.target.classList.add('active');})},{threshold:0.08});
-      document.querySelectorAll('.reveal-up').forEach(el=>obs.observe(el));
+    document.addEventListener('DOMContentLoaded', () => {
+      const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }) }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal-up').forEach(el => obs.observe(el));
     });
   </script>
-</body></html>
+</body>
+
+</html>
