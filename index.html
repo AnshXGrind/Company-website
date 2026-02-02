@@ -279,7 +279,12 @@
             color: var(--text-main) !important;
         }
     </style>
-    <!-- Section visibility styles removed -->
+    <style>
+        #content-overlay,
+        #scroll-indicator {
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body class="antialiased relative selection:bg-blue-600 selection:text-white">
@@ -328,24 +333,15 @@
             <div class="relative z-50 pointer-events-auto" id="brand-container"
                 style="max-width:900px;width:90%;text-align:center">
                 <h1 id="main-title"
-                    class="text-4xl md:text-7xl tracking-tight font-bold text-center transition-all duration-300"
-                    style="transform: scale(1); opacity: 1; filter: none; margin:0 0 20px 0; line-height:1.1; color: var(--text-main); font-family: 'Orbitron', sans-serif;">
+                    class="text-4xl md:text-7xl tracking-tight font-bold text-center transition-all duration-300 hero-intensity"
+                    style="transform: scale(1); opacity: 1; filter: none; margin:0; line-height:1.1; font-family: 'Orbitron', sans-serif;">
                     <span
-                        style="display:block;font-size:0.5em;font-weight:400;color:var(--muted);margin-bottom:16px;letter-spacing:0.1em;text-transform:uppercase">From
+                        style="display:block;font-size:0.5em;font-weight:400;color:rgba(255,255,255,0.7);margin-bottom:16px;letter-spacing:0.1em;text-transform:uppercase;text-shadow:none;">From
                         idea to production systems, not endless sprints.</span>
                     Build <span data-flip-words="modern,intelligent,scalable,powerful"></span><br />automation systems
                 </h1>
-                <p id="sub-title"
-                    class="text-base md:text-xl text-center tracking-normal transition-opacity duration-700 delay-200"
-                    style="opacity: 1; margin:0 0 32px 0; line-height:1.6; color: var(--muted)">
-                    We build AI agents, automated workflows, and high-performance websites that remove manual work and
-                    scale with your business.
-                </p>
-                <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px">
-                    <button data-interactive-button data-contact="open"><span>Book an Automation Audit →</span></button>
-                    <button data-interactive-button data-variant="glass"
-                        onclick="window.location.href='/workflow.html'"><span>See How It Works</span></button>
-                </div>
+                <p id="sub-title" style="display:none"></p>
+                <div style="display:none"></div>
             </div>
 
 

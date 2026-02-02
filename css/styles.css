@@ -98,20 +98,10 @@ body {
   padding: 18px;
   border-radius: 12px;
   text-align: center;
-}
-
-.hero-intensity {
-  font-weight: 900 !important;
-  text-shadow: 0 0 15px rgba(255, 255, 255, 0.6), 0 0 30px rgba(255, 255, 255, 0.4), 0 0 50px rgba(255, 255, 255, 0.2);
-  letter-spacing: -0.02em;
-  filter: contrast(1.2);
-  color: #ffffff !important;
-}
-
-cursor: default;
-transition: transform .24s;
-background: var(--panel-bg);
-border: 1px solid var(--panel-border)
+  cursor: default;
+  transition: transform .24s;
+  background: var(--panel-bg);
+  border: 1px solid var(--panel-border)
 }
 
 .skill:hover {
