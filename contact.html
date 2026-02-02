@@ -1,10 +1,163 @@
 <!doctype html>
-<html lang="en"><head>
+<html lang="en">
+
+<head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contact — Launcify</title>
-  <meta http-equiv="refresh" content="0;url=/" />
-  <script>window.location.href = '/';</script>
-</head><body>
-  <p>Redirecting...</p>
-</body></html>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/themed-button.css">
+  <link rel="stylesheet" href="/interactive-button.css">
+  <style>
+    body {
+      padding-top: 70px;
+      position: relative;
+      overflow-x: hidden;
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    .nav-brand {
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    #world-map-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      z-index: 0;
+      opacity: 0.06;
+      pointer-events: none
+    }
+
+    nav {
+      font-family: Orbitron, system-ui;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: transparent;
+      border: none;
+      z-index: 100;
+      padding: 16px 24px
+    }
+
+    .nav-brand {
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-main);
+      text-decoration: none;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 20px;
+      align-items: center
+    }
+
+    .nav-links a {
+      color: var(--text-main);
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 0.05em
+    }
+
+    main {
+      position: relative;
+      z-index: 1;
+      min-height: 80vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="world-map-container">
+    <!-- Map BG would go here -->
+  </div>
+
+  <nav>
+    <div class="nav-container">
+      <a href="/" class="nav-brand">Launcify</a>
+      <div class="nav-links">
+        <a href="/services.html">Services</a>
+        <a href="/workflow.html">Workflow</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/skills.html">Capabilities</a>
+        <a href="/about.html">About</a>
+      </div>
+      <a href="/contact.html" class="nav-cta"
+        style="background: white; color: black; padding: 8px 16px; border-radius: 8px; font-weight: bold; text-decoration: none; font-family: Inter, sans-serif;">Contact</a>
+    </div>
+  </nav>
+
+  <main class="w-full max-w-4xl mx-auto px-6 py-20">
+    <div class="glass-panel p-8 md:p-12 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-center mb-6" style="font-family: 'Orbitron', sans-serif;">Get in
+        Touch</h1>
+      <p class="text-center text-gray-400 mb-12 max-w-lg mx-auto">Ready to automate your workflow? Send us a message and
+        let's verify your requirements.</p>
+
+      <form class="space-y-6 max-w-lg mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-2">First Name</label>
+            <input type="text"
+              class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
+              placeholder="John">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-2">Last Name</label>
+            <input type="text"
+              class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
+              placeholder="Doe">
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
+          <input type="email"
+            class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
+            placeholder="john@example.com">
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
+          <textarea rows="4"
+            class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
+            placeholder="Tell us about your project..."></textarea>
+        </div>
+
+        <button type="submit"
+          class="w-full bg-white text-black font-bold py-4 rounded-lg hover:bg-gray-200 transition-colors"
+          style="font-family: 'Orbitron', sans-serif;">
+          Send Message
+        </button>
+      </form>
+    </div>
+  </main>
+
+</body>
+
+</html>

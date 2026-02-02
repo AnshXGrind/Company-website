@@ -126,8 +126,54 @@ background: var(--panel-bg);
 border: 1px solid var(--panel-border)
 }
 
-.skill:hover {
-  transform: translateY(-6px)
+/* Premium Button Styles */
+.btn-premium {
+  position: relative;
+  padding: 14px 28px;
+  background: #ffffff;
+  color: #000000;
+  font-weight: 800;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+}
+
+.btn-premium:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+}
+
+.btn-premium-glass {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.btn-premium-glass:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+/* Aggressive Opacity Fix for Hero Text */
+#brand-container,
+#main-title,
+.hero-intensity {
+  opacity: 1 !important;
+  z-index: 100 !important;
+  position: relative !important;
+}
+
+/* Ensure Map is behind */
+#world-map-container {
+  opacity: 0.15 !important;
+  z-index: 0 !important;
 }
 
 .skill .icon {
