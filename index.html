@@ -334,14 +334,27 @@
                 style="max-width:900px;width:90%;text-align:center">
                 <h1 id="main-title"
                     class="text-4xl md:text-7xl tracking-tight font-bold text-center transition-all duration-300 hero-intensity"
-                    style="transform: scale(1); opacity: 1; margin:0; line-height:1.1; font-family: 'Orbitron', sans-serif;">
+                    style="transform: scale(1); opacity: 1 !important; margin:0; line-height:1.1; font-family: 'Orbitron', sans-serif;">
                     <span
-                        style="display:block;font-size:0.5em;font-weight:400;color:#ffffff;margin-bottom:16px;letter-spacing:0.1em;text-transform:uppercase;text-shadow:0 0 10px rgba(255,255,255,0.5);">From
+                        style="display:block;font-size:0.5em;font-weight:400;color:#ffffff !important;margin-bottom:16px;letter-spacing:0.1em;text-transform:uppercase;text-shadow:0 0 10px rgba(255,255,255,0.5);">From
                         idea to production systems, not endless sprints.</span>
-                    Build <span data-flip-words="modern,intelligent,scalable,powerful"></span><br />automation systems
+                    Build <span data-flip-words="modern,intelligent,scalable,powerful"
+                        style="color:#ffffff !important; opacity:1 !important;"></span><br />automation systems
                 </h1>
-                <p id="sub-title" style="display:none"></p>
-                <div style="display:none"></div>
+                <p id="sub-title"
+                    class="text-base md:text-xl text-center tracking-normal transition-opacity duration-700 delay-200"
+                    style="opacity: 1 !important; margin:32px 0; line-height:1.6; color: rgba(255,255,255,0.8) !important; display:block !important;">
+                    We build AI agents, automated workflows, and high-performance websites that remove manual work and
+                    scale with your business.
+                </p>
+                <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px">
+                    <button data-interactive-button data-contact="open"
+                        style="background:#ffffff; color:#000000; font-weight:bold; padding:12px 24px; border-radius:8px; border:none; cursor:pointer;"><span>Book
+                            an Automation Audit →</span></button>
+                    <button data-interactive-button data-variant="glass" onclick="window.location.href='/workflow.html'"
+                        style="background:rgba(255,255,255,0.1); color:#ffffff; font-weight:bold; padding:12px 24px; border-radius:8px; border:1px solid rgba(255,255,255,0.2); cursor:pointer;"><span>See
+                            How It Works</span></button>
+                </div>
             </div>
 
 
