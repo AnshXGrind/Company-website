@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  webui:
+    image: ghcr.io/oobabooga/text-generation-webui:latest
+    container_name: textgen_webui
+    restart: unless-stopped
+    ports:
+      - "7860:7860"
+    volumes:
+      - ./models:/home/user/models
+      - ./config:/home/user/.local/share/text-generation-webui
+    environment:
+      - COMMANDLINE_ARGS=--auto-devices
+    shm_size: '1gb'

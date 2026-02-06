@@ -6,158 +6,77 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Contact — Launcify</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/themed-button.css">
   <link rel="stylesheet" href="/interactive-button.css">
   <script src="https://js.puter.com/v2/"></script>
   <style>
-    body {
-      padding-top: 70px;
-      position: relative;
-      overflow-x: hidden;
-      font-family: 'Inter', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text-main);
-    }
+    body { padding-top: 70px; position: relative; overflow-x: hidden; font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text-main); }
+    .nav-brand { font-family: 'Orbitron', sans-serif; }
+    #world-map-container { position: fixed; top: 0; left: 0; width: 100%; height: 100vh; z-index: 0; opacity: 0.06; pointer-events: none }
+    nav { font-family: Orbitron, system-ui; position: fixed; top: 0; left: 0; width: 100%; background: transparent; border: none; z-index: 100; padding: 16px 24px }
+    .nav-brand { font-weight: 700; letter-spacing: 0.02em; display: flex; align-items: center; gap: 10px; color: var(--text-main); text-decoration: none; }
+    .nav-container { max-width: 1100px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between }
+    .nav-links { display: flex; gap: 20px; align-items: center }
+    .nav-links a { color: var(--text-main); text-decoration: none; text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em }
+    main { position: relative; z-index: 1; min-height: 80vh; display: flex; align-items: center; justify-content: center; }
+  </style>
+</head>
 
-    .nav-brand {
-      font-family: 'Orbitron', sans-serif;
-    }
+<body>
+  <div id="world-map-container"></div>
+  <nav>
+    <div class="nav-container">
+      <a href="/" class="nav-brand">Launcify</a>
+      <div class="nav-links">
+        <a href="/services.html">Services</a>
+        <a href="/workflow.html">Workflow</a>
+        <a href="/projects.html">Projects</a>
+        <a href="/skills.html">Capabilities</a>
+        <a href="/about.html">About</a>
+      </div>
+      <a href="/contact.html" class="nav-cta" style="background: white; color: black; padding: 8px 16px; border-radius: 8px; font-weight: bold; text-decoration: none; font-family: Inter, sans-serif;">Contact</a>
+    </div>
+  </nav>
 
-    #world-map-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      z-index: 0;
-      opacity: 0.06;
-      pointer-events: none
-    }
+  <main class="w-full max-w-4xl mx-auto px-6 py-20">
+    <div class="glass-panel p-8 md:p-12 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl">
+      <h1 class="text-4xl md:text-5xl font-bold text-center mb-6" style="font-family: 'Orbitron', sans-serif;">Get in Touch</h1>
+      <p class="text-center text-gray-400 mb-12 max-w-lg mx-auto">Ready to automate your workflow? Send us a message and let's verify your requirements.</p>
 
-    nav {
-      font-family: Orbitron, system-ui;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: transparent;
-      border: none;
-      z-index: 100;
-      padding: 16px 24px
-    }
+      <form class="space-y-6 max-w-lg mx-auto" action="/api/submit" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="_next" value="/thank-you.html">
+        <input type="text" name="_gotcha" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;border:0;padding:0;margin:0;" />
 
-    .nav-brand {
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text-main);
-      text-decoration: none;
-    }
-
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-          if (resp.ok) {
-            // If user consented to AI, generate a draft reply via Puter (Grok)
-            const consent = !!form.querySelector('[name="ai_consent"]').checked;
-            if (consent && window.puter && puter.ai) {
-              showMessage('Message sent. Generating AI draft reply…', 'success');
-
-              const first = data.get('first_name') || '';
-              const last = data.get('last_name') || '';
-              const email = data.get('email') || '';
-              const messageText = data.get('message') || '';
-
-              // Small helper to escape HTML when injecting into DOM
-              function escapeHTML(s) { return String(s).replace(/[&<>"'`]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' }[c]; }); }
-
-              const prompt = `You are a helpful assistant. Given the contact submission below, classify the intent (one of: inquiry, pricing, support, partnership, other) and priority (low, medium, high). Then produce a concise, professional email reply subject and body addressed to the sender. Respond ONLY in JSON with keys: intent, priority, subject, body.\n\nSubmission:\nName: ${first} ${last}\nEmail: ${email}\nMessage: ${messageText}`;
-
-              try {
-                const aiResp = await puter.ai.chat(prompt, { model: 'x-ai/grok-4.1-fast' });
-                const content = aiResp?.message?.content ?? aiResp?.content ?? '';
-                let parsed = null;
-                try { parsed = JSON.parse(content); } catch (e) { parsed = { subject: 'Draft reply', body: content }; }
-
-                // Create draft UI
-                const draft = document.createElement('div');
-                draft.id = 'ai-draft';
-                draft.style.marginTop = '12px';
-                draft.innerHTML = `<h3 style="margin:8px 0">AI Draft Reply</h3><div style="margin-bottom:8px"><strong>Intent:</strong> ${escapeHTML(parsed.intent||'N/A')} &nbsp; <strong>Priority:</strong> ${escapeHTML(parsed.priority||'N/A')}</div><div style="margin-bottom:8px"><strong>Subject:</strong> ${escapeHTML(parsed.subject||'')}</div>`;
-
-                const ta = document.createElement('textarea');
-                ta.rows = 8;
-                ta.style.width = '100%';
-                ta.style.marginBottom = '8px';
-                ta.value = parsed.body || '';
-                draft.appendChild(ta);
-
-                const btns = document.createElement('div');
-                btns.style.marginTop = '8px';
-
-                const copyBtn = document.createElement('button');
-                copyBtn.type = 'button';
-                copyBtn.textContent = 'Copy reply';
-                copyBtn.style.padding = '8px 12px';
-                copyBtn.style.borderRadius = '6px';
-                copyBtn.onclick = function () { ta.select(); document.execCommand('copy'); };
-
-                const contBtn = document.createElement('button');
-                contBtn.type = 'button';
-                contBtn.textContent = 'Continue';
-                contBtn.style.marginLeft = '8px';
-                contBtn.style.padding = '8px 12px';
-                contBtn.style.borderRadius = '6px';
-                contBtn.onclick = function () { window.location.href = '/thank-you.html'; };
-
-                btns.appendChild(copyBtn);
-                btns.appendChild(contBtn);
-                draft.appendChild(btns);
-
-                msgContainer.appendChild(draft);
-                form.reset();
-              } catch (aiErr) {
-                showMessage('Message sent — AI generation failed.', 'success');
-                form.reset();
-                setTimeout(() => { window.location.href = '/thank-you.html'; }, 2200);
-              }
-            } else {
-              showMessage('Thanks — your message was sent!', 'success');
-              form.reset();
-              setTimeout(() => { window.location.href = '/thank-you.html'; }, 2200);
-            }
-          } else {
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div>
+            <label class="block text-sm font-medium text-gray-400 mb-2">First Name</label>
+            <input type="text" name="first_name" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors" placeholder="John">
+          </div>
+          <div>
             <label class="block text-sm font-medium text-gray-400 mb-2">Last Name</label>
-            <input type="text" name="last_name"
-              class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
-              placeholder="Doe">
+            <input type="text" name="last_name" class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors" placeholder="Doe">
           </div>
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
-          <input type="email" name="email" required
-            class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
-            placeholder="john@example.com">
+          <input type="email" name="email" required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors" placeholder="john@example.com">
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
-          <textarea rows="4" name="message" required
-            class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
-            placeholder="Tell us about your project..."></textarea>
+          <textarea rows="4" name="message" required class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors" placeholder="Tell us about your project..."></textarea>
         </div>
 
         <input type="hidden" name="_subject" value="New Contact Form Submission from Launcify Website">
         <input type="hidden" name="form_type" value="contact_page">
+
+        <div>
+          <label class="block text-sm font-medium text-gray-400 mb-2">Attachment (optional)</label>
+          <input type="file" name="attachment" accept=".pdf,.png,.jpg,.jpeg" class="w-full text-sm text-gray-300" />
+        </div>
 
         <div class="flex items-center gap-3">
           <label style="display:flex;align-items:center;gap:8px;" title="AI will see the message if checked">
@@ -166,22 +85,17 @@
           </label>
         </div>
 
-        <button type="submit"
-          class="w-full bg-white text-black font-bold py-4 rounded-lg hover:bg-gray-200 transition-colors"
-          style="font-family: 'Orbitron', sans-serif;">
-          Send Message
-        </button>
+        <button type="submit" class="w-full bg-white text-black font-bold py-4 rounded-lg hover:bg-gray-200 transition-colors" style="font-family: 'Orbitron', sans-serif;">Send Message</button>
       </form>
     </div>
   </main>
 
   <script>
     (function () {
-      const form = document.querySelector('form[action^="https://formspree.io"]');
+      const form = document.querySelector('form[action="/api/submit"]');
       if (!form) return;
 
       const submitBtn = form.querySelector('button[type="submit"]');
-
       const msgContainer = document.createElement('div');
       msgContainer.id = 'form-message';
       msgContainer.setAttribute('aria-live', 'polite');
@@ -196,88 +110,62 @@
         el.style.borderRadius = '8px';
         el.style.marginBottom = '12px';
         el.style.fontWeight = '600';
-        if (type === 'success') {
-          el.style.background = '#d1fae5';
-          el.style.color = '#065f46';
-        } else {
-          el.style.background = '#fee2e2';
-          el.style.color = '#991b1b';
-        }
+        if (type === 'success') { el.style.background = '#d1fae5'; el.style.color = '#065f46'; } else { el.style.background = '#fee2e2'; el.style.color = '#991b1b'; }
         msgContainer.appendChild(el);
       }
 
       function validateForm() {
-        // Basic client-side validation with ARIA updates
         const required = form.querySelectorAll('[required]');
         for (const el of required) {
-          if (!el.value.trim()) {
-            el.setAttribute('aria-invalid', 'true');
-            el.focus();
-            showMessage('Please fill all required fields.', 'error');
-            return false;
-          } else {
-            el.removeAttribute('aria-invalid');
-          }
+          if (!el.value.trim()) { el.setAttribute('aria-invalid', 'true'); el.focus(); showMessage('Please fill all required fields.', 'error'); return false; } else { el.removeAttribute('aria-invalid'); }
         }
         return true;
       }
 
-      async function executeRecaptcha() {
-        // Placeholder: if you add reCAPTCHA site key, load the API and call grecaptcha.execute
-        // Example flow (requires site key & server-side validation):
-        // if (window.grecaptcha && grecaptcha.execute) {
-        //   const token = await grecaptcha.execute('YOUR_SITE_KEY', { action: 'submit' });
-        //   return token;
-        // }
-        return null;
-      }
-
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
-
-        // Honeypot check
-        if (form.querySelector('[name="_gotcha"]').value) {
-          showMessage('Spam detected.', 'error');
-          return;
-        }
-
+        if (form.querySelector('[name="_gotcha"]').value) { showMessage('Spam detected.', 'error'); return; }
         if (!validateForm()) return;
 
         const data = new FormData(form);
-
-        // reCAPTCHA hook: if enabled, append token
-        const token = await executeRecaptcha();
-        if (token) {
-          data.append('g-recaptcha-response', token);
-        }
-
         if (submitBtn) submitBtn.disabled = true;
         const origText = submitBtn ? submitBtn.textContent : '';
         if (submitBtn) submitBtn.textContent = 'Sending...';
 
         try {
-          const resp = await fetch(form.action, {
-            method: 'POST',
-            body: data,
-            headers: { 'Accept': 'application/json' }
-          });
-
+          const resp = await fetch(form.action, { method: 'POST', body: data, headers: { 'Accept': 'application/json' } });
+          const body = await resp.json().catch(() => null);
           if (resp.ok) {
-            showMessage('Thanks — your message was sent!', 'success');
-            form.reset();
-            setTimeout(() => { window.location.href = '/thank-you.html'; }, 2200);
+            const consent = !!form.querySelector('[name="ai_consent"]').checked;
+            if (consent && body && body.ai) {
+              const parsed = body.ai;
+              function escapeHTML(s) { return String(s).replace(/[&<>"'`]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' }[c]; }); }
+
+              const draft = document.createElement('div');
+              draft.id = 'ai-draft';
+              draft.style.marginTop = '12px';
+              draft.innerHTML = `<h3 style="margin:8px 0">AI Draft Reply</h3><div style="margin-bottom:8px"><strong>Intent:</strong> ${escapeHTML(parsed.intent||'N/A')} &nbsp; <strong>Priority:</strong> ${escapeHTML(parsed.priority||'N/A')}</div><div style="margin-bottom:8px"><strong>Subject:</strong> ${escapeHTML(parsed.subject||'')}</div>`;
+
+              const ta = document.createElement('textarea'); ta.rows = 8; ta.style.width = '100%'; ta.style.marginBottom = '8px'; ta.value = parsed.body || ''; draft.appendChild(ta);
+
+              const btns = document.createElement('div'); btns.style.marginTop = '8px';
+              const copyBtn = document.createElement('button'); copyBtn.type = 'button'; copyBtn.textContent = 'Copy reply'; copyBtn.style.padding = '8px 12px'; copyBtn.style.borderRadius = '6px'; copyBtn.onclick = function () { ta.select(); document.execCommand('copy'); };
+              const contBtn = document.createElement('button'); contBtn.type = 'button'; contBtn.textContent = 'Continue'; contBtn.style.marginLeft = '8px'; contBtn.style.padding = '8px 12px'; contBtn.style.borderRadius = '6px'; contBtn.onclick = function () { window.location.href = '/thank-you.html'; };
+              btns.appendChild(copyBtn); btns.appendChild(contBtn); draft.appendChild(btns);
+              msgContainer.appendChild(draft);
+              form.reset();
+            } else {
+              showMessage('Thanks — your message was sent!', 'success');
+              form.reset();
+              setTimeout(() => { window.location.href = '/thank-you.html'; }, 2200);
+            }
           } else {
-            const body = await resp.json().catch(() => null);
-            const errMsg = (body && body.error) ? body.error : 'Submission failed. Please try again.';
-            showMessage(errMsg, 'error');
+            const errMsg = (body && body.error) ? body.error : 'Submission failed. Please try again.'; showMessage(errMsg, 'error');
           }
         } catch (err) {
           showMessage('Network error. Please try again later.', 'error');
         } finally {
-          if (submitBtn) {
-            submitBtn.disabled = false;
-            submitBtn.textContent = origText;
-          }
+          if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = origText; }
         }
       });
     })();
