@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Request a Call — Launcify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/interactive-button.css">
+    <style>
+        body {
+            padding-top: 70px;
+            position: relative;
+            overflow-x: hidden;
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text-main);
+        }
+
+        .nav-brand {
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #world-map-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            opacity: 0.06;
+            pointer-events: none
+        }
+
+        nav {
+            font-family: Orbitron, system-ui;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: transparent;
+            border: none;
+            z-index: 100;
+            padding: 16px 24px
+        }
+
+        .nav-brand {
+            font-weight: 700;
+            letter-spacing: 0.02em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.05em
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-success {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .form-error {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="world-map-container">
+        <!-- Map BG would go here -->
+    </div>
+
+    <nav>
+        <div class="nav-container">
+            <a href="/" class="nav-brand">Launcify</a>
+            <div class="nav-links">
+                <a href="/services.html">Services</a>
+                <a href="/workflow.html">Workflow</a>
+                <a href="/projects.html">Projects</a>
+                <a href="/skills.html">Capabilities</a>
+                <a href="/about.html">About</a>
+            </div>
+            <a href="/contact.html" class="nav-cta"
+                style="background: white; color: black; padding: 8px 16px; border-radius: 8px; font-weight: bold; text-decoration: none; font-family: Inter, sans-serif;">Contact</a>
+        </div>
+    </nav>
+
+    <main class="w-full max-w-4xl mx-auto px-6 py-20">
+        <div class="glass-panel p-8 md:p-12 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl">
+            <h1 class="text-4xl md:text-5xl font-bold text-center mb-6" style="font-family: 'Orbitron', sans-serif;">
+                Book a
+                Call</h1>
+            <p class="text-center text-gray-400 mb-12 max-w-lg mx-auto">Let's discuss how we can automate your workflows
+                and
+                scale your business. Schedule a call at your convenience.</p>
+
+            <div id="form-message"></div>
+
+            <form id="call-form" class="space-y-6 max-w-lg mx-auto" action="https://formspree.io/f/mjgwlokv"
+                method="POST">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">First Name *</label>
+                        <input type="text" name="first_name" required
+                            class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
+                            placeholder="John">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-400 mb-2">Last Name *</label>
+                        <input type="text" name="last_name" required
+                            class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
+                            placeholder="Doe">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Email Address *</label>
+                    <input type="email" name="email" required
+                        class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
+                        placeholder="john@example.com">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Phone Number</label>
+                    <input type="tel" name="phone"
+                        class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
+                        placeholder="+1 (555) 000-0000">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Preferred Date & Time</label>
+                    <input type="datetime-local" name="preferred_datetime"
+                        class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">What would you like to discuss?</label>
+                    <textarea rows="4" name="message" required
+                        class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
+                        placeholder="Tell us about your project and what you'd like to achieve..."></textarea>
+                </div>
+
+                <input type="hidden" name="_subject" value="New Call Request from Launcify Website">
+                <input type="hidden" name="form_type" value="request_call">
+
+                <button type="submit"
+                    class="w-full bg-white text-black font-bold py-4 rounded-lg hover:bg-gray-200 transition-colors"
+                    style="font-family: 'Orbitron', sans-serif;">
+                    Request Call
+                </button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            const form = document.getElementById('call-form');
+            if (!form) return;
+
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const msgContainer = document.getElementById('form-message');
+
+            function showMessage(text, type) {
+                msgContainer.innerHTML = '';
+                const el = document.createElement('div');
+                el.textContent = text;
+                el.setAttribute('role', 'status');
+                el.className = type === 'success' ? 'form-success' : 'form-error';
+                msgContainer.appendChild(el);
+            }
+
+            form.addEventListener('submit', async function (e) {
+                e.preventDefault();
+                const data = new FormData(form);
+                if (submitBtn) {
+                    submitBtn.disabled = true;
+                }
+                const origText = submitBtn ? submitBtn.textContent : '';
+                if (submitBtn) submitBtn.textContent = 'Sending...';
+
+                try {
+                    const resp = await fetch(form.action, {
+                        method: 'POST',
+                        body: data,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (resp.ok) {
+                        showMessage('Thanks! Your call request has been submitted. We\'ll be in touch soon.', 'success');
+                        form.reset();
+                        setTimeout(() => { window.location.href = '/thank-you.html'; }, 2200);
+                    } else {
+                        await resp.json().catch(() => null);
+                        showMessage('Submission failed. Please try again.', 'error');
+                    }
+                } catch (err) {
+                    showMessage('Network error. Please try again later.', 'error');
+                } finally {
+                    if (submitBtn) {
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = origText;
+                    }
+                }
+            });
+        })();
+    </script>
+
+    <script src="/world-map.js" defer></script>
+
+</body>
+
+</html>

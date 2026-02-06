@@ -336,7 +336,7 @@
                     class="text-4xl md:text-7xl tracking-tight font-bold text-center transition-all duration-300 hero-intensity"
                     style="transform: scale(1); opacity: 1 !important; margin:0; line-height:1.1; font-family: 'Orbitron', sans-serif;">
                     <span
-                        style="display:block;font-size:0.5em;font-weight:700;color:#ffffff !important;margin-bottom:16px;letter-spacing:0.1em;text-transform:uppercase;text-shadow:0 0 15px rgba(255,255,255,0.8);">From
+                        style="display:block;font-size:0.5em;font-weight:700;color:#ffffff !important;margin-bottom:16px;letter-spacing:0.1em;text-transform:uppercase;text-shadow:0 0 20px rgba(255,255,255,1), 0 0 40px rgba(255,255,255,0.8);">From
                         idea to production systems, not endless sprints.</span>
                     Build <span data-flip-words="modern,intelligent,scalable,powerful"
                         style="color:#ffffff !important; opacity:1 !important;"></span><br />automation systems
@@ -348,7 +348,8 @@
                     scale with your business.
                 </p>
                 <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px">
-                    <button data-interactive-button data-contact="open" class="btn-premium"><span>Book an Automation
+                    <button data-interactive-button onclick="window.location.href='/book-automation-audit.html'"
+                        class="btn-premium"><span>Book an Automation
                             Audit →</span></button>
                     <button data-interactive-button data-variant="glass" onclick="window.location.href='/workflow.html'"
                         class="btn-premium btn-premium-glass"><span>See How It Works</span></button>
@@ -618,7 +619,7 @@
                                 </a>
 
                                 <!-- Call Card -->
-                                <a href="#"
+                                <a href="/request-call.html"
                                     class="bg-slate-900/50 border border-slate-800 hover:bg-white hover:text-black hover:border-white rounded-xl p-6 flex flex-col justify-center items-center gap-2 group/call transition-all h-32">
                                     <iconify-icon icon="solar:phone-calling-linear" width="28"
                                         height="28"></iconify-icon>
@@ -658,11 +659,11 @@
         <div id="contact-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
         <form id="contact-form"
             class="relative z-70 w-full max-w-xl bg-[#0b0b0d] border border-slate-800 rounded-2xl p-6 shadow-lg"
-            aria-hidden="true">
+            action="https://formspree.io/f/mjgwlokv" method="POST" aria-hidden="true">
             <div class="flex justify-between items-start mb-4">
                 <div>
                     <h3 class="text-lg text-white font-medium">Contact Us</h3>
-                    <p class="text-xs text-slate-400">Send a short note — we’ll reply within one business day.</p>
+                    <p class="text-xs text-slate-400">Send a short note — we'll reply within one business day.</p>
                 </div>
                 <button type="button" id="contact-close" aria-label="Close contact form"
                     class="text-slate-400 hover:text-white">✕</button>
@@ -675,6 +676,8 @@
                 <textarea name="message" id="cf-message" rows="4" required placeholder="How can we help?"
                     aria-label="Message"
                     class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white"></textarea>
+                <input type="hidden" name="_subject" value="New Contact Form Submission from Launcify Website">
+                <input type="hidden" name="form_type" value="contact_modal">
                 <div class="flex items-center justify-between">
                     <button id="cf-submit" type="submit" data-interactive-button><span>Contact me now</span></button>
                     <span id="cf-status" class="text-xs text-slate-400"></span>
@@ -842,8 +845,7 @@
                     navbar.style.background = 'transparent';
                     navbar.style.pointerEvents = 'auto';
                 }
-                if (mainTitle) { mainTitle.style.opacity = '0.2'; }
-                if (subTitle) { subTitle.style.opacity = '0'; }
+                // Keep hero text bright - no dimming
                 if (scrollIndicator) { scrollIndicator.style.opacity = '0'; }
             } catch (e) { console.warn('Disable-splash script error', e); }
         });
@@ -888,7 +890,6 @@
         // === Modal & Form Logic ===
         // Contact modal + Formspree integration
         (function () {
-            const FORM_ENDPOINT = 'https://formspree.io/f/mjgwlokv';
             const modal = document.getElementById('contact-modal');
             const backdrop = document.getElementById('contact-backdrop');
             const form = document.getElementById('contact-form');
@@ -942,27 +943,31 @@
                 ev.preventDefault();
                 status.textContent = '';
                 submitBtn.disabled = true;
-                submitBtn.textContent = 'Sending...';
+                submitBtn.querySelector('span').textContent = 'Sending...';
 
                 const fd = new FormData(form);
 
                 try {
-                    const res = await fetch(FORM_ENDPOINT, { method: 'POST', body: fd });
+                    const res = await fetch(form.action, {
+                        method: 'POST',
+                        body: fd,
+                        headers: { 'Accept': 'application/json' }
+                    });
                     if (res.ok) {
                         status.textContent = 'Message sent — thank you.';
-                        submitBtn.textContent = 'Sent';
-                        setTimeout(() => { closeModal(); submitBtn.disabled = false; submitBtn.textContent = 'Contact me now'; form.reset(); status.textContent = ''; }, 1200);
+                        submitBtn.querySelector('span').textContent = 'Sent';
+                        setTimeout(() => { closeModal(); submitBtn.disabled = false; submitBtn.querySelector('span').textContent = 'Contact me now'; form.reset(); status.textContent = ''; }, 1200);
                     } else {
                         const text = await res.text();
                         status.textContent = 'Error sending message.';
                         submitBtn.disabled = false;
-                        submitBtn.textContent = 'Contact me now';
+                        submitBtn.querySelector('span').textContent = 'Contact me now';
                         console.warn('Formspree failed', res.status, text);
                     }
                 } catch (err) {
                     status.textContent = 'Network error.';
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'Contact me now';
+                    submitBtn.querySelector('span').textContent = 'Contact me now';
                     console.error(err);
                 }
             });

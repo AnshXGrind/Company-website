@@ -104,26 +104,22 @@ body {
   font-weight: 900 !important;
   color: #ffffff !important;
   text-shadow:
-    0 0 10px rgba(255, 255, 255, 0.9),
-    0 0 20px rgba(255, 255, 255, 0.9),
-    0 0 40px rgba(255, 255, 255, 0.7),
-    0 0 80px rgba(255, 255, 255, 0.5) !important;
+    0 0 15px rgba(255, 255, 255, 1),
+    0 0 30px rgba(255, 255, 255, 1),
+    0 0 60px rgba(255, 255, 255, 0.9),
+    0 0 100px rgba(255, 255, 255, 0.7) !important;
   letter-spacing: -0.02em;
   mix-blend-mode: normal !important;
   opacity: 1 !important;
-  filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)) brightness(1.2);
 }
 
 .flip-word {
   color: #ffffff !important;
-  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  text-shadow:
+    0 0 25px rgba(255, 255, 255, 1),
+    0 0 50px rgba(255, 255, 255, 0.8);
   font-weight: 900 !important;
-}
-
-cursor: default;
-transition: transform .24s;
-background: var(--panel-bg);
-border: 1px solid var(--panel-border)
 }
 
 /* Premium Button Styles */
@@ -168,7 +164,9 @@ border: 1px solid var(--panel-border)
   100% {
     opacity: 1;
     color: #ffffff;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    text-shadow:
+      0 0 25px rgba(255, 255, 255, 1),
+      0 0 50px rgba(255, 255, 255, 0.9);
   }
 }
 
@@ -183,7 +181,7 @@ border: 1px solid var(--panel-border)
   /* Constant enforcement */
   color: #ffffff !important;
   mix-blend-mode: normal !important;
-  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)) !important;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8)) brightness(1.3) !important;
 }
 
 /* Ensure Map is behind */
