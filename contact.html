@@ -119,17 +119,17 @@
       <p class="text-center text-gray-400 mb-12 max-w-lg mx-auto">Ready to automate your workflow? Send us a message and
         let's verify your requirements.</p>
 
-      <form class="space-y-6 max-w-lg mx-auto">
+      <form class="space-y-6 max-w-lg mx-auto" action="https://formspree.io/f/meelqqge" method="POST">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label class="block text-sm font-medium text-gray-400 mb-2">First Name</label>
-            <input type="text"
+            <input type="text" name="first_name"
               class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
               placeholder="John">
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-400 mb-2">Last Name</label>
-            <input type="text"
+            <input type="text" name="last_name"
               class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
               placeholder="Doe">
           </div>
@@ -137,17 +137,19 @@
 
         <div>
           <label class="block text-sm font-medium text-gray-400 mb-2">Email Address</label>
-          <input type="email"
+          <input type="email" name="email" required
             class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
             placeholder="john@example.com">
         </div>
 
         <div>
           <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
-          <textarea rows="4"
+          <textarea rows="4" name="message" required
             class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
             placeholder="Tell us about your project..."></textarea>
         </div>
+
+        <input type="hidden" name="_subject" value="New contact form submission from Launcify website">
 
         <button type="submit"
           class="w-full bg-white text-black font-bold py-4 rounded-lg hover:bg-gray-200 transition-colors"
