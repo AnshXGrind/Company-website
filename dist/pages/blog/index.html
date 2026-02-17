@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Insights — Launcify</title>
+    <meta name="description" content="Insights on AI, Automation, and Web Development for forward-thinking businesses.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/interactive-button.css">
+</head>
+
+<body class="bg-black text-white font-inter">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 backdrop-blur-md bg-black/50 border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/" class="text-2xl font-orbitron font-bold tracking-tight">Launcify</a>
+            <div class="hidden md:flex gap-8">
+                <a href="/services"
+                    class="text-sm font-medium text-white hover:text-gray-300 transition-colors">Services</a>
+                <a href="/pages/case-studies/index.html"
+                    class="text-sm font-medium hover:text-gray-300 transition-colors">Work</a>
+                <a href="/pages/blog/index.html" class="text-sm font-medium text-white transition-colors">Blog</a>
+                <a href="/about" class="text-sm font-medium hover:text-gray-300 transition-colors">About</a>
+            </div>
+            <a href="/pages/schedule-contact.html"
+                class="bg-white text-black px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition-colors">Book
+                Call</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="pt-32 pb-16 px-6 text-center relative">
+        <h1 class="text-4xl md:text-6xl font-orbitron font-bold mb-6">Insights & <span
+                style="color: var(--tangerine);">Ideas</span></h1>
+        <p class="text-gray-400 text-lg max-w-2xl mx-auto">
+            Deep dives into artificial intelligence, workflow automation, and the future of work.
+        </p>
+    </header>
+
+    <!-- Filters -->
+    <section class="px-6 pb-12">
+        <div class="flex justify-center flex-wrap gap-4" id="filters">
+            <button
+                class="filter-btn active px-6 py-2 rounded-full border border-white/20 bg-white text-black font-medium transition-all"
+                data-filter="all">All</button>
+            <button
+                class="filter-btn px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all text-gray-400 hover:text-white"
+                data-filter="ai">AI</button>
+            <button
+                class="filter-btn px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all text-gray-400 hover:text-white"
+                data-filter="automation">Automation</button>
+            <button
+                class="filter-btn px-6 py-2 rounded-full border border-white/20 hover:bg-white/10 transition-all text-gray-400 hover:text-white"
+                data-filter="web">Web Dev</button>
+        </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="max-w-7xl mx-auto px-6 pb-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+        id="articles-grid">
+
+        <!-- Article 1 -->
+        <article
+            class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:-translate-y-2 transition-transform duration-300"
+            data-category="automation">
+            <div class="aspect-video bg-gray-800 relative overflow-hidden">
+                <img src="https://placehold.co/600x400/111/444?text=Automation+2025" alt="Automation Trends"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div
+                    class="absolute top-4 left-4 bg-purple-500/20 backdrop-blur-md border border-purple-500/30 text-purple-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    Automation</div>
+            </div>
+            <div class="p-6">
+                <div class="text-gray-500 text-xs mb-3">Feb 18, 2026 • 5 min read</div>
+                <h3 class="text-xl font-bold font-orbitron mb-3 group-hover:text-purple-400 transition-colors">5 Ways AI
+                    Can Automate Your Business in 2026</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Discover the top automation strategies that are
+                    saving companies thousands of hours this year.</p>
+                <a href="/pages/blog/automation-trends-2026.html"
+                    class="inline-block text-white font-bold text-sm border-b border-white/30 pb-0.5 hover:border-white transition-colors">Read
+                    Article →</a>
+            </div>
+        </article>
+
+        <!-- Article 2 -->
+        <article
+            class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:-translate-y-2 transition-transform duration-300"
+            data-category="web">
+            <div class="aspect-video bg-gray-800 relative overflow-hidden">
+                <img src="https://placehold.co/600x400/222/555?text=Web+Apps" alt="Web Apps vs Websites"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div
+                    class="absolute top-4 left-4 bg-blue-500/20 backdrop-blur-md border border-blue-500/30 text-blue-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    Web Dev</div>
+            </div>
+            <div class="p-6">
+                <div class="text-gray-500 text-xs mb-3">Feb 10, 2026 • 7 min read</div>
+                <h3 class="text-xl font-bold font-orbitron mb-3 group-hover:text-blue-400 transition-colors">Why Every
+                    Business Needs a Custom Web App</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Static websites are dead. Learn how interactive
+                    web applications drive user engagement and retention.</p>
+                <a href="/pages/blog/web-apps-vs-websites.html"
+                    class="inline-block text-white font-bold text-sm border-b border-white/30 pb-0.5 hover:border-white transition-colors">Read
+                    Article →</a>
+            </div>
+        </article>
+
+        <!-- Article 3 -->
+        <article
+            class="group relative rounded-2xl overflow-hidden border border-white/10 bg-white/5 hover:-translate-y-2 transition-transform duration-300"
+            data-category="ai">
+            <div class="aspect-video bg-gray-800 relative overflow-hidden">
+                <img src="https://placehold.co/600x400/333/666?text=AI+Integration" alt="AI Integration"
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                <div
+                    class="absolute top-4 left-4 bg-orange-500/20 backdrop-blur-md border border-orange-500/30 text-orange-300 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                    AI</div>
+            </div>
+            <div class="p-6">
+                <div class="text-gray-500 text-xs mb-3">Jan 28, 2026 • 4 min read</div>
+                <h3 class="text-xl font-bold font-orbitron mb-3 group-hover:text-orange-400 transition-colors">The
+                    Difference Between AI Tools and Integration</h3>
+                <p class="text-gray-400 text-sm mb-6 leading-relaxed">Why copy-pasting into ChatGPT isn't enough, and
+                    how API integration changes the game.</p>
+                <a href="/pages/blog/ai-integration-explained.html"
+                    class="inline-block text-white font-bold text-sm border-b border-white/30 pb-0.5 hover:border-white transition-colors">Read
+                    Article →</a>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
+        <p>© 2026 Launcify. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Filter Logic
+        const buttons = document.querySelectorAll('.filter-btn');
+        const articles = document.querySelectorAll('article');
+
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Style updates
+                buttons.forEach(b => {
+                    b.classList.remove('bg-white', 'text-black');
+                    b.classList.add('text-gray-400', 'hover:bg-white/10');
+                });
+                btn.classList.remove('text-gray-400', 'hover:bg-white/10');
+                btn.classList.add('bg-white', 'text-black');
+
+                const filter = btn.dataset.filter;
+
+                articles.forEach(art => {
+                    if (filter === 'all' || art.dataset.category === filter) {
+                        art.style.display = 'block';
+                    } else {
+                        art.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

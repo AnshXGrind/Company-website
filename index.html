@@ -57,19 +57,27 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="min-h-screen relative flex items-center justify-center px-6 overflow-hidden hero-section">
-        
-        <!-- Spline 3D Scene Background (Lazy Loaded) -->
-        <div id="spline-container" class="absolute inset-0 w-full h-full z-0 transition-opacity duration-1000 opacity-0"></div>
-        
-        <!-- Static Fallback Gradient (Visible immediately) -->
-        <div class="absolute inset-0 bg-gradient-to-br from-indigo-950 via-black to-purple-950 z-[-1]"></div>
+    <!-- ============================================================
+         HERO SECTION
+         z-index stack (lowest → highest):
+           -1  .hero-fallback-bg  — static gradient, renders with the HTML
+            0  #spline-container  — 3D scene, lazy-loaded, fades in via JS
+            1  .hero-vignette     — readability overlay, pointer-events:none
+           10  .hero-content      — headline + CTA, always visible immediately
+         ============================================================ -->
+    <section class="hero-section" aria-label="Hero">
 
-        <!-- Content Overlay Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/80 z-10 pointer-events-none"></div>
+        <!-- Immediate static gradient fallback (no JS, no network) -->
+        <div class="hero-fallback-bg" aria-hidden="true"></div>
 
-        <div class="relative z-20 text-center max-w-5xl mx-auto pt-20">
+        <!-- Spline 3D background — injected by spline-loader.js after DOMContentLoaded -->
+        <div id="spline-container" class="hero-spline" aria-hidden="true"></div>
+
+        <!-- Vignette for text readability -->
+        <div class="hero-vignette" aria-hidden="true"></div>
+
+        <!-- Hero content: renders immediately, no dependency on Spline -->
+        <div class="hero-content">
             <div
                 class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6 animate-fade-in-up">
                 <span class="w-2 h-2 rounded-full bg-green-500"></span>
@@ -99,8 +107,8 @@
                     See Our Work
                 </a>
             </div>
-        </div>
-    </section>
+        </div><!-- /.hero-content -->
+    </section><!-- /.hero-section -->
 
     <!-- Social Proof -->
     <section class="py-12 border-y border-white/5 bg-white/05 overflow-hidden">

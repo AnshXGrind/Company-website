@@ -10,16 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Splash Screen Logic
-  const splash = document.getElementById('splash-screen');
-  const enterBtn = document.getElementById('enter-site-btn');
-  if (enterBtn && splash) {
-      enterBtn.addEventListener('click', () => {
-          splash.classList.add('hidden');
-          // Optional: Trigger any entrance animations for the main site here
-      });
-  }
-
   // Contact modal wiring: elements with data-contact="open" open #contact-modal if present
   const modal = document.getElementById('contact-modal');
   const backdrop = document.getElementById('contact-backdrop');

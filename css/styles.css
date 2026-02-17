@@ -345,3 +345,100 @@ nav a {
 .delay-300 {
   animation-delay: 0.3s;
 }
+
+/* =============================================================
+   HERO SECTION — z-index layering
+   ============================================================= */
+.hero-section {
+  position: relative;
+  min-height: 100svh; /* svh = small viewport height, avoids mobile bar jump */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.5rem;
+  overflow: hidden;
+}
+
+/* Layer -1: static gradient — renders instantly with HTML, zero network cost */
+.hero-fallback-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 90% 70% at 60% 30%, rgba(88, 28, 135, 0.45) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 20% 80%, rgba(30, 58, 138, 0.35) 0%, transparent 55%),
+    #050508;
+  pointer-events: none;
+}
+
+/* Layer 0: Spline 3D canvas — invisible until .spline-loaded is added by JS */
+.hero-spline {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.4s ease;
+  pointer-events: none;
+}
+
+/* JS adds this class after scene emits 'load' */
+.hero-spline.spline-loaded {
+  opacity: 0.85;
+}
+
+/* Spline custom element fills its container */
+.hero-spline spline-viewer {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Layer 1: vignette — improves text contrast over any background */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(to bottom,
+      rgba(0,0,0,0.55) 0%,
+      transparent 28%,
+      transparent 65%,
+      rgba(0,0,0,0.75) 100%),
+    linear-gradient(to right,
+      rgba(0,0,0,0.25) 0%,
+      transparent 35%,
+      transparent 65%,
+      rgba(0,0,0,0.25) 100%);
+  pointer-events: none;
+}
+
+/* Layer 10: hero text — always on top, always visible */
+.hero-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding-top: 5rem; /* clear fixed nav */
+}
+
+/* Disable Spline on small screens (no IntersectionObserver check needed) */
+@media (max-width: 767px) {
+  .hero-spline {
+    display: none;
+  }
+}
+
+/* Disable Spline for users who request reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .hero-spline {
+    display: none;
+  }
+  .animate-fade-in-up {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

@@ -1,135 +1,94 @@
 /**
- * Optimized Spline 3D Scene Loader
- * - Lazy loads only when in viewport
- * - Respects reduced motion preferences
- * - Skips on mobile (<768px)
- * - Uses dynamic import for performance
+ * spline-loader.js
+ * Lazy-loads a Spline 3D scene as a hero background element.
+ *
+ * Guarantees:
+ *  - Zero render-blocking: deferred IIFE, runs after DOMContentLoaded
+ *  - IntersectionObserver: only loads when #spline-container enters viewport
+ *  - Skips entirely on mobile (<768px) and prefers-reduced-motion
+ *  - requestIdleCallback: yields to main thread before injecting the module script
+ *  - Smooth CSS fade-in via `.spline-loaded` class after scene is ready
+ *  - Cleans up observer on trigger to prevent memory leaks
  */
+(function () {
+  'use strict';
+  var CONTAINER_ID = 'spline-container';
+  var SCENE_URL    = 'https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode';
+  var VIEWER_SRC   = 'https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js';
 
-(function initSplineLoader() {
-  const CONTAINER_ID = 'spline-container';
-  const SCENE_URL = 'https://prod.spline.design/6Wq1Q7YGyM-iab9i/scene.splinecode'; // Replace with your scene URL
-  
-  // Configuration
-  const CONFIG = {
-    mobileBreakpoint: 768,
-    lazyLoadThreshold: 0.1, // Load when 10% visible
-  };
-
-  function shouldLoadSpline() {
-    // 1. Check reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      console.log('Spline: Skipped due to reduced motion preference');
-      return false;
-    }
-
-    // 2. Check screen width
-    if (window.innerWidth < CONFIG.mobileBreakpoint) {
-      console.log('Spline: Skipped on mobile');
-      return false;
-    }
-
-    return true;
+  /* ---- Guards ---- */
+  function shouldSkip() {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return true;
+    if (window.innerWidth < 768) return true;
+    return false;
   }
 
-  function loadSplineViewer() {
-    return new Promise((resolve, reject) => {
-      // Check if already loaded
-      if (document.querySelector('script[src*="spline-viewer"]')) {
-        resolve();
-        return;
-      }
+  /* ---- Build the <spline-viewer> element ---- */
+  function buildElement(container) {
+    if (container.querySelector('spline-viewer')) return;
 
-      const script = document.createElement('script');
-      script.type = 'module';
-      script.src = 'https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js';
-      script.defer = true;
-      script.onload = resolve;
-      script.onerror = reject;
-      document.body.appendChild(script);
-    });
-  }
+    var viewer = document.createElement('spline-viewer');
+    viewer.setAttribute('url', SCENE_URL);
+    viewer.setAttribute('loading-anim-type', 'none');
+    viewer.setAttribute('aria-hidden', 'true');
+    viewer.style.cssText = 'width:100%;height:100%;display:block;pointer-events:none;';
 
-  function injectSplineScene() {
-    const container = document.getElementById(CONTAINER_ID);
-    if (!container) return;
-
-    // Create the viewer element
-    // We use innerHTML to insert the custom element which might not be upgraded yet
-    // but the script tag will upgrade it once loaded.
-    const viewerHtml = `
-      <spline-viewer 
-        url="${SCENE_URL}"
-        loading-anim-type="spinner-small-light"
-        width="100%" 
-        height="100%"
-        class="spline-canvas">
-      </spline-viewer>
-    `;
-    
-    // Load script first, then inject HTML to ensure custom element is registered or ready
-    // We use a container that sits *above* the fallback but *below* the content
-    // The fallback is a separate element in HTML, so we don't need to overwrite it here.
-    // However, if we put the <spline-viewer> inside #spline-container, we should clear it if it had placeholder content.
-    
-    loadSplineViewer().then(() => {
-        container.innerHTML = viewerHtml;
-        // Fade in smoothly using Tailwind classes
-        container.classList.remove('opacity-0');
-        container.classList.add('opacity-100'); 
-        console.log('Spline: Scene injected');
-    }).catch(err => {
-      console.error('Spline: Failed to load viewer script', err);
-    });
-  }
-
-  function initObserver() {
-    const container = document.getElementById(CONTAINER_ID);
-    if (!container) return;
-
-    // cleanup existing observer if any
-    if (window.splineObserver) {
-      window.splineObserver.disconnect();
+    function reveal() {
+      container.classList.add('spline-loaded');
     }
+    viewer.addEventListener('load', reveal, { once: true });
+    var fallbackTimer = setTimeout(reveal, 5000);
+    viewer.addEventListener('load', function () { clearTimeout(fallbackTimer); }, { once: true });
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          // Element is in viewport (or close to it)
-          if (shouldLoadSpline()) {
-            // Defer slightly to prioritize main thread for other critical render tasks
-            // using requestIdleCallback if available, or setTimeout
-            if ('requestIdleCallback' in window) {
-              requestIdleCallback(() => injectSplineScene());
-            } else {
-              setTimeout(injectSplineScene, 200);
-            }
-          }
-          // Stop observing once triggered
-          observer.disconnect();
+    container.appendChild(viewer);
+  }
+
+  /* ---- Inject the viewer module script, then build element ---- */
+  function injectViewer(container) {
+    var existing = document.querySelector('script[data-spline-viewer]');
+    if (existing) {
+      buildElement(container);
+      return;
+    }
+    var script = document.createElement('script');
+    script.type = 'module';
+    script.src = VIEWER_SRC;
+    script.setAttribute('data-spline-viewer', '1');
+    script.onload = function () { buildElement(container); };
+    script.onerror = function () {
+      console.warn('[spline-loader] Viewer failed to load — fallback gradient shown.');
+    };
+    document.head.appendChild(script);
+  }
+
+  /* ---- Init: observe container, load only when visible ---- */
+  function init() {
+    var container = document.getElementById(CONTAINER_ID);
+    if (!container || shouldSkip()) return;
+
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        observer.disconnect();
+        if ('requestIdleCallback' in window) {
+          requestIdleCallback(function () { injectViewer(container); }, { timeout: 2000 });
+        } else {
+          setTimeout(function () { injectViewer(container); }, 150);
         }
       });
     }, {
-      rootMargin: '200px 0px', // Start loading slightly before it comes into view
-      threshold: CONFIG.lazyLoadThreshold
+      rootMargin: '0px 0px 200px 0px',
+      threshold: 0
     });
 
     observer.observe(container);
-    window.splineObserver = observer;
   }
 
-  // Clean up on page unload/visibility change if needed (optional optimization)
-  document.addEventListener('visibilitychange', () => {
-    if (document.visibilityState === 'hidden') {
-      // Pause resource usage if feasible (spline viewer might handle this internaly)
-    }
-  });
-
-  // Initialize on DOM Ready
+  /* ---- Entry point ---- */
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initObserver);
+    document.addEventListener('DOMContentLoaded', init, { once: true });
   } else {
-    initObserver();
+    init();
   }
 
 })();
