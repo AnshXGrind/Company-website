@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MetricFlow AI Case Study — Launcify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .metric-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 24px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--tangerine);
+            font-family: 'Orbitron', sans-serif;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            font-size: 0.875rem;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body class="bg-black text-white font-inter">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 backdrop-blur-md bg-black/50 border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/" class="text-2xl font-orbitron font-bold tracking-tight">Launcify</a>
+            <a href="/pages/case-studies/index.html"
+                class="text-sm font-medium hover:text-white text-gray-400 transition-colors">← Back to Work</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="pt-32 pb-20 px-6 max-w-5xl mx-auto text-center">
+        <div
+            class="inline-block px-3 py-1 mb-6 border border-white/10 rounded-full text-xs uppercase tracking-wider text-gray-400">
+            Logistics & Supply Chain</div>
+        <h1 class="text-4xl md:text-6xl font-orbitron font-bold mb-8">MetricFlow AI Automation</h1>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            How we helped a mid-size logistics firm save 30+ hours per week by automating their shipment tracking and
+            reporting systems.
+        </p>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-6 pb-24">
+
+        <!-- Hero Image -->
+        <div class="rounded-2xl overflow-hidden border border-white/10 mb-16">
+            <img src="https://placehold.co/1200x600/111/444?text=MetricFlow+Dashboard" alt="Project Hero"
+                class="w-full">
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-20">
+            <div class="metric-card">
+                <div class="metric-value">85%</div>
+                <div class="metric-label">Reduction in Reporting Time</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">0</div>
+                <div class="metric-label">Data Entry Errors</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">3.5x</div>
+                <div class="metric-label">ROI in First Month</div>
+            </div>
+        </div>
+
+        <div class="space-y-16 text-gray-300 leading-8">
+            <!-- Problem -->
+            <section>
+                <h2 class="text-2xl text-white font-orbitron font-bold mb-6">The Challenge</h2>
+                <p class="mb-4">
+                    The client was manually pulling data from three different carrier APis, aggregating it in Excel, and
+                    emailing PDF reports to customers. This process took their operations manager 4 hours every single
+                    day.
+                </p>
+                <p>
+                    They needed a solution that could run automatically, scale with their growth, and provide real-time
+                    visibility to their customers without manual intervention.
+                </p>
+            </section>
+
+            <!-- Solution -->
+            <section>
+                <h2 class="text-2xl text-white font-orbitron font-bold mb-6">The Solution</h2>
+                <p class="mb-6">
+                    We built a custom middleware using Python and deployed it on AWS Lambda. It automatically fetches
+                    data every 15 minutes, normalizes it, and syncs it to a custom dashboard we built with React.
+                </p>
+                <ul class="space-y-4 pl-4 border-l-2 border-white/10">
+                    <li><strong>Automated Ingestion:</strong> Python scripts connecting to FedEx, DHL, and UPS APIs.
+                    </li>
+                    <li><strong>Real-time Dashboard:</strong> A clean interface for clients to login and track
+                        shipments.</li>
+                    <li><strong>Smart Alerts:</strong> AI-powered categorization of delay reasons sending automated
+                        Slack notifications.</li>
+                </ul>
+            </section>
+
+            <!-- Testimonial -->
+            <section class="bg-white/5 p-8 rounded-xl border border-white/10 my-12">
+                <p class="text-xl italic text-white mb-6">"Launcify didn't just build a website, they fundamentally
+                    changed how we operate. The ROI was immediate."</p>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-gray-600 rounded-full"></div>
+                    <div>
+                        <div class="text-white font-bold text-sm">Sarah Jenkins</div>
+                        <div class="text-gray-500 text-xs">COO, FastTrack Logistics</div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- Bottom CTA -->
+    <section class="py-20 text-center border-t border-white/5">
+        <h2 class="text-3xl font-orbitron font-bold mb-8">Ready to automate your workflow?</h2>
+        <a href="/pages/schedule-contact.html"
+            class="inline-block bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition-colors">Book
+            a Discovery Call</a>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
+        <p>© 2026 Launcify. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

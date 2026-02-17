@@ -1,77 +1,62 @@
-// Flip Words Animation Component (Vanilla JS)
-// Animates through an array of words with smooth transitions
+/**
+ * FlipWords / Typewriter Effect
+ * Cycles through text strings with a typewriter effect.
+ */
 
-class FlipWords {
-  constructor(element, words, options = {}) {
-    this.element = element;
-    this.words = words;
-    this.currentIndex = 0;
-    this.options = {
-      interval: options.interval || 3000,
-      className: options.className || 'flip-word'
-    };
-    
-    this.init();
+class TxtRotate {
+  constructor(el, toRotate, period) {
+    this.toRotate = toRotate;
+    this.el = el;
+    this.loopNum = 0;
+    this.period = parseInt(period, 10) || 2000;
+    this.txt = '';
+    this.tick();
+    this.isDeleting = false;
   }
-  
-  init() {
-    this.element.style.position = 'relative';
-    this.element.style.display = 'inline-block';
-    this.element.style.minWidth = '150px';
-    this.element.style.textAlign = 'center';
-    
-    this.wordElement = document.createElement('span');
-    this.wordElement.className = this.options.className;
-    this.wordElement.textContent = this.words[0];
-    this.wordElement.style.cssText = `
-      display: inline-block;
-      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    `;
-    
-    this.element.appendChild(this.wordElement);
-    
-    // Add keyframes for flip animation
-    this.addKeyframes();
-    
-    // Start animation
-    setInterval(() => this.flip(), this.options.interval);
+
+  tick() {
+    var i = this.loopNum % this.toRotate.length;
+    var fullTxt = this.toRotate[i];
+
+    if (this.isDeleting) {
+      this.txt = fullTxt.substring(0, this.txt.length - 1);
+    } else {
+      this.txt = fullTxt.substring(0, this.txt.length + 1);
+    }
+
+    this.el.innerHTML = '<span class="wrap">' + this.txt + '</span>';
+
+    var that = this;
+    var delta = 300 - Math.random() * 100;
+
+    if (this.isDeleting) { delta /= 2; }
+
+    if (!this.isDeleting && this.txt === fullTxt) {
+      delta = this.period;
+      this.isDeleting = true;
+    } else if (this.isDeleting && this.txt === '') {
+      this.isDeleting = false;
+      this.loopNum++;
+      delta = 500;
+    }
+
+    setTimeout(function () {
+      that.tick();
+    }, delta);
   }
-  
-  flip() {
-    this.wordElement.style.transform = 'rotateX(90deg)';
-    this.wordElement.style.opacity = '0';
-    
-    setTimeout(() => {
-      this.currentIndex = (this.currentIndex + 1) % this.words.length;
-      this.wordElement.textContent = this.words[this.currentIndex];
-      this.wordElement.style.transform = 'rotateX(0deg)';
-      this.wordElement.style.opacity = '1';
-    }, 250);
-  }
-  
-  addKeyframes() {
-    if (!document.getElementById('flip-words-styles')) {
-      const style = document.createElement('style');
-      style.id = 'flip-words-styles';
-      style.textContent = `
-        .flip-word {
-          font-weight: 700;
-          color: var(--accent);
-        }
-      `;
-      document.head.appendChild(style);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  var elements = document.getElementsByClassName('txt-rotate');
+  for (var i = 0; i < elements.length; i++) {
+    var toRotate = elements[i].getAttribute('data-rotate');
+    var period = elements[i].getAttribute('data-period');
+    if (toRotate) {
+      new TxtRotate(elements[i], JSON.parse(toRotate), period);
     }
   }
-}
-
-// Auto-initialize
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('[data-flip-words]').forEach(el => {
-    const words = el.dataset.flipWords.split(',');
-    new FlipWords(el, words);
-  });
+  // Inject CSS
+  var css = document.createElement("style");
+  css.innerHTML = ".txt-rotate > .wrap { border-right: 0.08em solid #666 }";
+  document.body.appendChild(css);
 });
-
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = FlipWords;
-}

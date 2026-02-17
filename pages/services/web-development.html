@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development Services | Launcify</title>
+    <meta name="description"
+        content="High-performance modern websites and web applications built with React, Next.js, and Three.js.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/interactive-button.css">
+</head>
+
+<body class="bg-black text-white font-inter">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 backdrop-blur-md bg-black/50 border-b border-white/5">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/" class="text-2xl font-orbitron font-bold tracking-tight">Launcify</a>
+            <div class="hidden md:flex gap-8">
+                <a href="/services" class="text-sm font-medium text-white transition-colors">Services</a>
+                <a href="/pages/case-studies/index.html"
+                    class="text-sm font-medium hover:text-gray-300 transition-colors">Work</a>
+                <a href="/pages/pricing.html"
+                    class="text-sm font-medium hover:text-gray-300 transition-colors">Pricing</a>
+                <a href="/about" class="text-sm font-medium hover:text-gray-300 transition-colors">About</a>
+            </div>
+            <a href="/pages/schedule-contact.html"
+                class="bg-white text-black px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition-colors">Book
+                Call</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="pt-32 pb-20 px-6 max-w-5xl mx-auto text-center relative overflow-hidden">
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[100px] -z-10 animate-pulse">
+        </div>
+
+        <div
+            class="inline-block px-3 py-1 mb-6 border border-blue-500/30 bg-blue-500/10 rounded-full text-xs uppercase tracking-wider text-blue-400">
+            Web Development
+        </div>
+        <h1 class="text-5xl md:text-7xl font-orbitron font-bold mb-8">
+            Websites That <span class="text-blue-500">Perform</span>
+        </h1>
+        <p class="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed mb-10">
+            We build lightning-fast, SEO-optimized websites and complex web applications using modern frameworks like
+            React, Next.js, and Three.js.
+        </p>
+        <div class="flex gap-4 justify-center">
+            <a href="/pages/schedule-contact.html"
+                class="bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition-colors">
+                Start Web Project
+            </a>
+            <a href="#tech"
+                class="border border-white/20 px-8 py-4 rounded-full font-bold hover:bg-white/5 transition-colors">
+                Our Tech Stack
+            </a>
+        </div>
+    </header>
+
+    <!-- Features -->
+    <section class="py-24 px-6 bg-white/05 border-y border-white/5">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-2xl border border-white/10 bg-black/40 hover:border-blue-500/50 transition-colors">
+                <div class="text-blue-500 text-3xl mb-4">🚀</div>
+                <h3 class="text-xl font-bold mb-3">Hyperspeed Performance</h3>
+                <p class="text-gray-400 text-sm">Scoring 95+ on Google Lighthouse. Fast load times mean better SEO and
+                    higher conversion rates.</p>
+            </div>
+            <div class="p-8 rounded-2xl border border-white/10 bg-black/40 hover:border-blue-500/50 transition-colors">
+                <div class="text-blue-500 text-3xl mb-4">🎨</div>
+                <h3 class="text-xl font-bold mb-3">Immersive Design</h3>
+                <p class="text-gray-400 text-sm">3D elements, smooth animations, and premium aesthetics that stand out
+                    from the competition.</p>
+            </div>
+            <div class="p-8 rounded-2xl border border-white/10 bg-black/40 hover:border-blue-500/50 transition-colors">
+                <div class="text-blue-500 text-3xl mb-4">🔒</div>
+                <h3 class="text-xl font-bold mb-3">Secure & Scalable</h3>
+                <p class="text-gray-400 text-sm">Built on Vercel/AWS with enterprise-grade security and the ability to
+                    scale to millions of users.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section id="tech" class="py-24 px-6 text-center">
+        <h2 class="text-3xl font-orbitron font-bold mb-12">Built With Current <span class="text-blue-500">Tech</span>
+        </h2>
+        <div class="flex flex-wrap justify-center gap-4 md:gap-8 max-w-4xl mx-auto text-gray-400 font-mono text-sm">
+            <span class="border border-white/10 px-4 py-2 rounded-lg">React.js</span>
+            <span class="border border-white/10 px-4 py-2 rounded-lg">Next.js</span>
+            <span class="border border-white/10 px-4 py-2 rounded-lg">TypeScript</span>
+            <span class="border border-white/10 px-4 py-2 rounded-lg">Tailwind CSS</span>
+            <span class="border border-white/10 px-4 py-2 rounded-lg">Three.js</span>
+            <span class="border border-white/10 px-4 py-2 rounded-lg">Node.js</span>
+            <span class="border border-white/10 px-4 py-2 rounded-lg">Supabase</span>
+            <span class="border border-white/10 px-4 py-2 rounded-lg">Vercel</span>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20 text-center border-t border-white/5 bg-gradient-to-b from-black to-blue-900/10">
+        <div class="max-w-3xl mx-auto px-6">
+            <h2 class="text-3xl font-orbitron font-bold mb-6">Need a website that converts?</h2>
+            <p class="text-gray-400 mb-8">Web development packages start from $1,500.</p>
+            <a href="/pages/schedule-contact.html"
+                class="inline-block bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition-colors">Get
+                Started</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm bg-black">
+        <p>© 2026 Launcify. All rights reserved.</p>
+    </footer>
+
+</body>
+
+</html>

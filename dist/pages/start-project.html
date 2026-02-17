@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Start Your Project - Launcify</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #02040a;
+            color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        #world-map-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        .page-container {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .form-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            text-align: center;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .form-subtitle {
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        .project-types {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 32px;
+        }
+
+        .project-type-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .project-type-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .project-type-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .project-type-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #ffffff;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: rgba(168, 139, 250, 0.5);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-select {
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(168, 139, 250, 0.3);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .message {
+            margin-top: 16px;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .message.success {
+            background: rgba(34, 197, 94, 0.2);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+        }
+
+        .message.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 24px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #ffffff;
+        }
+
+        @media (max-width: 640px) {
+            .form-card {
+                padding: 32px 24px;
+            }
+
+            .form-title {
+                font-size: 28px;
+            }
+
+            .project-types {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="world-map-container"></div>
+
+    <div class="page-container">
+        <div class="form-card">
+            <a href="/" class="back-link">← Back to Projects</a>
+
+            <h1 class="form-title">Start Your Project</h1>
+            <p class="form-subtitle">Let's build something amazing together</p>
+
+            <div class="project-types">
+                <div class="project-type-card">
+                    <div class="project-type-icon">🌐</div>
+                    <div class="project-type-name">Website</div>
+                </div>
+                <div class="project-type-card">
+                    <div class="project-type-icon">⚡</div>
+                    <div class="project-type-name">Automation</div>
+                </div>
+                <div class="project-type-card">
+                    <div class="project-type-icon">🤖</div>
+                    <div class="project-type-name">AI System</div>
+                </div>
+                <div class="project-type-card">
+                    <div class="project-type-icon">🛠️</div>
+                    <div class="project-type-name">Custom Tool</div>
+                </div>
+            </div>
+
+            <form id="project-form" action="https://formspree.io/f/mjgwlokv" method="POST">
+                <div class="form-group">
+                    <label class="form-label" for="first_name">First Name *</label>
+                    <input type="text" id="first_name" name="first_name" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="last_name">Last Name *</label>
+                    <input type="text" id="last_name" name="last_name" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="company">Company *</label>
+                    <input type="text" id="company" name="company" class="form-input" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="project_type">Project Type *</label>
+                    <select id="project_type" name="project_type" class="form-select" required
+                        aria-label="Project type">
+                        <option value="">Select project type</option>
+                        <option value="website">Website Development</option>
+                        <option value="automation">Workflow Automation</option>
+                        <option value="ai">AI System</option>
+                        <option value="custom_tool">Custom Tool</option>
+                        <option value="multiple">Multiple Services</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="budget_range">Budget Range</label>
+                    <select id="budget_range" name="budget_range" class="form-select" aria-label="Budget range">
+                        <option value="">Select budget range</option>
+                        <option value="under-10k">Under $10,000</option>
+                        <option value="10k-25k">$10,000 - $25,000</option>
+                        <option value="25k-50k">$25,000 - $50,000</option>
+                        <option value="50k-100k">$50,000 - $100,000</option>
+                        <option value="100k+">$100,000+</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="timeline">Desired Timeline</label>
+                    <select id="timeline" name="timeline" class="form-select" aria-label="Project timeline">
+                        <option value="">Select timeline</option>
+                        <option value="asap">ASAP (Within 2 weeks)</option>
+                        <option value="1-month">1 Month</option>
+                        <option value="2-3-months">2-3 Months</option>
+                        <option value="3-6-months">3-6 Months</option>
+                        <option value="flexible">Flexible</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="project_description">Project Description *</label>
+                    <textarea id="project_description" name="project_description" class="form-textarea" required
+                        placeholder="Tell us about your project goals, requirements, and any specific features you need..."></textarea>
+                </div>
+
+                <input type="hidden" name="_subject" value="New Project Request from Launcify Website">
+                <input type="hidden" name="form_type" value="start_project">
+
+                <button type="submit" class="submit-btn" id="submit-btn">Start Project</button>
+
+                <div id="message" class="message" style="display: none;"></div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/world-map.js"></script>
+    <script>
+        const form = document.getElementById('project-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const messageDiv = document.getElementById('message');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+            messageDiv.style.display = 'none';
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    messageDiv.textContent = 'Thank you! We\'ll review your project and get back to you soon.';
+                    messageDiv.className = 'message success';
+                    messageDiv.style.display = 'block';
+                    form.reset();
+
+                    setTimeout(() => {
+                        window.location.href = '/thank-you.html';
+                    }, 2200);
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                messageDiv.textContent = 'Oops! Something went wrong. Please try again.';
+                messageDiv.className = 'message error';
+                messageDiv.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Start Project';
+            }
+        });
+    </script>
+</body>
+
+</html>

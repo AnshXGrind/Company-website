@@ -1,1064 +1,346 @@
+<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#000000">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="manifest" href="/manifest.json">
-    <link rel="apple-touch-icon" href="/assets/icon-192.png">
-    <title>Launcify | Agentic AI &amp; Workflows</title>
+    <title>Launcify | AI, Automation & Web Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/interactive-button.css">
-    <link rel="stylesheet" href="/css/auth-modal.css">
-    <link rel="stylesheet" href="/styles.css">
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
-    :root {
-    --bg: #000000;
-    --tangerine: #FF7F11;
-    --bubblegum: #FF77B5;
-    --lavender: #B497FF;
-    --buttercream: #FFF1B8;
-    --muted: #9CA3AF;
-    --panel-bg: rgba(255, 255, 255, 0.02);
-    --panel-border: rgba(255, 255, 255, 0.06);
-    --accent: var(--tangerine);
-    }
-
-    body {
-    background: var(--bg);
-    color: var(--text-main, #fff)
-    }
-
-    .glass-panel {
-    background: var(--panel-bg) !important;
-    border: 1px solid var(--panel-border) !important
-    }
-
-    .text-slate-400 {
-    color: var(--muted) !important
-    }
-
-    .text-slate-500 {
-    color: var(--muted) !important
-    }
-
-    .border-slate-800 {
-    border-color: rgba(255, 255, 255, 0.04) !important
-    }
-
-    .bg-white {
-    background: var(--buttercream) !important;
-    color: #000 !important
-    }
-
-    a:hover {
-    opacity: 0.9
-    }
-
-    .btn-accent {
-    background: linear-gradient(90deg, var(--tangerine), var(--bubblegum));
-    color: #000
-    }
-    </style>
-    <style>
-        /* Typography: Lucida Sans Stack */
-        :root {
-            --color-tangerine: #FF7A2D;
-            --color-bubblegum: #FF6FA3;
-            --color-lavender: #A78BFA;
-            --color-buttercream: #FFF5C3;
-            --text-dark: #0f172a;
-            --panel-bg: rgba(255, 255, 255, 0.76);
-            --panel-border: rgba(15, 23, 42, 0.06);
-            --overlay-bg: rgba(167, 139, 250, 0.06);
-            --control-bg: rgba(255, 255, 255, 0.06);
-        }
-
-        body {
-            font-family: 'Inter', system-ui, sans-serif;
-            background-color: var(--bg);
-            color: var(--text-main, #ffffff);
-        }
-
-        /* Custom Utilities - Dual Tone Tinting */
-        .glass-panel {
-            background: var(--panel-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--panel-border);
-        }
-
-        .glass-panel:hover {
-            border-color: rgba(15, 23, 42, 0.12);
-            background: rgba(255, 255, 255, 0.9);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-        }
-
-        .text-glow {
-            text-shadow: 0 0 28px var(--color-tangerine);
-        }
-
-        /* Hide scrollbar */
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        /* Animation Classes */
-        .reveal-up {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .reveal-up.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Mobile / Touch Optimizations */
-        :root {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        a,
-        button {
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0.06);
-        }
-
-        /* Performance hints for hero animations */
-        #main-title,
-        #sub-title,
-        #scroll-indicator,
-        #content-overlay {
-            will-change: transform, opacity, filter;
-        }
-
-        /* content overlay override to match palette */
-        #content-overlay {
-            background: linear-gradient(180deg, rgba(167, 139, 250, 0.08), rgba(255, 255, 255, 0.02));
-        }
-
-        /* Larger tap targets for touch devices */
-        @media (pointer: coarse) {
-
-            button,
-            a {
-                min-height: 44px;
-                min-width: 44px;
-                padding: 10px 12px;
-            }
-
-            .w-8.h-8 {
-                width: 44px;
-                height: 44px;
-            }
-        }
-
-        /* Respect users who prefer reduced motion */
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                transition: none !important;
-                animation: none !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        /* Respect OS color scheme; allow black/white-only modes */
-        @media (prefers-color-scheme: light) {
-            body {
-                background-color: #ffffff;
-                color: #000000;
-            }
-
-            .glass-panel {
-                background: rgba(255, 255, 255, 0.6);
-                border-color: rgba(0, 0, 0, 0.06);
-            }
-
-            .text-glow {
-                text-shadow: none;
-            }
-        }
-
-        /* Custom UI Elements - Dual Tone Specifics */
-        input[type=range] {
-            -webkit-appearance: none;
-            background: transparent;
-        }
-
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 16px;
-            width: 16px;
-            border-radius: 50%;
-            background: #fff;
-            /* White thumb */
-            margin-top: -6px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 4px;
-            background: #222;
-            border-radius: 2px;
-        }
-
-        .custom-checkbox input:checked+div {
-            background-color: #fff;
-            border-color: #fff;
-        }
-
-        /* White checked */
-        .custom-checkbox input:checked+div svg {
-            display: block;
-        }
-
-        /* iOS momentum scrolling for scrollable containers */
-        html,
-        body,
-        #content-overlay {
-            -webkit-overflow-scrolling: touch;
-        }
-
-        /* Make all tappable elements respond immediately and hint clickable */
-        a,
-        button,
-        [role="button"] {
-            touch-action: manipulation;
-            cursor: pointer;
-            -webkit-tap-highlight-color: rgba(255, 255, 255, 0.06);
-        }
-    </style>
-    <style>
-        :root {
-            --nav-height: 64px;
-        }
-
-        /* Slightly reduce heavy blur after splash to improve readability */
-        body.post-splash .glass-panel {
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-        }
-
-        /* Prevent in-page anchors from being hidden under navbar */
-        [id] {
-            scroll-margin-top: calc(var(--nav-height) + 12px);
-        }
-    </style>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-    <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.59/build/spline-viewer.js"></script>
-    <style id="palette-override">
-        :root {
-            /* Default to Light Theme for Main Content (Factory S) */
-            --bg: #b0becc;
-            --text-main: #0f172a;
-            --tangerine: #FF7A2D;
-            --bubblegum: #FF6FA3;
-            --lavender: #4f46e5;
-            /* Darker purple for light mode */
-            --buttercream: #FFF5C3;
-            --muted: #475569;
-            --panel-bg: rgba(255, 255, 255, 0.6);
-            --panel-border: rgba(255, 255, 255, 0.4);
-        }
-
-        body {
-            font-family: 'Orbitron', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-            background: var(--bg) !important;
-            color: var(--text-main) !important;
-            overflow-x: hidden;
-        }
-
-        /* Dark Theme Section Overrides */
-        .theme-dark {
-            --bg: #161616;
-            --text-main: #FFFFFF;
-            --muted: #9CA3AF;
-            --panel-bg: rgba(255, 255, 255, 0.05);
-            --panel-border: rgba(255, 255, 255, 0.1);
-            color: var(--text-main);
-            background-color: var(--bg);
-        }
-    </style>
-    <style>
-        #content-overlay,
-        #scroll-indicator {
-            display: none !important;
-        }
-
-        /* Splash Screen Styles */
-        #splash-screen {
-            position: fixed;
-            inset: 0;
-            z-index: 9999;
-            background: #0b0c10;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            transition: opacity 0.8s ease-in-out, visibility 0.8s;
-        }
-
-        #splash-screen.hidden {
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-        }
-
-        .splash-content {
-            position: absolute;
-            bottom: 10%;
-            z-index: 10;
-            text-align: center;
-        }
-
-        spline-viewer {
-            width: 100%;
-            height: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 
-<body class="antialiased relative selection:bg-blue-600 selection:text-white">
+<body class="bg-black text-white font-inter overflow-x-hidden">
 
-    <!-- SPLASH SCREEN (Landing Page 04) -->
-    <div id="splash-screen">
-        <spline-viewer
-            url="https://prod.spline.design/websitelandingpage04-NG6HB5Zj2Ob2McNmb531RfBc/scene.splinecode"></spline-viewer>
-        <div class="splash-content">
-            <button id="enter-site-btn" class="btn-premium"
-                style="background: white; color: black; border: none; padding: 16px 48px; font-size: 1.25rem;">
-                ENTER EXPERIENCE
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 backdrop-blur-md bg-black/50 border-b border-white/5 transition-all duration-300"
+        id="navbar">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="/" class="text-2xl font-orbitron font-bold tracking-tight">Launcify</a>
+
+            <!-- Desktop Nav -->
+            <div class="hidden md:flex gap-8 items-center">
+                <a href="/services" class="text-sm font-medium hover:text-gray-300 transition-colors">Services</a>
+                <a href="/pages/case-studies/index.html"
+                    class="text-sm font-medium hover:text-gray-300 transition-colors">Work</a>
+                <a href="/pages/pricing.html"
+                    class="text-sm font-medium hover:text-gray-300 transition-colors">Pricing</a>
+                <a href="/about" class="text-sm font-medium hover:text-gray-300 transition-colors">About</a>
+                <a href="/pages/schedule-contact.html"
+                    class="bg-white text-black px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition-colors">Book
+                    a Call</a>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button class="md:hidden text-white focus:outline-none" id="mobile-menu-btn">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                    </path>
+                </svg>
             </button>
         </div>
-    </div>
 
-    <!-- Fixed Gradient Background (Dual Tone: Black & Blue) -->
-    <!-- No colored background glows for pure black/white mode -->
-
-    <!-- Sticky Navigation (Appears on Scroll) -->
-    <nav id="navbar" class="fixed top-0 left-0 w-full z-50"
-        style="background:transparent;border:none;font-family:Orbitron,system-ui;">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" style="align-items:center">
-            <a href="/"
-                style="text-decoration:none;color:var(--text-main);font-weight:700;letter-spacing:0.02em;font-family:'Orbitron', sans-serif;">Launcify</a>
-
-            <div class="hidden md:flex gap-8 items-center" style="gap:24px;">
-                <a href="/services" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity"
-                    style="color:var(--text-main);text-decoration:none">Services</a>
-                <a href="/workflow" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity"
-                    style="color:var(--text-main);text-decoration:none">Workflow</a>
-                <a href="/projects" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity"
-                    style="color:var(--text-main);text-decoration:none">Projects</a>
-                <a href="/skills" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity"
-                    style="color:var(--text-main);text-decoration:none">Capabilities</a>
-                <a href="/about" class="text-sm uppercase tracking-widest hover:opacity-80 transition-opacity"
-                    style="color:var(--text-main);text-decoration:none">About</a>
-            </div>
-
-            <div class="flex items-center gap-3">
-                <button data-interactive-button data-contact="open"><span>Contact</span></button>
-                <button id="nav-toggle" class="md:hidden" aria-label="Open menu"
-                    style="background:transparent;border:0;color:var(--text-main);font-size:20px;line-height:1">☰</button>
-            </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden bg-black border-t border-white/10 absolute w-full left-0 top-full p-6 flex-col gap-4"
+            id="mobile-menu">
+            <a href="/services" class="text-lg font-medium">Services</a>
+            <a href="/pages/case-studies/index.html" class="text-lg font-medium">Work</a>
+            <a href="/pages/pricing.html" class="text-lg font-medium">Pricing</a>
+            <a href="/about" class="text-lg font-medium">About</a>
+            <a href="/pages/schedule-contact.html"
+                class="bg-white text-black px-5 py-3 rounded-lg font-bold text-center mt-2">Book a Call</a>
         </div>
     </nav>
 
-    <!-- Main Wrapper -->
-    <main class="relative z-10">
+    <!-- Hero Section -->
+    <section class="min-h-screen relative flex items-center justify-center px-6 overflow-hidden hero-section">
+        
+        <!-- Spline 3D Scene Background (Lazy Loaded) -->
+        <div id="spline-container" class="absolute inset-0 w-full h-full z-0 transition-opacity duration-1000 opacity-0"></div>
+        
+        <!-- Static Fallback Gradient (Visible immediately) -->
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-950 via-black to-purple-950 z-[-1]"></div>
 
-        <!-- Hero Section with Center Animation (Factory S - Light Theme) -->
-        <section class="h-screen w-full flex flex-col relative items-center justify-center overflow-hidden">
-            <!-- Spline Background: Factory S (Light) -->
-            <div style="position:absolute;inset:0;z-index:0;">
-                <spline-viewer
-                    url="https://prod.spline.design/3dpathsfactoryletterscopy-n7j7EwAUsuTHb2gQ5QAWCqiD/scene.splinecode"></spline-viewer>
+        <!-- Content Overlay Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/80 z-10 pointer-events-none"></div>
+
+        <div class="relative z-20 text-center max-w-5xl mx-auto pt-20">
+            <div
+                class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-6 animate-fade-in-up">
+                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                <span class="text-xs uppercase tracking-widest text-gray-300">Accepting New Projects</span>
             </div>
 
-            <!-- Dynamic Brand Name Container -->
-            <div class="relative z-50 pointer-events-auto" id="brand-container"
-                style="max-width:900px;width:90%;text-align:center; margin-top: -10vh;">
-                <h1 id="main-title"
-                    class="text-4xl md:text-7xl tracking-tight font-bold text-center transition-all duration-300"
-                    style="transform: scale(1); opacity: 1 !important; margin:0; line-height:1.1; font-family: 'Orbitron', sans-serif; color: #0f172a !important; text-shadow: none !important;">
-                    <span
-                        style="display:block;font-size:0.5em;font-weight:700;color:#334155 !important;margin-bottom:16px;letter-spacing:0.1em;text-transform:uppercase; text-shadow: none !important;">From
-                        idea to production systems</span>
-                    Build <span data-flip-words="modern,intelligent,scalable,powerful"
-                        style="color:#2563eb !important; opacity:1 !important; text-shadow: none !important;"></span><br />automation
-                    systems
-                </h1>
-                <p id="sub-title"
-                    class="text-base md:text-xl text-center tracking-normal transition-opacity duration-700 delay-200"
-                    style="opacity: 1 !important; margin:32px 0; line-height:1.6; color: #475569 !important; display:block !important; text-shadow: none;">
-                    We build AI agents, automated workflows, and high-performance websites that remove manual work and
-                    scale with your business.
-                </p>
-                <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:32px">
-                    <button data-interactive-button onclick="window.location.href='/book-automation-audit.html'"
-                        class="btn-premium" style="background:#0f172a; color: white;"><span>Book an Automation
-                            Audit →</span></button>
-                    <button data-interactive-button data-variant="glass" onclick="window.location.href='/workflow.html'"
-                        class="btn-premium btn-premium-glass"
-                        style="color:#0f172a; border-color: rgba(15,23,42,0.2);"><span>See How It Works</span></button>
-                </div>
-            </div>
+            <h1
+                class="text-5xl md:text-7xl lg:text-8xl font-orbitron font-bold mb-8 leading-tight animate-fade-in-up delay-100">
+                Using AI to<br>
+                <span class="txt-rotate text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-amber-200"
+                    data-period="2000" data-rotate='[ "Automate.", "Scale.", "Build.", "Innovate." ]'></span>
+            </h1>
 
-            <!-- Scroll Indicator (Dark for Light Theme) -->
-            <div id="scroll-indicator"
-                class="absolute bottom-12 flex flex-col items-center gap-2 opacity-75 animate-pulse">
-                <span class="text-[10px] tracking-widest uppercase text-slate-600">Scroll / Swipe</span>
-                <div class="w-[1px] h-8 bg-gradient-to-b from-transparent via-slate-800 to-transparent"></div>
-            </div>
-        </section>
+            <p
+                class="text-lg md:text-2xl text-gray-400 mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in-up delay-200">
+                We build custom AI, automation, and web solutions that help forward-thinking businesses grow faster and
+                work smarter.
+            </p>
 
-        <!-- Content Overlay (hidden initially; revealed on scroll) -->
-        <div id="content-overlay"
-            class="w-full bg-[#02040a] relative z-10 border-t border-slate-900/60 shadow-[0_-50px_100px_rgba(0,0,0,1)] rounded-t-[3rem] pb-24"
-            style="opacity:0; transform: translateY(100vh); pointer-events: none; transition: all 600ms ease;">
-
-            <div class="max-w-6xl mx-auto px-6 pt-24">
-
-                <!-- What You Do -->
-                <div class="mb-32 reveal-up" style="text-align:center;max-width:800px;margin:0 auto 80px">
-                    <h2 class="text-3xl md:text-4xl font-bold leading-tight tracking-tight text-white"
-                        style="margin:0 0 20px 0">
-                        We turn fragmented processes into systems that run themselves.
-                    </h2>
-                    <p class="text-slate-300 text-lg leading-relaxed" style="margin:20px 0 0 0">
-                        Most teams waste time moving data between tools, fixing human errors, and managing workflows
-                        that don't scale.
-                    </p>
-                    <p class="text-slate-300 text-lg leading-relaxed" style="margin:16px 0 0 0">
-                        We replace that with automated, observable systems that run quietly in the background.
-                    </p>
-                </div>
-
-                <!-- Bento Grid Services -->
-                <div id="services" class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-32">
-
-                    <!-- Card 1 - Web -->
-                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 group reveal-up hover:scale-[1.01] transition-transform duration-500"
-                        style="border-left: 2px solid rgba(20, 184, 166, 0.3);">
-                        <div class="flex justify-between items-start">
-                            <iconify-icon icon="solar:monitor-smartphone-linear" width="24" height="24"
-                                style="color: #14b8a6;" stroke-width="1.5"></iconify-icon>
-                            <span class="text-[10px] uppercase tracking-widest px-2 py-1 rounded-full transition-colors"
-                                style="color: #14b8a6; border: 1px solid rgba(20, 184, 166, 0.3);">Web</span>
-                        </div>
-                        <div class="">
-                            <h3 class="text-lg font-medium tracking-tight mb-2 group-hover:text-neutral-100 transition-colors"
-                                style="color: var(--text-main);">Modern Websites</h3>
-                            <p class="text-xs leading-relaxed" style="color: var(--muted);">
-                                Pixel-perfect, high-performance web interfaces designed for conversion and speed.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Card 2 - Automation -->
-                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 md:col-span-2 group reveal-up hover:scale-[1.01] transition-transform duration-500 relative overflow-hidden"
-                        style="border-left: 2px solid rgba(59, 130, 246, 0.3);">
-                        <div class="flex justify-between items-start relative z-10">
-                            <iconify-icon icon="solar:infinity-linear" width="24" height="24" style="color: #3b82f6;"
-                                stroke-width="1.5"></iconify-icon>
-                            <span class="text-[10px] uppercase tracking-widest px-2 py-1 rounded-full transition-colors"
-                                style="color: #3b82f6; border: 1px solid rgba(59, 130, 246, 0.3);">Auto</span>
-                        </div>
-                        <div class="relative z-10 flex gap-12 items-end">
-                            <div class="max-w-xs">
-                                <h3 class="text-lg font-medium tracking-tight mb-2 group-hover:text-neutral-100 transition-colors"
-                                    style="color: var(--text-main);">Workflow Automation</h3>
-                                <p class="text-xs leading-relaxed" style="color: var(--muted);">
-                                    End-to-end business logic automation. We connect your tools to work while you sleep.
-                                </p>
-                            </div>
-                            <!-- Mock UI for visual interest -->
-                            <div class="hidden md:flex gap-2">
-                                <div class="w-2 h-2 rounded-full animate-pulse" style="background: #3b82f6;"></div>
-                                <div class="w-16 h-2 bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full w-1/2" style="background: rgba(59, 130, 246, 0.5);"></div>
-                                </div>
-                                <div class="w-2 h-2 rounded-full bg-slate-800"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 3 - AI Agents -->
-                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 md:col-span-2 group reveal-up hover:scale-[1.01] transition-transform duration-500"
-                        style="border-left: 2px solid rgba(167, 139, 250, 0.3);">
-                        <div class="flex justify-between items-start">
-                            <iconify-icon icon="solar:users-group-two-rounded-linear" width="24" height="24"
-                                style="color: #a78bfa;" stroke-width="1.5"></iconify-icon>
-                            <span class="text-[10px] uppercase tracking-widest px-2 py-1 rounded-full transition-colors"
-                                style="color: #a78bfa; border: 1px solid rgba(167, 139, 250, 0.3);">AI Agents</span>
-                        </div>
-                        <div class="grid grid-cols-2 gap-8 items-end">
-                            <div>
-                                <h3 class="text-lg font-medium tracking-tight mb-2 group-hover:text-neutral-100 transition-colors"
-                                    style="color: var(--text-main);">Agentic AI</h3>
-                                <p class="text-xs leading-relaxed" style="color: var(--muted);">
-                                    Deploy autonomous agents to handle customer support, outreach, and data analysis.
-                                </p>
-                            </div>
-                            <!-- Interactive Element -->
-                            <div class="p-3 rounded-lg backdrop-blur-sm transition-colors"
-                                style="background: rgba(167, 139, 250, 0.05); border: 1px solid rgba(167, 139, 250, 0.2);">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <div class="w-2 h-2 rounded-full"
-                                        style="background: #a78bfa; box-shadow: 0 0 10px #a78bfa;"></div>
-                                    <span class="text-[10px]" style="color: #a78bfa;">Agent Status: Active</span>
-                                </div>
-                                <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
-                                    <div class="h-full w-2/3"
-                                        style="background: #a78bfa; box-shadow: 0 0 10px #a78bfa;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Card 4 - Tools -->
-                    <div class="glass-panel p-8 rounded-2xl flex flex-col justify-between h-64 group reveal-up hover:scale-[1.01] transition-transform duration-500"
-                        style="border-left: 2px solid rgba(251, 191, 36, 0.3);">
-                        <div class="flex justify-between items-start">
-                            <iconify-icon icon="solar:magic-stick-3-linear" width="24" height="24"
-                                style="color: #fbbf24;" stroke-width="1.5"></iconify-icon>
-                            <span class="text-[10px] uppercase tracking-widest px-2 py-1 rounded-full transition-colors"
-                                style="color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3);">Tools</span>
-                        </div>
-                        <div>
-                            <h3 class="text-lg font-medium tracking-tight mb-2 group-hover:text-neutral-100 transition-colors"
-                                style="color: var(--text-main);">Custom AI Tools</h3>
-                            <p class="text-xs leading-relaxed" style="color: var(--muted);">
-                                Bespoke AI wrappers and internal tools tailored to your specific operational needs.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Interactive Configurator Section -->
-                <div class="mb-32 reveal-up">
-                    <div class="border border-slate-800 bg-slate-900/20 rounded-xl overflow-hidden backdrop-blur-sm">
-                        <div
-                            class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-slate-800">
-                            <!-- Toggle -->
-                            <div class="p-8 flex flex-col gap-4">
-                                <span class="text-xs text-slate-500 uppercase tracking-widest">Efficiency Mode</span>
-                                <label class="flex items-center cursor-pointer group">
-                                    <div class="relative">
-                                        <input type="checkbox" class="sr-only peer" checked="">
-                                        <div
-                                            class="w-10 h-6 bg-slate-800 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-slate-400 after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600 peer-checked:after:bg-white peer-checked:shadow-[0_0_15px_rgba(59,130,246,0.5)]">
-                                        </div>
-                                    </div>
-                                    <span
-                                        class="ml-3 text-sm text-slate-300 group-hover:text-white transition-colors">AI
-                                        Optimization</span>
-                                </label>
-                            </div>
-                            <!-- Slider -->
-                            <div class="p-8 flex flex-col gap-4">
-                                <span class="text-xs text-slate-500 uppercase tracking-widest">Throughput</span>
-                                <input type="range" min="1" max="100" value="75" class="w-full">
-                                <div class="flex justify-between text-[10px] text-slate-500">
-                                    <span>Low</span>
-                                    <span>High</span>
-                                </div>
-                            </div>
-                            <!-- Custom Checkbox List -->
-                            <div class="p-8 flex flex-col gap-4">
-                                <span class="text-xs text-slate-500 uppercase tracking-widest">Integrations</span>
-                                <div class="space-y-2">
-                                    <label class="custom-checkbox flex items-center gap-3 cursor-pointer group">
-                                        <input type="checkbox" class="hidden" checked="">
-                                        <div
-                                            class="w-4 h-4 border border-slate-600 rounded flex items-center justify-center transition-colors group-hover:border-white">
-                                            <svg class="w-2.5 h-2.5 text-white hidden" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                    d="M5 13l4 4L19 7"></path>
-                                            </svg>
-                                        </div>
-                                        <span class="text-xs text-slate-400 group-hover:text-white">OpenAI API</span>
-                                    </label>
-                                    <label class="custom-checkbox flex items-center gap-3 cursor-pointer group">
-                                        <input type="checkbox" class="hidden">
-                                        <div
-                                            class="w-4 h-4 border border-slate-600 rounded flex items-center justify-center transition-colors group-hover:border-white">
-                                            <svg class="w-2.5 h-2.5 text-white hidden" fill="none" stroke="currentColor"
-                                                viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
-                                                    d="M5 13l4 4L19 7"></path>
-                                            </svg>
-                                        </div>
-                                        <span class="text-xs text-slate-400 group-hover:text-white">Stripe
-                                            Payments</span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer / Cool Contact Hub (Dark Theme - Connecting Card) -->
-                <footer class="theme-dark relative pt-24 reveal-up overflow-hidden"
-                    style="margin-top: -50px; padding-bottom: 24px;">
-                    <!-- Background Spline: Connecting Card -->
-                    <div style="position:absolute;inset:0;z-index:0; opacity: 0.6;">
-                        <spline-viewer
-                            url="https://prod.spline.design/connectingcard-lWP5o4LwjPvVlOx8y8NBigbJ/scene.splinecode"></spline-viewer>
-                    </div>
-
-                    <div class="relative z-10 max-w-6xl mx-auto px-6">
-
-                        <!-- Contact Glass Grid -->
-                        <div class="glass-panel rounded-3xl p-8 md:p-12 mb-12 relative overflow-hidden group border-slate-800"
-                            style="background: rgba(22, 22, 22, 0.6); backdrop-filter: blur(20px);">
-
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
-                                <!-- Left: Vision & Founders -->
-                                <div class="flex flex-col justify-between h-full gap-8">
-                                    <div>
-                                        <h2 class="text-3xl md:text-5xl tracking-tighter text-white font-medium mb-4">
-                                            Let's
-                                            build the future.</h2>
-                                        <p class="text-sm text-slate-400 max-w-sm leading-relaxed">
-                                            Ready to scale? Connect with us to architect your autonomous workflow today.
-                                        </p>
-                                    </div>
-
-                                    <!-- Founders Section -->
-                                    <div class="flex items-center gap-4 mt-4">
-                                        <div class="flex -space-x-3">
-                                            <div id="logo-S" data-image="https://assets.aceternity.com/manu-red.png"
-                                                role="button" tabindex="0"
-                                                class="w-10 h-10 rounded-full bg-slate-800 border-2 border-[#02040a] flex items-center justify-center text-xs text-white font-medium hover:bg-blue-600 transition-colors cursor-pointer">
-                                                S</div>
-                                            <div id="logo-Y"
-                                                data-image="https://pbs.twimg.com/media/Gyla7NnXMAAXSo_?format=jpg&name=large"
-                                                role="button" tabindex="0"
-                                                class="w-10 h-10 rounded-full bg-slate-700 border-2 border-[#02040a] flex items-center justify-center text-xs text-white font-medium hover:bg-blue-600 transition-colors cursor-pointer">
-                                                Y</div>
-                                        </div>
-                                        <div class="flex flex-col">
-                                            <span class="text-sm font-medium tracking-tight"
-                                                style="color: white">Saksham &amp; Yadyansh</span>
-                                            <span
-                                                class="text-[10px] text-slate-500 uppercase tracking-widest">Founders</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Right: Contact Actions -->
-                                <div class="grid grid-cols-2 gap-3">
-                                    <!-- Large Email Card -->
-                                    <a href="#" data-contact="open"
-                                        class="col-span-2 bg-slate-900/50 border border-slate-800 hover:border-white/50 hover:bg-white/10 rounded-xl p-6 flex flex-col justify-between group/card transition-all h-32">
-                                        <div class="flex justify-between items-start">
-                                            <iconify-icon icon="solar:letter-linear"
-                                                class="text-slate-500 group-hover/card:text-white transition-colors"
-                                                width="24" height="24"></iconify-icon>
-                                            <iconify-icon icon="solar:arrow-right-up-linear"
-                                                class="text-white opacity-0 group-hover/card:opacity-100 transform translate-y-2 group-hover/card:translate-y-0 duration-300"
-                                                width="20" height="20"></iconify-icon>
-                                        </div>
-                                        <span
-                                            class="text-lg font-medium tracking-tight group-hover/card:text-neutral-100 transition-colors"
-                                            style="color: white">grgsaksham25@gmail.com</span>
-                                    </a>
-
-                                    <!-- Call Card -->
-                                    <a href="/"
-                                        class="bg-slate-900/50 border border-slate-800 hover:bg-white hover:text-black hover:border-white rounded-xl p-6 flex flex-col justify-center items-center gap-2 group/call transition-all h-32">
-                                        <iconify-icon icon="solar:phone-calling-linear" width="28"
-                                            height="28"></iconify-icon>
-                                        <span class="text-xs font-medium text-white group-hover/call:text-black">Book a
-                                            Call</span>
-                                    </a>
-
-                                    <!-- Socials Card -->
-                                    <a href="#"
-                                        class="bg-slate-900/50 border border-slate-800 hover:border-white/50 hover:bg-white/5 rounded-xl p-6 flex flex-col justify-center items-center gap-2 group/social transition-all h-32">
-                                        <iconify-icon icon="solar:brands-linear" width="28" height="28"></iconify-icon>
-                                        <span
-                                            class="text-xs font-medium text-slate-400 group-hover/social:text-blue-400">Socials</span>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Bottom Copyright -->
-                        <div
-                            class="flex flex-col md:flex-row justify-between w-full text-[10px] text-slate-600 uppercase tracking-widest pb-12">
-                            <span class="">© from 2026</span>
-                            <div class="flex gap-6 mt-4 md:mt-0">
-                                <a href="#" class="hover:text-white transition-colors">Twitter</a>
-                                <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
-                                <a href="#" class="hover:text-white transition-colors">Legal</a>
-                            </div>
-                        </div>
-
-                    </div>
-                </footer>
-
+            <div class="flex flex-col md:flex-row gap-4 justify-center animate-fade-in-up delay-300">
+                <a href="/pages/schedule-contact.html"
+                    class="bg-white text-black px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-200 transition-transform hover:scale-105">
+                    Book a Discovery Call
+                </a>
+                <a href="/pages/case-studies/index.html"
+                    class="border border-white/20 bg-white/5 backdrop-blur-md text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white/10 transition-transform hover:scale-105">
+                    See Our Work
+                </a>
             </div>
         </div>
+    </section>
 
-    </main>
+    <!-- Social Proof -->
+    <section class="py-12 border-y border-white/5 bg-white/05 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <p class="text-gray-500 text-sm uppercase tracking-widest mb-8">Trusted by innovative teams</p>
+            <div
+                class="flex flex-wrap justify-center gap-8 md:gap-16 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Logos (Placeholders) -->
+                <div class="text-2xl font-bold font-orbitron">NEXUS</div>
+                <div class="text-2xl font-bold font-orbitron">VORTEX</div>
+                <div class="text-2xl font-bold font-orbitron">STRATA</div>
+                <div class="text-2xl font-bold font-orbitron">KINETIC</div>
+                <div class="text-2xl font-bold font-orbitron">ECHO</div>
+            </div>
+        </div>
+    </section>
 
-    <!-- Contact Modal (hidden) -->
-    <div id="contact-modal" class="fixed inset-0 z-60 hidden items-center justify-center px-4">
-        <div id="contact-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-        <form id="contact-form"
-            class="relative z-70 w-full max-w-xl bg-[#0b0b0d] border border-slate-800 rounded-2xl p-6 shadow-lg"
-            action="https://formspree.io/f/mjgwlokv" method="POST" aria-hidden="true">
-            <div class="flex justify-between items-start mb-4">
+    <!-- Services -->
+    <section class="py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-orbitron font-bold mb-16 text-center">Our <span
+                    class="text-orange-500">Expertise</span></h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div
+                    class="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all hover:-translate-y-2">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center text-3xl mb-8">
+                        🤖
+                    </div>
+                    <h3 class="text-2xl font-orbitron font-bold mb-4">AI Integration</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">Custom LLMs, chatbots, and intelligent agents
+                        integrated directly into your existing workflow.</p>
+                    <a href="/services" class="text-orange-400 font-bold group-hover:underline">Learn more →</a>
+                </div>
+
+                <!-- Service 2 -->
+                <div
+                    class="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all hover:-translate-y-2">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center text-3xl mb-8">
+                        🌐
+                    </div>
+                    <h3 class="text-2xl font-orbitron font-bold mb-4">Web Development</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">High-performance React/Next.js applications and
+                        mesmerizing 3D websites that convert.</p>
+                    <a href="/services" class="text-blue-400 font-bold group-hover:underline">Learn more →</a>
+                </div>
+
+                <!-- Service 3 -->
+                <div
+                    class="group p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/10 transition-all hover:-translate-y-2">
+                    <div
+                        class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-3xl mb-8">
+                        ⚡
+                    </div>
+                    <h3 class="text-2xl font-orbitron font-bold mb-4">Automation</h3>
+                    <p class="text-gray-400 mb-6 leading-relaxed">n8n and Zapier workflows to eliminate manual data
+                        entry and save your team hours every week.</p>
+                    <a href="/services" class="text-purple-400 font-bold group-hover:underline">Learn more →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="py-24 px-6 bg-white/05 border-t border-white/5">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl md:text-5xl font-orbitron font-bold mb-16 text-center">How We <span
+                    class="text-orange-500">Build</span></h2>
+
+            <div class="flex flex-col md:flex-row gap-8 justify-center items-start">
+                <!-- Step 1 -->
+                <div class="flex-1 text-center relative p-6">
+                    <div
+                        class="text-8xl font-orbitron font-bold text-white/5 absolute -top-4 left-1/2 -translate-x-1/2 select-none">
+                        01</div>
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-bold mb-4 text-orange-400">Strategy Call</h3>
+                        <p class="text-gray-400">We audit your current systems and identify high-impact areas for
+                            automation.</p>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="hidden md:block pt-8 text-white/20 text-4xl">→</div>
+
+                <!-- Step 2 -->
+                <div class="flex-1 text-center relative p-6">
+                    <div
+                        class="text-8xl font-orbitron font-bold text-white/5 absolute -top-4 left-1/2 -translate-x-1/2 select-none">
+                        02</div>
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-bold mb-4 text-blue-400">Build & Deploy</h3>
+                        <p class="text-gray-400">Our team builds your custom solution, keeping you updated every step of
+                            the way.</p>
+                    </div>
+                </div>
+
+                <!-- Arrow -->
+                <div class="hidden md:block pt-8 text-white/20 text-4xl">→</div>
+
+                <!-- Step 3 -->
+                <div class="flex-1 text-center relative p-6">
+                    <div
+                        class="text-8xl font-orbitron font-bold text-white/5 absolute -top-4 left-1/2 -translate-x-1/2 select-none">
+                        03</div>
+                    <div class="relative z-10">
+                        <h3 class="text-xl font-bold mb-4 text-purple-400">Scale & Support</h3>
+                        <p class="text-gray-400">We launch, train your team, and provide ongoing support to ensure
+                            success.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Preview -->
+    <section class="py-24 px-6 relative overflow-hidden">
+        <div class="absolute inset-0 bg-blue-900/5 -z-10"></div>
+        <div class="max-w-7xl mx-auto">
+            <div class="flex justify-between items-end mb-12">
                 <div>
-                    <h3 class="text-lg text-white font-medium">Contact Us</h3>
-                    <p class="text-xs text-slate-400">Send a short note — we'll reply within one business day.</p>
+                    <h2 class="text-3xl md:text-5xl font-orbitron font-bold mb-4">Featured <span
+                            class="text-orange-500">Work</span></h2>
+                    <p class="text-gray-400">See how we transform businesses.</p>
                 </div>
-                <button type="button" id="contact-close" aria-label="Close contact form"
-                    class="text-slate-400 hover:text-white">✕</button>
-            </div>
-            <div class="grid grid-cols-1 gap-3">
-                <input name="name" id="cf-name" required placeholder="Your name" aria-label="Your name"
-                    class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
-                <input name="email" id="cf-email" type="email" required placeholder="Email" aria-label="Email address"
-                    class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white" />
-                <textarea name="message" id="cf-message" rows="4" required placeholder="How can we help?"
-                    aria-label="Message"
-                    class="bg-[#02040a] border border-slate-800 rounded px-3 py-2 text-white"></textarea>
-                <input type="hidden" name="_subject" value="New Contact Form Submission from Launcify Website">
-                <input type="hidden" name="form_type" value="contact_modal">
-                <div class="flex items-center justify-between">
-                    <button id="cf-submit" type="submit" data-interactive-button><span>Contact me now</span></button>
-                    <span id="cf-status" class="text-xs text-slate-400"></span>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    <!-- Auth Modal (Signup/Login) -->
-    <div id="auth-modal" class="auth-modal">
-        <div class="auth-modal-content">
-            <button class="auth-modal-close" id="auth-close" aria-label="Close">×</button>
-
-            <h2>Welcome to Launcify</h2>
-            <p class="auth-modal-description">Create an account to get started with automated workflows and AI-powered
-                tools.</p>
-
-            <!-- Tabs -->
-            <div class="auth-tabs">
-                <button class="auth-tab active" data-tab="signup">Sign Up</button>
-                <button class="auth-tab" data-tab="login">Login</button>
+                <a href="/pages/case-studies/index.html"
+                    class="hidden md:inline-block border-b border-orange-500 text-orange-500 pb-1 hover:text-white hover:border-white transition-colors">View
+                    all projects</a>
             </div>
 
-            <!-- Signup Form -->
-            <form class="auth-form" id="signup-form">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label" for="firstname">First name</label>
-                        <input class="form-input" id="firstname" type="text" placeholder="Tyler" required>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Replace with actual case study cards from your index -->
+                <a href="/pages/case-studies/metric-flow.html"
+                    class="group block relative rounded-2xl overflow-hidden aspect-video border border-white/10">
+                    <img src="https://placehold.co/800x450/111/444?text=MetricFlow+AI" alt="Project 1"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                        <h3 class="text-2xl font-bold mb-2">MetricFlow AI</h3>
+                        <p class="text-gray-300 text-sm">Automated Logistics Reporting • 85% Efficiency Gain</p>
                     </div>
-                    <div class="form-group">
-                        <label class="form-label" for="lastname">Last name</label>
-                        <input class="form-input" id="lastname" type="text" placeholder="Durden" required>
+                </a>
+
+                <a href="#"
+                    class="group block relative rounded-2xl overflow-hidden aspect-video border border-white/10">
+                    <img src="https://placehold.co/800x450/222/555?text=NovaBank+Web" alt="Project 2"
+                        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-8 flex flex-col justify-end">
+                        <h3 class="text-2xl font-bold mb-2">NovaBank Interface</h3>
+                        <p class="text-gray-300 text-sm">Next.js Financial Platform • Modern UX Overhaul</p>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="signup-email">Email Address</label>
-                    <input class="form-input" id="signup-email" type="email" placeholder="you@company.com" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="signup-password">Password</label>
-                    <input class="form-input" id="signup-password" type="password" placeholder="••••••••" required>
-                </div>
+                </a>
+            </div>
 
-                <button class="auth-submit-btn" type="submit">
-                    Sign up →
-                </button>
-
-                <div class="auth-divider"></div>
-
-                <div class="social-buttons">
-                    <button class="social-btn" type="button" data-provider="github">
-                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                        </svg>
-                        <span>GitHub</span>
-                    </button>
-                    <button class="social-btn" type="button" data-provider="google">
-                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                                fill="#4285F4" />
-                            <path
-                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                                fill="#34A853" />
-                            <path
-                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                                fill="#FBBC05" />
-                            <path
-                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                                fill="#EA4335" />
-                        </svg>
-                        <span>Google</span>
-                    </button>
-                </div>
-            </form>
-
-            <!-- Login Form (hidden by default) -->
-            <form class="auth-form" id="login-form" style="display:none">
-                <div class="form-group">
-                    <label class="form-label" for="login-email">Email Address</label>
-                    <input class="form-input" id="login-email" type="email" placeholder="you@company.com" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label" for="login-password">Password</label>
-                    <input class="form-input" id="login-password" type="password" placeholder="••••••••" required>
-                </div>
-
-                <button class="auth-submit-btn" type="submit">
-                    Login →
-                </button>
-
-                <div class="auth-divider"></div>
-
-                <div class="social-buttons">
-                    <button class="social-btn" type="button" data-provider="github">
-                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                        </svg>
-                        <span>GitHub</span>
-                    </button>
-                    <button class="social-btn" type="button" data-provider="google">
-                        <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor">
-                            <path
-                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                                fill="#4285F4" />
-                            <path
-                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                                fill="#34A853" />
-                            <path
-                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                                fill="#FBBC05" />
-                            <path
-                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                                fill="#EA4335" />
-                        </svg>
-                        <span>Google</span>
-                    </button>
-                </div>
-            </form>
+            <a href="/pages/case-studies/index.html"
+                class="md:hidden mt-8 block text-center border-b border-orange-500 text-orange-500 pb-1 hover:text-white transition-colors">View
+                all projects</a>
         </div>
-    </div>
+    </section>
 
+    <!-- CTA Section -->
+    <section class="py-32 px-6 text-center relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-600/20 rounded-full blur-[100px] animate-pulse">
+            </div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto">
+            <h2 class="text-4xl md:text-6xl font-orbitron font-bold mb-8">Ready to Build the Future?</h2>
+            <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">Stop wasting time on manual tasks. Start automating
+                your growth today.</p>
+            <a href="/pages/schedule-contact.html"
+                class="inline-block bg-white text-black px-10 py-5 rounded-full font-bold text-xl hover:bg-gray-200 transition-transform hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.3)]">
+                Start Your Project
+            </a>
+            <p class="mt-6 text-sm text-gray-500">No commitment required. Free 15-min strategy call.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-white/5 bg-black">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+            <div class="col-span-1 md:col-span-2">
+                <a href="/" class="text-2xl font-orbitron font-bold tracking-tight mb-4 block">Launcify</a>
+                <p class="text-gray-400 max-w-sm">Building the next generation of digital experiences through AI,
+                    automation, and design.</p>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4 uppercase tracking-wider text-sm">Services</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="/services" class="hover:text-white">AI Integration</a></li>
+                    <li><a href="/services" class="hover:text-white">Web Development</a></li>
+                    <li><a href="/services" class="hover:text-white">Workflow Automation</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-bold mb-4 uppercase tracking-wider text-sm">Company</h4>
+                <ul class="space-y-2 text-gray-400 text-sm">
+                    <li><a href="/about" class="hover:text-white">About Us</a></li>
+                    <li><a href="/pages/case-studies/index.html" class="hover:text-white">Case Studies</a></li>
+                    <li><a href="/pages/pricing.html" class="hover:text-white">Pricing</a></li>
+                    <li><a href="/pages/schedule-contact.html" class="hover:text-white">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-gray-600 text-xs border-t border-white/5 pt-8">
+            <p>© 2026 Launcify. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script defer src="/js/spline-loader.js"></script>
+    <script src="/js/flip-words.js"></script>
     <script>
-        // === Splash / App-Unlock Logic ===
-        // Responsible for: splash state, unlocking app, safety failsafes
-        // Init Subtitle Animation
-        document.addEventListener('DOMContentLoaded', () => {
-            const st = document.getElementById('sub-title');
-            if (st) st.style.opacity = '1';
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
         });
 
-        // Intersection Observer for Scroll Reveals
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal-up').forEach((el) => observer.observe(el));
-
-        // Splash/hero animations disabled by user request — reveal content immediately
-        document.addEventListener('DOMContentLoaded', () => {
-            try {
-                // Ensure body is scrollable
-                document.body.style.position = '';
-                document.body.style.overflowY = 'auto';
-
-                const contentOverlay = document.getElementById('content-overlay');
-                const navbar = document.getElementById('navbar');
-                const mainTitle = document.getElementById('main-title');
-                const subTitle = document.getElementById('sub-title');
-                const scrollIndicator = document.getElementById('scroll-indicator');
-
-                if (contentOverlay) {
-                    contentOverlay.style.transition = 'none';
-                    contentOverlay.style.transform = 'translateY(0)';
-                    contentOverlay.style.opacity = '1';
-                    contentOverlay.style.pointerEvents = 'auto';
-                }
-                if (navbar) {
-                    navbar.classList.remove('-translate-y-full', 'opacity-0');
-                    navbar.classList.add('translate-y-0', 'opacity-100');
-                    navbar.style.background = 'transparent';
-                    navbar.style.pointerEvents = 'auto';
-                }
-                // Keep hero text bright - no dimming
-                if (scrollIndicator) { scrollIndicator.style.opacity = '0'; }
-            } catch (e) { console.warn('Disable-splash script error', e); }
+        // Sticky Nav Blur Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-black/80', 'py-3');
+                nav.classList.remove('py-4', 'bg-black/50');
+            } else {
+                nav.classList.remove('bg-black/80', 'py-3');
+                nav.classList.add('py-4', 'bg-black/50');
+            }
         });
     </script>
-
-    <script>
-        // === Scroll & Navigation Behavior ===
-        // Anchor link handler: account for navbar height and ensure smooth scroll
-        (function () {
-            function getNavOffset() {
-                const nav = document.getElementById('navbar');
-                if (!nav) return 64;
-                return Math.round(nav.getBoundingClientRect().height) || 64;
-            }
-
-            // set css var for nav height on load/resize
-            function updateNavVar() {
-                try { document.documentElement.style.setProperty('--nav-height', getNavOffset() + 'px'); } catch (e) { }
-            }
-            window.addEventListener('load', updateNavVar);
-            window.addEventListener('resize', updateNavVar);
-            updateNavVar();
-
-            // intercept hash anchor clicks
-            document.addEventListener('click', (e) => {
-                const a = e.target.closest && e.target.closest('a[href^="#"]');
-                if (!a) return;
-                const href = a.getAttribute('href');
-                if (!href || href === '#') return;
-                const id = href.slice(1);
-                const target = document.getElementById(id);
-                if (!target) return;
-                e.preventDefault();
-                const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || getNavOffset();
-                const top = target.getBoundingClientRect().top + window.scrollY - navH - 8;
-                window.scrollTo({ top, behavior: 'smooth' });
-            }, { passive: false });
-        })();
-    </script>
-
-    <script>
-        // === Modal & Form Logic ===
-        // Contact modal + Formspree integration
-        (function () {
-            const modal = document.getElementById('contact-modal');
-            const backdrop = document.getElementById('contact-backdrop');
-            const form = document.getElementById('contact-form');
-            const submitBtn = document.getElementById('cf-submit');
-            const status = document.getElementById('cf-status');
-            const closeBtn = document.getElementById('contact-close');
-
-            function openModal(e) {
-                if (!modal) return;
-                // guard: already open
-                if (modal.classList.contains('flex')) return;
-                if (e) {
-                    try { e.preventDefault(); } catch (err) { }
-                }
-                modal.classList.remove('hidden');
-                modal.classList.add('flex');
-                form.setAttribute('aria-hidden', 'false');
-                // focus first input
-                const name = document.getElementById('cf-name');
-                if (name) name.focus();
-            }
-            function closeModal() {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                form.setAttribute('aria-hidden', 'true');
-            }
-
-            // attach to elements with data-contact
-            document.querySelectorAll('[data-contact="open"]').forEach(el => {
-                // Prefer pointerup for faster, unified tap handling (avoids 300ms/ghost click issues)
-                el.addEventListener('pointerup', (ev) => {
-                    // only primary pointers
-                    if (ev.isPrimary === false) return;
-                    // stop anchors from navigating (href="#") and suppress synthetic clicks
-                    try { ev.preventDefault(); } catch (err) { }
-                    openModal(ev);
-                });
-                // Fallback: ensure clicks still open on older platforms
-                el.addEventListener('click', (ev) => {
-                    try { ev.preventDefault(); } catch (err) { }
-                    openModal(ev);
-                });
-            });
-
-            backdrop && backdrop.addEventListener('click', closeModal);
-            closeBtn && closeBtn.addEventListener('click', closeModal);
-            // Allow closing the modal with Escape key
-            window.addEventListener('keydown', (e) => { if (e.key === 'Escape') { if (modal && modal.classList.contains('flex')) closeModal(); } }, { passive: true });
-
-            form.addEventListener('submit', async (ev) => {
-                ev.preventDefault();
-                status.textContent = '';
-                submitBtn.disabled = true;
-                submitBtn.querySelector('span').textContent = 'Sending...';
-
-                const fd = new FormData(form);
-
-                try {
-                    const res = await fetch(form.action, {
-                        method: 'POST',
-                        body: fd,
-                        headers: { 'Accept': 'application/json' }
-                    });
-                    if (res.ok) {
-                        status.textContent = 'Message sent — thank you.';
-                        submitBtn.querySelector('span').textContent = 'Sent';
-                        setTimeout(() => { closeModal(); submitBtn.disabled = false; submitBtn.querySelector('span').textContent = 'Contact me now'; form.reset(); status.textContent = ''; }, 1200);
-                    } else {
-                        const text = await res.text();
-                        status.textContent = 'Error sending message.';
-                        submitBtn.disabled = false;
-                        submitBtn.querySelector('span').textContent = 'Contact me now';
-                        console.warn('Formspree failed', res.status, text);
-                    }
-                } catch (err) {
-                    status.textContent = 'Network error.';
-                    submitBtn.disabled = false;
-                    submitBtn.querySelector('span').textContent = 'Contact me now';
-                    console.error(err);
-                }
-            });
-        })();
-    </script>
-
-    <!-- Optional: register a service worker if provided to enable offline/fast loads on supported platforms -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').catch(() => {/* sw optional */ });
-            });
-        }
-    </script>
-
-    <!-- removed webcam + pixel modal scripts per user request -->
-
-    <script src="/js/world-map.js" defer></script>
-    <script src="/js/flip-words.js" defer></script>
-    <script src="/js/border-beam.js"></script>
-    <script src="/js/theme-toggler.js"></script>
-    <script src="/js/auth-modal.js"></script>
-
-    <!-- dev overlay removed for production -->
-
 </body>
 
 </html>
