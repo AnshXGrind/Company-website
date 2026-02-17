@@ -1,0 +1,20 @@
+/* Hyperspeed background canvas styles */
+#lights {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* make canvas cover container */
+#lights canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* keep existing small helper rules from original component */
+canvas { width: 100%; height: 100%; }

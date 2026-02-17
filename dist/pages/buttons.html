@@ -9,9 +9,9 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/interactive-button.css">
-  <link rel="stylesheet" href="/auth-modal.css">
+  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/interactive-button.css">
+  <link rel="stylesheet" href="/css/auth-modal.css">
   <style>
     body {
       padding-top: 70px;
@@ -132,11 +132,11 @@
     <div class="nav-container">
       <a href="/" class="nav-brand">Launcify</a>
       <div class="nav-links" id="nav-links">
-        <a href="/services.html">Services</a>
-        <a href="/workflow.html">Workflow</a>
-        <a href="/projects.html">Projects</a>
-        <a href="/skills.html">Capabilities</a>
-        <a href="/about.html">About</a>
+        <a href="/pages/services.html">Services</a>
+        <a href="/pages/workflow.html">Workflow</a>
+        <a href="/pages/projects.html">Projects</a>
+        <a href="/pages/skills.html">Capabilities</a>
+        <a href="/pages/about.html">About</a>
       </div>
       <button data-interactive-button data-contact="open"><span>Contact</span></button>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
@@ -262,9 +262,9 @@
     </div>
   </main>
 
-  <script src="/border-beam.js"></script>
-  <script src="/theme-toggler.js"></script>
-  <script src="/scripts.js"></script>
+  <script src="/js/border-beam.js"></script>
+  <script src="/js/theme-toggler.js"></script>
+  <script src="/js/scripts.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }) }, { threshold: 0.08 });

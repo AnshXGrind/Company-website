@@ -9,7 +9,7 @@
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
     rel="stylesheet">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/css/themed-button.css">
   <link rel="stylesheet" href="/css/interactive-button.css">
   <style>
@@ -188,11 +188,11 @@
     <div class="nav-container">
       <a href="/" class="nav-brand" style="font-family:'Orbitron', sans-serif;">Launcify</a>
       <div class="nav-links" id="nav-links">
-        <a href="/pages/services.html">Services</a>
-        <a href="/pages/workflow.html">Workflow</a>
-        <a href="/pages/projects.html">Projects</a>
-        <a href="/pages/skills.html">Capabilities</a>
-        <a href="/pages/about.html">About</a>
+        <a href="/">Services</a>
+        <a href="/">Workflow</a>
+        <a href="/">Projects</a>
+        <a href="/">Capabilities</a>
+        <a href="/">About</a>
       </div>
       <button data-interactive-button data-contact="open"><span>Contact</span></button>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
@@ -309,14 +309,37 @@
       <h2 style="font-size:32px;margin:0 0 16px 0;font-weight:600">Ready to automate your operations?</h2>
       <p style="color:var(--muted);margin:0 0 24px 0;font-size:16px">Let's discuss how we can build similar systems for
         your business.</p>
-      <button data-interactive-button data-contact="open"><span>Start Your Project →</span></button>
+      <button data-interactive-button onclick="window.location.href='/start-project.html'"><span>Start Your Project
+          →</span></button>
     </div>
   </main>
 
+  <style>
+    @keyframes gradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+
   <script src="/js/world-map.js"></script>
-  <script src="/js/interactive-button.js"></script>
+  <script src="/js/border-beam.js"></script>
   <script src="/js/theme-toggler.js"></script>
   <script src="/js/scripts.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }) }, { threshold: 0.08 });
+      document.querySelectorAll('.reveal-up').forEach(el => obs.observe(el));
+    });
+  </script>
 </body>
 
 </html>

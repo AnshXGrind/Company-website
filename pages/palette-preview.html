@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Palette Preview — Launcify</title>
+  <style>
+    :root{
+      --bg: #000000;
+      --text-main: #ffffff;
+      --tangerine: #FF7A2D;
+      --bubblegum: #FF6FA3;
+      --lavender: #A78BFA;
+      --buttercream: #FFF5C3;
+      --muted: #9CA3AF;
+    }
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial}
+    body{background:var(--bg);color:var(--text-main);display:flex;align-items:center;justify-content:center;padding:32px}
+    .preview{width:980px;max-width:96%;display:grid;grid-template-columns:320px 1fr;gap:24px}
+
+    .card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);padding:18px;border-radius:12px}
+    .swatches{display:flex;flex-wrap:wrap;gap:8px}
+    .sw{width:120px;height:64px;border-radius:8px;display:flex;align-items:flex-end;justify-content:center;padding:8px;color:#000;font-weight:600}
+    .label{font-size:12px;color:var(--muted);margin-top:8px;text-align:center}
+
+    .sw--t { background: linear-gradient(90deg,var(--tangerine),#ff8e4b); color:#000}
+    .sw--b { background: linear-gradient(90deg,var(--bubblegum),#ff90b7); color:#000}
+    .sw--l { background: linear-gradient(90deg,var(--lavender),#bda8ff); color:#000}
+    .sw--c { background: var(--buttercream); color:#000}
+    .sw--mut { background: var(--muted); color:#fff }
+
+    /* Right column examples */
+    .right {display:flex;flex-direction:column;gap:14px}
+    header{display:flex;align-items:center;justify-content:space-between}
+    h1{margin:0;font-size:22px}
+    p{margin:0;color:var(--muted)}
+
+    .btn{display:inline-block;padding:10px 16px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--tangerine),var(--bubblegum));color:#000}
+    .btn-outline{background:transparent;border:1px solid rgba(255,255,255,0.08);color:var(--text-main)}
+
+    .panel{background:var(--buttercream);color:#000;padding:12px;border-radius:10px;border:1px solid rgba(0,0,0,0.06)}
+    .nav{display:flex;gap:14px}
+    .nav a{color:var(--text-main);text-decoration:none;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="preview">
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <strong>Launcify Palette</strong>
+        <span style="font-size:12px;color:var(--muted)">Black base preview</span>
+      </div>
+
+      <div style="margin-top:12px" class="swatches">
+        <div>
+          <div class="sw sw--t">Tangerine</div>
+          <div class="label">#FF7A2D</div>
+        </div>
+        <div>
+          <div class="sw sw--b">Bubblegum</div>
+          <div class="label">#FF6FA3</div>
+        </div>
+        <div>
+          <div class="sw sw--l">Lavender</div>
+          <div class="label">#A78BFA</div>
+        </div>
+        <div>
+          <div class="sw sw--c">Buttercream</div>
+          <div class="label">#FFF5C3</div>
+        </div>
+        <div>
+          <div class="sw sw--mut">Muted</div>
+          <div class="label">#9CA3AF</div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px">
+        <div style="display:flex;gap:8px">
+          <button class="btn btn-primary">Primary CTA</button>
+          <button class="btn btn-outline">Secondary</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="card">
+        <header>
+          <h1>Example Header</h1>
+          <nav class="nav">
+            <a href="#">Services</a>
+            <a href="#">Workflow</a>
+            <a href="#">Skills</a>
+          </nav>
+        </header>
+        <div style="margin-top:12px">
+          <p>Sample paragraph demonstrating body text over the black background using <strong>--text-main</strong>.</p>
+        </div>
+      </div>
+
+      <div class="card panel">
+        <strong>Light panel (buttercream)</strong>
+        <div style="margin-top:8px;color:#333">This panel uses the buttercream surface color for card-like UI in light contexts.</div>
+      </div>
+
+      <div class="card">
+        <strong>Usage notes</strong>
+        <ul style="margin:8px 0 0 18px;color:var(--muted)">
+          <li>Use <code>--tangerine</code> for primary CTAs and highlights.</li>
+          <li>Use <code>--bubblegum</code> for playful accents and gradients.</li>
+          <li>Use <code>--lavender</code> for overlays and subtle glows.</li>
+          <li>Reserve <code>--buttercream</code> for light surfaces only (kept sparingly on black base).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
