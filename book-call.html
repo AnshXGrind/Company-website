@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book a Strategy Call with Launcify">
+    <title>Contact | Launcify</title>
+    
+    <!-- Design System -->
+    <link rel="stylesheet" href="/css/design-system.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all var(--transition);
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.2);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <a href="/" class="logo">LAUNCIFY</a>
+            <div class="nav-menu">
+                <a href="/pages/services.html" class="nav-link">Services</a>
+                <a href="/pages/pricing.html" class="nav-link">Pricing</a>
+                <a href="/pages/about.html" class="nav-link">About</a>
+                <a href="/book-call.html" class="btn btn-primary nav-cta">Book a Free Strategy Call</a>
+            </div>
+            <button class="nav-toggle" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="section text-center" style="padding-top: 160px;">
+        <div class="container">
+            <h1 class="text-h2 mb-4">Let's Talk Efficiency<span class="text-primary">.</span></h1>
+            <p class="text-body mx-auto" style="max-width: 600px;">
+                Ready to transform your business with automation? Let us know the best way to reach you.
+            </p>
+        </div>
+    </header>
+
+    <!-- Form Section -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container" style="max-width: 600px;">
+           <div class="card">
+                <form id="schedule-form" action="https://formspree.io/f/mjgwlokv" method="POST">
+                    <div class="grid-2" style="gap: 24px; margin-bottom: 24px;">
+                        <div>
+                            <label class="form-label">First Name *</label>
+                            <input type="text" name="first_name" required class="form-input" placeholder="John">
+                        </div>
+                        <div>
+                            <label class="form-label">Last Name *</label>
+                            <input type="text" name="last_name" required class="form-input" placeholder="Doe">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Email Address *</label>
+                        <input type="email" name="email" required class="form-input" placeholder="john@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Company Name</label>
+                        <input type="text" name="company" class="form-input" placeholder="Your Company">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Service Interest *</label>
+                        <select name="service_interest" required class="form-select">
+                            <option value="">Select a service...</option>
+                            <option value="Workflow Automation">Workflow Automation</option>
+                            <option value="AI Agents">AI Agents</option>
+                            <option value="Custom Development">Custom Development</option>
+                            <option value="Audit & Strategy">Audit & Strategy</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea name="message" required class="form-textarea" placeholder="Tell us about your needs and goals..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-w-full">Request Strategy Call</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">LAUNCIFY</a>
+                    <p class="text-small">
+                        Helping forward-thinking companies build scalable AI infrastructure.
+                    </p>
+                </div>
+                <div class="footer-bottom" style="grid-column: 1 / -1;">
+                    &copy; 2026 Launcify. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
+
+</body>
+</html>
