@@ -1,9 +1,13 @@
+/* =========================================
+   Launcify Premium Design System
+   Inspired by Stripe & Linear
+   ========================================= */
+
 :root {
-  /* =========================================
-     Color System — Enterprise AI Consulting
-     ========================================= */
+  /* PHASE 2: COLOR SYSTEM */
   --color-bg: #0B0F14;
   --color-surface: #11161C;
+  --color-surface-2: #161C23;
   --color-border: #1F2730;
 
   --color-primary: #4F8CFF;
@@ -13,52 +17,28 @@
   --color-text-muted: #8B98A5;
   --color-text-on-primary: #FFFFFF;
 
-  /* =========================================
-     Typographic Scale (Orbitron = Headers, Inter = Body)
-     ========================================= */
-  --font-heading: 'Orbitron', 'Inter', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  /* PHASE 6: CARD VARIABLES */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
 
-  --fs-hero: clamp(2.5rem, 5vw, 4rem);
-  --fs-h2: clamp(1.8rem, 4vw, 2.5rem);
-  --fs-h3: 1.5rem;
-  --fs-body: 1rem;
-  --fs-small: 0.875rem;
-
-  --lh-heading: 1.1;
-  --lh-body: 1.6;
-
-  /* =========================================
-     Spacing & Layout (8px Grid)
-     ========================================= */
   --container-width: 1200px;
+  --transition: 0.25s ease;
 
-  /* Section Spacing: 96px Desktop / 64px Mobile */
-  --spacing-section: 96px;
-  --spacing-element: 24px;
-  /* 3x8 */
-
-  --radius-sm: 4px;
-  /* Sharper, more corporate */
-  --radius-md: 8px;
-  --radius-lg: 12px;
-
-  --transition: 0.3s ease;
-
-  /* Subtle, Premium Shadows */
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.1);
   --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
-  --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  --shadow-hover: 0 12px 24px -6px rgba(0, 0, 0, 0.3);
+
+  /* PHASE 3: TYPOGRAPHY */
+  --font-heading: 'Inter', system-ui, sans-serif;
+  /* Clean, Single Font Family preferred for Linear vibe */
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --lh-heading: 1.2;
+  --lh-body: 1.6;
 }
 
-@media (max-width: 768px) {
-  :root {
-    --spacing-section: 64px;
-  }
-}
-
-/* =========================================
-   Reset & Base
-   ========================================= */
+/* Reset & Base */
 *,
 *::before,
 *::after {
@@ -79,7 +59,6 @@ body {
   line-height: var(--lh-body);
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
-  /* Prevent horizontal scroll */
 }
 
 a {
@@ -92,9 +71,7 @@ ul {
   list-style: none;
 }
 
-/* =========================================
-   Typography Utilities
-   ========================================= */
+/* Typography Scale */
 h1,
 h2,
 h3,
@@ -104,35 +81,36 @@ h6 {
   font-family: var(--font-heading);
   line-height: var(--lh-heading);
   color: var(--color-text);
-  margin-bottom: var(--spacing-element);
-  letter-spacing: 0.02em;
-  /* Slight letter spacing for tech feel */
-}
-
-.text-hero {
-  font-size: var(--fs-hero);
-  font-weight: 700;
+  margin-bottom: 24px;
+  font-weight: 600;
   letter-spacing: -0.02em;
 }
 
+.text-hero {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
 .text-h2 {
-  font-size: var(--fs-h2);
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.text-h3 {
+  font-size: 1.4rem;
   font-weight: 600;
   letter-spacing: -0.01em;
 }
 
-.text-h3 {
-  font-size: var(--fs-h3);
-  font-weight: 600;
-}
-
 .text-body {
-  font-size: var(--fs-body);
+  font-size: 1rem;
   color: var(--color-text-muted);
 }
 
 .text-small {
-  font-size: var(--fs-small);
+  font-size: 0.875rem;
   color: var(--color-text-muted);
 }
 
@@ -140,9 +118,7 @@ h6 {
   color: var(--color-primary);
 }
 
-/* =========================================
-   Layout System
-   ========================================= */
+/* Layout */
 .container {
   max-width: var(--container-width);
   margin: 0 auto;
@@ -151,71 +127,65 @@ h6 {
 }
 
 .section {
-  padding: var(--spacing-section) 0;
+  padding: 96px 0;
   position: relative;
-  /* Ensure overflow is handled per section if needed, but usually body handles it */
 }
 
-/* Grid Systems */
-.grid-2,
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 0;
+  }
+}
+
 .grid-3 {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 32px;
 }
 
-.grid-2 {
-  grid-template-columns: 1fr;
-}
-
-.grid-3 {
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 768px) {
-  .grid-2 {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .grid-3 {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-/* =========================================
-   Component: Cards (Structured, Enterprise)
-   ========================================= */
+/* PHASE 6: CARD SYSTEM */
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 32px;
-  transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
   height: 100%;
-  /* Equal height in grids */
   display: flex;
   flex-direction: column;
 }
 
 .card:hover {
-  border-color: var(--color-primary);
   transform: translateY(-6px);
   box-shadow: var(--shadow-hover);
+  border-color: var(--color-border);
+  /* Keep subtle */
 }
 
-/* =========================================
-   Component: Buttons (Standardized)
-   ========================================= */
+/* Pricing Card Variant */
+.card-price {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-price.recommended {
+  border-color: var(--color-primary);
+  background: var(--color-surface-2);
+}
+
+/* Buttons */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 14px 32px;
-  /* Standardized sizing */
+  padding: 12px 24px;
   border-radius: var(--radius-sm);
-  /* Consistent radius */
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: 0.01em;
+  font-weight: 500;
+  font-size: 0.9375rem;
   transition: all var(--transition);
   cursor: pointer;
   border: 1px solid transparent;
@@ -231,7 +201,7 @@ h6 {
 .btn-primary:hover {
   background: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .btn-secondary {
@@ -241,18 +211,16 @@ h6 {
 }
 
 .btn-secondary:hover {
+  background: var(--color-surface-2);
   border-color: var(--color-text-muted);
-  background: var(--color-border);
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .btn-w-full {
   width: 100%;
 }
 
-/* =========================================
-   Component: Navigation (Sticky, Enterprise)
-   ========================================= */
+/* PHASE 7: NAVBAR */
 .navbar {
   position: fixed;
   top: 0;
@@ -260,16 +228,16 @@ h6 {
   width: 100%;
   z-index: 1000;
   background: transparent;
-  /* Starts transparent */
-  transition: background-color 0.3s ease, border-bottom-color 0.3s ease;
   border-bottom: 1px solid transparent;
+  transition: background-color 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease;
 }
 
 .navbar.scrolled {
-  background: rgba(11, 15, 20, 0.95);
+  background: rgba(11, 15, 20, 0.85);
+  /* Matches color-bg with opacity */
+  border-bottom-color: var(--color-border);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom-color: var(--color-border);
 }
 
 .navbar-inner {
@@ -280,10 +248,9 @@ h6 {
 }
 
 .logo {
-  font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: 0.05em;
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
   color: var(--color-text);
 }
 
@@ -303,60 +270,56 @@ h6 {
   color: var(--color-text);
 }
 
-/* Mobile Toggle */
-.nav-toggle {
-  display: none;
-  background: none;
-  border: none;
-  color: var(--color-text);
-  cursor: pointer;
+/* Hero Specifics */
+.hero-section {
+  padding: 180px 0 120px;
+  position: relative;
+  overflow: hidden;
 }
 
-@media (max-width: 768px) {
-  .nav-menu {
-    display: none;
-  }
-
-  .nav-toggle {
-    display: block;
-  }
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.15;
 }
 
-/* =========================================
-   Component: Footer
-   ========================================= */
+#neural-grid {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin-bottom: 32px;
+}
+
+/* Footer */
 .footer {
-  background: var(--color-bg);
+  padding: 80px 0 40px;
   border-top: 1px solid var(--color-border);
-  padding: 64px 0 32px;
-}
-
-.footer-grid {
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 48px;
-  margin-bottom: 64px;
-}
-
-@media (max-width: 900px) {
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 32px;
-  }
-}
-
-.footer-brand p {
-  margin-top: 16px;
-  max-width: 300px;
+  background: var(--color-bg);
 }
 
 .footer-col h4 {
   font-size: 0.875rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+  font-weight: 600;
   color: var(--color-text);
   margin-bottom: 24px;
-  font-weight: 600;
 }
 
 .footer-col ul li {
@@ -372,133 +335,11 @@ h6 {
   color: var(--color-primary);
 }
 
-.footer-bottom {
-  padding-top: 32px;
-  border-top: 1px solid var(--color-border);
+/* Utilities */
+.text-center {
   text-align: center;
-  font-size: 0.875rem;
-  color: var(--color-text-muted);
 }
 
-/* =========================================
-   Hero & Neural Grid
-   ========================================= */
-.hero-section {
-  position: relative;
-  overflow: hidden;
-  padding: 160px 0 120px 0;
-  /* Expanded enterprise padding */
-  background: var(--color-bg);
-}
-
-.hero-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  opacity: 0.15;
-  /* Subtle opacity as requested */
-}
-
-#neural-grid {
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.hero-content {
-  position: relative;
-  z-index: 2;
-}
-
-/* Badge Component */
-.badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 16px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  font-size: 0.875rem;
-  font-weight: 500;
-  margin-bottom: 32px;
-}
-
-.badge-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--color-primary);
-  border-radius: 50%;
-  box-shadow: 0 0 8px var(--color-primary);
-}
-
-/* =========================================
-   Pricing (Consistent with Enterprise)
-   ========================================= */
-.card-price {
-  background: var(--color-surface);
-}
-
-.card-price.recommended {
-  border-color: var(--color-primary);
-  position: relative;
-}
-
-.card-price.recommended::before {
-  content: 'Recommended';
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--color-primary);
-  color: white;
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.price-amount {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--color-text);
-  margin: 16px 0;
-  font-family: var(--font-heading);
-}
-
-.price-period {
-  font-size: 1rem;
-  font-weight: 400;
-  color: var(--color-text-muted);
-}
-
-.price-features {
-  margin: 32px 0 32px 0;
-  flex: 1;
-  /* Push button to bottom if needed */
-}
-
-.price-features li {
-  margin-bottom: 16px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 0.9375rem;
-  color: var(--color-text-muted);
-}
-
-.price-features li svg {
-  color: var(--color-primary);
-  min-width: 20px;
-}
-
-/* =========================================
-   Utility Helpers
-   ========================================= */
 .mb-4 {
   margin-bottom: 16px;
 }
@@ -507,17 +348,13 @@ h6 {
   margin-bottom: 32px;
 }
 
-.text-center {
-  text-align: center;
-}
-
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Motion Classes (Handled by JS, but base states here if needed) */
-.reveal-text {
+/* Motion Initial States (Handled by JS) */
+.motion-fade-up {
   opacity: 0;
   transform: translateY(20px);
 }

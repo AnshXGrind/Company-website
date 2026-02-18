@@ -1,73 +1,14 @@
 /**
- * Motion System (Enterprise)
- * - IntersectionObserver for reveal animations
- * - Navbar scroll behavior
- * - Button hover effects (if JS needed, mostly CSS)
+ * Launcify Motion System (Premium)
+ * Handles sequential fade-ups and navbar interaction.
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-    initMotion();
     initNavbar();
+    initScrollAnimations();
 });
 
-/* =========================================
-   1. Motion Reveal System
-   ========================================= */
-function initMotion() {
-    // Check for reduced motion preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        // Force all elements to visible immediately
-        document.querySelectorAll('.reveal-text, .card, .hero-content > *').forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'none';
-        });
-        return;
-    }
-
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-
-                // Animate based on element type or class
-                // We'll use a simple CSS class toggle for performance
-                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-
-                // Unobserve after reveal
-                observer.unobserve(el);
-            }
-        });
-    }, observerOptions);
-
-    // Select elements to animate
-    const elementsToAnimate = [
-        ...document.querySelectorAll('.section h2'),
-        ...document.querySelectorAll('.section p'),
-        ...document.querySelectorAll('.card'),
-        ...document.querySelectorAll('.hero-content > *') // Stagger hero children
-    ];
-
-    elementsToAnimate.forEach((el, index) => {
-        // Set initial state
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-
-        // Add subtle stagger to cards or lists if they are siblings
-        // This is a simple logic; for complex staggers, use data-delay
-        observer.observe(el);
-    });
-}
-
-/* =========================================
-   2. Navbar Scroll Behavior
-   ========================================= */
+// PHASE 7: NAVBAR
 function initNavbar() {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
@@ -79,4 +20,56 @@ function initNavbar() {
             navbar.classList.remove('scrolled');
         }
     }, { passive: true });
+}
+
+// PHASE 5: SECTION MOTION SYSTEM
+function initScrollAnimations() {
+    // Respect user preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        document.querySelectorAll('.motion-fade-up').forEach(el => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+        });
+        return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+
+                // Animation properites
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+
+                // Delay logic if specified (for staggering)
+                const delay = el.getAttribute('data-delay') || 0;
+                if (delay) el.style.transitionDelay = `${delay}s`;
+
+                observer.unobserve(el);
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    // Observe all elements marked for animation
+    // We add this class dynamically to key structural elements if they don't have it
+    const targets = document.querySelectorAll('.section, .card, .motion-fade-up');
+    targets.forEach(el => {
+        if (!el.classList.contains('motion-fade-up')) {
+            el.classList.add('motion-fade-up');
+        }
+        observer.observe(el);
+    });
+
+    // Stagger Hero Elements specifically
+    const heroElements = document.querySelectorAll('.hero-content > *');
+    heroElements.forEach((el, index) => {
+        el.classList.add('motion-fade-up');
+        el.style.transitionDelay = `${index * 0.1}s`; // 100ms stagger
+        observer.observe(el);
+    });
 }
