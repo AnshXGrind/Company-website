@@ -4,120 +4,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book a Strategy Call | Launcify</title>
+    <meta name="description" content="Book a free 30-minute strategy call with the Launcify automation team.">
+    <title>Book a Free Strategy Call | Launcify</title>
+
+    <!-- Design System -->
     <link rel="stylesheet" href="/css/design-system.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/layout.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <nav class="navbar">
-        <div class="container navbar-inner">
-            <a href="/" class="logo">LAUNCIFY</a>
-            <div class="nav-menu">
-                <a href="/pages/services.html" class="nav-link">Services</a>
-                <a href="/pages/case-studies/index.html" class="nav-link">Case Studies</a>
-                <a href="/pages/pricing.html" class="nav-link">Pricing</a>
-            </div>
-        </div>
-    </nav>
-    <!-- Header -->
-    <section class="section text-center" style="padding-top: 160px;">
-        <div class="container">
-            <h1>Let's Design Your Automation System</h1>
-            <p class="hero-subtext" style="max-width: 600px; margin: 0 auto;">
-                Book a 30-minute consultation to identify your bottlenecks and build a roadmap for efficiency.
-            </p>
-        </div>
-    </section>
+    <!-- NAVBAR COMPONENT -->
+    <div id="navbar-container"></div>
 
-    <!-- QUALIFICATION SECTION -->
-    <section class="section" style="padding-top: 0;">
-        <div class="container" style="max-width: 900px;">
-            <div class="grid-2" style="gap: 32px; margin-bottom: 64px;">
-                <!-- WHO THIS IS FOR -->
-                <div class="card" style="border-left: 4px solid #4F8CFF;">
-                    <h3>Who This Call Is For:</h3>
-                    <ul style="margin-top: 16px; color: #E6EDF3; font-size: 0.9375rem;">
-                        <li style="margin-bottom: 12px;">✅ Founders scaling past $1M ARR.</li>
-                        <li style="margin-bottom: 12px;">✅ Ops managers drowning in spreadsheet data.</li>
-                        <li style="margin-bottom: 12px;">✅ Teams looking to reduce manual headcount cost.</li>
-                    </ul>
-                </div>
-                <!-- WHO THIS IS NOT FOR -->
-                <div class="card" style="border-left: 4px solid #FF4F4F;">
-                    <h3>Who This Is NOT For:</h3>
-                    <ul style="margin-top: 16px; color: #8B98A5; font-size: 0.9375rem;">
-                        <li style="margin-bottom: 12px;">❌ Students looking for internships.</li>
-                        <li style="margin-bottom: 12px;">❌ Businesses wanting a $500 WordPress site.</li>
-                        <li style="margin-bottom: 12px;">❌ Anyone expecting "magic" without process change.</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- WHAT TO EXPECT -->
-            <div class="text-center mb-8">
-                <h3>What To Expect</h3>
-                <p>No hard sales. We review your current stack, identify 3 automation opportunities, and give you a
-                    rough implementation timeline.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section">
+    <!-- HEADER -->
+    <header class="section hero-section" style="padding-top: 120px; padding-bottom: 48px;">
         <div class="container text-center">
-            <div class="grid-2" style="max-width: 900px; margin: 48px auto 0; text-align: left; gap: 48px;">
+            <div class="section-header mx-auto reveal-text">
+                <span class="badge">Free · No Obligation</span>
+                <h1>Let's Design Your<br>Automation System</h1>
+                <p>Book a 30-minute consultation. We'll identify your bottlenecks and sketch a roadmap — no hard sell.</p>
+            </div>
+        </div>
+    </header>
 
-                <!-- Value Prop Sidebar -->
-                <div style="padding: 24px;">
-                    <h3>What We'll Cover:</h3>
-                    <ul style="color: #8B98A5; font-size: 1rem; margin-top: 24px;">
-                        <li style="margin-bottom: 16px; display: flex; gap: 12px;">
-                            <span style="color: #4F8CFF;">✓</span>
-                            Current Operational Bottlenecks
-                        </li>
-                        <li style="margin-bottom: 16px; display: flex; gap: 12px;">
-                            <span style="color: #4F8CFF;">✓</span>
-                            Feasibility of AI Agents for your use case
-                        </li>
-                        <li style="margin-bottom: 16px; display: flex; gap: 12px;">
-                            <span style="color: #4F8CFF;">✓</span>
-                            Estimated ROI & Implementation Timeline
-                        </li>
-                        <li style="margin-bottom: 16px; display: flex; gap: 12px;">
-                            <span style="color: #4F8CFF;">✓</span>
-                            Custom Tech Stack Recommendations
-                        </li>
+    <!-- QUALIFICATION GRID -->
+    <section class="section section-narrow">
+        <div class="container">
+            <div class="grid-2">
+
+                <!-- WHO THIS IS FOR -->
+                <div class="card card-border-accent">
+                    <h3>Who This Call Is For</h3>
+                    <ul class="check-list mt-4">
+                        <li><span class="check-mark">&#10003;</span>Founders scaling past $1M ARR</li>
+                        <li><span class="check-mark">&#10003;</span>Ops managers drowning in spreadsheet data</li>
+                        <li><span class="check-mark">&#10003;</span>Teams looking to cut manual headcount cost</li>
                     </ul>
-
-                    <div
-                        style="margin-top: 48px; background: #11161C; padding: 24px; border-radius: 8px; border: 1px solid #1F2730;">
-                        <p style="margin-bottom: 8px; color: #E6EDF3; font-weight: 500;">"The call alone saved us weeks
-                            of research."</p>
-                        <p style="font-size: 0.875rem; margin-bottom: 0;">- Mark D., CEO at TechFlow</p>
-                    </div>
                 </div>
 
-                <!-- Calendar Placeholder -->
-                <div class="card"
-                    style="min-height: 400px; display: flex; align-items: center; justify-content: center; background: #161C23;">
-                    <!-- Embed Calendly/Cal.com here -->
-                    <div class="text-center">
-                        <p style="color: #E6EDF3; font-weight: 500;">Select a Time</p>
-                        <!-- Example placeholder for user to swap with real embed -->
-                        <div
-                            style="background: #0B0F14; padding: 20px; border-radius: 8px; border: 1px solid #1F2730; margin-top: 16px;">
-                            <p style="font-size: 0.875rem;">[ Calendar Embed Code Goes Here ]</p>
-                        </div>
+                <!-- WHO THIS IS NOT FOR -->
+                <div class="card card-border-muted">
+                    <h3>Who This Is NOT For</h3>
+                    <ul class="check-list mt-4">
+                        <li><span class="check-mark muted">&#10007;</span>Students looking for internships</li>
+                        <li><span class="check-mark muted">&#10007;</span>Businesses wanting a $500 WordPress site</li>
+                        <li><span class="check-mark muted">&#10007;</span>Anyone expecting magic without process change</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL CONTENT + CALENDAR -->
+    <section class="section">
+        <div class="container section-narrow">
+            <div class="grid-2">
+
+                <!-- Value Prop -->
+                <div>
+                    <h3 class="mb-4">What We'll Cover</h3>
+                    <ul class="feature-list">
+                        <li>&#10003; Current operational bottlenecks</li>
+                        <li>&#10003; Feasibility of AI agents for your use case</li>
+                        <li>&#10003; Estimated ROI &amp; implementation timeline</li>
+                        <li>&#10003; Custom tech stack recommendations</li>
+                    </ul>
+
+                    <blockquote class="card surface mt-8">
+                        <p class="text-strong">"The call alone saved us weeks of research."</p>
+                        <cite class="text-sm">— Mark D., CEO at TechFlow</cite>
+                    </blockquote>
+                </div>
+
+                <!-- Calendar Embed -->
+                <div class="card card-center">
+                    <!-- Replace content below with Calendly/Cal.com embed -->
+                    <p class="text-strong">Select a Time</p>
+                    <div class="surface mt-4">
+                        <p class="text-sm">[ Calendar Embed Code Goes Here ]</p>
                     </div>
                 </div>
 
             </div>
         </div>
     </section>
+
+    <!-- FOOTER COMPONENT -->
+    <div id="footer-container"></div>
 
     <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
     <script src="/js/motion.js" defer></script>
+    <script src="/js/include.js" defer></script>
 
 </body>
 

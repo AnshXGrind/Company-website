@@ -1,23 +1,26 @@
-<footer class="footer">
+<footer class="footer" role="contentinfo">
     <div class="container footer-inner">
         <div>
             <a href="/" class="logo">LAUNCIFY</a>
-            <p class="mt-4" style="max-width: 300px; font-size: 0.875rem; color: var(--color-text-muted);">
+            <p class="mt-4 max-w-sm text-muted" style="font-size: 0.875rem;">
                 Building intelligent infrastructure for forward-thinking enterprises.
             </p>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px;">
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <strong style="color: var(--color-text); margin-bottom: 8px;">Company</strong>
-                <a href="/pages/about.html" style="color: var(--color-text-muted); text-decoration: none;">About</a>
-                <a href="/pages/services.html" style="color: var(--color-text-muted); text-decoration: none;">Services</a>
-                <!-- <a href="/pages/case-studies/index.html" style="color: var(--color-text-muted); text-decoration: none;">Work</a> -->
+        <nav class="footer-nav" aria-label="Footer navigation">
+            <div class="footer-col">
+                <strong class="footer-col-heading">Company</strong>
+                <a href="/pages/about.html" class="footer-link">About</a>
+                <a href="/pages/services.html" class="footer-link">Services</a>
+                <a href="/pages/pricing.html" class="footer-link">Pricing</a>
             </div>
-            <div style="display: flex; flex-direction: column; gap: 8px;">
-                <strong style="color: var(--color-text); margin-bottom: 8px;">Legal</strong>
-                <a href="#" style="color: var(--color-text-muted); text-decoration: none;">Privacy</a>
-                <a href="#" style="color: var(--color-text-muted); text-decoration: none;">Terms</a>
+            <div class="footer-col">
+                <strong class="footer-col-heading">Legal</strong>
+                <a href="/privacy.html" class="footer-link">Privacy</a>
+                <a href="/terms.html" class="footer-link">Terms</a>
             </div>
-        </div>
+        </nav>
+    </div>
+    <div class="container footer-bottom">
+        <p class="cta-subtext">&copy; 2026 Launcify. Intelligent Systems.</p>
     </div>
 </footer>

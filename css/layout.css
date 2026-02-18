@@ -1,0 +1,223 @@
+/* =========================================
+   layout.css — Reusable layout utilities
+   Extends design-system.css without modifying it.
+   ========================================= */
+
+/* Surface variants */
+.surface           { background-color: var(--color-surface); }
+.surface-alt       { background-color: var(--color-surface-alt); }
+
+/* Spacing utilities */
+.mt-2  { margin-top: var(--space-2); }
+.mt-4  { margin-top: var(--space-4); }
+.mt-6  { margin-top: var(--space-6); }
+.mt-8  { margin-top: var(--space-8); }
+.mb-2  { margin-bottom: var(--space-2); }
+.mb-4  { margin-bottom: var(--space-4); }
+.mb-6  { margin-bottom: var(--space-6); }
+.mb-8  { margin-bottom: var(--space-8); }
+.mb-12 { margin-bottom: var(--space-12); }
+
+/* Inline-style replacements */
+.mx-auto          { margin-left: auto; margin-right: auto; }
+.p-auto           { padding-left: auto; padding-right: auto; }
+.w-full           { width: 100%; }
+.max-w-sm         { max-width: 480px; }
+.max-w-md         { max-width: 640px; }
+.max-w-lg         { max-width: 800px; }
+.max-w-xl         { max-width: 1000px; }
+
+/* Text utilities */
+.text-muted       { color: var(--color-text-muted); }
+.text-primary     { color: var(--color-primary); }
+.uppercase        { text-transform: uppercase; }
+.tracking-wide    { letter-spacing: 0.05em; }
+.leading-tight    { line-height: 1.2; }
+.font-bold        { font-weight: 700; }
+.font-medium      { font-weight: 500; }
+
+/* Grid extensions */
+.grid-auto        { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.items-start      { align-items: start; }
+
+/* Flex helpers */
+.flex-wrap        { flex-wrap: wrap; }
+.flex-row-cta     { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+
+/* Hero visual container — replaces inline style group */
+.hero-visual {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hero-visual svg  { opacity: 0.8; }
+
+/* Section heading block — replaces repeated inline margin patterns */
+.section-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto var(--space-8);
+}
+.section-header p {
+    margin: 0 auto;
+}
+
+/* Process step — replaces repeated inline flex rows */
+.process-step {
+    display: flex;
+    gap: var(--space-2);
+}
+.process-step-number {
+    font-family: var(--font-mono);
+    color: var(--color-primary);
+    font-weight: 700;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    min-width: 32px;
+}
+.process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+}
+
+/* Stat block inside card */
+.stat-headline {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+/* Card highlight border variant */
+.card-highlight {
+    border-color: var(--color-primary);
+}
+.card-center {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+/* Pricing feature list */
+.feature-list {
+    margin-top: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    font-size: 0.9375rem;
+}
+.feature-list li {
+    color: var(--color-text-muted);
+}
+.feature-list.light li {
+    color: var(--color-text);
+}
+
+/* Pricing price display */
+.price-amount {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin: var(--space-3) 0;
+    line-height: 1.1;
+}
+.price-period {
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    font-weight: 400;
+}
+
+/* Popular badge (pricing) */
+.card-popular-label {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* FAQ block */
+.faq-item {
+    margin-bottom: var(--space-4);
+}
+.faq-item h3 {
+    color: var(--color-text);
+    margin-bottom: var(--space-1);
+}
+
+/* Narrow section container override */
+.section-narrow > .container {
+    max-width: 800px;
+}
+
+/* CTA section helpers */
+.cta-subtext {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-2);
+    margin-bottom: 0;
+}
+
+/* Case study check list */
+.check-list {
+    margin-bottom: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.check-list li {
+    display: flex;
+    gap: 8px;
+    font-size: 1rem;
+    color: var(--color-text-muted);
+}
+.check-list li .check-mark {
+    color: var(--color-accent);
+    flex-shrink: 0;
+}
+
+/* Mobile nav open state */
+/* ---- Card border accent variants ---- */
+.card-border-accent { border-left: 4px solid var(--color-accent); }
+.card-border-muted  { border-left: 4px solid var(--color-border); }
+
+/* ---- Typography helpers ---- */
+.text-strong { font-weight: 600; color: var(--color-text); }
+.text-sm     { font-size: 0.9375rem; }
+.muted       { color: var(--color-muted); }
+
+/* ---- Blockquote helper ---- */
+blockquote { margin: 0; }
+blockquote cite { display: block; margin-top: var(--space-2); color: var(--color-muted); }
+
+/* ---- Width utilities ---- */
+.w-full { width: 100%; }
+
+@media (max-width: 768px) {
+    .nav-toggle { display: block; }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--color-surface);
+        border-bottom: 1px solid var(--color-border);
+        flex-direction: column;
+        padding: var(--space-3);
+        gap: var(--space-2);
+    }
+    .nav-menu.is-open { display: flex; }
+
+    .flex-row-cta { flex-direction: column; }
+    .stat-headline { font-size: 3.5rem; }
+}

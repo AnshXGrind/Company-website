@@ -4,89 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Transparent Pricing for Enterprise AI Automation - Launcify">
     <title>Pricing | Launcify</title>
+
+    <!-- Design System -->
     <link rel="stylesheet" href="/css/design-system.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/layout.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <nav class="navbar">
-        <div class="container navbar-inner">
-            <a href="/" class="logo">LAUNCIFY</a>
-            <div class="nav-menu">
-                <a href="/pages/services.html" class="nav-link">Services</a>
-                <a href="/pages/case-studies/index.html" class="nav-link">Case Studies</a>
-                <a href="/book-call.html" class="btn-primary" style="padding: 8px 16px; font-size: 0.875rem;">Strategy
-                    Call</a>
+    <!-- NAVBAR COMPONENT -->
+    <div id="navbar-container"></div>
+
+    <!-- HEADER -->
+    <header class="section hero-section" style="padding-top: 120px; padding-bottom: 60px;">
+        <div class="container text-center">
+            <div class="section-header mx-auto reveal-text">
+                <span class="badge">Transparent Investment</span>
+                <h1>Clear Pricing for<br>ROI-Focused Teams</h1>
+                <p>We don't do hidden fees. Choose the model that fits your stage.</p>
             </div>
         </div>
-    </nav>
+    </header>
 
+    <!-- PRICING CARDS -->
     <section class="section">
-        <div class="container text-center">
-            <span class="badge">Transparent Investment</span>
-            <h1>Clear Pricing for ROI-Focused Teams</h1>
-            <p class="hero-subtext" style="margin-left: auto; margin-right: auto;">
-                We don't do hidden fees. Choose the model that fits your stage.
-            </p>
-
-            <div class="grid-3" style="margin-top: 64px; text-align: left;">
+        <div class="container">
+            <div class="grid-3">
 
                 <!-- AUDIT -->
                 <div class="card">
                     <h3>System Audit</h3>
-                    <p style="min-height: 48px;">Perfect for teams who know they have bottlenecks but can't pinpoint
-                        them.</p>
-                    <div style="font-size: 2.5rem; font-weight: 700; color: #E6EDF3; margin: 24px 0;">$2,500 <span
-                            style="font-size: 1rem; color: #8B98A5; font-weight: 400;">/ one-time</span></div>
-
-                    <a href="/book-call.html" class="btn-secondary" style="width: 100%; justify-content: center;">Book
-                        Audit</a>
-
-                    <ul style="margin-top: 32px; color: #8B98A5; font-size: 0.9375rem;">
-                        <li style="margin-bottom: 12px;">✓ Full Workflow Analysis</li>
-                        <li style="margin-bottom: 12px;">✓ Tech Stack Review</li>
-                        <li style="margin-bottom: 12px;">✓ Automation Roadmap Blueprint</li>
-                        <li style="margin-bottom: 12px;">✓ Security Compliance Check</li>
+                    <p class="text-sm">Perfect for teams who know they have bottlenecks but can't pinpoint them.</p>
+                    <div class="price-amount">$2,500 <span class="price-period">/ one-time</span></div>
+                    <a href="/book-call.html" class="btn btn-secondary w-full">Book Audit</a>
+                    <ul class="feature-list mt-4">
+                        <li>&#10003; Full Workflow Analysis</li>
+                        <li>&#10003; Tech Stack Review</li>
+                        <li>&#10003; Automation Roadmap Blueprint</li>
+                        <li>&#10003; Security Compliance Check</li>
                     </ul>
                 </div>
 
                 <!-- GROWTH (Highlighted) -->
-                <div class="card" style="border-color: #4F8CFF; background: #161C23; position: relative;">
-                    <div
-                        style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #4F8CFF; color: white; padding: 4px 12px; border-radius: 99px; font-size: 0.75rem; font-weight: 600;">
-                        MOST POPULAR</div>
+                <div class="card card-highlight surface-alt">
+                    <span class="card-popular-label">MOST POPULAR</span>
                     <h3>Growth Partner</h3>
-                    <p style="min-height: 48px;">Continuous automation engineering for scaling companies.</p>
-                    <div style="font-size: 2.5rem; font-weight: 700; color: #E6EDF3; margin: 24px 0;">$4,800 <span
-                            style="font-size: 1rem; color: #8B98A5; font-weight: 400;">/ month</span></div>
-
-                    <a href="/book-call.html" class="btn-primary" style="width: 100%; justify-content: center;">Start
-                        Scale-Up</a>
-
-                    <ul style="margin-top: 32px; color: #E6EDF3; font-size: 0.9375rem;">
-                        <li style="margin-bottom: 12px;">✓ <strong>Custom AI Agent Development</strong></li>
-                        <li style="margin-bottom: 12px;">✓ Unlimited Workflow Edits</li>
-                        <li style="margin-bottom: 12px;">✓ Priority Slack Support</li>
-                        <li style="margin-bottom: 12px;">✓ Bi-weekly Strategy Calls</li>
+                    <p class="text-sm">Continuous automation engineering for scaling companies.</p>
+                    <div class="price-amount">$4,800 <span class="price-period">/ month</span></div>
+                    <a href="/book-call.html" class="btn btn-primary w-full">Start Scale-Up</a>
+                    <ul class="feature-list light mt-4">
+                        <li>&#10003; <strong>Custom AI Agent Development</strong></li>
+                        <li>&#10003; Unlimited Workflow Edits</li>
+                        <li>&#10003; Priority Slack Support</li>
+                        <li>&#10003; Bi-weekly Strategy Calls</li>
                     </ul>
                 </div>
 
                 <!-- ENTERPRISE -->
                 <div class="card">
                     <h3>Enterprise</h3>
-                    <p style="min-height: 48px;">For organizations requiring on-premise deployment and strict SLAs.</p>
-                    <div style="font-size: 2.5rem; font-weight: 700; color: #E6EDF3; margin: 24px 0;">Custom</div>
-
-                    <a href="/book-call.html" class="btn-secondary"
-                        style="width: 100%; justify-content: center;">Contact Sales</a>
-
-                    <ul style="margin-top: 32px; color: #8B98A5; font-size: 0.9375rem;">
-                        <li style="margin-bottom: 12px;">✓ On-Premise LLM Deployment</li>
-                        <li style="margin-bottom: 12px;">✓ Dedicated Engineering Pod</li>
-                        <li style="margin-bottom: 12px;">✓ 24/7 SLA Support</li>
-                        <li style="margin-bottom: 12px;">✓ Custom MSA & Invoicing</li>
+                    <p class="text-sm">For organizations requiring on-premise deployment and strict SLAs.</p>
+                    <div class="price-amount">Custom</div>
+                    <a href="/book-call.html" class="btn btn-secondary w-full">Contact Sales</a>
+                    <ul class="feature-list mt-4">
+                        <li>&#10003; On-Premise LLM Deployment</li>
+                        <li>&#10003; Dedicated Engineering Pod</li>
+                        <li>&#10003; 24/7 SLA Support</li>
+                        <li>&#10003; Custom MSA &amp; Invoicing</li>
                     </ul>
                 </div>
 
@@ -94,56 +85,50 @@
         </div>
     </section>
 
-    <!-- FAQ SECTION (Objection Handling) -->
-    <section class="section" style="background: #11161C;">
-        <div class="container" style="max-width: 800px;">
-            <h2 class="text-center" style="margin-bottom: 48px;">Common Questions</h2>
+    <!-- FAQ SECTION -->
+    <section class="section section-narrow surface">
+        <div class="container">
+            <h2 class="text-center mb-8">Common Questions</h2>
 
-            <div style="margin-bottom: 32px;">
-                <h3 style="color: #E6EDF3; margin-bottom: 8px;">How long does it take to see results?</h3>
-                <p>Most clients see their first automated workflow live within 7 days. Complex AI agents typically take
-                    2-3 weeks to build, test, and deploy.</p>
+            <div class="faq-item">
+                <h3>How long does it take to see results?</h3>
+                <p>Most clients see their first automated workflow live within 7 days. Complex AI agents typically take 2–3 weeks to build, test, and deploy.</p>
             </div>
 
-            <div style="margin-bottom: 32px;">
-                <h3 style="color: #E6EDF3; margin-bottom: 8px;">Do we own the code?</h3>
-                <p>Yes. Everything we build (n8n workflows, custom scripts) is transferred to your own infrastructure.
-                    You own the IP.</p>
+            <div class="faq-item">
+                <h3>Do we own the code?</h3>
+                <p>Yes. Everything we build (n8n workflows, custom scripts) is transferred to your own infrastructure. You own the IP.</p>
             </div>
 
-            <div style="margin-bottom: 32px;">
-                <h3 style="color: #E6EDF3; margin-bottom: 8px;">Is my data secure?</h3>
-                <p>Security is our priority. We use SOC2 compliant tools and never train public models on your
-                    proprietary data. We can also deploy fully on-premise if needed.</p>
+            <div class="faq-item">
+                <h3>Is my data secure?</h3>
+                <p>Security is our priority. We use SOC2 compliant tools and never train public models on your proprietary data. We can also deploy fully on-premise if needed.</p>
             </div>
 
-            <div style="margin-bottom: 32px;">
-                <h3 style="color: #E6EDF3; margin-bottom: 8px;">What if we need to pause?</h3>
-                <p>Our monthly "Growth" plan can be paused or cancelled with 14 days notice. We are partners, not
-                    hostages.</p>
+            <div class="faq-item">
+                <h3>What if we need to pause?</h3>
+                <p>Our monthly Growth plan can be paused or cancelled with 14 days notice. We are partners, not hostages.</p>
             </div>
-
         </div>
     </section>
 
     <!-- CTA -->
     <section class="section text-center">
-        <div class="container">
+        <div class="container section-header mx-auto">
             <h2>Still unsure which plan is right?</h2>
-            <a href="/book-call.html" class="btn-primary" style="margin-top: 24px;">Talk to an Engineer</a>
+            <p>Book a no-cost 30-minute call with our team. We'll point you in the right direction.</p>
+            <a href="/book-call.html" class="btn btn-primary">Book a Free Strategy Call</a>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="section" style="padding: 48px 0; border-top: 1px solid #1F2730;">
-        <div class="container text-center">
-            <p style="font-size: 0.875rem;">&copy; 2026 Launcify. Intelligent Systems.</p>
-        </div>
-    </footer>
+    <!-- FOOTER COMPONENT -->
+    <div id="footer-container"></div>
 
     <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
     <script src="/js/motion.js" defer></script>
+    <script src="/js/include.js" defer></script>
 
 </body>
-
 </html>

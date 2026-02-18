@@ -9,6 +9,7 @@
 
     <!-- 1. Enterprise Design System -->
     <link rel="stylesheet" href="/css/design-system.css">
+    <link rel="stylesheet" href="/css/layout.css">
 
     <!-- 2. Font Imports -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,14 +45,15 @@
                         </p>
                     </div>
 
-                    <div class="reveal-text" style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 32px;">
-                        <a href="/book-call.html" class="btn btn-primary">Book Strategy Call</a>
+    <!-- Hero CTA row -->
+                    <div class="reveal-text flex-row-cta mt-4">
+                        <a href="/book-call.html" class="btn btn-primary">Book a Free Strategy Call</a>
                         <a href="#how-it-works" class="btn btn-secondary">Explore Process</a>
                     </div>
                 </div>
 
                 <!-- Subtle Geometric Illustration -->
-                <div class="hero-visual" style="position: relative; display: flex; justify-content: center; align-items: center;">
+                <div class="hero-visual">
                      <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.8;">
                         <defs>
                             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -82,9 +84,9 @@
     <!-- PROBLEM SECTION -->
     <section class="section">
         <div class="container">
-            <div class="text-center mb-8 reveal-text">
+            <div class="section-header reveal-text">
                 <h2>The Growth Ceiling</h2>
-                <p style="margin: 0 auto;">Manual processes are the bottleneck to your scalability.</p>
+                <p>Manual processes are the bottleneck to your scalability.</p>
             </div>
             <div class="grid-3">
                 <div class="card">
@@ -121,9 +123,9 @@
     <!-- STRATEGY ASSISTANT (NEW) -->
     <section id="strategy-assistant" class="section">
         <div class="container">
-            <div class="text-center mb-8 reveal-text">
+            <div class="section-header reveal-text">
                 <h2>Get Your Automation Strategy</h2>
-                <p style="margin: 0 auto;">Answer 3 questions to see where you can save 10+ hours a week.</p>
+                <p>Answer 3 questions to see where you can save 10+ hours a week.</p>
             </div>
             
             <div id="strategy-assistant-root">
@@ -133,11 +135,11 @@
     </section>
 
     <!-- SOLUTION SECTION -->
-    <section class="section" style="background-color: var(--color-surface);">
+    <section class="section surface">
         <div class="container">
-            <div class="text-center mb-8 reveal-text">
+            <div class="section-header reveal-text">
                 <h2>Intelligent Infrastructure</h2>
-                <p style="margin: 0 auto;">We engineer autonomous systems that work while you sleep.</p>
+                <p>We engineer autonomous systems that work while you sleep.</p>
             </div>
             <div class="grid-3">
                 <div class="card">
@@ -176,36 +178,36 @@
     <!-- HOW IT WORKS -->
     <section id="how-it-works" class="section">
         <div class="container">
-            <div class="grid-2" style="align-items: center;">
+            <div class="grid-2 items-center">
                 <div>
                      <h2 class="mb-4">Our Process</h2>
                      <p class="mb-8">We don't just "build websites." We engineer business logic.</p>
                      
-                     <div style="display: flex; flex-direction: column; gap: 32px;">
-                        <div style="display: flex; gap: 16px;">
-                            <div style="font-family: var(--font-mono); color: var(--color-primary); font-weight: bold; font-size: 1.5rem;">01</div>
+                     <div class="process-steps mb-8">
+                        <div class="process-step">
+                            <div class="process-step-number">01</div>
                             <div>
-                                <h4>Audit & Blueprint</h4>
+                                <h4>Audit &amp; Blueprint</h4>
                                 <p class="text-sm">We map your current workflows and identify high-ROI automation opportunities before writing a single line of code.</p>
                             </div>
                         </div>
-                        <div style="display: flex; gap: 16px;">
-                            <div style="font-family: var(--font-mono); color: var(--color-primary); font-weight: bold; font-size: 1.5rem;">02</div>
+                        <div class="process-step">
+                            <div class="process-step-number">02</div>
                             <div>
-                                <h4>Build & Integration</h4>
+                                <h4>Build &amp; Integration</h4>
                                 <p class="text-sm">We build your system in rapid sprints, integrating LLMs and custom scripts directly into your existing tools.</p>
                             </div>
                         </div>
-                        <div style="display: flex; gap: 16px;">
-                            <div style="font-family: var(--font-mono); color: var(--color-primary); font-weight: bold; font-size: 1.5rem;">03</div>
+                        <div class="process-step">
+                            <div class="process-step-number">03</div>
                             <div>
-                                <h4>Handover & Training</h4>
+                                <h4>Handover &amp; Training</h4>
                                 <p class="text-sm">You own the code and the IP. We train your team on how to manage and scale the new infrastructure.</p>
                             </div>
                         </div>
                      </div>
                 </div>
-                <div style="display: flex; justify-content: center; padding: 32px;">
+                <div class="hero-visual">
                     <!-- Process Illustration -->
                     <svg width="300" height="300" viewBox="0 0 300 300" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-text-muted);">
                         <rect x="50" y="50" width="200" height="200" rx="16" stroke="var(--color-border)" fill="var(--color-surface)" />
@@ -219,25 +221,25 @@
     </section>
 
     <!-- CASE STUDY -->
-    <section class="section" style="background-color: var(--color-surface);">
+    <section class="section surface">
         <div class="container">
-            <div class="grid-2" style="align-items: center;">
+            <div class="grid-2 items-center">
                 <div class="reveal-text">
                     <span class="badge"><span class="badge-dot"></span>Case Study</span>
                     <h2>Financial Compliance Automation</h2>
                     <p>We automated the client onboarding process for a Wealth Management firm, reducing manual compliance checks by 100%.</p>
                     
-                    <ul style="margin-bottom: 32px;">
-                        <li style="display:flex; gap:8px; margin-bottom:8px;"><span class="text-accent">✓</span> Reduced onboarding time from 5 days to 36 hours</li>
-                        <li style="display:flex; gap:8px; margin-bottom:8px;"><span class="text-accent">✓</span> Eliminated manual KYC data entry</li>
-                        <li style="display:flex; gap:8px; margin-bottom:8px;"><span class="text-accent">✓</span> $120k/year in projected labor savings</li>
+                    <ul class="check-list mb-4">
+                        <li><span class="check-mark">&#10003;</span> Reduced onboarding time from 5 days to 36 hours</li>
+                        <li><span class="check-mark">&#10003;</span> Eliminated manual KYC data entry</li>
+                        <li><span class="check-mark">&#10003;</span> $120k/year in projected labor savings</li>
                     </ul>
 
                     <a href="/pages/case-studies/index.html" class="btn btn-secondary">Read Case Study</a>
                 </div>
-                <div class="card" style="justify-content: center; align-items: center; text-align: center; padding: 64px 32px; border-color: var(--color-primary);">
-                     <span class="text-xs text-accent text-mono uppercase tracking-wider mb-2">Efficiency Gain</span>
-                     <div style="font-size: 5rem; font-weight: 700; color: var(--color-primary); line-height: 1;">70%</div>
+                <div class="card card-highlight card-center" style="padding: 64px 32px;">
+                     <span class="text-xs text-accent text-mono uppercase tracking-wide mb-2">Efficiency Gain</span>
+                     <div class="stat-headline">70%</div>
                      <p class="text-sm mt-2">Reduction in Turnaround Time</p>
                 </div>
             </div>
@@ -246,11 +248,11 @@
 
     <!-- CTA -->
     <section class="section text-center">
-        <div class="container reveal-text" style="max-width: 700px;">
+        <div class="container section-header" style="max-width: 700px;">
             <h2>Ready to Scale?</h2>
-            <p style="margin: 0 auto; margin-bottom: 32px;">Stop drowning in busy work. Let's build the infrastructure that takes you to the next level.</p>
-            <a href="/book-call.html" class="btn btn-primary" style="padding: 16px 32px; font-size: 1.125rem;">Book Your Strategy Call</a>
-            <p class="text-xs mt-4" style="color: var(--color-text-muted);">No pressure. Just engineering.</p>
+            <p>Stop drowning in busy work. Let's build the infrastructure that takes you to the next level.</p>
+            <a href="/book-call.html" class="btn btn-primary">Book a Free Strategy Call</a>
+            <p class="cta-subtext">No pressure. Just engineering.</p>
         </div>
     </section>
 
@@ -263,7 +265,7 @@
     <script src="/js/motion.js" defer></script>
     
     <!-- 3. Component Loader & Assistants -->
-    <script src="/js/components.js" defer></script>
+    <script src="/js/include.js" defer></script>
     <script src="/js/strategy-assistant.js" defer></script>
 
 </body>
