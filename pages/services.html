@@ -1,311 +1,146 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Services — Launcify</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/css/themed-button.css">
-  <link rel="stylesheet" href="/css/interactive-button.css">
-  <style>
-    body {
-      padding-top: 70px;
-      position: relative;
-      overflow-x: hidden;
-      font-family: 'Inter', system-ui, sans-serif;
-      background: var(--bg);
-      color: var(--text-main);
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AI Automation & Custom Software Development Services">
+    <title>Services | Launcify</title>
+    
+    <!-- Design System -->
+    <link rel="stylesheet" href="/css/design-system.css">
 
-    .nav-brand {
-      font-family: 'Orbitron', sans-serif;
-    }
-
-    #world-map-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100vh;
-      z-index: 0;
-      opacity: 0.08;
-      pointer-events: none
-    }
-
-    nav {
-      font-family: Orbitron, system-ui;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: transparent;
-      border: none;
-      z-index: 100;
-      padding: 16px 24px
-    }
-
-    .nav-brand {
-      font-weight: 700;
-      letter-spacing: 0.02em
-    }
-
-    .nav-container {
-      max-width: 1100px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: var(--text-main);
-      text-decoration: none;
-      font-weight: 700
-    }
-
-    .nav-brand .logo {
-      width: 32px;
-      height: 32px;
-      background: var(--panel-bg);
-      border-radius: 6px;
-      display: grid;
-      place-items: center
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      align-items: center
-    }
-
-    .nav-links a {
-      color: var(--text-main);
-      text-decoration: none;
-      text-transform: uppercase;
-      font-size: 13px;
-      letter-spacing: 0.05em
-    }
-
-    .nav-links .cta {
-      background: var(--buttercream);
-      color: #000;
-      padding: 8px 16px;
-      border-radius: 8px;
-      font-weight: 700
-    }
-
-    .nav-toggle {
-      display: none;
-      background: transparent;
-      border: 0;
-      color: var(--text-main);
-      font-size: 24px;
-      cursor: pointer
-    }
-
-    main {
-      position: relative;
-      z-index: 1
-    }
-
-    @media (max-width:768px) {
-      .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background: var(--bg);
-        flex-direction: column;
-        padding: 20px;
-        border-top: 1px solid var(--panel-border)
-      }
-
-      .nav-links.active {
-        display: flex
-      }
-
-      .nav-toggle {
-        display: block
-      }
-    }
-  </style>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
 </head>
-
 <body>
-  <div id="world-map-container"></div>
 
-  <nav>
-    <div class="nav-container">
-      <a href="/" class="nav-brand" style="font-family:'Orbitron', sans-serif;">Launcify</a>
-      <div class="nav-links" id="nav-links">
-        <a href="/">Services</a>
-        <a href="/">Workflow</a>
-        <a href="/">Projects</a>
-        <a href="/">Capabilities</a>
-        <a href="/">About</a>
-      </div>
-      <button data-interactive-button data-contact="open"><span>Contact</span></button>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">☰</button>
-    </div>
-  </nav>
-
-  <main class="container">
-    <div class="glass-panel reveal-up" style="text-align:center;padding:60px 20px;margin-bottom:48px">
-      <h1 style="font-size:48px;margin:0;font-weight:700">Our Services</h1>
-      <p style="margin:20px auto 0;color:var(--muted);font-size:18px;max-width:600px">Automation, AI systems, and custom
-        tools built to eliminate manual work and scale your operations.</p>
-    </div>
-
-    <!-- Bento Grid Services -->
-    <div class="bento-grid"
-      style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-top:32px">
-      <!-- Service 1 - Span 1 -->
-      <div class="glass-panel reveal-up"
-        style="padding:32px;border-radius:16px;transition:all 0.3s;position:relative;overflow:hidden">
-        <svg style="width:48px;height:48px;margin-bottom:20px;color:var(--text-main)" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2">
-          <path
-            d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z">
-          </path>
-          <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
-          <line x1="12" y1="22.08" x2="12" y2="12"></line>
-        </svg>
-        <h3 style="font-size:22px;margin:0 0 12px 0;font-weight:600;color:var(--text-main)">Revenue-Driving Websites
-        </h3>
-        <p style="margin:0;font-size:14px;color:var(--muted);line-height:1.6">Pixel-perfect sites built for conversion.
-          Fast, measurable, designed to turn traffic into qualified leads.</p>
-        <div style="margin-top:24px;padding:16px;border-radius:12px;background:rgba(255,255,255,0.05)">
-          <div style="font-size:13px;color:var(--text-main);font-weight:600;margin-bottom:8px">Measurable Outcomes</div>
-          <div style="font-size:12px;color:var(--muted)">30-day lift in demo requests & SQLs</div>
-        </div>
-      </div>
-
-      <!-- Service 2 - Span 2 -->
-      <div class="glass-panel reveal-up"
-        style="padding:32px;border-radius:16px;grid-column:span 2;transition:all 0.3s;position:relative;overflow:hidden">
-        <svg style="width:48px;height:48px;margin-bottom:20px;color:var(--text-main)" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2">
-          <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-        </svg>
-        <h3 style="font-size:22px;margin:0 0 12px 0;font-weight:600;color:var(--text-main)">Workflow Automation</h3>
-        <p style="margin:0;font-size:14px;color:var(--muted);line-height:1.6">Replace manual work with reliable,
-          monitored automation. Connect tools, orchestrate workflows, eliminate human error.</p>
-        <div style="display:flex;gap:12px;margin-top:24px">
-          <div style="flex:1;padding:16px;border-radius:12px;background:rgba(255,255,255,0.05)">
-            <div style="width:100%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:8px">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <a href="/" class="logo">LAUNCIFY</a>
+            <div class="nav-menu">
+                <a href="/pages/services.html" class="nav-link active">Services</a>
+                <a href="/pages/pricing.html" class="nav-link">Pricing</a>
+                <a href="/pages/about.html" class="nav-link">About</a>
+                <a href="/pages/schedule-contact.html" class="btn btn-primary">Book a Strategy Call</a>
             </div>
-            <div style="width:80%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px;margin-bottom:8px">
+            <button class="nav-toggle" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="section text-center" style="padding-top: 160px; padding-bottom: 80px;">
+        <div class="container">
+            <h1 class="text-h2 mb-4">Engineering <span class="text-primary">Scalability</span></h1>
+            <p class="text-body mx-auto" style="max-width: 600px;">
+                We replace manual, error-prone workflows with intelligent systems that run 24/7.
+            </p>
+        </div>
+    </header>
+
+    <!-- Service Detail 1: AI Agents -->
+    <section class="section" id="ai-agents">
+        <div class="container">
+            <div class="grid-2" style="align-items: center;">
+                <div>
+                    <div class="badge"><span class="badge-dot"></span> Core Service</div>
+                    <h2 class="text-h2 mb-4">Autonomous AI Agents</h2>
+                    <p class="text-body mb-8">
+                        Deploy intelligent workers that handle complex tasks without supervision. 
+                        Our agents can research prospects, draft personalized emails, qualify leads, 
+                        and even negotiate initial terms.
+                    </p>
+                    <ul class="price-features mb-8">
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 24/7 Customer Support</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Lead Qualification & Enrichment</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Multi-step Research Tasks</li>
+                    </ul>
+                    <a href="/pages/schedule-contact.html?service=ai-agents" class="btn btn-secondary">Deploy Agents</a>
+                </div>
+                <!-- Placeholder for visual illustration -->
+                <div class="card" style="height: 300px; display: flex; align-items: center; justify-content: center; background: var(--color-surface-2);">
+                    <div class="text-small text-muted">Agent Workflow Visualization</div>
+                </div>
             </div>
-            <div style="width:90%;height:6px;background:rgba(255,255,255,0.1);border-radius:3px"></div>
-          </div>
-          <div style="flex:1;padding:16px;border-radius:12px;background:rgba(255,255,255,0.05)">
-            <div style="font-size:13px;color:var(--text-main);font-weight:600;margin-bottom:8px">Hours Saved Weekly
+        </div>
+    </section>
+
+    <!-- Service Detail 2: Workflow Automation -->
+    <section class="section bg-surface" id="automation">
+        <div class="container">
+             <!-- Note: simplified layout for maintainability, not using RTL trick here -->
+             <div class="grid-2" style="align-items: center;">
+                <div class="card" style="height: 300px; display: flex; align-items: center; justify-content: center; background: var(--color-surface-2);">
+                    <div class="text-small text-muted">Automation Graph Visual</div>
+                </div>
+                <div>
+                    <div class="badge"><span class="badge-dot"></span> Efficiency</div>
+                    <h2 class="text-h2 mb-4">Workflow Automation</h2>
+                    <p class="text-body mb-8">
+                        Connect your disconnected tools. We build robust n8n and Make.com workflows 
+                        that handle data synchronization, reporting, and notifications automatically.
+                    </p>
+                    <ul class="price-features mb-8">
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> CRM Sync (HubSpot, Salesforce)</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Automated Invoicing & Billing</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Content Distribution Pipelines</li>
+                    </ul>
+                    <a href="/pages/schedule-contact.html?service=automation" class="btn btn-secondary">Automate Workflows</a>
+                </div>
             </div>
-            <div style="font-size:12px;color:var(--muted)">Zero errors, 24/7 monitoring</div>
-          </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Service 3 - Span 2 -->
-      <div class="glass-panel reveal-up"
-        style="padding:32px;border-radius:16px;grid-column:span 2;transition:all 0.3s;position:relative;overflow:hidden">
-        <svg style="width:48px;height:48px;margin-bottom:20px;color:var(--text-main)" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2">
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-          <line x1="9" y1="9" x2="15" y2="15"></line>
-          <line x1="15" y1="9" x2="9" y2="15"></line>
-        </svg>
-        <h3 style="font-size:22px;margin:0 0 12px 0;font-weight:600;color:var(--text-main)">Agentic AI Systems</h3>
-        <p style="margin:0;font-size:14px;color:var(--muted);line-height:1.6">Deploy autonomous AI agents for support,
-          lead qualification, and data analysis. Not chatbots—systems that execute end-to-end.</p>
-        <div style="margin-top:24px;padding:20px;border-radius:12px;background:rgba(255,255,255,0.05)">
-          <div style="display:flex;gap:12px;margin-bottom:12px">
-            <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);opacity:0.5"></div>
-            <div style="flex:1;height:40px;background:rgba(255,255,255,0.05);border-radius:8px"></div>
-          </div>
-          <div style="display:flex;gap:12px;justify-content:flex-end">
-            <div style="width:60%;height:40px;background:rgba(255,255,255,0.08);border-radius:8px"></div>
-            <div style="width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.1);opacity:0.5"></div>
-          </div>
+    <!-- Service Detail 3: Custom Dev -->
+    <section class="section" id="custom-dev">
+        <div class="container">
+            <div class="grid-2" style="align-items: center;">
+                <div>
+                    <div class="badge"><span class="badge-dot"></span> Bespoke</div>
+                    <h2 class="text-h2 mb-4">Custom Internal Tools</h2>
+                    <p class="text-body mb-8">
+                        Sometimes off-the-shelf software isn't enough. We build custom dashboards, 
+                        client portals, and data visualization tools tailored to your specific operations.
+                    </p>
+                    <ul class="price-features mb-8">
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Custom Client Portals</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Internal Admin Dashboards</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Data Warehousing Solutions</li>
+                    </ul>
+                    <a href="/pages/schedule-contact.html?service=custom-dev" class="btn btn-secondary">Build Custom Tools</a>
+                </div>
+                 <div class="card" style="height: 300px; display: flex; align-items: center; justify-content: center; background: var(--color-surface-2);">
+                    <div class="text-small text-muted">Dashboard UI Placeholder</div>
+                </div>
+            </div>
         </div>
-      </div>
+    </section>
 
-      <!-- Service 4 - Span 1 -->
-      <div class="glass-panel reveal-up"
-        style="padding:32px;border-radius:16px;transition:all 0.3s;position:relative;overflow:hidden">
-        <svg style="width:48px;height:48px;margin-bottom:20px;color:var(--text-main)" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2">
-          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-          <polyline points="14 2 14 8 20 8"></polyline>
-          <line x1="16" y1="13" x2="8" y2="13"></line>
-          <line x1="16" y1="17" x2="8" y2="17"></line>
-        </svg>
-        <h3 style="font-size:22px;margin:0 0 12px 0;font-weight:600;color:var(--text-main)">Custom AI Tools</h3>
-        <p style="margin:0;font-size:14px;color:var(--muted);line-height:1.6">Bespoke interfaces wrapping AI into your
-          workflow. Built for your team's exact use case.</p>
-        <div style="margin-top:24px;padding:16px;border-radius:12px;background:rgba(255,255,255,0.05)">
-          <div style="font-size:13px;color:var(--text-main);font-weight:600;margin-bottom:8px">Full Control</div>
-          <div style="font-size:12px;color:var(--muted)">Your data, your rules</div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">LAUNCIFY</a>
+                    <p class="text-small">
+                        Helping forward-thinking companies build scalable AI infrastructure.
+                    </p>
+                </div>
+                <div class="footer-bottom" style="grid-column: 1 / -1;">
+                    &copy; 2026 Launcify. All rights reserved.
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </footer>
 
-    <style>
-      @keyframes gradient {
-        0% {
-          background-position: 0% 50%;
-        }
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
 
-        50% {
-          background-position: 100% 50%;
-        }
-
-        100% {
-          background-position: 0% 50%;
-        }
-      }
-
-      .glass-panel:hover {
-        transform: translateY(-4px);
-        border-color: rgba(255, 255, 255, 0.2);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-      }
-
-      @media (max-width: 768px) {
-        .bento-grid>div {
-          grid-column: span 1 !important;
-        }
-      }
-    </style>
-
-    <div class="glass-panel reveal-up" style="margin-top:60px;text-align:center;padding:48px 20px">
-      <h2 style="font-size:32px;margin:0 0 16px 0;font-weight:600">Ready to automate your operations?</h2>
-      <p style="color:var(--muted);margin:0 0 24px 0;font-size:16px">Book an ops audit. We'll map your current workflow
-        and identify automation opportunities.</p>
-      <button data-interactive-button onclick="window.location.href='/ops-audit.html'"><span>Book an Ops Audit
-          →</span></button>
-    </div>
-  </main>
-
-  <script src="/js/world-map.js"></script>
-  <script src="/js/border-beam.js"></script>
-  <script src="/js/theme-toggler.js"></script>
-  <script src="/js/scripts.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const obs = new IntersectionObserver((entries) => { entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); }) }, { threshold: 0.08 });
-      document.querySelectorAll('.reveal-up').forEach(el => obs.observe(el));
-    });
-  </script>
 </body>
-
 </html>

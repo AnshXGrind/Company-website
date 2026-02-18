@@ -1,272 +1,154 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Schedule Contact — Launcify</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/css/interactive-button.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book a Strategy Call with Launcify">
+    <title>Contact | Launcify</title>
+    
+    <!-- Design System -->
+    <link rel="stylesheet" href="/css/design-system.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
     <style>
-        body {
-            padding-top: 70px;
-            position: relative;
-            overflow-x: hidden;
-            font-family: 'Inter', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text-main);
+        .form-group {
+            margin-bottom: 24px;
         }
-
-        .nav-brand {
-            font-family: 'Orbitron', sans-serif;
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            color: var(--color-text-muted);
+            font-weight: 500;
         }
-
-        #world-map-container {
-            position: fixed;
-            top: 0;
-            left: 0;
+        
+        .form-input, .form-select, .form-textarea {
             width: 100%;
-            height: 100vh;
-            z-index: 0;
-            opacity: 0.06;
-            pointer-events: none
+            background: var(--color-surface-2);
+            border: 1px solid var(--color-border);
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            color: var(--color-text);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: all var(--transition);
+        }
+        
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.2);
         }
 
-        nav {
-            font-family: Orbitron, system-ui;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: transparent;
-            border: none;
-            z-index: 100;
-            padding: 16px 24px
-        }
-
-        .nav-brand {
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-main);
-            text-decoration: none;
-        }
-
-        .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            justify-content: space-between
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 20px;
-            align-items: center
-        }
-
-        .nav-links a {
-            color: var(--text-main);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 13px;
-            letter-spacing: 0.05em
-        }
-
-        main {
-            position: relative;
-            z-index: 1;
-            min-height: 80vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .form-success {
-            background: #d1fae5;
-            color: #065f46;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            font-weight: 600;
-        }
-
-        .form-error {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 16px;
-            font-weight: 600;
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
         }
     </style>
 </head>
-
 <body>
-    <div id="world-map-container">
-        <!-- Map BG would go here -->
-    </div>
 
-    <nav>
-        <div class="nav-container">
-            <a href="/" class="nav-brand">Launcify</a>
-            <div class="nav-links">
-                <a href="/">Services</a>
-                <a href="/">Workflow</a>
-                <a href="/">Projects</a>
-                <a href="/">Capabilities</a>
-                <a href="/">About</a>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <a href="/" class="logo">LAUNCIFY</a>
+            <div class="nav-menu">
+                <a href="/pages/services.html" class="nav-link">Services</a>
+                <a href="/pages/pricing.html" class="nav-link">Pricing</a>
+                <a href="/pages/about.html" class="nav-link">About</a>
+                <a href="/pages/schedule-contact.html" class="nav-link active">Book Call</a>
             </div>
-            <a href="/" class="nav-cta"
-                style="background: white; color: black; padding: 8px 16px; border-radius: 8px; font-weight: bold; text-decoration: none; font-family: Inter, sans-serif;">Contact</a>
+            <button class="nav-toggle" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
         </div>
     </nav>
 
-    <main class="w-full max-w-4xl mx-auto px-6 py-20">
-        <div class="glass-panel p-8 md:p-12 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl">
-            <h1 class="text-4xl md:text-5xl font-bold text-center mb-6" style="font-family: 'Orbitron', sans-serif;">
-                Schedule Contact</h1>
-            <p class="text-center text-gray-400 mb-12 max-w-lg mx-auto">Ready to transform your business with
-                automation? Let us know the best way to reach you.</p>
-
-            <div id="form-message"></div>
-
-            <form id="schedule-form" class="space-y-6 max-w-lg mx-auto" action="https://formspree.io/f/mjgwlokv"
-                method="POST">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2">First Name *</label>
-                        <input type="text" name="first_name" required
-                            class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
-                            placeholder="John">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-400 mb-2">Last Name *</label>
-                        <input type="text" name="last_name" required
-                            class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
-                            placeholder="Doe">
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">Email Address *</label>
-                    <input type="email" name="email" required
-                        class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
-                        placeholder="john@example.com">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">Company Name</label>
-                    <input type="text" name="company"
-                        class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
-                        placeholder="Your Company">
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">Service Interest *</label>
-                    <select name="service_interest" required
-                        class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors">
-                        <option value="">Select a service...</option>
-                        <option value="Modern Websites">Modern Websites</option>
-                        <option value="Workflow Automation">Workflow Automation</option>
-                        <option value="Agentic AI">Agentic AI</option>
-                        <option value="Custom AI Tools">Custom AI Tools</option>
-                        <option value="Multiple Services">Multiple Services</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">Preferred Contact Method *</label>
-                    <select name="contact_method" required
-                        class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors">
-                        <option value="">Select method...</option>
-                        <option value="Email">Email</option>
-                        <option value="Phone">Phone</option>
-                        <option value="Video Call">Video Call</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-sm font-medium text-gray-400 mb-2">Message</label>
-                    <textarea rows="4" name="message" required
-                        class="w-full bg-black/50 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:border-white/50 text-white transition-colors"
-                        placeholder="Tell us about your needs and goals..."></textarea>
-                </div>
-
-                <input type="hidden" name="_subject" value="New Schedule Contact Request from Launcify Website">
-                <input type="hidden" name="form_type" value="schedule_contact">
-
-                <button type="submit"
-                    class="w-full bg-white text-black font-bold py-4 rounded-lg hover:bg-gray-200 transition-colors"
-                    style="font-family: 'Orbitron', sans-serif;">
-                    Schedule Contact
-                </button>
-            </form>
+    <!-- Header -->
+    <header class="section text-center" style="padding-top: 160px;">
+        <div class="container">
+            <h1 class="text-h2 mb-4">Let's Talk Efficiency<span class="text-primary">.</span></h1>
+            <p class="text-body mx-auto" style="max-width: 600px;">
+                Ready to transform your business with automation? Let us know the best way to reach you.
+            </p>
         </div>
-    </main>
+    </header>
 
-    <script>
-        (function () {
-            const form = document.getElementById('schedule-form');
-            if (!form) return;
+    <!-- Form Section -->
+    <section class="section" style="padding-top: 0;">
+        <div class="container" style="max-width: 600px;">
+           <div class="card">
+                <form id="schedule-form" action="https://formspree.io/f/mjgwlokv" method="POST">
+                    <div class="grid-2" style="gap: 24px; margin-bottom: 24px;">
+                        <div>
+                            <label class="form-label">First Name *</label>
+                            <input type="text" name="first_name" required class="form-input" placeholder="John">
+                        </div>
+                        <div>
+                            <label class="form-label">Last Name *</label>
+                            <input type="text" name="last_name" required class="form-input" placeholder="Doe">
+                        </div>
+                    </div>
 
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const msgContainer = document.getElementById('form-message');
+                    <div class="form-group">
+                        <label class="form-label">Email Address *</label>
+                        <input type="email" name="email" required class="form-input" placeholder="john@example.com">
+                    </div>
 
-            function showMessage(text, type) {
-                msgContainer.innerHTML = '';
-                const el = document.createElement('div');
-                el.textContent = text;
-                el.setAttribute('role', 'status');
-                el.className = type === 'success' ? 'form-success' : 'form-error';
-                msgContainer.appendChild(el);
-            }
+                    <div class="form-group">
+                        <label class="form-label">Company Name</label>
+                        <input type="text" name="company" class="form-input" placeholder="Your Company">
+                    </div>
 
-            form.addEventListener('submit', async function (e) {
-                e.preventDefault();
-                const data = new FormData(form);
-                if (submitBtn) {
-                    submitBtn.disabled = true;
-                }
-                const origText = submitBtn ? submitBtn.textContent : '';
-                if (submitBtn) submitBtn.textContent = 'Sending...';
+                    <div class="form-group">
+                        <label class="form-label">Service Interest *</label>
+                        <select name="service_interest" required class="form-select">
+                            <option value="">Select a service...</option>
+                            <option value="Workflow Automation">Workflow Automation</option>
+                            <option value="AI Agents">AI Agents</option>
+                            <option value="Custom Development">Custom Development</option>
+                            <option value="Audit & Strategy">Audit & Strategy</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
 
-                try {
-                    const resp = await fetch(form.action, {
-                        method: 'POST',
-                        body: data,
-                        headers: { 'Accept': 'application/json' }
-                    });
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea name="message" required class="form-textarea" placeholder="Tell us about your needs and goals..."></textarea>
+                    </div>
 
-                    if (resp.ok) {
-                        showMessage('Thanks! We\'ll contact you soon using your preferred method.', 'success');
-                        form.reset();
-                        setTimeout(() => { window.location.href = '/thank-you.html'; }, 2200);
-                    } else {
-                        await resp.json().catch(() => null);
-                        showMessage('Submission failed. Please try again.', 'error');
-                    }
-                } catch (err) {
-                    showMessage('Network error. Please try again later.', 'error');
-                } finally {
-                    if (submitBtn) {
-                        submitBtn.disabled = false;
-                        submitBtn.textContent = origText;
-                    }
-                }
-            });
-        })();
-    </script>
+                    <button type="submit" class="btn btn-primary btn-w-full">Request Strategy Call</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-    <script src="/js/world-map.js" defer></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">LAUNCIFY</a>
+                    <p class="text-small">
+                        Helping forward-thinking companies build scalable AI infrastructure.
+                    </p>
+                </div>
+                <div class="footer-bottom" style="grid-column: 1 / -1;">
+                    &copy; 2026 Launcify. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
 
 </body>
-
 </html>
