@@ -1,21 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // FAQ Accordion Logic
-    const faqItems = document.querySelectorAll('.faq-question');
-
-    faqItems.forEach(header => {
-        header.addEventListener('click', () => {
-            const item = header.parentElement;
-
-            // Close others (optional, remove this block if you want multiple open)
-            document.querySelectorAll('.faq-item').forEach(i => {
-                if (i !== item) i.classList.remove('active');
-            });
-
-            // Toggle current
-            item.classList.toggle('active');
-        });
-    });
-
+    // FAQ Accordion Logic moved to app.js
+    
     // Intersection Observer for Pricing Cards animation
     const observerOptions = {
         threshold: 0.1,

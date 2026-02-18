@@ -1,299 +1,244 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing — Launcify</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="/css/interactive-button.css">
+    <meta name="description" content="Transparent Pricing for AI & Automation Services">
+    <title>Pricing | Launcify</title>
+    
+    <!-- Design System -->
+    <link rel="stylesheet" href="/css/design-system.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+
     <style>
-        .pricing-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .highlight-card {
-            border: 1px solid var(--tangerine);
-            box-shadow: 0 0 30px rgba(255, 122, 45, 0.1);
-            position: relative;
-        }
-
-        .highlight-badge {
-            position: absolute;
-            top: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--tangerine);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 99px;
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .check-icon {
-            color: var(--tangerine);
-            flex-shrink: 0;
-        }
-
+        /* Page Specific: FAQ Styles */
         .faq-item {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid var(--color-border);
         }
-
+        
         .faq-question {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 24px 0;
             cursor: pointer;
-            padding: 20px 0;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            color: var(--color-text);
+            font-family: var(--font-heading);
+            font-size: 1.125rem;
+            font-weight: 500;
         }
 
         .faq-answer {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease-out;
-            opacity: 0.7;
-            font-size: 0.95rem;
+            color: var(--color-text-muted);
             line-height: 1.6;
         }
-
+        
         .faq-item.active .faq-answer {
-            max-height: 200px;
-            /* Approximate max height */
-            padding-bottom: 20px;
+            max-height: 300px; /* Adjust if needed */
+            padding-bottom: 24px;
         }
 
         .faq-icon {
             transition: transform 0.3s ease;
+            font-size: 1.5rem;
+            color: var(--color-primary);
         }
-
+        
         .faq-item.active .faq-icon {
             transform: rotate(45deg);
         }
+
+        /* Page Specific: Highlight Badge */
+        .highlight-badge {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+        }
     </style>
 </head>
+<body>
 
-<body class="bg-black text-white font-inter">
-
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 backdrop-blur-md bg-black/50 border-b border-white/5">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="/" class="text-2xl font-orbitron font-bold tracking-tight">Launcify</a>
-            <div class="hidden md:flex gap-8">
-                <a href="/services" class="text-sm font-medium hover:text-gray-300 transition-colors">Services</a>
-                <a href="/workflow" class="text-sm font-medium hover:text-gray-300 transition-colors">Workflow</a>
-                <a href="/pages/pricing.html" class="text-sm font-medium text-white transition-colors">Pricing</a>
-                <a href="/about" class="text-sm font-medium hover:text-gray-300 transition-colors">About</a>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <a href="/" class="logo">LAUNCIFY</a>
+            <div class="nav-menu">
+                <a href="/#services" class="nav-link">Services</a>
+                <a href="/#process" class="nav-link">Process</a>
+                <a href="/pages/pricing.html" class="nav-link active">Pricing</a>
+                <a href="/#about" class="nav-link">About</a>
+                <a href="/#contact" class="btn btn-primary">Book a Strategy Call</a>
             </div>
-            <a href="/pages/schedule-contact.html"
-                class="bg-white text-black px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition-colors">Book
-                Call</a>
+            <button class="nav-toggle" aria-label="Menu">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
         </div>
     </nav>
 
     <!-- Header -->
-    <header class="pt-32 pb-20 px-6 text-center relative overflow-hidden">
-        <div class="max-w-3xl mx-auto relative z-10">
-            <h1 class="text-4xl md:text-6xl font-orbitron font-bold mb-6">Transparent <span
-                    style="color: var(--tangerine);">Pricing</span></h1>
-            <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-                Simple, scalable packages for businesses ready to automate and grow. No hidden fees.
+    <header class="section text-center" style="padding-top: 160px; padding-bottom: 80px;">
+        <div class="container">
+            <h1 class="text-h2 mb-4">Transparent Investment<span class="text-primary">.</span></h1>
+            <p class="text-body mx-auto" style="max-width: 600px;">
+                Clear, flat-rate packages for businesses ready to automate and grow. 
+                No hourly billing anxiety. No hidden fees.
             </p>
-        </div>
-        <!-- Background Glow -->
-        <div
-            class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[500px] bg-gradient-to-b from-blue-900/20 to-transparent pointer-events-none -z-10 blur-3xl">
         </div>
     </header>
 
     <!-- Pricing Grid -->
-    <section class="px-6 pb-24">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <section class="section" style="padding-top: 0;">
+        <div class="container">
+            <div class="grid-3">
+                <!-- Starter Plan -->
+                <div class="card pricing-card">
+                    <h3 class="text-h3">Audit & Strategy</h3>
+                    <p class="text-body text-small mb-4">For businesses starting their automation journey.</p>
+                    <div class="price-amount">$2,500 <span class="price-period">/ one-time</span></div>
+                    
+                    <a href="/pages/schedule-contact.html?plan=starter" class="btn btn-secondary btn-w-full mb-8">Get Started</a>
+                    
+                    <ul class="price-features">
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full Workflow Audit</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Tool Stack Review</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Implementation Roadmap</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 2 Weeks Support</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 100% Money Back Guarantee</li>
+                    </ul>
+                </div>
 
-            <!-- Starter Plan -->
-            <div class="pricing-card rounded-2xl p-8 flex flex-col">
-                <h3 class="text-xl font-orbitron font-bold mb-2">Starter</h3>
-                <p class="text-gray-400 text-sm mb-6">Perfect for small businesses starting their automation journey.
-                </p>
-                <div class="mb-8">
-                    <span class="text-4xl font-bold">$2,500</span>
-                    <span class="text-gray-500 text-sm">/ project</span>
+                <!-- Growth Plan (Recommended) -->
+                <div class="card card-price pricing-card recommended">
+                    <div style="text-align: center;"><span class="highlight-badge">Most Popular</span></div>
+                    <h3 class="text-h3">Growth Partner</h3>
+                    <p class="text-body text-small mb-4">Complete automation department.</p>
+                    <div class="price-amount">$4,800 <span class="price-period">/ month</span></div>
+                    
+                    <a href="/pages/schedule-contact.html?plan=growth" class="btn btn-primary btn-w-full mb-8">Start Growth Plan</a>
+                    
+                    <ul class="price-features">
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> <strong>Everything in Audit</strong></li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Custom AI Agent Development</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> n8n / Zapier Workflows</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Requests</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Private Slack Channel</li>
+                    </ul>
                 </div>
-                <a href="/pages/schedule-contact.html?plan=starter"
-                    class="block w-full text-center py-3 rounded-lg border border-white/20 hover:bg-white/5 transition-colors font-medium mb-8">Get
-                    Started</a>
-                <ul class="space-y-4 flex-1 text-sm text-gray-300">
-                    <li class="flex gap-3"><span class="check-icon">✓</span> Custom Landing Page</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> Basic CRM Integration</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> Email Automation Setup</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> SEO Optimization</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> 2 Weeks Support</li>
-                </ul>
-            </div>
 
-            <!-- Growth Plan (Highlighted) -->
-            <div
-                class="pricing-card highlight-card rounded-2xl p-8 flex flex-col transform scale-105 md:-translate-y-4 bg-black">
-                <div class="highlight-badge">Recommended</div>
-                <h3 class="text-xl font-orbitron font-bold mb-2">Growth</h3>
-                <p class="text-gray-400 text-sm mb-6">Advanced AI integration and workflow optimization.</p>
-                <div class="mb-8">
-                    <span class="text-4xl font-bold">$5,000</span>
-                    <span class="text-gray-500 text-sm">/ project</span>
+                <!-- Enterprise Plan -->
+                <div class="card pricing-card">
+                    <h3 class="text-h3">Enterprise</h3>
+                    <p class="text-body text-small mb-4">Bespoke digital transformation.</p>
+                    <div class="price-amount">Custom</div>
+                    
+                    <a href="/pages/schedule-contact.html?plan=enterprise" class="btn btn-secondary btn-w-full mb-8">Contact Sales</a>
+                    
+                    <ul class="price-features">
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> On-premise LLM Deployment</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Dedicated Engineering Team</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> SLA & 24/7 Support</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Custom SaaS Development</li>
+                    </ul>
                 </div>
-                <button
-                    class="block w-full text-center py-3 rounded-lg bg-orange-600 hover:bg-orange-500 text-white transition-colors font-bold mb-8"
-                    data-noise-button data-gradient-colors="#ff7a2d,#ff6fa3,#a78bfa">Get Started</button>
-                <ul class="space-y-4 flex-1 text-sm text-gray-300">
-                    <li class="flex gap-3"><span class="check-icon">✓</span> <strong>Everything in Starter</strong></li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> Custom Web Application</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> AI Chatbot Integration</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> Complex Workflow Automation</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> User Dashboard / Portal</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> 1 Month Priority Support</li>
-                </ul>
-            </div>
 
-            <!-- Enterprise Plan -->
-            <div class="pricing-card rounded-2xl p-8 flex flex-col">
-                <h3 class="text-xl font-orbitron font-bold mb-2">Enterprise</h3>
-                <p class="text-gray-400 text-sm mb-6">Full-scale digital transformation and bespoke solutions.</p>
-                <div class="mb-8">
-                    <span class="text-4xl font-bold">Custom</span>
-                </div>
-                <a href="/pages/schedule-contact.html?plan=enterprise"
-                    class="block w-full text-center py-3 rounded-lg border border-white/20 hover:bg-white/5 transition-colors font-medium mb-8">Contact
-                    Sales</a>
-                <ul class="space-y-4 flex-1 text-sm text-gray-300">
-                    <li class="flex gap-3"><span class="check-icon">✓</span> <strong>Everything in Growth</strong></li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> Dedicated Development Team</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> Custom AI Model Training</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> SaaS Product Development</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> SLA & 24/7 Support</li>
-                    <li class="flex gap-3"><span class="check-icon">✓</span> On-premise Deployment Options</li>
-                </ul>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- "All Plans Include" Section -->
-    <section class="py-16 border-t border-white/5 bg-white/05">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <h2 class="text-2xl font-orbitron font-bold mb-10">All Plans Include</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-sm text-gray-300">
-                <div class="p-4 border border-white/10 rounded-xl">
-                    <div class="text-2xl mb-2">🔒</div>
-                    <div>Safe & Secure</div>
-                </div>
-                <div class="p-4 border border-white/10 rounded-xl">
-                    <div class="text-2xl mb-2">📱</div>
-                    <div>Mobile Responsive</div>
-                </div>
-                <div class="p-4 border border-white/10 rounded-xl">
-                    <div class="text-2xl mb-2">⚡</div>
-                    <div>Fast Performance</div>
-                </div>
-                <div class="p-4 border border-white/10 rounded-xl">
-                    <div class="text-2xl mb-2">🤝</div>
-                    <div>Dedicated Support</div>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="py-24 px-6">
-        <div class="max-w-3xl mx-auto">
-            <h2 class="text-3xl font-orbitron font-bold text-center mb-12">Frequently Asked Questions</h2>
+    <section class="section">
+        <div class="container" style="max-width: 800px;">
+            <div class="text-center mb-12">
+                <h2 class="text-h2">Common Questions</h2>
+                <p class="text-body">Everything you need to know about working with us.</p>
+            </div>
 
-            <div class="faq-container space-y-2">
-                <!-- FAQ 1 -->
+            <div class="faq-container">
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span class="font-bold text-lg">How long does a typical project take?</span>
-                        <span class="faq-icon text-2xl">+</span>
-                    </div>
+                    <button class="faq-question">
+                        How long does a typical project take?
+                        <span class="faq-icon">+</span>
+                    </button>
                     <div class="faq-answer">
-                        We typically deliver Starter projects in 1-2 weeks, Growth projects in 3-5 weeks, and Enterprise
-                        solutions vary by scope. We provide a detailed timeline during our discovery call.
+                        We typically deliver Audit & Strategy roadmaps in 1 week. Growth plan implementations start showing value within 2 weeks, with ongoing optimizations every sprint (2-week cycles).
                     </div>
                 </div>
 
-                <!-- FAQ 2 -->
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span class="font-bold text-lg">Do you offer ongoing maintenance?</span>
-                        <span class="faq-icon text-2xl">+</span>
-                    </div>
+                    <button class="faq-question">
+                        Do you offer ongoing maintenance?
+                        <span class="faq-icon">+</span>
+                    </button>
                     <div class="faq-answer">
-                        Yes! We offer monthly retainer packages for updates, monitoring, and small improvements. We
-                        ensure your automation and site keep running smoothly.
+                        Yes! Our Growth package includes ongoing maintenance, monitoring, and updates. We ensure your automation agents keep running smoothly even as APIs change.
                     </div>
                 </div>
 
-                <!-- FAQ 3 -->
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span class="font-bold text-lg">What if I need a custom feature?</span>
-                        <span class="faq-icon text-2xl">+</span>
-                    </div>
+                    <button class="faq-question">
+                        What if I need a custom feature?
+                        <span class="faq-icon">+</span>
+                    </button>
                     <div class="faq-answer">
-                        Our Growth and Enterprise plans are fully customizable. We can build bespoke API integrations,
-                        custom user portals, and specialized AI tools tailored to your exact needs.
+                        Our Growth and Enterprise plans are fully customizable. We can build bespoke API integrations, custom user portals, and specialized AI tools tailored to your exact needs.
                     </div>
                 </div>
 
-                <!-- FAQ 4 -->
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span class="font-bold text-lg">Is there a refund policy?</span>
-                        <span class="faq-icon text-2xl">+</span>
-                    </div>
+                    <button class="faq-question">
+                        Is there a refund policy?
+                        <span class="faq-icon">+</span>
+                    </button>
                     <div class="faq-answer">
-                        We work in milestones. You approve each stage (Design, Dev, Launch) before we move forward,
-                        ensuring you're happy with the progress. Deposits are non-refundable to cover initial resource
-                        allocation.
+                        For our Audit package, if you're not satisfied with the value provided in the roadmap, we offer a full refund. For monthly retainers, you can cancel anytime.
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="py-24 px-6 text-center">
-        <div class="max-w-4xl mx-auto glass-panel p-12 rounded-3xl border border-white/10 relative overflow-hidden">
-            <div class="absolute inset-0 bg-blue-900/10 pointer-events-none"></div>
-            <h2 class="text-3xl md:text-4xl font-orbitron font-bold mb-6">Not sure which plan is right?</h2>
-            <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">Schedule a free 15-minute discovery call. We'll
-                analyze your needs and recommend the best path forward.</p>
-            <a href="/pages/schedule-contact.html"
-                class="inline-block bg-white text-black px-8 py-4 rounded-full font-bold hover:bg-gray-200 transition-colors">Book
-                a Free Strategy Call</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
-        <p>© 2026 Launcify. All rights reserved.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="/" class="logo">LAUNCIFY</a>
+                    <p class="text-small">
+                        Helping forward-thinking companies build scalable AI infrastructure.
+                    </p>
+                </div>
+                <!-- ... (Simplified Footer Columns) ... -->
+                <div class="footer-bottom" style="grid-column: 1 / -1;">
+                    &copy; 2026 Launcify. All rights reserved.
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <script src="/js/noise-button.js"></script>
+    <!-- Scripts -->
+    <script src="/js/app.js"></script>
     <script src="/js/pricing.js"></script>
 
 </body>
-
 </html>

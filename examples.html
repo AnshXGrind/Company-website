@@ -7,7 +7,7 @@
     <title>Launcify | Enterprise AI Solutions</title>
     
     <!-- 1. Design System -->
-    <link rel="stylesheet" href="/css/design-system.css">
+    <link rel="stylesheet" href="css/design-system.css">
 
     <!-- 2. Font Imports (Google Fonts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,12 +24,10 @@
             <a href="/" class="logo">LAUNCIFY</a>
             
             <div class="nav-menu">
-                <!-- Using absolute paths for navigation to work across pages -->
-                <a href="/#services" class="nav-link">Services</a>
-                <a href="/#process" class="nav-link">Process</a>
-                <a href="/pages/pricing.html" class="nav-link">Pricing</a>
-                <a href="/#about" class="nav-link">About</a>
-                <a href="/#contact" class="btn btn-primary">Book a Strategy Call</a>
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#process" class="nav-link">Process</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#contact" class="btn btn-primary">Book a Strategy Call</a>
             </div>
             
             <button class="nav-toggle" aria-label="Menu">
@@ -44,11 +42,7 @@
          HERO SECTION
          ========================= -->
     <header class="section hero-section">
-        <!-- 3D Spline Canvas Container -->
-        <div id="spline-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6;">
-        </div>
-
-        <div class="container text-center" style="position: relative; z-index: 1;">
+        <div class="container text-center">
             
             <div class="badge">
                 <span class="badge-dot"></span>
@@ -74,75 +68,55 @@
     </header>
 
     <!-- =========================
-         SERVICES PREVIEW
+         PRICING SECTION EXAMPLE
          ========================= -->
-    <section class="section" id="services">
+    <section class="section" id="pricing">
         <div class="container">
             <div class="text-center mb-8">
-                <h2 class="text-h2">What We Build</h2>
-                <p class="text-body">End-to-end automation solutions for forward-thinking companies.</p>
+                <h2 class="text-h2">Clear, Flat-Rate Pricing</h2>
+                <p class="text-body">No hourly billing. No hidden fees. Pause or cancel anytime.</p>
             </div>
-            
-            <div class="grid-3">
-                <div class="card">
-                    <h3 class="text-h3">AI Agents</h3>
-                    <p class="text-body">Autonomous agents that handle customer support, lead qualification, and data processing 24/7.</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-h3">Workflow Automation</h3>
-                    <p class="text-body">Connect your entire tech stack. We replace manual copy-pasting with intelligent, self-correcting workflows.</p>
-                </div>
-                <div class="card">
-                    <h3 class="text-h3">Custom Development</h3>
-                    <p class="text-body">Bespoke web applications and internal tools built to solve your unique operational bottlenecks.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- =========================
-         PRICING PREVIEW
-         ========================= -->
-    <section class="section" id="pricing-preview">
-        <div class="container">
-            <div class="text-center mb-8">
-                <h2 class="text-h2">Clear, Transparent Pricing</h2>
-                <p class="text-body mb-8">Scalable packages for every stage of growth.</p>
-            </div>
-            
             <div class="grid-3">
-                <!-- Using subset of pricing for homepage -->
+                <!-- Plan 1 -->
                 <div class="card">
                     <h3 class="text-h3">Audit</h3>
-                    <p class="text-body mb-4">Full system analysis.</p>
+                    <p class="text-small mb-4">Perfect for initial strategy.</p>
                     <div class="price-amount">$2,500 <span class="price-period">/ one-time</span></div>
                     <ul class="price-features">
-                        <li>Full Workflow Audit</li>
-                        <li>Automation Roadmap</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full Workflow Audit</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Automation Roadmap</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Tool Stack Review</li>
                     </ul>
-                    <a href="/pages/pricing.html" class="btn btn-secondary btn-w-full">View Details</a>
+                    <a href="#contact" class="btn btn-secondary btn-w-full">Get Initial Audit</a>
                 </div>
 
+                <!-- Plan 2 (Recommended) -->
                 <div class="card card-price recommended">
                     <h3 class="text-h3">Growth</h3>
-                     <p class="text-body mb-4">Most popular choice.</p>
+                    <p class="text-small mb-4">For scaling agencies.</p>
                     <div class="price-amount">$4,800 <span class="price-period">/ month</span></div>
                     <ul class="price-features">
-                        <li>Custom AI Agents</li>
-                        <li>n8n Workflow Automation</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Custom AI Agents</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> n8n Workflow Automation</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 48h Turnaround Time</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Dedicated Slack Channel</li>
                     </ul>
-                    <a href="/pages/pricing.html" class="btn btn-primary btn-w-full">View Details</a>
+                    <a href="#contact" class="btn btn-primary btn-w-full">Start Growth Plan</a>
                 </div>
 
+                <!-- Plan 3 -->
                 <div class="card">
                     <h3 class="text-h3">Enterprise</h3>
-                     <p class="text-body mb-4">For large orgs.</p>
+                    <p class="text-small mb-4">For large organizations.</p>
                     <div class="price-amount">Custom</div>
                     <ul class="price-features">
-                        <li>On-premise LLM Deployment</li>
-                        <li>Priority 24/7 Support</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> On-premise LLM Deployment</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Priority 24/7 Support</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Dedicated Engineer</li>
+                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> SLA Guarantees</li>
                     </ul>
-                    <a href="/pages/pricing.html" class="btn btn-secondary btn-w-full">View Details</a>
+                    <a href="#contact" class="btn btn-secondary btn-w-full">Contact Sales</a>
                 </div>
             </div>
         </div>
@@ -193,10 +167,6 @@
             </div>
         </div>
     </footer>
-
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
-    <script type="module" src="/js/spline-loader.js"></script>
 
 </body>
 </html>
