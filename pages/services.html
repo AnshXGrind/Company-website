@@ -1,146 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI Automation & Custom Software Development Services">
+    <meta name="description" content="Our AI & Automation Services">
     <title>Services | Launcify</title>
-    
+
     <!-- Design System -->
     <link rel="stylesheet" href="/css/design-system.css">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container navbar-inner">
-            <a href="/" class="logo">LAUNCIFY</a>
-            <div class="nav-menu">
-                <a href="/pages/services.html" class="nav-link active">Services</a>
-                <a href="/pages/pricing.html" class="nav-link">Pricing</a>
-                <a href="/pages/about.html" class="nav-link">About</a>
-                <a href="/book-call.html" class="btn btn-primary nav-cta">Book a Strategy Call</a>
-            </div>
-            <button class="nav-toggle" aria-label="Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
-        </div>
-    </nav>
+    <!-- NAVBAR COMPONENT -->
+    <div id="navbar-container"></div>
 
-    <!-- Header -->
-    <header class="section text-center" style="padding-top: 160px; padding-bottom: 80px;">
-        <div class="container">
-            <h1 class="text-h2 mb-4">Engineering <span class="text-primary">Scalability</span></h1>
-            <p class="text-body mx-auto" style="max-width: 600px;">
-                We replace manual, error-prone workflows with intelligent systems that run 24/7.
-            </p>
+    <!-- HERO SECTION -->
+    <header class="section hero-section" style="padding-top: 120px; padding-bottom: 60px;">
+        <div class="container text-center">
+            <div class="reveal-text">
+                <span class="badge"><span class="badge-dot"></span>Services</span>
+                <h1>Engineering <span class="text-accent">Intelligence</span></h1>
+                <p class="hero-subtext" style="margin: 0 auto;">
+                    We don't utilize "tools". We architect full-stack automation ecosystems tailored to your business logic.
+                </p>
+            </div>
         </div>
     </header>
 
-    <!-- Service Detail 1: AI Agents -->
-    <section class="section" id="ai-agents">
+    <!-- SERVICE GRID -->
+    <section class="section">
         <div class="container">
-            <div class="grid-2" style="align-items: center;">
-                <div>
-                    <div class="badge"><span class="badge-dot"></span> Core Service</div>
-                    <h2 class="text-h2 mb-4">Autonomous AI Agents</h2>
-                    <p class="text-body mb-8">
-                        Deploy intelligent workers that handle complex tasks without supervision. 
-                        Our agents can research prospects, draft personalized emails, qualify leads, 
-                        and even negotiate initial terms.
-                    </p>
-                    <ul class="price-features mb-8">
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 24/7 Customer Support</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Lead Qualification & Enrichment</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Multi-step Research Tasks</li>
+            <div class="grid-2">
+                <!-- Service 1 -->
+                <div class="card">
+                    <h3>AI Agent Development</h3>
+                    <p class="mb-4">Custom LLM-powered agents that can reason, browse the web, and execute tasks within your internal tools.</p>
+                    <ul class="text-sm" style="color: var(--color-text-muted);">
+                        <li class="mb-2">• 24/7 Customer Support Triage</li>
+                        <li class="mb-2">• Automated Lead Qualification</li>
+                        <li class="mb-2">• Document Analysis & Data Extraction</li>
                     </ul>
-                    <a href="/book-call.html?service=ai-agents" class="btn btn-secondary">Deploy Agents</a>
                 </div>
-                <!-- Placeholder for visual illustration -->
-                <div class="card" style="height: 300px; display: flex; align-items: center; justify-content: center; background: var(--color-surface-2);">
-                    <div class="text-small text-muted">Agent Workflow Visualization</div>
+
+                <!-- Service 2 -->
+                <div class="card">
+                    <h3>Workflow Automation Sprints</h3>
+                    <p class="mb-4">Rapid implementation of Integromat/Make/n8n pipelines to eliminate manual data entry between systems.</p>
+                    <ul class="text-sm" style="color: var(--color-text-muted);">
+                        <li class="mb-2">• CRM Data Enrichment</li>
+                        <li class="mb-2">• Automated Invoicing & Payroll</li>
+                        <li class="mb-2">• Cross-Platform Syncing</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="card">
+                    <h3>Internal Tooling</h3>
+                    <p class="mb-4">Bespoke Retool or custom React dashboards to give your operations team superpowers.</p>
+                    <ul class="text-sm" style="color: var(--color-text-muted);">
+                        <li class="mb-2">• Admin Panels</li>
+                        <li class="mb-2">• Inventory Management Systems</li>
+                        <li class="mb-2">• KPI Dashboards</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="card">
+                    <h3>Consulting & Strategy</h3>
+                    <p class="mb-4">Deep-dive audits into your operational inefficiencies and a roadmap for digital transformation.</p>
+                    <ul class="text-sm" style="color: var(--color-text-muted);">
+                        <li class="mb-2">• Tech Stack Audit</li>
+                        <li class="mb-2">• Automation Blueprinting</li>
+                        <li class="mb-2">• Team Training</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Service Detail 2: Workflow Automation -->
-    <section class="section bg-surface" id="automation">
+    <!-- CTA -->
+    <section class="section text-center" style="background-color: var(--color-surface);">
         <div class="container">
-             <!-- Note: simplified layout for maintainability, not using RTL trick here -->
-             <div class="grid-2" style="align-items: center;">
-                <div class="card" style="height: 300px; display: flex; align-items: center; justify-content: center; background: var(--color-surface-2);">
-                    <div class="text-small text-muted">Automation Graph Visual</div>
-                </div>
-                <div>
-                    <div class="badge"><span class="badge-dot"></span> Efficiency</div>
-                    <h2 class="text-h2 mb-4">Workflow Automation</h2>
-                    <p class="text-body mb-8">
-                        Connect your disconnected tools. We build robust n8n and Make.com workflows 
-                        that handle data synchronization, reporting, and notifications automatically.
-                    </p>
-                    <ul class="price-features mb-8">
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> CRM Sync (HubSpot, Salesforce)</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Automated Invoicing & Billing</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Content Distribution Pipelines</li>
-                    </ul>
-                    <a href="/book-call.html?service=automation" class="btn btn-secondary">Automate Workflows</a>
-                </div>
-            </div>
+            <h2>Not sure what you need?</h2>
+            <p class="mb-8">Use our strategy assistant to find the low-hanging fruit in your operations.</p>
+            <a href="/index.html#strategy-assistant" class="btn btn-secondary">Open Strategy Assistant</a>
         </div>
     </section>
 
-    <!-- Service Detail 3: Custom Dev -->
-    <section class="section" id="custom-dev">
-        <div class="container">
-            <div class="grid-2" style="align-items: center;">
-                <div>
-                    <div class="badge"><span class="badge-dot"></span> Bespoke</div>
-                    <h2 class="text-h2 mb-4">Custom Internal Tools</h2>
-                    <p class="text-body mb-8">
-                        Sometimes off-the-shelf software isn't enough. We build custom dashboards, 
-                        client portals, and data visualization tools tailored to your specific operations.
-                    </p>
-                    <ul class="price-features mb-8">
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Custom Client Portals</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Internal Admin Dashboards</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Data Warehousing Solutions</li>
-                    </ul>
-                    <a href="/book-call.html?service=custom-dev" class="btn btn-secondary">Build Custom Tools</a>
-                </div>
-                 <div class="card" style="height: 300px; display: flex; align-items: center; justify-content: center; background: var(--color-surface-2);">
-                    <div class="text-small text-muted">Dashboard UI Placeholder</div>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- FOOTER COMPONENT -->
+    <div id="footer-container"></div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="/" class="logo">LAUNCIFY</a>
-                    <p class="text-small">
-                        Helping forward-thinking companies build scalable AI infrastructure.
-                    </p>
-                </div>
-                <div class="footer-bottom" style="grid-column: 1 / -1;">
-                    &copy; 2026 Launcify. All rights reserved.
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
+    <script src="/js/motion.js" defer></script>
+    <script src="/js/components.js" defer></script>
 
 </body>
 </html>

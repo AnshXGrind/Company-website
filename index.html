@@ -5,116 +5,169 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Intelligent Automation & AI Integration for Enterprises">
-    <title>Launcify | Intelligent Systems</title>
+    <title>Launcify | Enterprise AI Automation</title>
 
-    <!-- 1. Zero-Noise Design System -->
+    <!-- 1. Enterprise Design System -->
     <link rel="stylesheet" href="/css/design-system.css">
 
     <!-- 2. Font Imports -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <div class="container navbar-inner">
-            <a href="/" class="logo">LAUNCIFY</a>
-            <div class="nav-menu">
-                <a href="/pages/services.html" class="nav-link">Services</a>
-                <a href="/pages/pricing.html" class="nav-link">Pricing</a>
-                <a href="/pages/about.html" class="nav-link">About</a>
-                <a href="/book-call.html" class="btn-primary" style="padding: 8px 16px; font-size: 0.875rem;">Strategy
-                    Call</a>
-            </div>
-        </div>
-    </nav>
+    <!-- NAVBAR COMPONENT -->
+    <div id="navbar-container"></div>
 
-    <!-- HERO: CLARITY & OUTCOME -->
-    <section class="hero section">
-        <!-- Neural Grid Background -->
-        <div class="hero-bg">
-            <svg id="neural-grid" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
-                <g class="lines"></g>
-                <g class="nodes"></g>
-            </svg>
-        </div>
-
+    <!-- HERO SECTION -->
+    <header class="section hero-section">
         <div class="container">
-            <span class="badge">Enterprise Automation Systems</span>
+            <div class="grid-2 toggle-reverse-mobile">
+                <div class="hero-content">
+                    <div class="reveal-text">
+                        <span class="badge"><span class="badge-dot"></span>Enterprise Automation</span>
+                    </div>
 
-            <h1>
-                AI Automation Systems That Save<br>
-                Businesses 20+ Hours Per Week.
-            </h1>
+                    <div class="reveal-text">
+                        <h1>
+                            Scalable AI Systems<br>
+                            <span class="text-accent">Without The Overhead.</span>
+                        </h1>
+                    </div>
 
-            <p class="hero-subtext">
-                We build custom intelligent infrastructure that eliminates manual data entry,
-                connects your disconnected tools, and scales your operations without hiring.
-            </p>
+                    <div class="reveal-text">
+                        <p class="hero-subtext">
+                            We engineer custom intelligent infrastructure that eliminates manual data entry,
+                            connects your disconnected tools, and scales your operations 24/7.
+                        </p>
+                    </div>
 
-            <div class="hero-actions">
-                <a href="/book-call.html" class="btn-primary">
-                    Book a Free Strategy Call
-                </a>
-                <a href="#how-it-works" class="btn-secondary">
-                    See How It Works
-                </a>
+                    <div class="reveal-text" style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 32px;">
+                        <a href="/book-call.html" class="btn btn-primary">Book Strategy Call</a>
+                        <a href="#how-it-works" class="btn btn-secondary">Explore Process</a>
+                    </div>
+                </div>
+
+                <!-- Subtle Geometric Illustration -->
+                <div class="hero-visual" style="position: relative; display: flex; justify-content: center; align-items: center;">
+                     <svg width="400" height="400" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity: 0.8;">
+                        <defs>
+                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:var(--color-primary);stop-opacity:0.2" />
+                                <stop offset="100%" style="stop-color:var(--color-bg);stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="200" cy="200" r="150" stroke="var(--color-border)" stroke-width="1" stroke-dasharray="4 4" />
+                        <circle cx="200" cy="200" r="100" stroke="var(--color-border)" stroke-width="1" />
+                        
+                        <!-- Nodes -->
+                        <circle class="animate-pulse" cx="200" cy="50" r="4" fill="var(--color-accent)" />
+                        <circle class="animate-pulse" cx="350" cy="200" r="4" fill="var(--color-accent)" />
+                        <circle class="animate-pulse" cx="200" cy="350" r="4" fill="var(--color-accent)" />
+                        <circle class="animate-pulse" cx="50" cy="200" r="4" fill="var(--color-accent)" />
+                        
+                        <!-- Connecting Lines -->
+                        <path d="M200 50 L350 200 L200 350 L50 200 Z" stroke="var(--color-primary)" stroke-width="1" stroke-opacity="0.3" />
+                        
+                        <!-- Floating Elements (Animated via CSS/JS elsewhere if needed, currently static) -->
+                        <rect x="180" y="180" width="40" height="40" rx="8" fill="var(--color-surface-alt)" stroke="var(--color-primary)" stroke-width="2" />
+                    </svg>
+                </div>
             </div>
         </div>
-    </section>
+    </header>
 
     <!-- PROBLEM SECTION -->
     <section class="section">
         <div class="container">
-            <div class="text-center mb-8">
+            <div class="text-center mb-8 reveal-text">
                 <h2>The Growth Ceiling</h2>
-                <p>Why scaling feels harder than it should.</p>
+                <p style="margin: 0 auto;">Manual processes are the bottleneck to your scalability.</p>
             </div>
             <div class="grid-3">
                 <div class="card">
-                    <h3 style="color: #FF4F4F;">Drowning in Manual Work</h3>
-                    <p>Your team spends hours copy-pasting data between spreadsheets, CRMs, and email. It's slow,
-                        expensive, and error-prone.</p>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3>Manual Bottlenecks</h3>
+                    <p class="text-sm">Your highly-paid talent spends hours on data entry and copy-pasting instead of strategic work.</p>
                 </div>
                 <div class="card">
-                    <h3 style="color: #FF4F4F;">Disconnected Tools</h3>
-                    <p>You use HubSpot, Slack, Airtable, and Xero—but none of them talk to each other independently. You
-                        are the glue holding them together.</p>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3>Siloed Data</h3>
+                    <p class="text-sm">Your CRM, email, and project tools don't talk to each other, creating "truth decay" across teams.</p>
                 </div>
                 <div class="card">
-                    <h3 style="color: #FF4F4F;">Missed Opportunities</h3>
-                    <p>Leads go cold because follow-ups are too slow. Customer data sits unused. You're leaving money on
-                        the table due to operational friction.</p>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                        </svg>
+                    </div>
+                    <h3>Missed Revenue</h3>
+                    <p class="text-sm">Leads go cold and follow-ups are missed because your operations can't keep up with demand.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STRATEGY ASSISTANT (NEW) -->
+    <section id="strategy-assistant" class="section">
+        <div class="container">
+            <div class="text-center mb-8 reveal-text">
+                <h2>Get Your Automation Strategy</h2>
+                <p style="margin: 0 auto;">Answer 3 questions to see where you can save 10+ hours a week.</p>
+            </div>
+            
+            <div id="strategy-assistant-root">
+                <!-- JS will inject here -->
             </div>
         </div>
     </section>
 
     <!-- SOLUTION SECTION -->
-    <section class="section" style="background: #11161C;">
+    <section class="section" style="background-color: var(--color-surface);">
         <div class="container">
-            <div class="text-center mb-8">
-                <h2>The Intelligent Infrastructure</h2>
-                <p>We replace manual grunt work with autonomous systems.</p>
+            <div class="text-center mb-8 reveal-text">
+                <h2>Intelligent Infrastructure</h2>
+                <p style="margin: 0 auto;">We engineer autonomous systems that work while you sleep.</p>
             </div>
             <div class="grid-3">
                 <div class="card">
-                    <h3>1. Autonomous Agents</h3>
-                    <p>Deploy AI agents that handle customer support tickets, qualify leads, and draft personalized
-                        emails 24/7 without sleep.</p>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                             <rect x="4" y="4" width="16" height="16" rx="2" />
+                             <path d="M9 12h6M12 9v6" />
+                        </svg>
+                    </div>
+                    <h3>AI Agents</h3>
+                    <p>Deploy autonomous agents that handle support tickets, qualify leads, and process complex documents instantly.</p>
                 </div>
                 <div class="card">
-                    <h3>2. Workflow Orchestration</h3>
-                    <p>We build custom n8n pipelines that sync your entire tech stack. When a sale happens, your CRM,
-                        invoice, and Slack update automatically.</p>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                    </div>
+                    <h3>Workflow Automation</h3>
+                    <p>Custom n8n and Python pipelines that sync your tech stack. Actions in one tool trigger updates everywhere else.</p>
                 </div>
                 <div class="card">
-                    <h3>3. Custom Dashboards</h3>
-                    <p>Internal tools built for your specific operations. View real-time KPIs, manage approvals, and
-                        control your data in one place.</p>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" />
+                            <path d="M3 9h18M9 21V9" />
+                        </svg>
+                    </div>
+                    <h3>Custom Dashboards</h3>
+                    <p>Bespoke internal tools built for your specific KPIs. Visualize real-time data and control operations in one view.</p>
                 </div>
             </div>
         </div>
@@ -123,93 +176,95 @@
     <!-- HOW IT WORKS -->
     <section id="how-it-works" class="section">
         <div class="container">
-            <h2 class="text-center mb-8">Our Process</h2>
-            <div class="grid-3">
+            <div class="grid-2" style="align-items: center;">
                 <div>
-                    <h3>1. Audit & Blueprint</h3>
-                    <p>We analyze your workflows to identify the highest-ROI automation opportunities. You get a clear
-                        roadmap before we build.</p>
+                     <h2 class="mb-4">Our Process</h2>
+                     <p class="mb-8">We don't just "build websites." We engineer business logic.</p>
+                     
+                     <div style="display: flex; flex-direction: column; gap: 32px;">
+                        <div style="display: flex; gap: 16px;">
+                            <div style="font-family: var(--font-mono); color: var(--color-primary); font-weight: bold; font-size: 1.5rem;">01</div>
+                            <div>
+                                <h4>Audit & Blueprint</h4>
+                                <p class="text-sm">We map your current workflows and identify high-ROI automation opportunities before writing a single line of code.</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 16px;">
+                            <div style="font-family: var(--font-mono); color: var(--color-primary); font-weight: bold; font-size: 1.5rem;">02</div>
+                            <div>
+                                <h4>Build & Integration</h4>
+                                <p class="text-sm">We build your system in rapid sprints, integrating LLMs and custom scripts directly into your existing tools.</p>
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 16px;">
+                            <div style="font-family: var(--font-mono); color: var(--color-primary); font-weight: bold; font-size: 1.5rem;">03</div>
+                            <div>
+                                <h4>Handover & Training</h4>
+                                <p class="text-sm">You own the code and the IP. We train your team on how to manage and scale the new infrastructure.</p>
+                            </div>
+                        </div>
+                     </div>
                 </div>
-                <div>
-                    <h3>2. Build & Validate</h3>
-                    <p>We engineer your custom system in 2-week sprints, rigorously testing with your real data to
-                        ensure accuracy.</p>
-                </div>
-                <div>
-                    <h3>3. Handover & Training</h3>
-                    <p>We don't just ship code. We train your team, provide documentation, and hand over full ownership
-                        of the intellectual property.</p>
+                <div style="display: flex; justify-content: center; padding: 32px;">
+                    <!-- Process Illustration -->
+                    <svg width="300" height="300" viewBox="0 0 300 300" fill="none" stroke="currentColor" stroke-width="1.5" style="color: var(--color-text-muted);">
+                        <rect x="50" y="50" width="200" height="200" rx="16" stroke="var(--color-border)" fill="var(--color-surface)" />
+                        <path d="M50 150h200M150 50v200" stroke="var(--color-border)" stroke-dasharray="4 4" />
+                        <circle cx="150" cy="150" r="40" stroke="var(--color-primary)" fill="var(--color-surface-alt)" />
+                        <path d="M150 130v20M140 150h20" stroke="var(--color-primary)" />
+                    </svg>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- PROOF / CASE STUDY PREVIEW -->
-    <section class="section" style="background: #11161C;">
+    <!-- CASE STUDY -->
+    <section class="section" style="background-color: var(--color-surface);">
         <div class="container">
-            <div class="grid-2" style="align-items: center; gap: 48px;">
-                <div>
-                    <span class="badge">Case Study</span>
-                    <h2>Saved 25 Hours/Week for WealthFlow</h2>
-                    <p>We automated the client onboarding process for a FinTech firm, reducing manual data entry by
-                        100%.</p>
-                    <ul style="margin-bottom: 32px; color: #E6EDF3;">
-                        <li style="margin-bottom: 12px;">✅ Reduced onboarding time from 5 days to 36 hours</li>
-                        <li style="margin-bottom: 12px;">✅ Eliminated manual compliance checks</li>
-                        <li style="margin-bottom: 12px;">✅ $120k/year in projected labor savings</li>
+            <div class="grid-2" style="align-items: center;">
+                <div class="reveal-text">
+                    <span class="badge"><span class="badge-dot"></span>Case Study</span>
+                    <h2>Financial Compliance Automation</h2>
+                    <p>We automated the client onboarding process for a Wealth Management firm, reducing manual compliance checks by 100%.</p>
+                    
+                    <ul style="margin-bottom: 32px;">
+                        <li style="display:flex; gap:8px; margin-bottom:8px;"><span class="text-accent">✓</span> Reduced onboarding time from 5 days to 36 hours</li>
+                        <li style="display:flex; gap:8px; margin-bottom:8px;"><span class="text-accent">✓</span> Eliminated manual KYC data entry</li>
+                        <li style="display:flex; gap:8px; margin-bottom:8px;"><span class="text-accent">✓</span> $120k/year in projected labor savings</li>
                     </ul>
-                    <a href="/pages/case-studies/fintech-automation.html" class="btn-secondary">Read Full Case Study</a>
+
+                    <a href="/pages/case-studies/index.html" class="btn btn-secondary">Read Case Study</a>
                 </div>
-                <!-- Simple Visual Representation of the Case Study -->
-                <div class="card" style="border-color: #4F8CFF; background: rgba(79, 140, 255, 0.05);">
-                    <div style="font-size: 4rem; font-weight: 700; color: #4F8CFF; line-height: 1;">70%</div>
-                    <div style="font-size: 1.25rem; color: #E6EDF3; margin-top: 8px;">Reduction in Turnaround Time</div>
+                <div class="card" style="justify-content: center; align-items: center; text-align: center; padding: 64px 32px; border-color: var(--color-primary);">
+                     <span class="text-xs text-accent text-mono uppercase tracking-wider mb-2">Efficiency Gain</span>
+                     <div style="font-size: 5rem; font-weight: 700; color: var(--color-primary); line-height: 1;">70%</div>
+                     <p class="text-sm mt-2">Reduction in Turnaround Time</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- TESTIMONIAL PLACEHOLDER -->
-    <section class="section">
-        <div class="container text-center" style="max-width: 800px;">
-            <p style="font-size: 1.5rem; color: #E6EDF3; font-style: italic; margin-bottom: 24px;">
-                "Launcify didn't just build a website. They built a machine that runs our backend operations. It's the
-                best investment we made this year."
-            </p>
-            <p style="color: #8B98A5; font-weight: 500;">- Sarah Jenkins, COO at FinScale</p>
-        </div>
-    </section>
-
-    <!-- FINAL CTA -->
+    <!-- CTA -->
     <section class="section text-center">
-        <div class="container">
-            <h2>Ready to Eliminate Manual Work?</h2>
-            <p>Schedule a strategy call to see exactly how much time we can save you.</p>
-            <a href="/book-call.html" class="btn-primary" style="margin-top: 24px;">Book a Free Strategy Call</a>
+        <div class="container reveal-text" style="max-width: 700px;">
+            <h2>Ready to Scale?</h2>
+            <p style="margin: 0 auto; margin-bottom: 32px;">Stop drowning in busy work. Let's build the infrastructure that takes you to the next level.</p>
+            <a href="/book-call.html" class="btn btn-primary" style="padding: 16px 32px; font-size: 1.125rem;">Book Your Strategy Call</a>
+            <p class="text-xs mt-4" style="color: var(--color-text-muted);">No pressure. Just engineering.</p>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="section" style="padding: 48px 0; border-top: 1px solid #1F2730;">
-        <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
-            <div>
-                <a href="/" class="logo">LAUNCIFY</a>
-                <p style="font-size: 0.875rem; max-width: 300px; margin-top: 16px;">
-                    Building intelligent infrastructure for forward-thinking companies.
-                </p>
-            </div>
-            <div style="display: flex; gap: 32px;">
-                <a href="/pages/privacy.html" style="color: #8B98A5; font-size: 0.875rem;">Privacy</a>
-                <a href="/pages/terms.html" style="color: #8B98A5; font-size: 0.875rem;">Terms</a>
-            </div>
-        </div>
-    </footer>
+    <!-- FOOTER COMPONENT -->
+    <div id="footer-container"></div>
 
     <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3/dist/ScrollTrigger.min.js" defer></script>
-    <script src="/js/neural-grid.js" defer></script>
     <script src="/js/motion.js" defer></script>
+    
+    <!-- 3. Component Loader & Assistants -->
+    <script src="/js/components.js" defer></script>
+    <script src="/js/strategy-assistant.js" defer></script>
 
 </body>
 
