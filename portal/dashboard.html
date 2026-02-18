@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | Launcify Client Portal</title>
+    <link rel="stylesheet" href="/css/design-system.css">
+    <link rel="stylesheet" href="/css/portal.css">
+    <!-- Icons -->
+    <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body class="portal-body">
+
+    <!-- Sidebar -->
+    <aside class="portal-sidebar">
+        <div class="portal-brand">
+            LAUNCIFY <span class="badge" style="margin: 0; font-size: 10px;">Portal</span>
+        </div>
+
+        <nav class="portal-nav">
+            <a href="/portal/dashboard.html" class="portal-link active">
+                <iconify-icon icon="solar:widget-2-linear"></iconify-icon> Dashboard
+            </a>
+            <a href="#" class="portal-link">
+                <iconify-icon icon="solar:clipboard-list-linear"></iconify-icon> Project Timeline
+            </a>
+            <a href="#" class="portal-link">
+                <iconify-icon icon="solar:folder-with-files-linear"></iconify-icon> Files
+            </a>
+            <a href="#" class="portal-link">
+                <iconify-icon icon="solar:bill-list-linear"></iconify-icon> Invoices
+            </a>
+        </nav>
+
+        <div class="portal-user">
+            <div class="user-avatar">C</div>
+            <div style="flex: 1; min-width: 0;">
+                <div class="text-small" style="font-weight: 600; color: var(--color-text);" id="user-email">Loading...
+                </div>
+                <div class="text-small" style="font-size: 11px;">Client Account</div>
+            </div>
+            <a href="#" id="logout-btn" style="color: var(--color-text-muted);"><iconify-icon
+                    icon="solar:logout-2-linear"></iconify-icon></a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="portal-main">
+        <header class="portal-header">
+            <div>
+                <h1 class="portal-title">Overview</h1>
+                <p class="text-body">Welcome back. Here is the status of your active project.</p>
+            </div>
+            <a href="mailto:support@launcify.com" class="btn btn-secondary">Contact Manager</a>
+        </header>
+
+        <!-- KPI Grid -->
+        <div class="kpi-grid">
+            <div class="kpi-card">
+                <div class="kpi-label">Current Phase</div>
+                <div class="kpi-value text-primary" id="proj-status">Loading...</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Next Milestone</div>
+                <div class="kpi-value" style="font-size: 1.5rem;" id="proj-next">Loading...</div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-label">Due Date</div>
+                <div class="kpi-value" style="font-size: 1.5rem;" id="proj-date">Loading...</div>
+            </div>
+        </div>
+
+        <!-- Progress Section -->
+        <h3 class="text-h3 mb-4">Overall Progress</h3>
+        <div class="card mb-8">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                <span class="text-small">Completion</span>
+                <span class="text-small">65%</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: var(--color-bg); border-radius: 4px; overflow: hidden;">
+                <div id="progress-bar"
+                    style="width: 0%; height: 100%; background: var(--color-primary); transition: width 1s ease;"></div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="grid-2">
+            <div>
+                <h3 class="text-h3 mb-4">Recent Activity</h3>
+                <div class="activity-feed">
+                    <div class="activity-item">
+                        <div class="activity-icon"><iconify-icon icon="solar:check-circle-linear"></iconify-icon></div>
+                        <div>
+                            <div style="font-weight: 600;">Phase 2: Development Completed</div>
+                            <div class="text-small">Yesterday at 4:30 PM</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon"><iconify-icon icon="solar:file-text-linear"></iconify-icon></div>
+                        <div>
+                            <div style="font-weight: 600;">New Deliverable Uploaded</div>
+                            <div class="text-small">API Documentation v1.0 • 2 days ago</div>
+                        </div>
+                    </div>
+                    <div class="activity-item">
+                        <div class="activity-icon"><iconify-icon icon="solar:chat-round-dots-linear"></iconify-icon>
+                        </div>
+                        <div>
+                            <div style="font-weight: 600;">Strategy Call Scheduled</div>
+                            <div class="text-small">Feb 24, 2:00 PM</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-h3 mb-4">Quick Actions</h3>
+                <div class="card">
+                    <button class="btn btn-secondary btn-w-full mb-4" style="justify-content: flex-start; gap: 12px;">
+                        <iconify-icon icon="solar:upload-minimalistic-linear"></iconify-icon> Upload Assets
+                    </button>
+                    <button class="btn btn-secondary btn-w-full mb-4" style="justify-content: flex-start; gap: 12px;">
+                        <iconify-icon icon="solar:calendar-linear"></iconify-icon> Book Review Call
+                    </button>
+                    <button class="btn btn-secondary btn-w-full" style="justify-content: flex-start; gap: 12px;">
+                        <iconify-icon icon="solar:file-download-linear"></iconify-icon> Download Latest Build
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="/js/portal.js"></script>
+</body>
+
+</html>

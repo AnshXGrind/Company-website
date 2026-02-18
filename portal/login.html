@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Launcify Client Portal</title>
+    <link rel="stylesheet" href="/css/design-system.css">
+    <link rel="stylesheet" href="/css/portal.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="auth-container">
+        <div class="auth-card">
+            <h1 class="portal-brand" style="justify-content: center; margin-bottom: 24px;">LAUNCIFY <span class="badge"
+                    style="margin: 0; font-size: 10px;">Portal</span></h1>
+            <p class="text-body mb-8">Sign in to view your project status.</p>
+
+            <form id="login-form">
+                <input type="email" id="email" class="auth-input" placeholder="name@company.com" required
+                    value="demo@client.com">
+                <input type="password" class="auth-input" placeholder="••••••••" required value="password">
+                <button type="submit" class="btn btn-primary btn-w-full">Sign In</button>
+            </form>
+
+            <p class="text-small" style="margin-top: 24px; opacity: 0.5;">Hint: Just click Sign In (Demo Mode)</p>
+        </div>
+    </div>
+
+    <script src="/js/portal.js"></script>
+</body>
+
+</html>
