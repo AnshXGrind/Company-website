@@ -2,112 +2,136 @@ document.addEventListener('DOMContentLoaded', () => {
     const assistantContainer = document.getElementById('strategy-assistant-root');
     if (!assistantContainer) return;
 
-    // State
+    // ── State ──────────────────────────────────────────────────────────────────
     const state = {
         step: 0,
+        loading: false,
+        error: null,
         data: {
             companySize: '',
             bottleneck: '',
-            techStack: []
+            techStack: [],
         },
-        recommendation: null
+        result: null,
     };
 
-    // Configuration
+    // ── Step Configuration ─────────────────────────────────────────────────────
     const steps = [
         {
-            id: 'size',
-            question: "How large is your organization?",
+            id: 'companySize',
+            question: 'How large is your organization?',
             type: 'single',
             options: [
-                { label: "1–10 Employees", value: "1-10" },
-                { label: "10–50 Employees", value: "10-50" },
-                { label: "50–200 Employees", value: "50-200" },
-                { label: "200+ Employees", value: "200+" }
-            ]
+                { label: '1–10 Employees',   value: '1-10'  },
+                { label: '10–50 Employees',  value: '10-50' },
+                { label: '50–200 Employees', value: '50-200'},
+                { label: '200+ Employees',   value: '200+'  },
+            ],
         },
         {
             id: 'bottleneck',
-            question: "What is your primary operational bottleneck?",
+            question: 'What is your primary operational bottleneck?',
             type: 'single',
             options: [
-                { label: "Manual Data Entry", value: "data-entry" },
-                { label: "Slow Sales Process", value: "sales" },
-                { label: "Customer Support Overload", value: "support" },
-                { label: "Reporting Chaos", value: "reporting" },
-                { label: "Tool Fragmentation", value: "fragmentation" }
-            ]
+                { label: 'Manual Data Entry',           value: 'data-entry'    },
+                { label: 'Slow Sales Process',          value: 'sales'         },
+                { label: 'Customer Support Overload',   value: 'support'       },
+                { label: 'Reporting Chaos',             value: 'reporting'     },
+                { label: 'Tool Fragmentation',          value: 'fragmentation' },
+            ],
         },
         {
-            id: 'tech',
-            question: "Which tools do you currently use? (Select all that apply)",
+            id: 'techStack',
+            question: 'Which tools do you currently use? (Select all that apply)',
             type: 'multi',
             options: [
-                { label: "HubSpot", value: "hubspot" },
-                { label: "Slack", value: "slack" },
-                { label: "Airtable", value: "airtable" },
-                { label: "Notion", value: "notion" },
-                { label: "Shopify", value: "shopify" },
-                { label: "Custom / Other", value: "custom" }
-            ]
-        }
+                { label: 'HubSpot',         value: 'hubspot'  },
+                { label: 'Slack',           value: 'slack'    },
+                { label: 'Airtable',        value: 'airtable' },
+                { label: 'Notion',          value: 'notion'   },
+                { label: 'Shopify',         value: 'shopify'  },
+                { label: 'Custom / Other',  value: 'custom'   },
+            ],
+        },
     ];
 
-    // Logic: Decision Tree for Recommendations
-    function generateRecommendation(data) {
-        let system = "Custom Integration Protocol";
-        let timeSaved = "10-15";
-        let timeline = "2-3 weeks";
+    // ── API Call ───────────────────────────────────────────────────────────────
+    async function fetchStrategy() {
+        state.loading = true;
+        state.error = null;
+        render();
 
-        if (data.bottleneck === 'data-entry') {
-            system = "Autonomous Data Pipeline (n8n + Python)";
-            timeSaved = "20+";
-        } else if (data.bottleneck === 'sales') {
-            system = "Automated Lead Qualification & CRM Sync";
-            timeSaved = "15-20";
-        } else if (data.bottleneck === 'support') {
-            system = "Tier-1 AI Support Agent";
-            timeSaved = "25+";
-            timeline = "3-4 weeks";
-        } else if (data.bottleneck === 'reporting') {
-            system = "Real-time BI Dashboard & Aggregation";
-            timeSaved = "5-10";
-            timeline = "1-2 weeks";
+        try {
+            const response = await fetch('/api/strategy', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    companySize: state.data.companySize,
+                    bottleneck:  state.data.bottleneck,
+                    techStack:   state.data.techStack,
+                }),
+            });
+
+            if (!response.ok) {
+                const err = await response.json().catch(() => ({}));
+                throw new Error(err.error || `Server error ${response.status}`);
+            }
+
+            const json = await response.json();
+            state.result  = json.result;
+            state.step    = steps.length; // advance to result view
+        } catch (err) {
+            state.error = err.message || 'An unexpected error occurred. Please try again.';
+            state.step  = steps.length - 1; // return to last question so user can retry
+        } finally {
+            state.loading = false;
+            render();
         }
-
-        if (data.companySize === '200+') {
-            timeline = "4-6 weeks (Enterprise Rollout)";
-        }
-
-        return { system, timeSaved, timeline };
     }
 
-    // Render Functions
+    // ── Render ─────────────────────────────────────────────────────────────────
     function render() {
         assistantContainer.innerHTML = '';
-        
-        // Progress Bar
-        const progress = document.createElement('div');
-        progress.className = 'sa-progress';
-        const progressFill = document.createElement('div');
-        progressFill.className = 'sa-progress-fill';
-        // Calculate progress: if we are at step 0 of 3, show 25%. Step 3 (result) is 100%.
-        const percentage = Math.min(((state.step + 1) / (steps.length + 1)) * 100, 100);
-        progressFill.style.width = `${percentage}%`;
-        progress.appendChild(progressFill);
-        assistantContainer.appendChild(progress);
 
-        // Content
+        // Progress bar
+        const totalPhases = steps.length + 1; // questions + result
+        const currentPhase = state.loading ? steps.length : state.step;
+        const pct = Math.min(Math.round(((currentPhase + 1) / totalPhases) * 100), 100);
+
+        assistantContainer.insertAdjacentHTML('beforeend', `
+            <div class="sa-progress">
+                <div class="sa-progress-fill" style="width: ${pct}%;"></div>
+            </div>
+        `);
+
         const content = document.createElement('div');
-        content.className = 'sa-content fade-in';
+        content.className = 'sa-content';
 
-        if (state.step < steps.length) {
+        if (state.loading) {
+            renderLoading(content);
+        } else if (state.step < steps.length) {
             renderQuestion(content, steps[state.step]);
         } else {
             renderResult(content);
         }
 
+        if (state.error) {
+            const errEl = document.createElement('p');
+            errEl.className = 'sa-error';
+            errEl.textContent = state.error;
+            content.appendChild(errEl);
+        }
+
         assistantContainer.appendChild(content);
+    }
+
+    function renderLoading(container) {
+        container.innerHTML = `
+            <div class="sa-loading">
+                <div class="sa-spinner"></div>
+                <p>Analyzing your inputs. Generating strategy.</p>
+            </div>
+        `;
     }
 
     function renderQuestion(container, stepConfig) {
@@ -116,101 +140,127 @@ document.addEventListener('DOMContentLoaded', () => {
         title.textContent = stepConfig.question;
         container.appendChild(title);
 
-        const optionsContainer = document.createElement('div');
-        optionsContainer.className = 'sa-options';
+        const optionsGrid = document.createElement('div');
+        optionsGrid.className = 'sa-options';
 
         stepConfig.options.forEach(opt => {
             const btn = document.createElement('button');
             btn.className = 'sa-option-btn';
-            
-            // Check if selected
-            let isSelected = false;
-            if (stepConfig.type === 'single') {
-                isSelected = state.data[stepConfig.id] === opt.value;
-            } else {
-                isSelected = state.data.techStack.includes(opt.value);
-            }
-            
-            if (isSelected) btn.classList.add('selected');
 
+            const isSelected = stepConfig.type === 'single'
+                ? state.data[stepConfig.id] === opt.value
+                : state.data.techStack.includes(opt.value);
+
+            if (isSelected) btn.classList.add('selected');
             btn.textContent = opt.label;
-            btn.onclick = () => handleSelection(stepConfig, opt.value);
-            optionsContainer.appendChild(btn);
+            btn.addEventListener('click', () => handleSelect(stepConfig, opt.value));
+            optionsGrid.appendChild(btn);
         });
 
-        container.appendChild(optionsContainer);
+        container.appendChild(optionsGrid);
 
-        // Navigation for Multi-select
         if (stepConfig.type === 'multi') {
             const nextBtn = document.createElement('button');
             nextBtn.className = 'btn-primary sa-next-btn';
-            nextBtn.textContent = 'Analyze Strategy';
-            nextBtn.onclick = () => nextStep();
+            nextBtn.textContent = 'Generate My Strategy';
+            nextBtn.addEventListener('click', () => fetchStrategy());
             container.appendChild(nextBtn);
         }
     }
 
     function renderResult(container) {
-        const result = generateRecommendation(state.data);
-        
+        const r = state.result || {};
+
+        // Build implementation plan rows
+        const plan = r.plan || {};
+        const planRows = Object.entries(plan)
+            .map(([week, desc]) => `
+                <div class="sa-plan-row">
+                    <span class="sa-plan-week">${week.replace('week', 'Week ')}</span>
+                    <span>${escHtml(desc)}</span>
+                </div>
+            `).join('');
+
         container.innerHTML = `
-            <div class="sa-result text-center">
-                <span class="badge mb-4">You are qualified for automation</span>
-                <h3 class="mb-4">Recommended Strategy: <br><span class="text-accent">${result.system}</span></h3>
-                
+            <div class="sa-result">
+                <span class="badge mb-4">Strategy Generated</span>
+
+                <h3 class="mb-4">${escHtml(r.system || 'Custom Automation System')}</h3>
+
+                <p class="sa-diagnosis mb-4">${escHtml(r.diagnosis || '')}</p>
+
                 <div class="sa-stats-grid">
                     <div class="sa-stat-card">
-                        <div class="sa-stat-value">${result.timeSaved}h</div>
-                        <div class="sa-stat-label">Hours Saved / Week</div>
+                        <div class="sa-stat-value">${escHtml(r.hoursSaved || '—')}h</div>
+                        <div class="sa-stat-label">Estimated Hours Saved / Week</div>
                     </div>
                     <div class="sa-stat-card">
-                        <div class="sa-stat-value">${result.timeline}</div>
-                        <div class="sa-stat-label">Implementation Time</div>
+                        <div class="sa-stat-value">${escHtml(r.timeline || '—')}</div>
+                        <div class="sa-stat-label">Implementation Timeline</div>
                     </div>
                 </div>
 
-                <div class="sa-cta-box mt-8">
-                    <p class="mb-4 text-sm text-muted">This is an estimate based on your inputs. To implement this specific plan:</p>
-                    <a href="/book-call.html" class="btn btn-primary btn-lg">Book Implementation Strategy Call</a>
+                ${planRows ? `
+                    <div class="sa-plan">
+                        <h4 class="mb-4">Implementation Plan</h4>
+                        ${planRows}
+                    </div>
+                ` : ''}
+
+                <div class="sa-cta-box">
+                    <p class="text-sm mb-4" style="color: var(--color-text-muted);">${escHtml(r.nextStep || 'Book a strategy call to get started.')}</p>
+                    <a href="/book-call.html" class="btn btn-primary">Book a Free Strategy Call</a>
                 </div>
-                
-                <button class="btn-text mt-4" id="restart-sa">Start Over</button>
+
+                <button id="restart-sa">Start Over</button>
             </div>
         `;
 
-        // Bind restart separately after render
         setTimeout(() => {
-            document.getElementById('restart-sa').onclick = () => {
-                state.step = 0;
-                state.data = { companySize: '', bottleneck: '', techStack: [] };
-                render();
-            };
+            const restartBtn = document.getElementById('restart-sa');
+            if (restartBtn) {
+                restartBtn.addEventListener('click', () => {
+                    state.step    = 0;
+                    state.result  = null;
+                    state.error   = null;
+                    state.loading = false;
+                    state.data    = { companySize: '', bottleneck: '', techStack: [] };
+                    render();
+                });
+            }
         }, 0);
     }
 
-    // Handlers
-    function handleSelection(stepConfig, value) {
+    // ── Handlers ───────────────────────────────────────────────────────────────
+    function handleSelect(stepConfig, value) {
         if (stepConfig.type === 'single') {
             state.data[stepConfig.id] = value;
-            // Add small delay for visual feedback then next
-            setTimeout(() => nextStep(), 250);
+            // Brief visual feedback before advancing
+            setTimeout(() => {
+                state.step++;
+                render();
+            }, 220);
         } else {
-            // Multi-select toggle
-            const index = state.data.techStack.indexOf(value);
-            if (index === -1) {
+            const idx = state.data.techStack.indexOf(value);
+            if (idx === -1) {
                 state.data.techStack.push(value);
             } else {
-                state.data.techStack.splice(index, 1);
+                state.data.techStack.splice(idx, 1);
             }
-            render(); // Re-render to update selected state
+            render();
         }
     }
 
-    function nextStep() {
-        state.step++;
-        render();
+    // ── Utility ────────────────────────────────────────────────────────────────
+    function escHtml(str) {
+        if (!str) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;');
     }
 
-    // Initialize
+    // ── Boot ───────────────────────────────────────────────────────────────────
     render();
 });

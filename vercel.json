@@ -7,6 +7,10 @@
       "destination": "/index.html"
     },
     {
+      "source": "/api/:path*",
+      "destination": "/api/:path*"
+    },
+    {
       "source": "/:page",
       "destination": "/pages/:page.html"
     }
