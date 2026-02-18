@@ -1,243 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Transparent Pricing for AI & Automation Services">
     <title>Pricing | Launcify</title>
-    
-    <!-- Design System -->
     <link rel="stylesheet" href="/css/design-system.css">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
-    <style>
-        /* Page Specific: FAQ Styles */
-        .faq-item {
-            border-bottom: 1px solid var(--color-border);
-        }
-        
-        .faq-question {
-            width: 100%;
-            text-align: left;
-            background: none;
-            border: none;
-            padding: 24px 0;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            color: var(--color-text);
-            font-family: var(--font-heading);
-            font-size: 1.125rem;
-            font-weight: 500;
-        }
-
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            color: var(--color-text-muted);
-            line-height: 1.6;
-        }
-        
-        .faq-item.active .faq-answer {
-            max-height: 300px; /* Adjust if needed */
-            padding-bottom: 24px;
-        }
-
-        .faq-icon {
-            transition: transform 0.3s ease;
-            font-size: 1.5rem;
-            color: var(--color-primary);
-        }
-        
-        .faq-item.active .faq-icon {
-            transform: rotate(45deg);
-        }
-
-        /* Page Specific: Highlight Badge */
-        .highlight-badge {
-            display: inline-block;
-            background: var(--color-primary);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 16px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="container navbar-inner">
             <a href="/" class="logo">LAUNCIFY</a>
             <div class="nav-menu">
                 <a href="/pages/services.html" class="nav-link">Services</a>
-                <a href="/pages/pricing.html" class="nav-link active">Pricing</a>
-                <a href="/pages/about.html" class="nav-link">About</a>
-                <a href="/book-call.html" class="btn btn-primary nav-cta">Book a Strategy Call</a>
+                <a href="/pages/case-studies/index.html" class="nav-link">Case Studies</a>
+                <a href="/book-call.html" class="btn-primary" style="padding: 8px 16px; font-size: 0.875rem;">Strategy
+                    Call</a>
             </div>
-            <button class="nav-toggle" aria-label="Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
         </div>
     </nav>
 
-    <!-- Header -->
-    <header class="section text-center" style="padding-top: 160px; padding-bottom: 80px;">
-        <div class="container">
-            <h1 class="text-h2 mb-4">Transparent Investment<span class="text-primary">.</span></h1>
-            <p class="text-body mx-auto" style="max-width: 600px;">
-                Clear, flat-rate packages for businesses ready to automate and grow. 
-                No hourly billing anxiety. No hidden fees.
-            </p>
-        </div>
-    </header>
-
-    <!-- Pricing Grid -->
-    <section class="section" style="padding-top: 0;">
-        <div class="container">
-            <div class="grid-3">
-                <!-- Starter Plan -->
-                <div class="card pricing-card">
-                    <h3 class="text-h3">Audit & Strategy</h3>
-                    <p class="text-body text-small mb-4">For businesses starting their automation journey.</p>
-                    <div class="price-amount">$2,500 <span class="price-period">/ one-time</span></div>
-                    
-                    <a href="/book-call.html?plan=starter" class="btn btn-secondary btn-w-full mb-8">Get Started</a>
-                    
-                    <ul class="price-features">
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Full Workflow Audit</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Tool Stack Review</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Implementation Roadmap</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 2 Weeks Support</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 100% Money Back Guarantee</li>
-                    </ul>
-                </div>
-
-                <!-- Growth Plan (Recommended) -->
-                <div class="card card-price pricing-card recommended">
-                    <div style="text-align: center;"><span class="highlight-badge">Most Popular</span></div>
-                    <h3 class="text-h3">Growth Partner</h3>
-                    <p class="text-body text-small mb-4">Complete automation department.</p>
-                    <div class="price-amount">$4,800 <span class="price-period">/ month</span></div>
-                    
-                    <a href="/book-call.html?plan=growth" class="btn btn-primary btn-w-full mb-8">Start Growth Plan</a>
-                    
-                    <ul class="price-features">
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> <strong>Everything in Audit</strong></li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Custom AI Agent Development</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> n8n / Zapier Workflows</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Unlimited Requests</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Private Slack Channel</li>
-                    </ul>
-                </div>
-
-                <!-- Enterprise Plan -->
-                <div class="card pricing-card">
-                    <h3 class="text-h3">Enterprise</h3>
-                    <p class="text-body text-small mb-4">Bespoke digital transformation.</p>
-                    <div class="price-amount">Custom</div>
-                    
-                    <a href="/book-call.html?plan=enterprise" class="btn btn-secondary btn-w-full mb-8">Contact Sales</a>
-                    
-                    <ul class="price-features">
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> On-premise LLM Deployment</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Dedicated Engineering Team</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> SLA & 24/7 Support</li>
-                        <li><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Custom SaaS Development</li>
-                    </ul>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- FAQ Section -->
     <section class="section">
+        <div class="container text-center">
+            <span class="badge">Transparent Investment</span>
+            <h1>Clear Pricing for ROI-Focused Teams</h1>
+            <p class="hero-subtext" style="margin-left: auto; margin-right: auto;">
+                We don't do hidden fees. Choose the model that fits your stage.
+            </p>
+
+            <div class="grid-3" style="margin-top: 64px; text-align: left;">
+
+                <!-- AUDIT -->
+                <div class="card">
+                    <h3>System Audit</h3>
+                    <p style="min-height: 48px;">Perfect for teams who know they have bottlenecks but can't pinpoint
+                        them.</p>
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #E6EDF3; margin: 24px 0;">$2,500 <span
+                            style="font-size: 1rem; color: #8B98A5; font-weight: 400;">/ one-time</span></div>
+
+                    <a href="/book-call.html" class="btn-secondary" style="width: 100%; justify-content: center;">Book
+                        Audit</a>
+
+                    <ul style="margin-top: 32px; color: #8B98A5; font-size: 0.9375rem;">
+                        <li style="margin-bottom: 12px;">✓ Full Workflow Analysis</li>
+                        <li style="margin-bottom: 12px;">✓ Tech Stack Review</li>
+                        <li style="margin-bottom: 12px;">✓ Automation Roadmap Blueprint</li>
+                        <li style="margin-bottom: 12px;">✓ Security Compliance Check</li>
+                    </ul>
+                </div>
+
+                <!-- GROWTH (Highlighted) -->
+                <div class="card" style="border-color: #4F8CFF; background: #161C23; position: relative;">
+                    <div
+                        style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: #4F8CFF; color: white; padding: 4px 12px; border-radius: 99px; font-size: 0.75rem; font-weight: 600;">
+                        MOST POPULAR</div>
+                    <h3>Growth Partner</h3>
+                    <p style="min-height: 48px;">Continuous automation engineering for scaling companies.</p>
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #E6EDF3; margin: 24px 0;">$4,800 <span
+                            style="font-size: 1rem; color: #8B98A5; font-weight: 400;">/ month</span></div>
+
+                    <a href="/book-call.html" class="btn-primary" style="width: 100%; justify-content: center;">Start
+                        Scale-Up</a>
+
+                    <ul style="margin-top: 32px; color: #E6EDF3; font-size: 0.9375rem;">
+                        <li style="margin-bottom: 12px;">✓ <strong>Custom AI Agent Development</strong></li>
+                        <li style="margin-bottom: 12px;">✓ Unlimited Workflow Edits</li>
+                        <li style="margin-bottom: 12px;">✓ Priority Slack Support</li>
+                        <li style="margin-bottom: 12px;">✓ Bi-weekly Strategy Calls</li>
+                    </ul>
+                </div>
+
+                <!-- ENTERPRISE -->
+                <div class="card">
+                    <h3>Enterprise</h3>
+                    <p style="min-height: 48px;">For organizations requiring on-premise deployment and strict SLAs.</p>
+                    <div style="font-size: 2.5rem; font-weight: 700; color: #E6EDF3; margin: 24px 0;">Custom</div>
+
+                    <a href="/book-call.html" class="btn-secondary"
+                        style="width: 100%; justify-content: center;">Contact Sales</a>
+
+                    <ul style="margin-top: 32px; color: #8B98A5; font-size: 0.9375rem;">
+                        <li style="margin-bottom: 12px;">✓ On-Premise LLM Deployment</li>
+                        <li style="margin-bottom: 12px;">✓ Dedicated Engineering Pod</li>
+                        <li style="margin-bottom: 12px;">✓ 24/7 SLA Support</li>
+                        <li style="margin-bottom: 12px;">✓ Custom MSA & Invoicing</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION (Objection Handling) -->
+    <section class="section" style="background: #11161C;">
         <div class="container" style="max-width: 800px;">
-            <div class="text-center mb-12">
-                <h2 class="text-h2">Common Questions</h2>
-                <p class="text-body">Everything you need to know about working with us.</p>
+            <h2 class="text-center" style="margin-bottom: 48px;">Common Questions</h2>
+
+            <div style="margin-bottom: 32px;">
+                <h3 style="color: #E6EDF3; margin-bottom: 8px;">How long does it take to see results?</h3>
+                <p>Most clients see their first automated workflow live within 7 days. Complex AI agents typically take
+                    2-3 weeks to build, test, and deploy.</p>
             </div>
 
-            <div class="faq-container">
-                <div class="faq-item">
-                    <button class="faq-question">
-                        How long does a typical project take?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        We typically deliver Audit & Strategy roadmaps in 1 week. Growth plan implementations start showing value within 2 weeks, with ongoing optimizations every sprint (2-week cycles).
-                    </div>
-                </div>
+            <div style="margin-bottom: 32px;">
+                <h3 style="color: #E6EDF3; margin-bottom: 8px;">Do we own the code?</h3>
+                <p>Yes. Everything we build (n8n workflows, custom scripts) is transferred to your own infrastructure.
+                    You own the IP.</p>
+            </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Do you offer ongoing maintenance?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        Yes! Our Growth package includes ongoing maintenance, monitoring, and updates. We ensure your automation agents keep running smoothly even as APIs change.
-                    </div>
-                </div>
+            <div style="margin-bottom: 32px;">
+                <h3 style="color: #E6EDF3; margin-bottom: 8px;">Is my data secure?</h3>
+                <p>Security is our priority. We use SOC2 compliant tools and never train public models on your
+                    proprietary data. We can also deploy fully on-premise if needed.</p>
+            </div>
 
-                <div class="faq-item">
-                    <button class="faq-question">
-                        What if I need a custom feature?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        Our Growth and Enterprise plans are fully customizable. We can build bespoke API integrations, custom user portals, and specialized AI tools tailored to your exact needs.
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        Is there a refund policy?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        For our Audit package, if you're not satisfied with the value provided in the roadmap, we offer a full refund. For monthly retainers, you can cancel anytime.
-                    </div>
-                </div>
+            <div style="margin-bottom: 32px;">
+                <h3 style="color: #E6EDF3; margin-bottom: 8px;">What if we need to pause?</h3>
+                <p>Our monthly "Growth" plan can be paused or cancelled with 14 days notice. We are partners, not
+                    hostages.</p>
             </div>
 
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
+    <!-- CTA -->
+    <section class="section text-center">
         <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="/" class="logo">LAUNCIFY</a>
-                    <p class="text-small">
-                        Helping forward-thinking companies build scalable AI infrastructure.
-                    </p>
-                </div>
-                <!-- ... (Simplified Footer Columns) ... -->
-                <div class="footer-bottom" style="grid-column: 1 / -1;">
-                    &copy; 2026 Launcify. All rights reserved.
-                </div>
-            </div>
+            <h2>Still unsure which plan is right?</h2>
+            <a href="/book-call.html" class="btn-primary" style="margin-top: 24px;">Talk to an Engineer</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="section" style="padding: 48px 0; border-top: 1px solid #1F2730;">
+        <div class="container text-center">
+            <p style="font-size: 0.875rem;">&copy; 2026 Launcify. Intelligent Systems.</p>
         </div>
     </footer>
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
-    <script src="/js/pricing.js"></script>
+    <!-- SCRIPTS -->
+    <script src="/js/motion.js" defer></script>
 
 </body>
+
 </html>

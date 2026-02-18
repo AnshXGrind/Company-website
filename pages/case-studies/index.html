@@ -4,222 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Case Studies — Launcify</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Orbitron:wght@400;700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/interactive-button.css">
-    <style>
-        .case-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s ease;
-        }
-
-        .case-card:hover {
-            transform: translateY(-8px);
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .case-image {
-            height: 240px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .case-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .case-card:hover .case-image img {
-            transform: scale(1.05);
-        }
-
-        .category-tag {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .filter-btn {
-            background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #888;
-            padding: 8px 20px;
-            border-radius: 99px;
-            transition: all 0.3s ease;
-        }
-
-        .filter-btn:hover,
-        .filter-btn.active {
-            background: white;
-            color: black;
-            border-color: white;
-        }
-    </style>
+    <title>Case Studies | Launcify</title>
+    <link rel="stylesheet" href="/css/design-system.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body class="bg-black text-white font-inter">
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 left-0 w-full z-50 py-4 px-6 md:px-12 backdrop-blur-md bg-black/50 border-b border-white/5">
-        <div class="max-w-7xl mx-auto flex items-center justify-between">
-            <a href="/index.html" class="text-2xl font-orbitron font-bold tracking-tight">Launcify</a>
-            <div class="hidden md:flex gap-8">
-                <a href="/pages/services.html" class="text-sm font-medium hover:text-gray-300 transition-colors">Services</a>
-                <a href="/pages/case-studies/index.html"
-                    class="text-sm font-medium text-white transition-colors">Work</a>
-                <a href="/pages/pricing.html"
-                    class="text-sm font-medium hover:text-gray-300 transition-colors">Pricing</a>
-                <a href="/pages/about.html" class="text-sm font-medium hover:text-gray-300 transition-colors">About</a>
+    <nav class="navbar">
+        <div class="container navbar-inner">
+            <a href="/" class="logo">LAUNCIFY</a>
+            <div class="nav-menu">
+                <a href="/pages/services.html" class="nav-link">Services</a>
+                <a href="/pages/case-studies/index.html" class="nav-link" style="color: #E6EDF3;">Case Studies</a>
+                <a href="/book-call.html" class="btn-primary" style="padding: 8px 16px; font-size: 0.875rem;">Strategy
+                    Call</a>
             </div>
-            <a href="/book-call.html"
-                class="bg-white text-black px-5 py-2 rounded-full font-bold text-sm hover:bg-gray-200 transition-colors">Book
-                Call</a>
         </div>
     </nav>
 
-    <!-- Header -->
-    <header class="pt-32 pb-12 px-6 text-center relative">
-        <h1 class="text-4xl md:text-6xl font-orbitron font-bold mb-6">Our <span
-                style="color: var(--tangerine);">Work</span></h1>
-        <p class="text-gray-400 text-lg max-w-2xl mx-auto">
-            Real results for forward-thinking companies. From AI integration to custom web platforms.
-        </p>
-    </header>
+    <section class="section">
+        <div class="container">
+            <h1 class="text-center" style="margin-bottom: 16px;">Proven Results</h1>
+            <p class="text-center" style="color: #8B98A5; margin-bottom: 64px;">Real outcomes from our automation and AI
+                implementations.</p>
 
-    <!-- Filter -->
-    <section class="px-6 pb-12">
-        <div class="flex justify-center flex-wrap gap-4" id="filters">
-            <button class="filter-btn active" data-filter="all">All</button>
-            <button class="filter-btn" data-filter="ai">AI & Automation</button>
-            <button class="filter-btn" data-filter="web">Web Development</button>
-            <button class="filter-btn" data-filter="consulting">Consulting</button>
+            <div class="grid-3">
+                <!-- Case Study 1 -->
+                <a href="/pages/case-studies/fintech-automation.html" class="card"
+                    style="text-decoration: none; color: inherit; display: block;">
+                    <span class="badge" style="margin-bottom: 16px;">FinTech</span>
+                    <h3>WealthFlow Partners</h3>
+                    <p style="margin-bottom: 24px;">Reducing client onboarding time by 70% using n8n and auto-compliance
+                        checks.</p>
+                    <span style="color: #4F8CFF; font-weight: 500;">Read Deep Dive &rarr;</span>
+                </a>
+
+                <!-- Case Study 2 -->
+                <a href="/pages/case-studies/ecommerce-ai-agents.html" class="card"
+                    style="text-decoration: none; color: inherit; display: block;">
+                    <span class="badge" style="margin-bottom: 16px;">E-commerce</span>
+                    <h3>Nord Living</h3>
+                    <p style="margin-bottom: 24px;">Automating 85% of customer support tickets with a custom Shopify AI
+                        Agent.</p>
+                    <span style="color: #4F8CFF; font-weight: 500;">Read Deep Dive &rarr;</span>
+                </a>
+
+                <!-- Placeholder 3 -->
+                <div class="card" style="opacity: 0.5;">
+                    <span class="badge" style="margin-bottom: 16px;">Coming Soon</span>
+                    <h3>Logistics AI</h3>
+                    <p>Optimizing fleet route planning using predictive ML models.</p>
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 96px;">
+                <a href="/book-call.html" class="btn-primary">See How We Can Help You</a>
+            </div>
         </div>
     </section>
-
-    <!-- Projects Grid -->
-    <section class="px-6 pb-24">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="projects-grid">
-
-            <!-- Project 1 -->
-            <article class="case-card rounded-xl overflow-hidden group" data-category="ai">
-                <a href="/pages/case-studies/metric-flow.html" class="block">
-                    <div class="case-image">
-                        <!-- Placeholder Image generation via URL -->
-                        <img src="https://placehold.co/600x400/111/444?text=AI+Dashboard" alt="AI Dashboard">
-                        <div class="absolute top-4 left-4">
-                            <span class="category-tag backdrop-blur-md">AI Integration</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold font-orbitron mb-2 group-hover:text-amber-500 transition-colors">
-                            MetricFlow AI</h3>
-                        <p class="text-gray-400 text-sm mb-4">Automating data analysis for a logistics firm, reducing
-                            reporting time by 85%.</p>
-                        <div class="flex gap-2 text-xs text-gray-500 font-mono">
-                            <span>OpenAI API</span>
-                            <span>•</span>
-                            <span>Python</span>
-                            <span>•</span>
-                            <span>React</span>
-                        </div>
-                    </div>
-                </a>
-            </article>
-
-            <!-- Project 2 -->
-            <article class="case-card rounded-xl overflow-hidden group" data-category="web">
-                <a href="#" class="block">
-                    <div class="case-image">
-                        <img src="https://placehold.co/600x400/111/444?text=FinTech+Platform" alt="FinTech Platform">
-                        <div class="absolute top-4 left-4">
-                            <span class="category-tag backdrop-blur-md">Web Dev</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold font-orbitron mb-2 group-hover:text-amber-500 transition-colors">
-                            NovaBank Interface</h3>
-                        <p class="text-gray-400 text-sm mb-4">Modernizing a legacy banking interface with a sleek,
-                            responsive Vue.js application.</p>
-                        <div class="flex gap-2 text-xs text-gray-500 font-mono">
-                            <span>Vue.js</span>
-                            <span>•</span>
-                            <span>Tailwind</span>
-                            <span>•</span>
-                            <span>Security</span>
-                        </div>
-                    </div>
-                </a>
-            </article>
-
-            <!-- Project 3 -->
-            <article class="case-card rounded-xl overflow-hidden group" data-category="automation">
-                <a href="#" class="block">
-                    <div class="case-image">
-                        <img src="https://placehold.co/600x400/111/444?text=Workflow+Auto" alt="Workflow Automation">
-                        <div class="absolute top-4 left-4">
-                            <span class="category-tag backdrop-blur-md">Automation</span>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold font-orbitron mb-2 group-hover:text-amber-500 transition-colors">
-                            AutoReach Outreach</h3>
-                        <p class="text-gray-400 text-sm mb-4">Scaling cold outreach using n8n workflows and AI
-                            personalization.</p>
-                        <div class="flex gap-2 text-xs text-gray-500 font-mono">
-                            <span>n8n</span>
-                            <span>•</span>
-                            <span>Gmail API</span>
-                            <span>•</span>
-                            <span>CRM</span>
-                        </div>
-                    </div>
-                </a>
-            </article>
-
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="py-12 border-t border-white/5 text-center text-gray-500 text-sm">
-        <p>© 2026 Launcify. All rights reserved.</p>
-    </footer>
-
-    <script>
-        // Simple Filtering Logic
-        const buttons = document.querySelectorAll('.filter-btn');
-        const cards = document.querySelectorAll('.case-card');
-
-        buttons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Active state
-                buttons.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                const filter = btn.dataset.filter;
-
-                cards.forEach(card => {
-                    if (filter === 'all' || card.dataset.category === filter) {
-                        card.style.display = 'block';
-                        setTimeout(() => card.style.opacity = '1', 50);
-                    } else {
-                        card.style.opacity = '0';
-                        setTimeout(() => card.style.display = 'none', 300);
-                    }
-                });
-            });
-        });
-    </script>
 
 </body>
 

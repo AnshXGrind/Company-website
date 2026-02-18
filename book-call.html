@@ -1,154 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Book a Strategy Call with Launcify">
-    <title>Contact | Launcify</title>
-    
-    <!-- Design System -->
+    <title>Book a Strategy Call | Launcify</title>
     <link rel="stylesheet" href="/css/design-system.css">
-
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
-    <style>
-        .form-group {
-            margin-bottom: 24px;
-        }
-        
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.875rem;
-            color: var(--color-text-muted);
-            font-weight: 500;
-        }
-        
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            background: var(--color-surface-2);
-            border: 1px solid var(--color-border);
-            padding: 12px 16px;
-            border-radius: var(--radius-sm);
-            color: var(--color-text);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: all var(--transition);
-        }
-        
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 2px rgba(79, 140, 255, 0.2);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
 
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="container navbar-inner">
             <a href="/" class="logo">LAUNCIFY</a>
             <div class="nav-menu">
                 <a href="/pages/services.html" class="nav-link">Services</a>
+                <a href="/pages/case-studies/index.html" class="nav-link">Case Studies</a>
                 <a href="/pages/pricing.html" class="nav-link">Pricing</a>
-                <a href="/pages/about.html" class="nav-link">About</a>
-                <a href="/book-call.html" class="btn btn-primary nav-cta">Book a Free Strategy Call</a>
             </div>
-            <button class="nav-toggle" aria-label="Menu">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
         </div>
     </nav>
-
     <!-- Header -->
-    <header class="section text-center" style="padding-top: 160px;">
+    <section class="section text-center" style="padding-top: 160px;">
         <div class="container">
-            <h1 class="text-h2 mb-4">Let's Talk Efficiency<span class="text-primary">.</span></h1>
-            <p class="text-body mx-auto" style="max-width: 600px;">
-                Ready to transform your business with automation? Let us know the best way to reach you.
+            <h1>Let's Design Your Automation System</h1>
+            <p class="hero-subtext" style="max-width: 600px; margin: 0 auto;">
+                Book a 30-minute consultation to identify your bottlenecks and build a roadmap for efficiency.
             </p>
         </div>
-    </header>
+    </section>
 
-    <!-- Form Section -->
+    <!-- QUALIFICATION SECTION -->
     <section class="section" style="padding-top: 0;">
-        <div class="container" style="max-width: 600px;">
-           <div class="card">
-                <form id="schedule-form" action="https://formspree.io/f/mjgwlokv" method="POST">
-                    <div class="grid-2" style="gap: 24px; margin-bottom: 24px;">
-                        <div>
-                            <label class="form-label">First Name *</label>
-                            <input type="text" name="first_name" required class="form-input" placeholder="John">
-                        </div>
-                        <div>
-                            <label class="form-label">Last Name *</label>
-                            <input type="text" name="last_name" required class="form-input" placeholder="Doe">
-                        </div>
-                    </div>
+        <div class="container" style="max-width: 900px;">
+            <div class="grid-2" style="gap: 32px; margin-bottom: 64px;">
+                <!-- WHO THIS IS FOR -->
+                <div class="card" style="border-left: 4px solid #4F8CFF;">
+                    <h3>Who This Call Is For:</h3>
+                    <ul style="margin-top: 16px; color: #E6EDF3; font-size: 0.9375rem;">
+                        <li style="margin-bottom: 12px;">✅ Founders scaling past $1M ARR.</li>
+                        <li style="margin-bottom: 12px;">✅ Ops managers drowning in spreadsheet data.</li>
+                        <li style="margin-bottom: 12px;">✅ Teams looking to reduce manual headcount cost.</li>
+                    </ul>
+                </div>
+                <!-- WHO THIS IS NOT FOR -->
+                <div class="card" style="border-left: 4px solid #FF4F4F;">
+                    <h3>Who This Is NOT For:</h3>
+                    <ul style="margin-top: 16px; color: #8B98A5; font-size: 0.9375rem;">
+                        <li style="margin-bottom: 12px;">❌ Students looking for internships.</li>
+                        <li style="margin-bottom: 12px;">❌ Businesses wanting a $500 WordPress site.</li>
+                        <li style="margin-bottom: 12px;">❌ Anyone expecting "magic" without process change.</li>
+                    </ul>
+                </div>
+            </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Email Address *</label>
-                        <input type="email" name="email" required class="form-input" placeholder="john@example.com">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Company Name</label>
-                        <input type="text" name="company" class="form-input" placeholder="Your Company">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Service Interest *</label>
-                        <select name="service_interest" required class="form-select">
-                            <option value="">Select a service...</option>
-                            <option value="Workflow Automation">Workflow Automation</option>
-                            <option value="AI Agents">AI Agents</option>
-                            <option value="Custom Development">Custom Development</option>
-                            <option value="Audit & Strategy">Audit & Strategy</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea name="message" required class="form-textarea" placeholder="Tell us about your needs and goals..."></textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary btn-w-full">Request Strategy Call</button>
-                </form>
+            <!-- WHAT TO EXPECT -->
+            <div class="text-center mb-8">
+                <h3>What To Expect</h3>
+                <p>No hard sales. We review your current stack, identify 3 automation opportunities, and give you a
+                    rough implementation timeline.</p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-brand">
-                    <a href="/" class="logo">LAUNCIFY</a>
-                    <p class="text-small">
-                        Helping forward-thinking companies build scalable AI infrastructure.
-                    </p>
+    <section class="section">
+        <div class="container text-center">
+            <div class="grid-2" style="max-width: 900px; margin: 48px auto 0; text-align: left; gap: 48px;">
+
+                <!-- Value Prop Sidebar -->
+                <div style="padding: 24px;">
+                    <h3>What We'll Cover:</h3>
+                    <ul style="color: #8B98A5; font-size: 1rem; margin-top: 24px;">
+                        <li style="margin-bottom: 16px; display: flex; gap: 12px;">
+                            <span style="color: #4F8CFF;">✓</span>
+                            Current Operational Bottlenecks
+                        </li>
+                        <li style="margin-bottom: 16px; display: flex; gap: 12px;">
+                            <span style="color: #4F8CFF;">✓</span>
+                            Feasibility of AI Agents for your use case
+                        </li>
+                        <li style="margin-bottom: 16px; display: flex; gap: 12px;">
+                            <span style="color: #4F8CFF;">✓</span>
+                            Estimated ROI & Implementation Timeline
+                        </li>
+                        <li style="margin-bottom: 16px; display: flex; gap: 12px;">
+                            <span style="color: #4F8CFF;">✓</span>
+                            Custom Tech Stack Recommendations
+                        </li>
+                    </ul>
+
+                    <div
+                        style="margin-top: 48px; background: #11161C; padding: 24px; border-radius: 8px; border: 1px solid #1F2730;">
+                        <p style="margin-bottom: 8px; color: #E6EDF3; font-weight: 500;">"The call alone saved us weeks
+                            of research."</p>
+                        <p style="font-size: 0.875rem; margin-bottom: 0;">- Mark D., CEO at TechFlow</p>
+                    </div>
                 </div>
-                <div class="footer-bottom" style="grid-column: 1 / -1;">
-                    &copy; 2026 Launcify. All rights reserved.
+
+                <!-- Calendar Placeholder -->
+                <div class="card"
+                    style="min-height: 400px; display: flex; align-items: center; justify-content: center; background: #161C23;">
+                    <!-- Embed Calendly/Cal.com here -->
+                    <div class="text-center">
+                        <p style="color: #E6EDF3; font-weight: 500;">Select a Time</p>
+                        <!-- Example placeholder for user to swap with real embed -->
+                        <div
+                            style="background: #0B0F14; padding: 20px; border-radius: 8px; border: 1px solid #1F2730; margin-top: 16px;">
+                            <p style="font-size: 0.875rem;">[ Calendar Embed Code Goes Here ]</p>
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
-    </footer>
+    </section>
 
-    <!-- Scripts -->
-    <script src="/js/app.js"></script>
+    <!-- SCRIPTS -->
+    <script src="/js/motion.js" defer></script>
 
 </body>
+
 </html>

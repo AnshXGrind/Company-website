@@ -1,75 +1,94 @@
-/**
- * Launcify Motion System (Premium)
- * Handles sequential fade-ups and navbar interaction.
- */
+document.addEventListener("DOMContentLoaded", () => {
+    // Check for reduced motion preference
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-document.addEventListener('DOMContentLoaded', () => {
-    initNavbar();
-    initScrollAnimations();
-});
+    // Register ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
 
-// PHASE 7: NAVBAR
-function initNavbar() {
-    const navbar = document.querySelector('.navbar');
-    if (!navbar) return;
+    // =========================================
+    // HERO ENTRANCE
+    // =========================================
+    const heroTimeline = gsap.timeline();
 
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+    heroTimeline
+        .from(".badge", {
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+            ease: "power3.out"
+        })
+        .from(".text-hero", { // Targeting .text-hero class from index.html
+            opacity: 0,
+            y: 30,
+            duration: 0.8,
+            ease: "power3.out"
+        }, "-=0.4")
+        .from(".text-body", { // Targeting .text-body class from index.html
+            opacity: 0,
+            y: 20,
+            duration: 0.6,
+            ease: "power3.out"
+        }, "-=0.4")
+        .from(".btn", { // Targeting .btn class from index.html (there are two in hero)
+            opacity: 0,
+            y: 20,
+            stagger: 0.15,
+            duration: 0.6,
+            ease: "power3.out"
+        }, "-=0.3");
+
+    // =========================================
+    // SECTION REVEALS
+    // =========================================
+    gsap.utils.toArray(".section").forEach((section) => {
+        // Find children to animate (exclude already animated hero elements if section is hero)
+        const children = section.querySelectorAll("h2, h3, p, .card, .btn");
+        
+        if(children.length > 0) {
+            gsap.from(children, {
+                scrollTrigger: {
+                    trigger: section,
+                    start: "top 80%",
+                    toggleActions: "play none none none"
+                },
+                opacity: 0,
+                y: 40,
+                duration: 0.8,
+                stagger: 0.1,
+                ease: "power3.out"
+            });
         }
-    }, { passive: true });
-}
+    });
 
-// PHASE 5: SECTION MOTION SYSTEM
-function initScrollAnimations() {
-    // Respect user preference
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-        document.querySelectorAll('.motion-fade-up').forEach(el => {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-        });
-        return;
-    }
+    // =========================================
+    // NAVBAR SCROLL BEHAVIOR
+    // =========================================
+    const navbar = document.querySelector(".navbar");
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const el = entry.target;
-
-                // Animation properites
-                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-
-                // Delay logic if specified (for staggering)
-                const delay = el.getAttribute('data-delay') || 0;
-                if (delay) el.style.transitionDelay = `${delay}s`;
-
-                observer.unobserve(el);
+    if(navbar) {
+        ScrollTrigger.create({
+            start: 50,
+            onUpdate: (self) => {
+                if (self.scroll() > 50) {
+                    navbar.classList.add("scrolled");
+                } else {
+                    navbar.classList.remove("scrolled");
+                }
             }
         });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-    });
+    }
 
-    // Observe all elements marked for animation
-    // We add this class dynamically to key structural elements if they don't have it
-    const targets = document.querySelectorAll('.section, .card, .motion-fade-up');
-    targets.forEach(el => {
-        if (!el.classList.contains('motion-fade-up')) {
-            el.classList.add('motion-fade-up');
+    // =========================================
+    // SUBTLE PARALLAX FOR HERO BG
+    // =========================================
+    gsap.to(".hero-bg", {
+        y: 40,
+        ease: "none",
+        scrollTrigger: {
+            trigger: ".hero-section", // Corrected selector to match index.html class
+            start: "top top",
+            end: "bottom top",
+            scrub: true
         }
-        observer.observe(el);
     });
-
-    // Stagger Hero Elements specifically
-    const heroElements = document.querySelectorAll('.hero-content > *');
-    heroElements.forEach((el, index) => {
-        el.classList.add('motion-fade-up');
-        el.style.transitionDelay = `${index * 0.1}s`; // 100ms stagger
-        observer.observe(el);
-    });
-}
+});

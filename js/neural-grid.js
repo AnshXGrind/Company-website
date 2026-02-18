@@ -1,105 +1,93 @@
 document.addEventListener("DOMContentLoaded", () => {
     if (window.innerWidth < 768) return;
-
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const svg = document.getElementById("neural-grid");
     if (!svg) return;
 
+    // Fade in the grid
+    setTimeout(() => {
+        svg.style.opacity = "1";
+    }, 500);
+
     const linesGroup = svg.querySelector(".lines");
     const nodesGroup = svg.querySelector(".nodes");
 
-    // Use viewBox dimensions
     const width = 1200;
     const height = 600;
 
     const nodes = [];
-    const nodeCount = 18;
-    const maxDistance = 250;
+    const nodeCount = 12; // Reduced count for subtlety
+    const maxDistance = 200;
 
+    // Initialize Nodes
     for (let i = 0; i < nodeCount; i++) {
         const x = Math.random() * width;
         const y = Math.random() * height;
-
-        nodes.push({ x, y });
+        // Velocity (very slow)
+        const vx = (Math.random() - 0.5) * 0.2;
+        const vy = (Math.random() - 0.5) * 0.2;
 
         const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
         circle.setAttribute("cx", x);
         circle.setAttribute("cy", y);
-        circle.setAttribute("r", 3);
+        circle.setAttribute("r", 2); // Smaller radius
         circle.setAttribute("fill", "#4F8CFF");
-        circle.setAttribute("opacity", "0.8");
-
-        // Optional: Add class for CSS animation if needed, or keep JS pulse
-        // circle.classList.add('node-pulse'); 
+        circle.setAttribute("opacity", "0.4"); // Very low opacity nodes
 
         nodesGroup.appendChild(circle);
 
-        animatePulse(circle);
+        nodes.push({ x, y, vx, vy, circle });
     }
 
-    // Draw lines between close nodes
-    nodes.forEach((nodeA, i) => {
-        nodes.forEach((nodeB, j) => {
-            // Avoid duplicates and self-connection
-            if (i >= j) return;
-
-            const dx = nodeA.x - nodeB.x;
-            const dy = nodeA.y - nodeB.y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < maxDistance) {
-                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                line.setAttribute("x1", nodeA.x);
-                line.setAttribute("y1", nodeA.y);
-                line.setAttribute("x2", nodeB.x);
-                line.setAttribute("y2", nodeB.y);
-                line.setAttribute("stroke", "#4F8CFF");
-                line.setAttribute("stroke-width", "1");
-                line.setAttribute("opacity", "0.15"); // Lowered opacity for subtlety
-
-                linesGroup.appendChild(line);
-            }
-        });
-    });
-
-    function animatePulse(element) {
-        let scale = 1;
-        let growing = true;
-        // Random offset for organic feel
-        let step = 0.002 + Math.random() * 0.004;
-
-        function pulse() {
-            // Simple scale oscillation
-            // Note: SVG transform origin is 0,0 by default. 
-            // For circles, we can animate 'r' or use transform with transform-origin.
-            // Simplifying to radius animation for smoother SVG behavior without transform-origin complexity.
-
-            // Actually, the user script used setAttribute("transform", scale...). 
-            // SVG scale transforms from 0,0 unless origin is set.
-            // Let's strictly follow the user's requested logic but fix the origin issue if needed.
-            // User provided: element.setAttribute("transform", `scale(${scale})`);
-            // This will shift the circle unless we handle origin. 
-            // BETTER APPROACH: Animate radius 'r' for circles.
-
-            if (growing) {
-                scale += step;
-                if (scale >= 1.4) growing = false;
-            } else {
-                scale -= step;
-                if (scale <= 1) growing = true;
-            }
-
-            // To scale a circle in place using transform, we need setTransformOrigin.
-            // Or just animate 'r'. The prompt asked for "production-ready".
-            // Let's use the user's logic but adapted to work (animating 'r' is safer for cx/cy positioned circles).
-
-            const baseR = 3;
-            element.setAttribute("r", baseR * scale);
-
-            requestAnimationFrame(pulse);
+    function animate() {
+        // Clear lines
+        while (linesGroup.firstChild) {
+            linesGroup.removeChild(linesGroup.firstChild);
         }
 
-        pulse();
+        // Update Nodes
+        nodes.forEach(node => {
+            node.x += node.vx;
+            node.y += node.vy;
+
+            // Bounce off edges
+            if (node.x < 0 || node.x > width) node.vx *= -1;
+            if (node.y < 0 || node.y > height) node.vy *= -1;
+
+            node.circle.setAttribute("cx", node.x);
+            node.circle.setAttribute("cy", node.y);
+        });
+
+        // Draw Lines
+        nodes.forEach((nodeA, i) => {
+            nodes.forEach((nodeB, j) => {
+                if (i >= j) return;
+
+                const dx = nodeA.x - nodeB.x;
+                const dy = nodeA.y - nodeB.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < maxDistance) {
+                    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                    line.setAttribute("x1", nodeA.x);
+                    line.setAttribute("y1", nodeA.y);
+                    line.setAttribute("x2", nodeB.x);
+                    line.setAttribute("y2", nodeB.y);
+                    line.setAttribute("stroke", "#4F8CFF");
+                    line.setAttribute("stroke-width", "1");
+
+                    // Opacity based on distance, max 0.1 (Requested 10%)
+                    const opacity = (1 - distance / maxDistance) * 0.1;
+                    line.setAttribute("opacity", opacity);
+
+                    linesGroup.appendChild(line);
+                }
+            });
+        });
+
+        requestAnimationFrame(animate);
     }
+
+    animate();
 });
