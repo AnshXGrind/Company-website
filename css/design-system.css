@@ -9,7 +9,8 @@
 
   --color-primary: #4F8CFF;
   --color-primary-hover: #3C76E6;
-  --color-accent: #334155; /* Subtle accent for borders/separators */
+  --color-accent: #334155;
+  /* Subtle accent for borders/separators */
 
   --color-text: #E6EDF3;
   --color-text-muted: #8B98A5;
@@ -18,7 +19,8 @@
   /* =========================================
      Typographic Scale
      ========================================= */
-  --font-heading: 'Orbitron', 'Inter', system-ui, sans-serif; /* Keep brand font but use sparsely */
+  --font-heading: 'Orbitron', 'Inter', system-ui, sans-serif;
+  /* Keep brand font but use sparsely */
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
 
   --fs-hero: clamp(2.5rem, 5vw, 4rem);
@@ -36,21 +38,56 @@
   --container-width: 1200px;
   --spacing-section: 96px;
   --spacing-element: 24px;
-  
+
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
 
   --transition: 0.25s ease;
-  
-  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
   --shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* =========================================
+   Hero & Neural Grid
+   ========================================= */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  /* padding is handled by .section class usually, but user asked for specific padding */
+  /* We will stick to the existing .section padding or override if needed. 
+     User asked for: padding: 140px 0; */
+  padding: 140px 0;
+  background: var(--color-bg);
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.3;
+  /* Adjusted for visibility */
+}
+
+#neural-grid {
+  width: 100%;
+  height: 100%;
+  /* Ensure it covers the area */
+  display: block;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
 }
 
 /* =========================================
    Reset & Base
    ========================================= */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -82,20 +119,48 @@ ul {
 /* =========================================
    Typography Utilities
    ========================================= */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   line-height: var(--lh-heading);
   color: var(--color-text);
   margin-bottom: var(--spacing-element);
 }
 
-.text-hero { font-size: var(--fs-hero); font-weight: 700; letter-spacing: -0.02em; }
-.text-h2 { font-size: var(--fs-h2); font-weight: 600; letter-spacing: -0.01em; }
-.text-h3 { font-size: var(--fs-h3); font-weight: 600; }
-.text-body { font-size: var(--fs-body); color: var(--color-text-muted); }
-.text-small { font-size: var(--fs-small); color: var(--color-text-muted); }
+.text-hero {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
 
-.text-primary { color: var(--color-primary); }
+.text-h2 {
+  font-size: var(--fs-h2);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.text-h3 {
+  font-size: var(--fs-h3);
+  font-weight: 600;
+}
+
+.text-body {
+  font-size: var(--fs-body);
+  color: var(--color-text-muted);
+}
+
+.text-small {
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+}
+
+.text-primary {
+  color: var(--color-primary);
+}
 
 /* =========================================
    Layout System
@@ -112,11 +177,22 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-.grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
-.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+}
 
 @media (min-width: 1024px) {
-  .grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 /* =========================================
@@ -184,7 +260,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-ghost:hover {
   color: var(--color-text);
-  background: rgba(255,255,255, 0.03);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .btn-w-full {
@@ -231,16 +307,29 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--color-text-muted);
 }
 
-.nav-link:hover, .nav-link.active {
+.nav-link:hover,
+.nav-link.active {
   color: var(--color-text);
 }
 
 /* Mobile Toggle - Hidden by default on desktop */
-.nav-toggle { display: none; background: none; border: none; color: white; cursor: pointer; }
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
 
 @media (max-width: 768px) {
-  .nav-menu { display: none; } /* Simplified for this CSS file, JS handles toggle */
-  .nav-toggle { display: block; }
+  .nav-menu {
+    display: none;
+  }
+
+  /* Simplified for this CSS file, JS handles toggle */
+  .nav-toggle {
+    display: block;
+  }
 }
 
 /* =========================================
@@ -260,7 +349,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
-  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
 }
 
 .footer-brand p {
@@ -384,7 +476,19 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 50%;
 }
 
-.mb-4 { margin-bottom: 16px; }
-.mb-8 { margin-bottom: 32px; }
-.text-center { text-align: center; }
-.mx-auto { margin-left: auto; margin-right: auto; }
+.mb-4 {
+  margin-bottom: 16px;
+}
+
+.mb-8 {
+  margin-bottom: 32px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}

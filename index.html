@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Premium AI Consulting & Automation Services">
     <title>Launcify | Enterprise AI Solutions</title>
-    
+
     <!-- 1. Design System -->
     <link rel="stylesheet" href="/css/design-system.css">
 
     <!-- 2. Font Imports (Google Fonts) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Orbitron:wght@500;700&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
     <!-- =========================
@@ -22,7 +26,7 @@
     <nav class="navbar">
         <div class="container navbar-inner">
             <a href="/" class="logo">LAUNCIFY</a>
-            
+
             <div class="nav-menu">
                 <!-- Using absolute paths for navigation to work across pages -->
                 <a href="/pages/services.html" class="nav-link">Services</a>
@@ -30,10 +34,10 @@
                 <a href="/pages/about.html" class="nav-link">About</a>
                 <a href="/pages/schedule-contact.html" class="btn btn-primary">Book a Strategy Call</a>
             </div>
-            
+
             <button class="nav-toggle" aria-label="Menu">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M4 6h16M4 12h16M4 18h16"/>
+                    <path d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
         </div>
@@ -43,12 +47,15 @@
          HERO SECTION
          ========================= -->
     <header class="section hero-section">
-        <!-- 3D Spline Canvas Container -->
-        <div id="spline-container" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6;">
+        <div class="hero-bg">
+            <svg id="neural-grid" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice">
+                <g class="lines"></g>
+                <g class="nodes"></g>
+            </svg>
         </div>
 
-        <div class="container text-center" style="position: relative; z-index: 1;">
-            
+        <div class="container hero-content text-center">
+
             <div class="badge">
                 <span class="badge-dot"></span>
                 Accepting New Projects
@@ -58,12 +65,12 @@
                 Scalable AI Infrastructure <br>
                 <span class="text-primary">Without The Overhead.</span>
             </h1>
-            
+
             <p class="text-body mb-8" style="max-width: 600px; margin-left: auto; margin-right: auto;">
-                We build enterprise-grade automation systems and custom AI agents that 
+                We build enterprise-grade automation systems and custom AI agents that
                 drive revenue, reduce operational costs, and scale with your business.
             </p>
-            
+
             <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
                 <a href="#contact" class="btn btn-primary">Book a Free Strategy Call</a>
                 <a href="#case-studies" class="btn btn-secondary">View Case Studies</a>
@@ -81,19 +88,22 @@
                 <h2 class="text-h2">What We Build</h2>
                 <p class="text-body">End-to-end automation solutions for forward-thinking companies.</p>
             </div>
-            
+
             <div class="grid-3">
                 <div class="card">
                     <h3 class="text-h3">AI Agents</h3>
-                    <p class="text-body">Autonomous agents that handle customer support, lead qualification, and data processing 24/7.</p>
+                    <p class="text-body">Autonomous agents that handle customer support, lead qualification, and data
+                        processing 24/7.</p>
                 </div>
                 <div class="card">
                     <h3 class="text-h3">Workflow Automation</h3>
-                    <p class="text-body">Connect your entire tech stack. We replace manual copy-pasting with intelligent, self-correcting workflows.</p>
+                    <p class="text-body">Connect your entire tech stack. We replace manual copy-pasting with
+                        intelligent, self-correcting workflows.</p>
                 </div>
                 <div class="card">
                     <h3 class="text-h3">Custom Development</h3>
-                    <p class="text-body">Bespoke web applications and internal tools built to solve your unique operational bottlenecks.</p>
+                    <p class="text-body">Bespoke web applications and internal tools built to solve your unique
+                        operational bottlenecks.</p>
                 </div>
             </div>
         </div>
@@ -108,7 +118,7 @@
                 <h2 class="text-h2">Clear, Transparent Pricing</h2>
                 <p class="text-body mb-8">Scalable packages for every stage of growth.</p>
             </div>
-            
+
             <div class="grid-3">
                 <!-- Using subset of pricing for homepage -->
                 <div class="card">
@@ -124,7 +134,7 @@
 
                 <div class="card card-price recommended">
                     <h3 class="text-h3">Growth</h3>
-                     <p class="text-body mb-4">Most popular choice.</p>
+                    <p class="text-body mb-4">Most popular choice.</p>
                     <div class="price-amount">$4,800 <span class="price-period">/ month</span></div>
                     <ul class="price-features">
                         <li>Custom AI Agents</li>
@@ -135,7 +145,7 @@
 
                 <div class="card">
                     <h3 class="text-h3">Enterprise</h3>
-                     <p class="text-body mb-4">For large orgs.</p>
+                    <p class="text-body mb-4">For large orgs.</p>
                     <div class="price-amount">Custom</div>
                     <ul class="price-features">
                         <li>On-premise LLM Deployment</li>
@@ -159,7 +169,7 @@
                         Helping forward-thinking companies build scalable AI infrastructure.
                     </p>
                 </div>
-                
+
                 <div class="footer-col">
                     <h4>Company</h4>
                     <ul>
@@ -168,7 +178,7 @@
                         <li><a href="#careers">Careers</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-col">
                     <h4>Services</h4>
                     <ul>
@@ -177,7 +187,7 @@
                         <li><a href="#consulting">Consulting</a></li>
                     </ul>
                 </div>
-                
+
                 <div class="footer-col">
                     <h4>Legal</h4>
                     <ul>
@@ -186,7 +196,7 @@
                     </ul>
                 </div>
             </div>
-            
+
             <div class="footer-bottom">
                 &copy; 2026 Launcify. All rights reserved.
             </div>
@@ -198,4 +208,5 @@
     <script type="module" src="/js/spline-loader.js"></script>
 
 </body>
+
 </html>
